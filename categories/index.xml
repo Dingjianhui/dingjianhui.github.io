@@ -6,26 +6,26 @@
     <description>Recent content in Categories on Ding Jianhui 的个人博客 - 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 16 Apr 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 05 Jun 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://dingjianhui.top/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>hugo</title>
-      <link>http://dingjianhui.top/categories/hugo/</link>
-      <pubDate>Mon, 16 Apr 2018 00:00:00 +0000</pubDate>
+      <title>golang</title>
+      <link>http://dingjianhui.top/categories/golang/</link>
+      <pubDate>Fri, 05 Jun 2020 00:00:00 +0000</pubDate>
       
-      <guid>http://dingjianhui.top/categories/hugo/</guid>
+      <guid>http://dingjianhui.top/categories/golang/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>golang</title>
-      <link>http://dingjianhui.top/categories/golang/</link>
-      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
+      <title>hugo</title>
+      <link>http://dingjianhui.top/categories/hugo/</link>
+      <pubDate>Fri, 05 Jun 2020 00:00:00 +0000</pubDate>
       
-      <guid>http://dingjianhui.top/categories/golang/</guid>
+      <guid>http://dingjianhui.top/categories/hugo/</guid>
       <description></description>
     </item>
     
