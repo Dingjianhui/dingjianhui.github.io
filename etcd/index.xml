@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Etcds on Ding Jianhui 的个人博客 - 学习笔记</title>
+    <link>http://dingjianhui.top/etcd/</link>
+    <description>Recent content in Etcds on Ding Jianhui 的个人博客 - 学习笔记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 11 Jun 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://dingjianhui.top/etcd/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>etcd环境搭建(基于docker)</title>
+      <link>http://dingjianhui.top/etcd/etcd-install/</link>
+      <pubDate>Thu, 11 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://dingjianhui.top/etcd/etcd-install/</guid>
+      <description>etcd简介  A distributed, reliable key-value store for the most critical data of a distributed system
+ etcd是一个高可用的键值存储系统 etcd是由CoreOS开发并维护的,灵感来自于 ZooKeeper 等。它使用Go语言编写 Github: https://github.com/etcd-io/etcd 官网: https://etcd.io  功能特点 简单：基于 HTTP+JSON 的 API 让你用 curl 就可以轻松使用。 安全：可选 SSL 客户认证机制。 快速：每个实例每秒支持一千次写操作。 可信：使用 Raft 算法充分实现了分布式。  主要使用场景  主要用于共享配置 服务注册与发现 （Service Discovery） 分布式锁等  下载etcd并安装 下载地址：https://github.com/etcd-io/etcd/releases 我使用的方式是windows环境下载，然后上传至linux中  [tintin@localhost etcd]$ tar -zxvf etcd-v3.4.9-linux-amd64.tar.gz [tintin@localhost etcd]$ ls etcd-v3.4.9-linux-amd64 etcd-v3.4.9-linux-amd64.tar.gz [tintin@localhost etcd]$ cd etcd-v3.4.9-linux-amd64/ [tintin@localhost etcd-v3.4.9-linux-amd64]$ ls Documentation etcd etcdctl README-etcdctl.</description>
+    </item>
+    
+  </channel>
+</rss>
