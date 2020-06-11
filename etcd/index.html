@@ -11,7 +11,7 @@
 <meta property="og:description" content="没有播种，何来收获" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="http://dingjianhui.top/etcd/" />
-<meta property="og:updated_time" content="2020-06-11T00:00:00+00:00" />
+<meta property="og:updated_time" content="2020-06-11T17:14:58+08:00" />
 
 		<meta itemprop="name" content="Etcds">
 <meta itemprop="description" content="没有播种，何来收获">
@@ -55,6 +55,24 @@
 	</header><article class="list__item post">
 	<header class="list__header">
 		<h3 class="list__title post__title ">
+			<a href="/etcd/etcd-cluster-by-docker/" rel="bookmark">
+			使用docker模拟etcd集群的创建
+			</a>
+		</h3>
+		<div class="list__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Ding Jianhui</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-06-11T17:14:58&#43;08:00">2020-06-11</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/etcd/" rel="category">etcd</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		实际中部署集群 使用不同机器 或 docker swarm 或 k8s 来部署  Step 1 创建一个专门的docker网络 创建docker网络 (使用的是bridge,指定了子网) docker network create etcdnet --subnet 172.25.0.0/16  [tintin@localhost etcd]$ docker network create etcdnet --subnet 172.25.0.0/16 9d44277499703a9754ea35d305a1255ebed0c1415fab2cd4eeaf5f2bfee08b48 [tintin@localhost etcd]$ docker network ls NETWORK ID NAME DRIVER SCOPE 66be68f8e7eb bridge bridge local 9d4427749970 etcdnet bridge local b2633d6ca2c8 host host local e5af1ac036a0 none null local [tintin@localhost etcd]$ docker network inspect etcdnet [ { &#34;Name&#34;: &#34;etcdnet&#34;, &#34;Id&#34;: &#34;9d44277499703a9754ea35d305a1255ebed0c1415fab2cd4eeaf5f2bfee08b48&#34;, &#34;Created&#34;: &#34;2020-06-11T17:22:31.032325409+08:00&#34;, &#34;Scope&#34;: &#34;local&#34;, &#34;Driver&#34;: &#34;bridge&#34;, &#34;EnableIPv6&#34;: false, &#34;IPAM&#34;: { &#34;Driver&#34;: &#34;default&#34;, &#34;Options&#34;: {}, &#34;Config&#34;: [ { &#34;Subnet&#34;: &#34;172.
+	</div>
+</article><article class="list__item post">
+	<header class="list__header">
+		<h3 class="list__title post__title ">
 			<a href="/etcd/etcd-install/" rel="bookmark">
 			etcd环境搭建(基于docker)
 			</a>
@@ -63,7 +81,7 @@
 	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Ding Jianhui</span>
 </div>
 <div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-06-11T00:00:00Z">2020-06-11</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/etcd/" rel="category">etcd</a>
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-06-11T13:14:58&#43;08:00">2020-06-11</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/etcd/" rel="category">etcd</a>
 	</span>
 </div></div>
 	</header>
@@ -90,11 +108,11 @@
 	<h4 class="widget__title">近期文章</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/etcd/etcd-cluster-by-docker/">使用docker模拟etcd集群的创建</a></li>
 			<li class="widget__item"><a class="widget__link" href="/etcd/etcd-install/">etcd环境搭建(基于docker)</a></li>
-			<li class="widget__item"><a class="widget__link" href="/post/go-cross-compile/">Go Cross Compile</a></li>
-			<li class="widget__item"><a class="widget__link" href="/post/basic-elements/">Basic HTML Elements</a></li>
-			<li class="widget__item"><a class="widget__link" href="/post/creating-a-new-theme/">Creating a New Theme</a></li>
-			<li class="widget__item"><a class="widget__link" href="/post/about/">About Hugo</a></li>
+			<li class="widget__item"><a class="widget__link" href="/golang/go-cross-compile/">Go Cross Compile</a></li>
+			<li class="widget__item"><a class="widget__link" href="/hugo/basic-elements/">Basic HTML Elements</a></li>
+			<li class="widget__item"><a class="widget__link" href="/hugo/creating-a-new-theme/">Creating a New Theme</a></li>
 		</ul>
 	</div>
 </div>

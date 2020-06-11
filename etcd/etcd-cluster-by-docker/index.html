@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html class="no-js" lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>使用docker模拟etcd集群的创建 - Ding Jianhui 的个人博客 - 学习笔记</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="使用docker模拟etcd集群的创建">
+		<meta property="og:title" content="使用docker模拟etcd集群的创建" />
+<meta property="og:description" content="使用docker模拟etcd集群的创建" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://dingjianhui.top/etcd/etcd-cluster-by-docker/" />
+<meta property="article:published_time" content="2020-06-11T17:14:58+08:00" />
+<meta property="article:modified_time" content="2020-06-11T17:14:58+08:00" />
+
+		<meta itemprop="name" content="使用docker模拟etcd集群的创建">
+<meta itemprop="description" content="使用docker模拟etcd集群的创建">
+<meta itemprop="datePublished" content="2020-06-11T17:14:58&#43;08:00" />
+<meta itemprop="dateModified" content="2020-06-11T17:14:58&#43;08:00" />
+<meta itemprop="wordCount" content="601">
+
+
+
+<meta itemprop="keywords" content="etcd,docker," />
+		<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="使用docker模拟etcd集群的创建"/>
+<meta name="twitter:description" content="使用docker模拟etcd集群的创建"/>
+
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/custom.css">
+	<link rel="shortcut icon" href="/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo logo--mixed">
+		<a class="logo__link" href="/" title="Ding Jianhui" rel="home">
+			<div class="logo__item logo__imagebox">
+					<img class="logo__img" src="/img/logo.jpg">
+				</div><div class="logo__item logo__text">
+					<div class="logo__title">Ding Jianhui</div>
+					<div class="logo__tagline">有一种投资好过其他所有的投资: 那就是投资自己</div>
+				</div>
+		</a>
+	</div>
+		<div class="divider"></div>
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">使用docker模拟etcd集群的创建</h1>
+			<div class="post__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Ding Jianhui</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-06-11T17:14:58&#43;08:00">2020-06-11</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/etcd/" rel="category">etcd</a>
+	</span>
+</div></div>
+		</header>
+<div class="post__toc toc">
+	<div class="toc__title">目录</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+  <ul>
+    <li><a href="#step-1--创建一个专门的docker网络">Step 1  创建一个专门的docker网络</a></li>
+    <li><a href="#step-2-创建两个节点">Step 2 创建两个节点</a></li>
+    <li><a href="#step-3-创建每个节点的配置文件">Step 3 创建每个节点的配置文件</a></li>
+    <li><a href="#step-4--使用临时镜像来commit一个etcd镜像">Step 4  使用临时镜像来commit一个etcd镜像</a></li>
+    <li><a href="#step-5-使用新镜像创建两个容器">Step 5 使用新镜像创建两个容器</a></li>
+    <li><a href="#step-6-测试">Step 6 测试</a></li>
+  </ul>
+</nav>
+	</div>
+</div>
+<div class="content post__content clearfix">
+			<pre><code>实际中部署集群 使用不同机器 或 docker swarm  或 k8s  来部署
+</code></pre>
+<h2 id="step-1--创建一个专门的docker网络">Step 1  创建一个专门的docker网络</h2>
+<pre><code>创建docker网络  (使用的是bridge,指定了子网)
+docker network  create etcdnet  --subnet 172.25.0.0/16
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#f92672">[</span>tintin@localhost etcd<span style="color:#f92672">]</span>$ docker network  create etcdnet  --subnet 172.25.0.0/16 
+9d44277499703a9754ea35d305a1255ebed0c1415fab2cd4eeaf5f2bfee08b48
+<span style="color:#f92672">[</span>tintin@localhost etcd<span style="color:#f92672">]</span>$ docker network ls
+NETWORK ID          NAME                DRIVER              SCOPE
+66be68f8e7eb        bridge              bridge              local
+9d4427749970        etcdnet             bridge              local
+b2633d6ca2c8        host                host                local
+e5af1ac036a0        none                null                local
+<span style="color:#f92672">[</span>tintin@localhost etcd<span style="color:#f92672">]</span>$ docker network inspect etcdnet 
+<span style="color:#f92672">[</span>
+    <span style="color:#f92672">{</span>
+        <span style="color:#e6db74">&#34;Name&#34;</span>: <span style="color:#e6db74">&#34;etcdnet&#34;</span>,
+        <span style="color:#e6db74">&#34;Id&#34;</span>: <span style="color:#e6db74">&#34;9d44277499703a9754ea35d305a1255ebed0c1415fab2cd4eeaf5f2bfee08b48&#34;</span>,
+        <span style="color:#e6db74">&#34;Created&#34;</span>: <span style="color:#e6db74">&#34;2020-06-11T17:22:31.032325409+08:00&#34;</span>,
+        <span style="color:#e6db74">&#34;Scope&#34;</span>: <span style="color:#e6db74">&#34;local&#34;</span>,
+        <span style="color:#e6db74">&#34;Driver&#34;</span>: <span style="color:#e6db74">&#34;bridge&#34;</span>,
+        <span style="color:#e6db74">&#34;EnableIPv6&#34;</span>: false,
+        <span style="color:#e6db74">&#34;IPAM&#34;</span>: <span style="color:#f92672">{</span>
+            <span style="color:#e6db74">&#34;Driver&#34;</span>: <span style="color:#e6db74">&#34;default&#34;</span>,
+            <span style="color:#e6db74">&#34;Options&#34;</span>: <span style="color:#f92672">{}</span>,
+            <span style="color:#e6db74">&#34;Config&#34;</span>: <span style="color:#f92672">[</span>
+                <span style="color:#f92672">{</span>
+                    <span style="color:#e6db74">&#34;Subnet&#34;</span>: <span style="color:#e6db74">&#34;172.25.0.0/16&#34;</span>
+                <span style="color:#f92672">}</span>
+            <span style="color:#f92672">]</span>
+        <span style="color:#f92672">}</span>,
+        <span style="color:#e6db74">&#34;Internal&#34;</span>: false,
+        <span style="color:#e6db74">&#34;Attachable&#34;</span>: false,
+        <span style="color:#e6db74">&#34;Ingress&#34;</span>: false,
+        <span style="color:#e6db74">&#34;ConfigFrom&#34;</span>: <span style="color:#f92672">{</span>
+            <span style="color:#e6db74">&#34;Network&#34;</span>: <span style="color:#e6db74">&#34;&#34;</span>
+        <span style="color:#f92672">}</span>,
+        <span style="color:#e6db74">&#34;ConfigOnly&#34;</span>: false,
+        <span style="color:#e6db74">&#34;Containers&#34;</span>: <span style="color:#f92672">{}</span>,
+        <span style="color:#e6db74">&#34;Options&#34;</span>: <span style="color:#f92672">{}</span>,
+        <span style="color:#e6db74">&#34;Labels&#34;</span>: <span style="color:#f92672">{}</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">]</span>
+
+</code></pre></div><h2 id="step-2-创建两个节点">Step 2 创建两个节点</h2>
+<pre><code>一个节点为etcd1,一个节点为etcd2
+节点下各自创建 conf 和 data
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#f92672">[</span>tintin@localhost etcd<span style="color:#f92672">]</span>$ cd /home/tintin/jtthink/
+<span style="color:#f92672">[</span>tintin@localhost jtthink<span style="color:#f92672">]</span>$ ls
+build  compose  conf  etcd  mysql  web
+<span style="color:#f92672">[</span>tintin@localhost jtthink<span style="color:#f92672">]</span>$ mkdir etcd1 etcd2
+<span style="color:#f92672">[</span>tintin@localhost jtthink<span style="color:#f92672">]</span>$ ls
+build  compose  conf  etcd  etcd1  etcd2  mysql  web
+<span style="color:#f92672">[</span>tintin@localhost jtthink<span style="color:#f92672">]</span>$ mkdir etcd1/conf etcd1/data
+<span style="color:#f92672">[</span>tintin@localhost jtthink<span style="color:#f92672">]</span>$ mkdir etcd2/conf etcd2/data
+</code></pre></div><h2 id="step-3-创建每个节点的配置文件">Step 3 创建每个节点的配置文件</h2>
+<pre><code>etcd1/conf/etcd.yml (etcd1节点的配置文件)
+vim etcd1/conf/etcd.yml
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">name</span>: etcd1
+<span style="color:#66d9ef">data-dir</span>: /etcd/data
+<span style="color:#66d9ef">listen-client-urls</span>: http://<span style="color:#ae81ff">172.25.0.101</span>:<span style="color:#ae81ff">2379</span>, http://<span style="color:#ae81ff">127.0.0.1</span>:<span style="color:#ae81ff">2379</span>
+<span style="color:#66d9ef">advertise-client-urls</span>: http://<span style="color:#ae81ff">172.25.0.101</span>:<span style="color:#ae81ff">2379</span>
+<span style="color:#66d9ef">listen-peer-urls</span>: http://<span style="color:#ae81ff">172.25.0.101</span>:<span style="color:#ae81ff">2380</span>
+<span style="color:#66d9ef">initial-advertise-peer-urls</span>: http://<span style="color:#ae81ff">172.25.0.101</span>:<span style="color:#ae81ff">2380</span>
+<span style="color:#66d9ef">initial-cluster</span>: etcd1=http://<span style="color:#ae81ff">172.25.0.101</span>:<span style="color:#ae81ff">2380</span>,etcd2=http://<span style="color:#ae81ff">172.25.0.102</span>:<span style="color:#ae81ff">2380</span>
+<span style="color:#66d9ef">initial-cluster-token</span>: etcd-cluster-token
+<span style="color:#66d9ef">initial-cluster-state</span>: new
+</code></pre></div><pre><code>etcd2/conf/etcd.yml (etcd2节点的配置文件)
+vim etcd2/conf/etcd.yml
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">name</span>: etcd2
+<span style="color:#66d9ef">data-dir</span>: /etcd/data
+<span style="color:#66d9ef">listen-client-urls</span>: http://<span style="color:#ae81ff">172.25.0.102</span>:<span style="color:#ae81ff">2379</span>, http://<span style="color:#ae81ff">127.0.0.1</span>:<span style="color:#ae81ff">2379</span>
+<span style="color:#66d9ef">advertise-client-urls</span>: http://<span style="color:#ae81ff">172.25.0.102</span>:<span style="color:#ae81ff">2379</span>
+<span style="color:#66d9ef">listen-peer-urls</span>: http://<span style="color:#ae81ff">172.25.0.102</span>:<span style="color:#ae81ff">2380</span>
+<span style="color:#66d9ef">initial-advertise-peer-urls</span>: http://<span style="color:#ae81ff">172.25.0.102</span>:<span style="color:#ae81ff">2380</span>
+<span style="color:#66d9ef">initial-cluster</span>: etcd1=http://<span style="color:#ae81ff">172.25.0.101</span>:<span style="color:#ae81ff">2380</span>,etcd2=http://<span style="color:#ae81ff">172.25.0.102</span>:<span style="color:#ae81ff">2380</span>
+<span style="color:#66d9ef">initial-cluster-token</span>: etcd-cluster-token
+<span style="color:#66d9ef">initial-cluster-state</span>: new
+</code></pre></div><pre><code>ETCD参数说明
+
+data-dir:指定节点的数据存储目录，这些数据包括节点ID，集群ID，集群初始化配置，Snapshot文件，若未指定—wal-dir，还会存储WAL文件；
+wal-dir:指定节点的was文件的存储目录，若指定了该参数，wal文件会和其他数据文件分开存储。
+name: 节点名称
+name: 节点名称
+name: 节点名称
+initial-advertise-peer-urls: 告知集群其他节点url.(对于集群内提供服务的url)
+listen-peer-urls: 监听URL，用于与其他节点通讯
+advertise-client-urls: 告知客户端url, 也就是服务的url(对外提供服务的utl)
+initial-cluster-token: 集群的ID
+initial-cluster: 集群中所有节点
+</code></pre>
+<h2 id="step-4--使用临时镜像来commit一个etcd镜像">Step 4  使用临时镜像来commit一个etcd镜像</h2>
+<pre><code>下载镜像 docker pull golang:1.14.4-alpine3.12 
+使用golang镜像创建一个临时镜像 docker run --name testgo -it golang:1.14.4-alpine3.12 sh
+拷贝 docker cp etcd testgo:/usr/bin &amp;&amp; docker cp etcdctl testgo:/usr/bin 
+重新构建镜像 docker commit testgo etcd:my
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#f92672">[</span>tintin@localhost jtthink<span style="color:#f92672">]</span>$ docker run --name testgo -it <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>&gt; golang:1.14.4-alpine3.12 sh
+WARNING: IPv4 forwarding is disabled. Networking will not work.
+/go <span style="color:#75715e"># [tintin@localhost jtthink]$</span> 
+<span style="color:#f92672">[</span>tintin@localhost jtthink<span style="color:#f92672">]</span>$ docker ps
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+<span style="color:#f92672">[</span>tintin@localhost jtthink<span style="color:#f92672">]</span>$ docker ps -a
+CONTAINER ID        IMAGE                      COMMAND             CREATED             STATUS                          PORTS               NAMES
+229b57d82851        golang:1.14.4-alpine3.12   <span style="color:#e6db74">&#34;sh&#34;</span>                <span style="color:#ae81ff">2</span> minutes ago       Exited <span style="color:#f92672">(</span>0<span style="color:#f92672">)</span> About a minute ago                       testgo
+<span style="color:#f92672">[</span>tintin@localhost jtthink<span style="color:#f92672">]</span>$ docker start testgo 
+testgo
+<span style="color:#f92672">[</span>tintin@localhost jtthink<span style="color:#f92672">]</span>$ docker cp /home/tintin/jtthink/etcd/etcd-v3.4.9-linux-amd64/etcd testgo:/usr/bin
+<span style="color:#f92672">[</span>tintin@localhost jtthink<span style="color:#f92672">]</span>$ docker cp /home/tintin/jtthink/etcd/etcd-v3.4.9-linux-amd64/etcdctl testgo:/usr/bin
+<span style="color:#f92672">[</span>tintin@localhost jtthink<span style="color:#f92672">]</span>$ docker commit testgo etcd:my
+sha256:3665675b9ee6a3b838b5884e63fb257aa745bd791e5c57f619cbf01956e49405
+<span style="color:#f92672">[</span>tintin@localhost jtthink<span style="color:#f92672">]</span>$ docker ps
+CONTAINER ID        IMAGE                      COMMAND             CREATED             STATUS              PORTS               NAMES
+229b57d82851        golang:1.14.4-alpine3.12   <span style="color:#e6db74">&#34;sh&#34;</span>                <span style="color:#ae81ff">8</span> minutes ago       Up <span style="color:#ae81ff">5</span> minutes                            testgo
+<span style="color:#f92672">[</span>tintin@localhost jtthink<span style="color:#f92672">]</span>$ docker stop testgo 
+testgo
+<span style="color:#f92672">[</span>tintin@localhost jtthink<span style="color:#f92672">]</span>$ docker ps -a
+CONTAINER ID        IMAGE                      COMMAND                  CREATED             STATUS                            PORTS               NAMES
+229b57d82851        golang:1.14.4-alpine3.12   <span style="color:#e6db74">&#34;sh&#34;</span>                     <span style="color:#ae81ff">9</span> minutes ago       Exited <span style="color:#f92672">(</span>137<span style="color:#f92672">)</span> About a minute ago                       testgo
+<span style="color:#f92672">[</span>tintin@localhost jtthink<span style="color:#f92672">]</span>$ docker rm testgo 
+testgo
+<span style="color:#f92672">[</span>tintin@localhost jtthink<span style="color:#f92672">]</span>$ docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+etcd                my                  3665675b9ee6        <span style="color:#ae81ff">9</span> minutes ago       411MB
+redis               5.0.9-alpine        58084f18c7ec        <span style="color:#ae81ff">6</span> days ago          29.7MB
+golang              1.14.4-alpine3.12   3289bf11c284        <span style="color:#ae81ff">9</span> days ago          370MB
+</code></pre></div><h2 id="step-5-使用新镜像创建两个容器">Step 5 使用新镜像创建两个容器</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#f92672">[</span>tintin@localhost jtthink<span style="color:#f92672">]</span>$   docker run -d  --name etcd1  <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>&gt;  --network etcdnet <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>&gt;  --ip 172.25.0.101 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>&gt;  -p 23791:2379 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>&gt;  -v /home/tintin/jtthink/etcd1:/etcd <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>&gt;  etcd:my  etcd --config-file  /etcd/conf/etcd.yml
+fd3390dec30827ff3ecf0f2f41f277b9aff30a9da3c7f9e0fa7479aed62dae78
+<span style="color:#f92672">[</span>tintin@localhost jtthink<span style="color:#f92672">]</span>$   docker run -d  --name etcd2  <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>&gt;  --network etcdnet <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>&gt;  --ip 172.25.0.102 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>&gt;  -p 23792:2379 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>&gt;  -v /home/tintin/jtthink/etcd2:/etcd <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>&gt;  etcd:my  etcd --config-file  /etcd/conf/etcd.yml
+15e2a048ba1406cf24d91f4e49db06470c98d6fb3401661666acc5cb6287037f
+<span style="color:#f92672">[</span>tintin@localhost jtthink<span style="color:#f92672">]</span>$ docker ps
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                     NAMES
+15e2a048ba14        etcd:my             <span style="color:#e6db74">&#34;etcd --config-file …&#34;</span>   <span style="color:#ae81ff">5</span> seconds ago       Up <span style="color:#ae81ff">4</span> seconds        0.0.0.0:23792-&gt;2379/tcp   etcd2
+fd3390dec308        etcd:my             <span style="color:#e6db74">&#34;etcd --config-file …&#34;</span>   <span style="color:#ae81ff">30</span> seconds ago      Up <span style="color:#ae81ff">29</span> seconds       0.0.0.0:23791-&gt;2379/tcp   etcd1
+<span style="color:#f92672">[</span>tintin@localhost jtthink<span style="color:#f92672">]</span>$
+</code></pre></div><h2 id="step-6-测试">Step 6 测试</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#f92672">[</span>tintin@localhost jtthink<span style="color:#f92672">]</span>$ ls
+build  compose  conf  etcd  etcd1  etcd2  mysql  web
+<span style="color:#f92672">[</span>tintin@localhost etcd<span style="color:#f92672">]</span>$ cd etcd/etcd-v3.4.9-linux-amd64/
+<span style="color:#f92672">[</span>tintin@localhost etcd-v3.4.9-linux-amd64<span style="color:#f92672">]</span>$ ls
+Documentation  etcd  etcdctl  README-etcdctl.md  README.md  READMEv2-etcdctl.md
+<span style="color:#f92672">[</span>tintin@localhost etcd-v3.4.9-linux-amd64<span style="color:#f92672">]</span>$ ./etcdctl --endpoints http://localhost:23791 member list
+97f72e8299c69562, started, etcd1, http://172.25.0.101:2380, http://172.25.0.101:2379, false
+aea8ea6030d288e8, started, etcd2, http://172.25.0.102:2380, http://172.25.0.102:2379, false
+<span style="color:#f92672">[</span>tintin@localhost etcd-v3.4.9-linux-amd64<span style="color:#f92672">]</span>$ ./etcdctl --endpoints http://localhost:23792 member list
+97f72e8299c69562, started, etcd1, http://172.25.0.101:2380, http://172.25.0.101:2379, false
+aea8ea6030d288e8, started, etcd2, http://172.25.0.102:2380, http://172.25.0.102:2379, false
+
+</code></pre></div>
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/etcd/" rel="tag">etcd</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/docker/" rel="tag">docker</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="Ding Jianhui avatar" src="/img/logo.jpg" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name">关于 Ding Jianhui</span>
+	</div>
+</div>
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/etcd/etcd-install/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;上一篇</span>
+			<p class="pager__title">etcd环境搭建(基于docker)</p>
+		</a>
+	</div>
+</nav>
+
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2020 Ding Jianhui.
+			<span class="footer__copyright-credits">基于 <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> 引擎和 <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a>主題</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/js/menu.js"></script>
+<script src="/js/custom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
+</body>
+</html>

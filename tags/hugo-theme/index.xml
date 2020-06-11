@@ -13,19 +13,19 @@
     
     <item>
       <title>Basic HTML Elements</title>
-      <link>http://dingjianhui.top/post/basic-elements/</link>
+      <link>http://dingjianhui.top/hugo/basic-elements/</link>
       <pubDate>Mon, 16 Apr 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://dingjianhui.top/post/basic-elements/</guid>
+      <guid>http://dingjianhui.top/hugo/basic-elements/</guid>
       <description>&lt;p&gt;The main purpose of this article is to make sure that all basic HTML Elements are decorated with CSS so as to not miss any possible elements when creating new themes for Hugo.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>(Hu)go Template Primer</title>
-      <link>http://dingjianhui.top/post/goisforlovers/</link>
+      <link>http://dingjianhui.top/hugo/goisforlovers/</link>
       <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://dingjianhui.top/post/goisforlovers/</guid>
+      <guid>http://dingjianhui.top/hugo/goisforlovers/</guid>
       <description>&lt;p&gt;Hugo uses the excellent &lt;a href=&#34;https://golang.org/&#34;&gt;Go&lt;/a&gt; &lt;a href=&#34;https://golang.org/pkg/html/template/&#34;&gt;html/template&lt;/a&gt; library for
 its template engine. It is an extremely lightweight engine that provides a very
 small amount of logic. In our experience that it is just the right amount of
@@ -36,10 +36,10 @@ similarities in Go templates.&lt;/p&gt;</description>
     
     <item>
       <title>Getting Started with Hugo</title>
-      <link>http://dingjianhui.top/post/hugoisforlovers/</link>
+      <link>http://dingjianhui.top/hugo/hugoisforlovers/</link>
       <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://dingjianhui.top/post/hugoisforlovers/</guid>
+      <guid>http://dingjianhui.top/hugo/hugoisforlovers/</guid>
       <description>Step 1. Install Hugo Go to Hugo releases and download the appropriate version for your OS and architecture.
 Save it somewhere specific as we will be using it in the next step.
 More complete instructions are available at Install Hugo

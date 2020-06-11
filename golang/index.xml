@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Golangs on Ding Jianhui 的个人博客 - 学习笔记</title>
+    <link>http://dingjianhui.top/golang/</link>
+    <description>Recent content in Golangs on Ding Jianhui 的个人博客 - 学习笔记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 05 Jun 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://dingjianhui.top/golang/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Go Cross Compile</title>
+      <link>http://dingjianhui.top/golang/go-cross-compile/</link>
+      <pubDate>Fri, 05 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://dingjianhui.top/golang/go-cross-compile/</guid>
+      <description>linux set GOOS=linux set GOARCH=amd64 go build -o build/hugo main.go  windows set GOOS=windows set GOARCH=amd64 go build -o build/hugo.exe main.go   PS：环境变量参数参考：
+ GOARCH: amd64, 386, arm, ppc64, … GOOS: linux, darwin, windows, netbsd, … </description>
+    </item>
+    
+  </channel>
+</rss>

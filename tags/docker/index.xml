@@ -6,15 +6,24 @@
     <description>Recent content in docker on Ding Jianhui 的个人博客 - 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 11 Jun 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 11 Jun 2020 17:14:58 +0800</lastBuildDate>
     
 	<atom:link href="http://dingjianhui.top/tags/docker/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>使用docker模拟etcd集群的创建</title>
+      <link>http://dingjianhui.top/etcd/etcd-cluster-by-docker/</link>
+      <pubDate>Thu, 11 Jun 2020 17:14:58 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/etcd/etcd-cluster-by-docker/</guid>
+      <description>实际中部署集群 使用不同机器 或 docker swarm 或 k8s 来部署  Step 1 创建一个专门的docker网络 创建docker网络 (使用的是bridge,指定了子网) docker network create etcdnet --subnet 172.25.0.0/16  [tintin@localhost etcd]$ docker network create etcdnet --subnet 172.25.0.0/16 9d44277499703a9754ea35d305a1255ebed0c1415fab2cd4eeaf5f2bfee08b48 [tintin@localhost etcd]$ docker network ls NETWORK ID NAME DRIVER SCOPE 66be68f8e7eb bridge bridge local 9d4427749970 etcdnet bridge local b2633d6ca2c8 host host local e5af1ac036a0 none null local [tintin@localhost etcd]$ docker network inspect etcdnet [ { &amp;#34;Name&amp;#34;: &amp;#34;etcdnet&amp;#34;, &amp;#34;Id&amp;#34;: &amp;#34;9d44277499703a9754ea35d305a1255ebed0c1415fab2cd4eeaf5f2bfee08b48&amp;#34;, &amp;#34;Created&amp;#34;: &amp;#34;2020-06-11T17:22:31.032325409+08:00&amp;#34;, &amp;#34;Scope&amp;#34;: &amp;#34;local&amp;#34;, &amp;#34;Driver&amp;#34;: &amp;#34;bridge&amp;#34;, &amp;#34;EnableIPv6&amp;#34;: false, &amp;#34;IPAM&amp;#34;: { &amp;#34;Driver&amp;#34;: &amp;#34;default&amp;#34;, &amp;#34;Options&amp;#34;: {}, &amp;#34;Config&amp;#34;: [ { &amp;#34;Subnet&amp;#34;: &amp;#34;172.</description>
+    </item>
+    
+    <item>
       <title>etcd环境搭建(基于docker)</title>
       <link>http://dingjianhui.top/etcd/etcd-install/</link>
-      <pubDate>Thu, 11 Jun 2020 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 11 Jun 2020 13:14:58 +0800</pubDate>
       
       <guid>http://dingjianhui.top/etcd/etcd-install/</guid>
       <description>etcd简介  A distributed, reliable key-value store for the most critical data of a distributed system

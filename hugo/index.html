@@ -1,28 +1,27 @@
 <!DOCTYPE html>
 <html class="no-js" lang="zh-cn">
 <head>
-	<meta name="generator" content="Hugo 0.73.0-DEV" />
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Ding Jianhui 的个人博客 - 学习笔记</title>
+	<title>Hugos - Ding Jianhui 的个人博客 - 学习笔记</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
-	<meta name="description" content="没有播种，何来收获">
-		<meta property="og:title" content="Ding Jianhui 的个人博客 - 学习笔记" />
+	<meta name="description" content="">
+		<meta property="og:title" content="Hugos" />
 <meta property="og:description" content="没有播种，何来收获" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="http://dingjianhui.top/" />
-<meta property="og:updated_time" content="2020-06-11T17:14:58+08:00" />
+<meta property="og:url" content="http://dingjianhui.top/hugo/" />
+<meta property="og:updated_time" content="2018-04-16T00:00:00+00:00" />
 
-		<meta itemprop="name" content="Ding Jianhui 的个人博客 - 学习笔记">
+		<meta itemprop="name" content="Hugos">
 <meta itemprop="description" content="没有播种，何来收获">
 		<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Ding Jianhui 的个人博客 - 学习笔记"/>
+<meta name="twitter:title" content="Hugos"/>
 <meta name="twitter:description" content="没有播种，何来收获"/>
 
 	<link rel="dns-prefetch" href="//fonts.googleapis.com">
 	<link rel="dns-prefetch" href="//fonts.gstatic.com">
-	<link rel="alternate" type="application/rss+xml" href="/index.xml" title="Ding Jianhui 的个人博客 - 学习笔记">
+	<link rel="alternate" type="application/rss+xml" href="/hugo/index.xml" title="Ding Jianhui 的个人博客 - 学习笔记">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
 	<link rel="stylesheet" href="/css/style.css">
 	<link rel="stylesheet" href="/css/custom.css">
@@ -51,64 +50,9 @@
 			<div class="primary">
 			
 <main class="main list" role="main">
-	<article class="list__item post">
-	<header class="list__header">
-		<h3 class="list__title post__title ">
-			<a href="/etcd/etcd-cluster-by-docker/" rel="bookmark">
-			使用docker模拟etcd集群的创建
-			</a>
-		</h3>
-		<div class="list__meta meta"><div class="meta__item-author meta__item">
-	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Ding Jianhui</span>
-</div>
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-06-11T17:14:58&#43;08:00">2020-06-11</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/etcd/" rel="category">etcd</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		实际中部署集群 使用不同机器 或 docker swarm 或 k8s 来部署  Step 1 创建一个专门的docker网络 创建docker网络 (使用的是bridge,指定了子网) docker network create etcdnet --subnet 172.25.0.0/16  [tintin@localhost etcd]$ docker network create etcdnet --subnet 172.25.0.0/16 9d44277499703a9754ea35d305a1255ebed0c1415fab2cd4eeaf5f2bfee08b48 [tintin@localhost etcd]$ docker network ls NETWORK ID NAME DRIVER SCOPE 66be68f8e7eb bridge bridge local 9d4427749970 etcdnet bridge local b2633d6ca2c8 host host local e5af1ac036a0 none null local [tintin@localhost etcd]$ docker network inspect etcdnet [ { &#34;Name&#34;: &#34;etcdnet&#34;, &#34;Id&#34;: &#34;9d44277499703a9754ea35d305a1255ebed0c1415fab2cd4eeaf5f2bfee08b48&#34;, &#34;Created&#34;: &#34;2020-06-11T17:22:31.032325409+08:00&#34;, &#34;Scope&#34;: &#34;local&#34;, &#34;Driver&#34;: &#34;bridge&#34;, &#34;EnableIPv6&#34;: false, &#34;IPAM&#34;: { &#34;Driver&#34;: &#34;default&#34;, &#34;Options&#34;: {}, &#34;Config&#34;: [ { &#34;Subnet&#34;: &#34;172.
-	</div>
-</article><article class="list__item post">
-	<header class="list__header">
-		<h3 class="list__title post__title ">
-			<a href="/etcd/etcd-install/" rel="bookmark">
-			etcd环境搭建(基于docker)
-			</a>
-		</h3>
-		<div class="list__meta meta"><div class="meta__item-author meta__item">
-	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Ding Jianhui</span>
-</div>
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-06-11T13:14:58&#43;08:00">2020-06-11</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/etcd/" rel="category">etcd</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		etcd简介  A distributed, reliable key-value store for the most critical data of a distributed system
- etcd是一个高可用的键值存储系统 etcd是由CoreOS开发并维护的,灵感来自于 ZooKeeper 等。它使用Go语言编写 Github: https://github.com/etcd-io/etcd 官网: https://etcd.io  功能特点 简单：基于 HTTP+JSON 的 API 让你用 curl 就可以轻松使用。 安全：可选 SSL 客户认证机制。 快速：每个实例每秒支持一千次写操作。 可信：使用 Raft 算法充分实现了分布式。  主要使用场景  主要用于共享配置 服务注册与发现 （Service Discovery） 分布式锁等  下载etcd并安装 下载地址：https://github.com/etcd-io/etcd/releases 我使用的方式是windows环境下载，然后上传至linux中  [tintin@localhost etcd]$ tar -zxvf etcd-v3.4.9-linux-amd64.tar.gz [tintin@localhost etcd]$ ls etcd-v3.4.9-linux-amd64 etcd-v3.4.9-linux-amd64.tar.gz [tintin@localhost etcd]$ cd etcd-v3.4.9-linux-amd64/ [tintin@localhost etcd-v3.4.9-linux-amd64]$ ls Documentation etcd etcdctl README-etcdctl.
-	</div>
-</article><article class="list__item post">
-	<header class="list__header">
-		<h3 class="list__title post__title ">
-			<a href="/golang/go-cross-compile/" rel="bookmark">
-			Go Cross Compile
-			</a>
-		</h3>
-		<p class="list__lead post__lead">windows - 开发环境下 go交叉编译</p>
-		<div class="list__meta meta"><div class="meta__item-author meta__item">
-	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Ding Jianhui</span>
-</div>
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-06-05T00:00:00Z">2020-06-05</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/hugo/" rel="category">hugo</a>, <a class="meta__link" href="/categories/golang/" rel="category">golang</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		linux set GOOS=linux set GOARCH=amd64 go build -o build/hugo main.go  windows set GOOS=windows set GOARCH=amd64 go build -o build/hugo.exe main.go   PS：环境变量参数参考：
- GOARCH: amd64, 386, arm, ppc64, … GOOS: linux, darwin, windows, netbsd, … 
-	</div>
-</article><article class="list__item post">
+	<header class="main__header">
+		<h1 class="main__title">Hugos</h1>
+	</header><article class="list__item post">
 	<header class="list__header">
 		<h3 class="list__title post__title ">
 			<a href="/hugo/basic-elements/" rel="bookmark">
@@ -237,7 +181,8 @@ Follow the following steps:
 
 
 			</div>
-			<aside class="sidebar"><div class="widget-search widget">
+			
+<aside class="sidebar sidebar--left"><div class="widget-search widget">
 	<form class="widget-search__form" role="search" method="get" action="https://google.com/search">
 		<label>
 			<input class="widget-search__field" type="search" placeholder="搜索..." value="" name="q" aria-label="搜索...">
