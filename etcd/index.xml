@@ -17,7 +17,7 @@
       <pubDate>Thu, 11 Jun 2020 17:14:58 +0800</pubDate>
       
       <guid>http://dingjianhui.top/etcd/etcd-cluster-by-docker/</guid>
-      <description>实际中部署集群 使用不同机器 或 docker swarm 或 k8s 来部署  Step 1 创建一个专门的docker网络 创建docker网络 (使用的是bridge,指定了子网) docker network create etcdnet --subnet 172.25.0.0/16  [tintin@localhost etcd]$ docker network create etcdnet --subnet 172.25.0.0/16 9d44277499703a9754ea35d305a1255ebed0c1415fab2cd4eeaf5f2bfee08b48 [tintin@localhost etcd]$ docker network ls NETWORK ID NAME DRIVER SCOPE 66be68f8e7eb bridge bridge local 9d4427749970 etcdnet bridge local b2633d6ca2c8 host host local e5af1ac036a0 none null local [tintin@localhost etcd]$ docker network inspect etcdnet [ { &amp;#34;Name&amp;#34;: &amp;#34;etcdnet&amp;#34;, &amp;#34;Id&amp;#34;: &amp;#34;9d44277499703a9754ea35d305a1255ebed0c1415fab2cd4eeaf5f2bfee08b48&amp;#34;, &amp;#34;Created&amp;#34;: &amp;#34;2020-06-11T17:22:31.032325409+08:00&amp;#34;, &amp;#34;Scope&amp;#34;: &amp;#34;local&amp;#34;, &amp;#34;Driver&amp;#34;: &amp;#34;bridge&amp;#34;, &amp;#34;EnableIPv6&amp;#34;: false, &amp;#34;IPAM&amp;#34;: { &amp;#34;Driver&amp;#34;: &amp;#34;default&amp;#34;, &amp;#34;Options&amp;#34;: {}, &amp;#34;Config&amp;#34;: [ { &amp;#34;Subnet&amp;#34;: &amp;#34;172.</description>
+      <description>实际中部署集群 使用不同机器 或 docker swarm 或 k8s 来部署  Step 1 创建一个专门的docker网络 创建docker网络 (使用的是bridge,指定了子网) docker network create etcdnet --subnet 172.25.0.0/16 创建完后建议用户重新登录  [tintin@localhost ttphp]$ docker network create etcdnet --subnet 172.25.0.0/16 Step 2 创建两个节点 一个节点为etcd1,一个节点为etcd2 节点下各自创建 conf 和 data  [tintin@localhost ttphp]$ cd etcds/ [tintin@localhost etcds]$ mkdir etcd1 etcd2 [tintin@localhost etcds]$ mkdir etcd1/conf etcd1/data [tintin@localhost etcds]$ mkdir etcd2/conf etcd2/data Step 3 创建每个节点的配置文件 etcd1/conf/etcd.yml (etcd1节点的配置文件) vim etcd1/conf/etcd.yml  name: etcd1 data-dir: /etcd/data listen-client-urls: http://172.</description>
     </item>
     
     <item>
@@ -27,7 +27,7 @@
       
       <guid>http://dingjianhui.top/etcd/etcd-install/</guid>
       <description>etcd简介  A distributed, reliable key-value store for the most critical data of a distributed system
- etcd是一个高可用的键值存储系统 etcd是由CoreOS开发并维护的,灵感来自于 ZooKeeper 等。它使用Go语言编写 Github: https://github.com/etcd-io/etcd 官网: https://etcd.io  功能特点 简单：基于 HTTP+JSON 的 API 让你用 curl 就可以轻松使用。 安全：可选 SSL 客户认证机制。 快速：每个实例每秒支持一千次写操作。 可信：使用 Raft 算法充分实现了分布式。  主要使用场景  主要用于共享配置 服务注册与发现 （Service Discovery） 分布式锁等  下载etcd并安装 下载地址：https://github.com/etcd-io/etcd/releases 我使用的方式是windows环境下载，然后上传至linux中  [tintin@localhost etcd]$ tar -zxvf etcd-v3.4.9-linux-amd64.tar.gz [tintin@localhost etcd]$ ls etcd-v3.4.9-linux-amd64 etcd-v3.4.9-linux-amd64.tar.gz [tintin@localhost etcd]$ cd etcd-v3.4.9-linux-amd64/ [tintin@localhost etcd-v3.4.9-linux-amd64]$ ls Documentation etcd etcdctl README-etcdctl.</description>
+ etcd是一个高可用的键值存储系统 etcd是由CoreOS开发并维护的,灵感来自于 ZooKeeper 等。它使用Go语言编写 Github: https://github.com/etcd-io/etcd 官网: https://etcd.io  功能特点 简单：基于 HTTP+JSON 的 API 让你用 curl 就可以轻松使用。 安全：可选 SSL 客户认证机制。 快速：每个实例每秒支持一千次写操作。 可信：使用 Raft 算法充分实现了分布式。  主要使用场景  主要用于共享配置 服务注册与发现 （Service Discovery） 分布式锁等  下载etcd并安装 下载地址：https://github.com/etcd-io/etcd/releases 我使用的方式是windows环境下载，然后上传至linux中 解压安装  [tintin@localhost tools]$ tar -zxvf etcd-v3.4.9-linux-amd64.tar.gz [tintin@localhost tools]$ mv etcd-v3.4.9-linux-amd64 ../etcd [tintin@localhost ttphp]$ cd ../etcd/ [tintin@localhost etcd]$ ls Documentation etcd etcdctl README-etcdctl.</description>
     </item>
     
   </channel>
