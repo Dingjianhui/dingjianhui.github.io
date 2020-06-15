@@ -18,7 +18,7 @@
 <meta itemprop="description" content="使用docker模拟etcd集群的创建">
 <meta itemprop="datePublished" content="2020-06-11T17:14:58&#43;08:00" />
 <meta itemprop="dateModified" content="2020-06-11T17:14:58&#43;08:00" />
-<meta itemprop="wordCount" content="310">
+<meta itemprop="wordCount" content="423">
 
 
 
@@ -79,6 +79,7 @@
     <li><a href="#step-4--使用临时镜像来commit一个etcd镜像">Step 4  使用临时镜像来commit一个etcd镜像</a></li>
     <li><a href="#step-5-使用新镜像创建两个容器">Step 5 使用新镜像创建两个容器</a></li>
     <li><a href="#step-6-测试">Step 6 测试</a></li>
+    <li><a href="#step-7-go初步调用etcd测试">Step 7 Go初步调用etcd测试</a></li>
   </ul>
 </nav>
 	</div>
@@ -177,6 +178,62 @@ aea8ea6030d288e8, started, etcd2, http://172.25.0.102:2380, http://172.25.0.102:
 97f72e8299c69562, started, etcd1, http://172.25.0.101:2380, http://172.25.0.101:2379, false
 aea8ea6030d288e8, started, etcd2, http://172.25.0.102:2380, http://172.25.0.102:2379, false
 
+</code></pre></div><h2 id="step-7-go初步调用etcd测试">Step 7 Go初步调用etcd测试</h2>
+<pre><code>文档地址： https://godoc.org/go.etcd.io/etcd/clientv3
+
+安装客户端库   go get go.etcd.io/etcd/clientv3
+
+安装客户端库有问题时
+# github.com/coreos/etcd/clientv3/balancer/resolver/endpoint
+..\gopath\pkg\mod\github.com\coreos\etcd@v3.3.22+incompatible\clientv3\balancer\resolver\endpoint\endpoint.go:114:78: undefined: resolver.BuildOption
+..\gopath\pkg\mod\github.com\coreos\etcd@v3.3.22+incompatible\clientv3\balancer\resolver\endpoint\endpoint.go:182:31: undefined: resolver.ResolveNowOption
+# github.com/coreos/etcd/clientv3/balancer/picker
+..\gopath\pkg\mod\github.com\coreos\etcd@v3.3.22+incompatible\clientv3\balancer\picker\err.go:37:44: undefined: balancer.PickOptions
+..\gopath\pkg\mod\github.com\coreos\etcd@v3.3.22+incompatible\clientv3\balancer\picker\roundrobin_balanced.go:55:54: undefined: balancer.PickOptions
+
+参考:https://colobu.com/2020/04/09/accidents-of-etcd-and-go-module/
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Go" data-lang="Go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+
+<span style="color:#f92672">import</span> (
+	<span style="color:#e6db74">&#34;context&#34;</span>
+	<span style="color:#e6db74">&#34;go.etcd.io/etcd/clientv3&#34;</span>
+	<span style="color:#e6db74">&#34;log&#34;</span>
+	<span style="color:#e6db74">&#34;time&#34;</span>
+)
+
+<span style="color:#75715e">// etcd简单的kv操作
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>()  {
+	<span style="color:#a6e22e">config</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">clientv3</span>.<span style="color:#a6e22e">Config</span>{
+		<span style="color:#a6e22e">Endpoints</span>:            []<span style="color:#66d9ef">string</span>{<span style="color:#e6db74">&#34;192.168.137.130:23791&#34;</span>,<span style="color:#e6db74">&#34;192.168.137.130:23792&#34;</span>},
+		<span style="color:#a6e22e">DialTimeout</span>:          <span style="color:#ae81ff">10</span><span style="color:#f92672">*</span><span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Second</span>,
+	}
+	<span style="color:#a6e22e">client</span>,<span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">clientv3</span>.<span style="color:#a6e22e">New</span>(<span style="color:#a6e22e">config</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">err</span>.<span style="color:#a6e22e">Error</span>())
+	}
+	<span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">Close</span>()
+
+	<span style="color:#a6e22e">kv</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">clientv3</span>.<span style="color:#a6e22e">NewKV</span>(<span style="color:#a6e22e">client</span>)
+	<span style="color:#a6e22e">ctx</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Background</span>()
+	<span style="color:#a6e22e">resp</span>,<span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">kv</span>.<span style="color:#a6e22e">Put</span>(<span style="color:#a6e22e">ctx</span>,<span style="color:#e6db74">&#34;/services/user&#34;</span>,<span style="color:#e6db74">&#34;user1&#34;</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">err</span>.<span style="color:#a6e22e">Error</span>())
+	}
+	<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">resp</span>)
+}
+
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#f92672">[</span>tintin@localhost ttphp<span style="color:#f92672">]</span>$ docker exec -it etcd1 sh
+/go <span style="color:#75715e"># etcdctl get / --prefix</span>
+/services/user
+user1
+/go #
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#f92672">[</span>tintin@localhost ~<span style="color:#f92672">]</span>$ docker exec -it etcd2 sh
+/go <span style="color:#75715e"># etcdctl get / --prefix</span>
+/services/user
+user1
+/go #
 </code></pre></div>
 		</div>
 		<footer class="post__footer">

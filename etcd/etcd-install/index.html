@@ -18,7 +18,7 @@
 <meta itemprop="description" content="etcd入门之基于docker的环境搭建">
 <meta itemprop="datePublished" content="2020-06-11T13:14:58&#43;08:00" />
 <meta itemprop="dateModified" content="2020-06-11T13:14:58&#43;08:00" />
-<meta itemprop="wordCount" content="266">
+<meta itemprop="wordCount" content="758">
 
 
 
@@ -176,6 +176,123 @@ zhangsan
 /go <span style="color:#75715e"># etcdctl del /user/101 --prefix</span>
 <span style="color:#ae81ff">2</span>
 /go <span style="color:#75715e"># etcdctl get /user/101 --prefix</span>
+</code></pre></div><pre><code>lease 租约的使用,和redis设置过期是有区别的
+创建一个租约（好比租房合同），并设置过期时间 
+etcdctl lease grant 20  这好比 设置了一个 20秒的租约
+
+查看租约列表
+   etcdctl lease list
+
+查看信息（剩余时间）
+  etcdctl lease timetolive   xxxxxxx
+
+删除租约 
+  etcdctl lease revoke   xxxxxxx
+
+保持租约始终存活
+  etcdctl lease keep-alive xxxxx
+  
+把key和租约关联
+    etcdctl put /user shenyi --lease=xxxxxooo 
+    一旦租约过期，或被删掉,key就没了
+
+    etcdctl lease timetolive   xxxxxxx --keys 
+    可以查看该租约下的所有key
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">/go <span style="color:#75715e"># etcdctl lease grant 200</span>
+lease 694d72b5ce961a04 granted with TTL<span style="color:#f92672">(</span>200s<span style="color:#f92672">)</span>
+/go <span style="color:#75715e"># etcdctl lease timetolive 694d72b5ce961a04</span>
+lease 694d72b5ce961a04 granted with TTL<span style="color:#f92672">(</span>200s<span style="color:#f92672">)</span>, remaining<span style="color:#f92672">(</span>178s<span style="color:#f92672">)</span>
+/go <span style="color:#75715e"># etcdctl lease list</span>
+found <span style="color:#ae81ff">1</span> leases
+694d72b5ce961a04
+/go <span style="color:#75715e"># etcdctl lease revoke 694d72b5ce961a04</span>
+lease 694d72b5ce961a04 revoked
+/go <span style="color:#75715e"># etcdctl lease list</span>
+found <span style="color:#ae81ff">0</span> leases
+/go <span style="color:#75715e"># etcdctl lease grant 200</span>
+lease 694d72b5ce961a07 granted with TTL<span style="color:#f92672">(</span>200s<span style="color:#f92672">)</span>
+/go <span style="color:#75715e"># etcdctl lease timetolive 694d72b5ce961a07</span>
+lease 694d72b5ce961a07 granted with TTL<span style="color:#f92672">(</span>200s<span style="color:#f92672">)</span>, remaining<span style="color:#f92672">(</span>185s<span style="color:#f92672">)</span>
+/go <span style="color:#75715e"># etcdctl lease keep-alive 694d72b5ce961a07</span>
+lease 694d72b5ce961a07 keepalived with TTL<span style="color:#f92672">(</span>200<span style="color:#f92672">)</span>
+^C
+/go <span style="color:#75715e"># etcdctl lease revoke 694d72b5ce961a07</span>
+lease 694d72b5ce961a07 revoked
+/go <span style="color:#75715e"># etcdctl lease grant 100</span>
+lease 694d72b5ce961a0a granted with TTL<span style="color:#f92672">(</span>100s<span style="color:#f92672">)</span>
+/go <span style="color:#75715e"># etcdctl put /user lisi --lease 694d72b5ce961a0a</span>
+OK
+/go <span style="color:#75715e"># etcdctl get /user --prefix</span>
+/user
+lisi
+/go <span style="color:#75715e"># etcdctl lease timetolive 694d72b5ce961a0a</span>
+lease 694d72b5ce961a0a granted with TTL<span style="color:#f92672">(</span>100s<span style="color:#f92672">)</span>, remaining<span style="color:#f92672">(</span>7s<span style="color:#f92672">)</span>
+/go <span style="color:#75715e"># etcdctl lease timetolive 694d72b5ce961a0a --keys</span>
+lease 694d72b5ce961a0a already expired
+/go <span style="color:#75715e"># etcdctl lease grant 150</span>
+lease 694d72b5ce961a0f granted with TTL<span style="color:#f92672">(</span>150s<span style="color:#f92672">)</span>
+/go <span style="color:#75715e"># etcdctl lease timetolive 694d72b5ce961a0f</span>
+lease 694d72b5ce961a0f granted with TTL<span style="color:#f92672">(</span>150s<span style="color:#f92672">)</span>, remaining<span style="color:#f92672">(</span>134s<span style="color:#f92672">)</span>
+/go <span style="color:#75715e"># etcdctl put /user/name zhangsan --lease 694d72b5ce961a0f</span>
+OK
+/go <span style="color:#75715e"># etcdctl lease timetolive 694d72b5ce961a0f --keys</span>
+lease 694d72b5ce961a0f granted with TTL<span style="color:#f92672">(</span>150s<span style="color:#f92672">)</span>, remaining<span style="color:#f92672">(</span>61s<span style="color:#f92672">)</span>, attached keys<span style="color:#f92672">([</span>/user/name<span style="color:#f92672">])</span>
+/go <span style="color:#75715e"># etcdctl put /user/age 18 --lease 694d72b5ce961a0f</span>
+OK
+/go <span style="color:#75715e"># etcdctl lease timetolive 694d72b5ce961a0f --keys</span>
+lease 694d72b5ce961a0f granted with TTL<span style="color:#f92672">(</span>150s<span style="color:#f92672">)</span>, remaining<span style="color:#f92672">(</span>38s<span style="color:#f92672">)</span>, attached keys<span style="color:#f92672">([</span>/user/name /user/age<span style="color:#f92672">])</span>
+/go <span style="color:#75715e"># etcdctl lease timetolive 694d72b5ce961a0f</span>
+lease 694d72b5ce961a0f granted with TTL<span style="color:#f92672">(</span>150s<span style="color:#f92672">)</span>, remaining<span style="color:#f92672">(</span>30s<span style="color:#f92672">)</span>
+/go <span style="color:#75715e"># etcdctl get /user --prefix</span>
+/user/age
+<span style="color:#ae81ff">18</span>
+/user/name
+zhangsan
+/go <span style="color:#75715e"># etcdctl lease timetolive 694d72b5ce961a0f</span>
+lease 694d72b5ce961a0f already expired
+/go <span style="color:#75715e"># etcdctl get /user --prefix</span>
+/go <span style="color:#75715e"># etcdctl lease -h</span>
+NAME:
+	lease - Lease related commands
+
+USAGE:
+	etcdctl lease &lt;subcommand&gt; <span style="color:#f92672">[</span>flags<span style="color:#f92672">]</span>
+
+API VERSION:
+	3.4
+
+
+COMMANDS:
+	grant		Creates leases
+	keep-alive	Keeps leases alive <span style="color:#f92672">(</span>renew<span style="color:#f92672">)</span>
+	list		List all active leases
+	revoke		Revokes leases
+	timetolive	Get lease information
+
+OPTIONS:
+  -h, --help<span style="color:#f92672">[=</span>false<span style="color:#f92672">]</span>	help <span style="color:#66d9ef">for</span> lease
+
+GLOBAL OPTIONS:
+      --cacert<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>				verify certificates of TLS-enabled secure servers using this CA bundle
+      --cert<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>					identify secure client using this TLS certificate file
+      --command-timeout<span style="color:#f92672">=</span>5s			timeout <span style="color:#66d9ef">for</span> short running command <span style="color:#f92672">(</span>excluding dial timeout<span style="color:#f92672">)</span>
+      --debug<span style="color:#f92672">[=</span>false<span style="color:#f92672">]</span>				enable client-side debug logging
+      --dial-timeout<span style="color:#f92672">=</span>2s				dial timeout <span style="color:#66d9ef">for</span> client connections
+  -d, --discovery-srv<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>			domain name to query <span style="color:#66d9ef">for</span> SRV records describing cluster endpoints
+      --discovery-srv-name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>			service name to query when using DNS discovery
+      --endpoints<span style="color:#f92672">=[</span>127.0.0.1:2379<span style="color:#f92672">]</span>		gRPC endpoints
+      --hex<span style="color:#f92672">[=</span>false<span style="color:#f92672">]</span>				print byte strings as hex encoded strings
+      --insecure-discovery<span style="color:#f92672">[=</span>true<span style="color:#f92672">]</span>		accept insecure SRV records describing cluster endpoints
+      --insecure-skip-tls-verify<span style="color:#f92672">[=</span>false<span style="color:#f92672">]</span>	skip server certificate verification
+      --insecure-transport<span style="color:#f92672">[=</span>true<span style="color:#f92672">]</span>		disable transport security <span style="color:#66d9ef">for</span> client connections
+      --keepalive-time<span style="color:#f92672">=</span>2s			keepalive time <span style="color:#66d9ef">for</span> client connections
+      --keepalive-timeout<span style="color:#f92672">=</span>6s			keepalive timeout <span style="color:#66d9ef">for</span> client connections
+      --key<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>					identify secure client using this TLS key file
+      --password<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>				password <span style="color:#66d9ef">for</span> authentication <span style="color:#f92672">(</span><span style="color:#66d9ef">if</span> this option is used, --user option shouldn<span style="color:#960050;background-color:#1e0010">&#39;</span>t include password<span style="color:#f92672">)</span>
+      --user<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>					username<span style="color:#f92672">[</span>:password<span style="color:#f92672">]</span> <span style="color:#66d9ef">for</span> authentication <span style="color:#f92672">(</span>prompt <span style="color:#66d9ef">if</span> password is not supplied<span style="color:#f92672">)</span>
+  -w, --write-out<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;simple&#34;</span>			set the output format <span style="color:#f92672">(</span>fields, json, protobuf, simple, table<span style="color:#f92672">)</span>
+
 </code></pre></div><blockquote>
 <p>ps: etcd解读参考文献：</p>
 </blockquote>
