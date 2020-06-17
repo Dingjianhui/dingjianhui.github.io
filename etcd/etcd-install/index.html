@@ -18,7 +18,7 @@
 <meta itemprop="description" content="etcd入门之基于docker的环境搭建">
 <meta itemprop="datePublished" content="2020-06-11T13:14:58&#43;08:00" />
 <meta itemprop="dateModified" content="2020-06-11T13:14:58&#43;08:00" />
-<meta itemprop="wordCount" content="758">
+<meta itemprop="wordCount" content="760">
 
 
 
@@ -132,10 +132,12 @@ Documentation  etcd  etcdctl  README-etcdctl.md  README.md  READMEv2-etcdctl.md
 </code></pre>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#f92672">[</span>tintin@localhost etcds<span style="color:#f92672">]</span>$ docker pull golang:1.14.4-alpine3.12
 <span style="color:#f92672">[</span>tintin@localhost etcds<span style="color:#f92672">]</span>$ docker images
-<span style="color:#f92672">[</span>tintin@localhost etcds<span style="color:#f92672">]</span>$ docker run -it  --name etcd  -p 2379:2379  -v /home/tintin/ttphp/etcds/etcd0:/etcd golang:1.14.4-alpine3.12 sh
+<span style="color:#f92672">[</span>tintin@localhost etcds<span style="color:#f92672">]</span>$ docker run -it  --name etcd  -p 2379:2379 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>-v /home/tintin/ttphp/etcds/etcd0:/etcd golang:1.14.4-alpine3.12 sh
 Ctrl+D // 退出容器
 <span style="color:#f92672">[</span>tintin@localhost etcds<span style="color:#f92672">]</span>$ docker start etcd
-<span style="color:#f92672">[</span>tintin@localhost etcds<span style="color:#f92672">]</span>$ docker cp /home/tintin/ttphp/etcd/etcd etcd:/usr/bin <span style="color:#f92672">&amp;&amp;</span> docker cp /home/tintin/ttphp/etcd/etcdctl etcd:/usr/bin
+<span style="color:#f92672">[</span>tintin@localhost etcds<span style="color:#f92672">]</span>$ docker cp /home/tintin/ttphp/etcd/etcd etcd:/usr/bin <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>docker cp /home/tintin/ttphp/etcd/etcdctl etcd:/usr/bin
 <span style="color:#f92672">[</span>tintin@localhost etcds<span style="color:#f92672">]</span>$ cd /home/tintin/ttphp/etcds/etcd0/conf/
 <span style="color:#f92672">[</span>tintin@localhost conf<span style="color:#f92672">]</span>$ vim etcd.yml
 </code></pre></div><pre><code> 创建配置文件etcd.yml
