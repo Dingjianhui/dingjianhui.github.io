@@ -18,7 +18,7 @@
 <meta itemprop="description" content="使用docker模拟etcd集群的创建">
 <meta itemprop="datePublished" content="2020-06-11T17:14:58&#43;08:00" />
 <meta itemprop="dateModified" content="2020-06-11T17:14:58&#43;08:00" />
-<meta itemprop="wordCount" content="423">
+<meta itemprop="wordCount" content="597">
 
 
 
@@ -157,15 +157,22 @@ initial-cluster-state: 节点初始化方式，new 表示如果没有集群不�
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#f92672">[</span>tintin@localhost etcds<span style="color:#f92672">]</span>$ docker run --name testgo -it golang:1.14.4-alpine3.12 sh
 Ctrl+D 退出
 <span style="color:#f92672">[</span>tintin@localhost etcds<span style="color:#f92672">]</span>$ docker start testgo
-<span style="color:#f92672">[</span>tintin@localhost etcds<span style="color:#f92672">]</span>$ docker cp /home/tintin/ttphp/etcd/etcd testgo:/usr/bin <span style="color:#f92672">&amp;&amp;</span> docker cp /home/tintin/ttphp/etcd/etcdctl testgo:/usr/bin
+<span style="color:#f92672">[</span>tintin@localhost etcds<span style="color:#f92672">]</span>$ docker cp /home/tintin/ttphp/etcd/etcd testgo:/usr/bin <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span> docker cp /home/tintin/ttphp/etcd/etcdctl testgo:/usr/bin
 <span style="color:#f92672">[</span>tintin@localhost etcds<span style="color:#f92672">]</span>$ docker commit testgo etcd:my
 <span style="color:#f92672">[</span>tintin@localhost etcds<span style="color:#f92672">]</span>$ docker images
 <span style="color:#f92672">[</span>tintin@localhost etcds<span style="color:#f92672">]</span>$ docker ps
 <span style="color:#f92672">[</span>tintin@localhost etcds<span style="color:#f92672">]</span>$ docker stop testgo 
 <span style="color:#f92672">[</span>tintin@localhost etcds<span style="color:#f92672">]</span>$ docker rm testgo 
 </code></pre></div><h2 id="step-5-使用新镜像创建两个容器">Step 5 使用新镜像创建两个容器</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#f92672">[</span>tintin@localhost etcds<span style="color:#f92672">]</span>$ docker run -d --name etcd1 --network etcdnet  --ip 172.25.0.101 -p 23791:2379 -v /home/tintin/ttphp/etcds/etcd1:/etcd etcd:my etcd --config-file /etcd/conf/etcd.yml
-<span style="color:#f92672">[</span>tintin@localhost etcds<span style="color:#f92672">]</span>$ docker run -d --name etcd2 --network etcdnet  --ip 172.25.0.102 -p 23792:2379 -v /home/tintin/ttphp/etcds/etcd2:/etcd etcd:my etcd --config-file /etcd/conf/etcd.yml
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#f92672">[</span>tintin@localhost etcds<span style="color:#f92672">]</span>$ docker run -d --name etcd1 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>--network etcdnet  --ip 172.25.0.101 -p 23791:2379 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>-v /home/tintin/ttphp/etcds/etcd1:/etcd etcd:my <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>etcd --config-file /etcd/conf/etcd.yml
+<span style="color:#f92672">[</span>tintin@localhost etcds<span style="color:#f92672">]</span>$ docker run -d --name etcd2 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>--network etcdnet  --ip 172.25.0.102 -p 23792:2379 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>-v /home/tintin/ttphp/etcds/etcd2:/etcd etcd:my <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>etcd --config-file /etcd/conf/etcd.yml
 <span style="color:#f92672">[</span>tintin@localhost etcds<span style="color:#f92672">]</span>$ docker ps
 
 </code></pre></div><h2 id="step-6-测试">Step 6 测试</h2>
@@ -178,6 +185,31 @@ aea8ea6030d288e8, started, etcd2, http://172.25.0.102:2380, http://172.25.0.102:
 97f72e8299c69562, started, etcd1, http://172.25.0.101:2380, http://172.25.0.101:2379, false
 aea8ea6030d288e8, started, etcd2, http://172.25.0.102:2380, http://172.25.0.102:2379, false
 
+</code></pre></div><pre><code>也可以进入任意一个容器
+如果是v2版本，可以使用  ETCDCTL_API=2 etcdctl member list 和 ETCDCTL_API=3 etcdctl member list 来查看
+
+how can I know which node is leader ？
+详情查看 https://github.com/etcd-io/etcd/issues/9417
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#f92672">[</span>tintin@localhost etcds<span style="color:#f92672">]</span>$ docker exec -it etcd1 sh
+/go <span style="color:#75715e"># etcdctl member list</span>
+97f72e8299c69562, started, etcd1, http://172.25.0.101:2380, http://172.25.0.101:2379, false
+aea8ea6030d288e8, started, etcd2, http://172.25.0.102:2380, http://172.25.0.102:2379, false
+/go <span style="color:#75715e"># etcdctl version</span>
+etcdctl version: 3.4.9
+API version: 3.4
+/go <span style="color:#75715e"># ETCDCTL_API=3 etcdctl member list</span>
+97f72e8299c69562, started, etcd1, http://172.25.0.101:2380, http://172.25.0.101:2379, false
+aea8ea6030d288e8, started, etcd2, http://172.25.0.102:2380, http://172.25.0.102:2379, false
+/go <span style="color:#75715e"># ETCDCTL_API=2 etcdctl member list</span>
+unexpected status code <span style="color:#ae81ff">404</span>
+/go <span style="color:#75715e"># ETCDCTL_API=3 etcdctl -w table --endpoints=etcd1:2379,etcd2:2379,etcd3:2379 endpoint status</span>
++------------+------------------+---------+---------+-----------+------------+-----------+------------+--------------------+--------+
+|  ENDPOINT  |        ID        | VERSION | DB SIZE | IS LEADER | IS LEARNER | RAFT TERM | RAFT INDEX | RAFT APPLIED INDEX | ERRORS |
++------------+------------------+---------+---------+-----------+------------+-----------+------------+--------------------+--------+
+| etcd1:2379 | 97f72e8299c69562 |   3.4.9 |   <span style="color:#ae81ff">20</span> kB |      true |      false |        <span style="color:#ae81ff">30</span> |          <span style="color:#ae81ff">9</span> |                  <span style="color:#ae81ff">9</span> |        |
+| etcd2:2379 | aea8ea6030d288e8 |   3.4.9 |   <span style="color:#ae81ff">20</span> kB |     false |      false |        <span style="color:#ae81ff">30</span> |          <span style="color:#ae81ff">9</span> |                  <span style="color:#ae81ff">9</span> |        |
++------------+------------------+---------+---------+-----------+------------+-----------+------------+--------------------+--------+
 </code></pre></div><h2 id="step-7-go初步调用etcd测试">Step 7 Go初步调用etcd测试</h2>
 <pre><code>文档地址： https://godoc.org/go.etcd.io/etcd/clientv3
 
