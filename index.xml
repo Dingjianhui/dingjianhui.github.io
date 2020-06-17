@@ -6,10 +6,20 @@
     <description>Recent content on Ding Jianhui 的个人博客 - 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 11 Jun 2020 17:14:58 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 17 Jun 2020 14:15:53 +0800</lastBuildDate>
     
 	<atom:link href="http://dingjianhui.top/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Centos Install Docker &amp; Docker Compose</title>
+      <link>http://dingjianhui.top/docker/centos-docker-install/</link>
+      <pubDate>Wed, 17 Jun 2020 14:15:53 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/docker/centos-docker-install/</guid>
+      <description>安装文档-以官方文档为准
+ 官方文档 https://docs.docker.com/engine/install/centos/  Step 1 卸载旧版本 $ sudo yum remove docker \  docker-client \  docker-client-latest \  docker-common \  docker-latest \  docker-latest-logrotate \  docker-logrotate \  docker-engine Step 2 设置存储库 安装utils工具包 （依赖） 官方源信息 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo 阿里云软件源 yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo  $ sudo yum install -y yum-utils $ sudo yum-config-manager \  --add-repo \  https://download.docker.com/linux/centos/docker-ce.repo Step 3 安装 docker 引擎 1.安装最新版本 $ sudo yum install docker-ce docker-ce-cli containerd.</description>
+    </item>
     
     <item>
       <title>使用docker模拟etcd集群的创建</title>

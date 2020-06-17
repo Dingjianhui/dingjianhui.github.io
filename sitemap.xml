@@ -4,17 +4,42 @@
   
   <url>
     <loc>http://dingjianhui.top/categories/</loc>
-    <lastmod>2020-06-11T17:14:58+08:00</lastmod>
+    <lastmod>2020-06-17T14:15:53+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://dingjianhui.top/docker/centos-docker-install/</loc>
+    <lastmod>2020-06-17T14:15:53+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://dingjianhui.top/tags/centos7/</loc>
+    <lastmod>2020-06-17T14:15:53+08:00</lastmod>
   </url>
   
   <url>
     <loc>http://dingjianhui.top/</loc>
-    <lastmod>2020-06-11T17:14:58+08:00</lastmod>
+    <lastmod>2020-06-17T14:15:53+08:00</lastmod>
   </url>
   
   <url>
     <loc>http://dingjianhui.top/tags/docker/</loc>
-    <lastmod>2020-06-11T17:14:58+08:00</lastmod>
+    <lastmod>2020-06-17T14:15:53+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://dingjianhui.top/categories/docker/</loc>
+    <lastmod>2020-06-17T14:15:53+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://dingjianhui.top/docker/</loc>
+    <lastmod>2020-06-17T14:15:53+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://dingjianhui.top/tags/</loc>
+    <lastmod>2020-06-17T14:15:53+08:00</lastmod>
   </url>
   
   <url>
@@ -29,11 +54,6 @@
   
   <url>
     <loc>http://dingjianhui.top/etcd/</loc>
-    <lastmod>2020-06-11T17:14:58+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://dingjianhui.top/tags/</loc>
     <lastmod>2020-06-11T17:14:58+08:00</lastmod>
   </url>
   
