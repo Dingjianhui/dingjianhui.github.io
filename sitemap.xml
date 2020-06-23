@@ -3,22 +3,57 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://dingjianhui.top/categories/</loc>
-    <lastmod>2020-06-17T14:15:53+08:00</lastmod>
+    <loc>http://dingjianhui.top/blog/</loc>
+    <lastmod>2020-06-19T16:45:07+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://dingjianhui.top/docker/centos-docker-install/</loc>
+    <loc>http://dingjianhui.top/categories/</loc>
+    <lastmod>2020-06-19T16:45:07+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://dingjianhui.top/</loc>
+    <lastmod>2020-06-19T16:45:07+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://dingjianhui.top/tags/etcd/</loc>
+    <lastmod>2020-06-19T16:45:07+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://dingjianhui.top/categories/etcd/</loc>
+    <lastmod>2020-06-19T16:45:07+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://dingjianhui.top/tags/go/</loc>
+    <lastmod>2020-06-19T16:45:07+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://dingjianhui.top/blog/2020/06/19/go-etcd-v3-service-discovery/</loc>
+    <lastmod>2020-06-19T16:45:07+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://dingjianhui.top/categories/golang/</loc>
+    <lastmod>2020-06-19T16:45:07+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://dingjianhui.top/tags/</loc>
+    <lastmod>2020-06-19T16:45:07+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://dingjianhui.top/blog/2020/06/17/centos-docker-install/</loc>
     <lastmod>2020-06-17T14:15:53+08:00</lastmod>
   </url>
   
   <url>
     <loc>http://dingjianhui.top/tags/centos7/</loc>
-    <lastmod>2020-06-17T14:15:53+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://dingjianhui.top/</loc>
     <lastmod>2020-06-17T14:15:53+08:00</lastmod>
   </url>
   
@@ -33,57 +68,17 @@
   </url>
   
   <url>
-    <loc>http://dingjianhui.top/docker/</loc>
-    <lastmod>2020-06-17T14:15:53+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://dingjianhui.top/tags/</loc>
-    <lastmod>2020-06-17T14:15:53+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://dingjianhui.top/tags/etcd/</loc>
+    <loc>http://dingjianhui.top/blog/2020/06/11/etcd-cluster-by-docker/</loc>
     <lastmod>2020-06-11T17:14:58+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://dingjianhui.top/categories/etcd/</loc>
-    <lastmod>2020-06-11T17:14:58+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://dingjianhui.top/etcd/</loc>
-    <lastmod>2020-06-11T17:14:58+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://dingjianhui.top/etcd/etcd-cluster-by-docker/</loc>
-    <lastmod>2020-06-11T17:14:58+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://dingjianhui.top/etcd/etcd-install/</loc>
+    <loc>http://dingjianhui.top/blog/2020/06/11/etcd-install/</loc>
     <lastmod>2020-06-11T13:14:58+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://dingjianhui.top/tags/go/</loc>
-    <lastmod>2020-06-05T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://dingjianhui.top/golang/go-cross-compile/</loc>
-    <lastmod>2020-06-05T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://dingjianhui.top/categories/golang/</loc>
-    <lastmod>2020-06-05T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://dingjianhui.top/golang/</loc>
+    <loc>http://dingjianhui.top/blog/2020/06/05/go-cross-compile/</loc>
     <lastmod>2020-06-05T00:00:00+00:00</lastmod>
   </url>
   
@@ -93,7 +88,7 @@
   </url>
   
   <url>
-    <loc>http://dingjianhui.top/hugo/basic-elements/</loc>
+    <loc>http://dingjianhui.top/blog/basic-elements/</loc>
     <lastmod>2018-04-16T00:00:00+00:00</lastmod>
   </url>
   
@@ -103,32 +98,27 @@
   </url>
   
   <url>
-    <loc>http://dingjianhui.top/hugo/</loc>
-    <lastmod>2018-04-16T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://dingjianhui.top/hugo/creating-a-new-theme/</loc>
+    <loc>http://dingjianhui.top/blog/creating-a-new-theme/</loc>
     <lastmod>2014-09-28T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://dingjianhui.top/hugo/about/</loc>
+    <loc>http://dingjianhui.top/blog/about/</loc>
     <lastmod>2014-04-09T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://dingjianhui.top/hugo/goisforlovers/</loc>
+    <loc>http://dingjianhui.top/blog/goisforlovers/</loc>
     <lastmod>2014-04-02T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://dingjianhui.top/hugo/hugoisforlovers/</loc>
+    <loc>http://dingjianhui.top/blog/hugoisforlovers/</loc>
     <lastmod>2014-04-02T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://dingjianhui.top/hugo/migrate-from-jekyll/</loc>
+    <loc>http://dingjianhui.top/blog/migrate-from-jekyll/</loc>
     <lastmod>2014-03-10T00:00:00+00:00</lastmod>
   </url>
   

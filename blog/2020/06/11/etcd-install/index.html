@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html class="no-js" lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>etcd环境搭建(基于docker) - Ding Jianhui 的个人博客 - 学习笔记</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="etcd入门之基于docker的环境搭建">
+		<meta property="og:title" content="etcd环境搭建(基于docker)" />
+<meta property="og:description" content="etcd入门之基于docker的环境搭建" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://dingjianhui.top/blog/2020/06/11/etcd-install/" />
+<meta property="article:published_time" content="2020-06-11T13:14:58+08:00" />
+<meta property="article:modified_time" content="2020-06-11T13:14:58+08:00" />
+
+		<meta itemprop="name" content="etcd环境搭建(基于docker)">
+<meta itemprop="description" content="etcd入门之基于docker的环境搭建">
+<meta itemprop="datePublished" content="2020-06-11T13:14:58&#43;08:00" />
+<meta itemprop="dateModified" content="2020-06-11T13:14:58&#43;08:00" />
+<meta itemprop="wordCount" content="760">
+
+
+
+<meta itemprop="keywords" content="etcd,docker," />
+		<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="etcd环境搭建(基于docker)"/>
+<meta name="twitter:description" content="etcd入门之基于docker的环境搭建"/>
+
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/custom.css">
+	<link rel="shortcut icon" href="/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo logo--mixed">
+		<a class="logo__link" href="/" title="Ding Jianhui" rel="home">
+			<div class="logo__item logo__imagebox">
+					<img class="logo__img" src="/img/logo.jpg">
+				</div><div class="logo__item logo__text">
+					<div class="logo__title">Ding Jianhui</div>
+					<div class="logo__tagline">有一种投资好过其他所有的投资: 那就是投资自己</div>
+				</div>
+		</a>
+	</div>
+		<div class="divider"></div>
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">etcd环境搭建(基于docker)</h1>
+			<div class="post__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Ding Jianhui</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-06-11T13:14:58&#43;08:00">2020-06-11</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/etcd/" rel="category">etcd</a>, <a class="meta__link" href="/categories/docker/" rel="category">docker</a>
+	</span>
+</div></div>
+		</header>
+<div class="post__toc toc">
+	<div class="toc__title">目录</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#etcd简介">etcd简介</a></li>
+        <li><a href="#功能特点">功能特点</a></li>
+        <li><a href="#主要使用场景">主要使用场景</a></li>
+        <li><a href="#下载etcd并安装">下载etcd并安装</a></li>
+        <li><a href="#启动etcd">启动etcd</a></li>
+        <li><a href="#etcdctl-是客户端工具的使用">Etcdctl 是客户端工具的使用</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+	</div>
+</div>
+<div class="content post__content clearfix">
+			<h3 id="etcd简介">etcd简介</h3>
+<blockquote>
+<p>A distributed, reliable key-value store for the most critical data of a distributed system</p>
+</blockquote>
+<pre><code>etcd是一个高可用的键值存储系统
+etcd是由CoreOS开发并维护的,灵感来自于 ZooKeeper 等。它使用Go语言编写
+
+Github: https://github.com/etcd-io/etcd
+官网:  https://etcd.io
+</code></pre>
+<h3 id="功能特点">功能特点</h3>
+<pre><code>简单：基于 HTTP+JSON 的 API 让你用 curl 就可以轻松使用。
+安全：可选 SSL 客户认证机制。
+快速：每个实例每秒支持一千次写操作。
+可信：使用 Raft 算法充分实现了分布式。
+</code></pre>
+<h3 id="主要使用场景">主要使用场景</h3>
+<ol>
+<li>主要用于共享配置</li>
+<li>服务注册与发现 （Service Discovery）</li>
+<li>分布式锁等</li>
+</ol>
+<h3 id="下载etcd并安装">下载etcd并安装</h3>
+<pre><code>下载地址：https://github.com/etcd-io/etcd/releases
+我使用的方式是windows环境下载，然后上传至linux中 解压安装
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#f92672">[</span>tintin@localhost tools<span style="color:#f92672">]</span>$ tar -zxvf etcd-v3.4.9-linux-amd64.tar.gz
+<span style="color:#f92672">[</span>tintin@localhost tools<span style="color:#f92672">]</span>$ mv etcd-v3.4.9-linux-amd64 ../etcd
+<span style="color:#f92672">[</span>tintin@localhost ttphp<span style="color:#f92672">]</span>$ cd ../etcd/
+<span style="color:#f92672">[</span>tintin@localhost etcd<span style="color:#f92672">]</span>$ ls
+Documentation  etcd  etcdctl  README-etcdctl.md  README.md  READMEv2-etcdctl.md
+</code></pre></div><pre><code>创建映射文件 conf data
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#f92672">[</span>tintin@localhost etcd<span style="color:#f92672">]</span>$ cd ../
+<span style="color:#f92672">[</span>tintin@localhost ttphp<span style="color:#f92672">]</span>$ mkdir etcds
+<span style="color:#f92672">[</span>tintin@localhost ttphp<span style="color:#f92672">]</span>$ cd etcds/
+<span style="color:#f92672">[</span>tintin@localhost etcds<span style="color:#f92672">]</span>$ mkdir etcd0
+<span style="color:#f92672">[</span>tintin@localhost etcds<span style="color:#f92672">]</span>$ mkdir etcd0/conf etcd0/data
+</code></pre></div><pre><code>下载golang容器
+使用golang镜像方面以后有修改源码的时候可重新编译，因为etcd是go编写的
+当然也可以直接使用纯净的apline镜像或其他镜像
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#f92672">[</span>tintin@localhost etcds<span style="color:#f92672">]</span>$ docker pull golang:1.14.4-alpine3.12
+<span style="color:#f92672">[</span>tintin@localhost etcds<span style="color:#f92672">]</span>$ docker images
+<span style="color:#f92672">[</span>tintin@localhost etcds<span style="color:#f92672">]</span>$ docker run -it  --name etcd  -p 2379:2379 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>-v /home/tintin/ttphp/etcds/etcd0:/etcd golang:1.14.4-alpine3.12 sh
+Ctrl+D // 退出容器
+<span style="color:#f92672">[</span>tintin@localhost etcds<span style="color:#f92672">]</span>$ docker start etcd
+<span style="color:#f92672">[</span>tintin@localhost etcds<span style="color:#f92672">]</span>$ docker cp /home/tintin/ttphp/etcd/etcd etcd:/usr/bin <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>docker cp /home/tintin/ttphp/etcd/etcdctl etcd:/usr/bin
+<span style="color:#f92672">[</span>tintin@localhost etcds<span style="color:#f92672">]</span>$ cd /home/tintin/ttphp/etcds/etcd0/conf/
+<span style="color:#f92672">[</span>tintin@localhost conf<span style="color:#f92672">]</span>$ vim etcd.yml
+</code></pre></div><pre><code> 创建配置文件etcd.yml
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">name</span>: $(hostname -s)
+<span style="color:#66d9ef">data_dir</span>: /etcd/data
+<span style="color:#66d9ef">listen-client-urls</span>: http://<span style="color:#ae81ff">0.0.0.0</span>:<span style="color:#ae81ff">2379</span>
+</code></pre></div><h3 id="启动etcd">启动etcd</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#f92672">[</span>tintin@localhost conf<span style="color:#f92672">]</span>$ docker exec -it etcd sh
+/go <span style="color:#75715e"># etcdctl version</span>
+etcdctl version: 3.4.9
+API version: 3.4
+/go <span style="color:#75715e"># etcd --version</span>
+etcd Version: 3.4.9
+Git SHA: 54ba95891
+Go Version: go1.12.17
+Go OS/Arch: linux/amd64
+/go <span style="color:#75715e"># etcd --config-file  /etcd/conf/etcd.yml</span>
+</code></pre></div><h3 id="etcdctl-是客户端工具的使用">Etcdctl 是客户端工具的使用</h3>
+<pre><code>etcd v3.4.9 的API版本是 v3
+另外开一个终端进入容器 docker exec -it etcd sh
+简单的kv测试
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#f92672">[</span>tintin@localhost conf<span style="color:#f92672">]</span>$ docker exec -it etcd sh
+/go <span style="color:#75715e"># etcdctl put /user/101/name zhangsan</span>
+OK
+/go <span style="color:#75715e"># etcdctl put /user/101/age 18</span>
+OK
+/go <span style="color:#75715e"># etcdctl get /user/101/name</span>
+/user/101/name
+zhangsan
+/go <span style="color:#75715e"># etcdctl get /user/101</span>
+/go <span style="color:#75715e"># etcdctl get /user/101 --prefix</span>
+/user/101/age
+<span style="color:#ae81ff">18</span>
+/user/101/name
+zhangsan
+/go <span style="color:#75715e"># etcdctl del /user/101 --prefix</span>
+<span style="color:#ae81ff">2</span>
+/go <span style="color:#75715e"># etcdctl get /user/101 --prefix</span>
+</code></pre></div><pre><code>lease 租约的使用,和redis设置过期是有区别的
+创建一个租约（好比租房合同），并设置过期时间 
+etcdctl lease grant 20  这好比 设置了一个 20秒的租约
+
+查看租约列表
+   etcdctl lease list
+
+查看信息（剩余时间）
+  etcdctl lease timetolive   xxxxxxx
+
+删除租约 
+  etcdctl lease revoke   xxxxxxx
+
+保持租约始终存活
+  etcdctl lease keep-alive xxxxx
+  
+把key和租约关联
+    etcdctl put /user shenyi --lease=xxxxxooo 
+    一旦租约过期，或被删掉,key就没了
+
+    etcdctl lease timetolive   xxxxxxx --keys 
+    可以查看该租约下的所有key
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">/go <span style="color:#75715e"># etcdctl lease grant 200</span>
+lease 694d72b5ce961a04 granted with TTL<span style="color:#f92672">(</span>200s<span style="color:#f92672">)</span>
+/go <span style="color:#75715e"># etcdctl lease timetolive 694d72b5ce961a04</span>
+lease 694d72b5ce961a04 granted with TTL<span style="color:#f92672">(</span>200s<span style="color:#f92672">)</span>, remaining<span style="color:#f92672">(</span>178s<span style="color:#f92672">)</span>
+/go <span style="color:#75715e"># etcdctl lease list</span>
+found <span style="color:#ae81ff">1</span> leases
+694d72b5ce961a04
+/go <span style="color:#75715e"># etcdctl lease revoke 694d72b5ce961a04</span>
+lease 694d72b5ce961a04 revoked
+/go <span style="color:#75715e"># etcdctl lease list</span>
+found <span style="color:#ae81ff">0</span> leases
+/go <span style="color:#75715e"># etcdctl lease grant 200</span>
+lease 694d72b5ce961a07 granted with TTL<span style="color:#f92672">(</span>200s<span style="color:#f92672">)</span>
+/go <span style="color:#75715e"># etcdctl lease timetolive 694d72b5ce961a07</span>
+lease 694d72b5ce961a07 granted with TTL<span style="color:#f92672">(</span>200s<span style="color:#f92672">)</span>, remaining<span style="color:#f92672">(</span>185s<span style="color:#f92672">)</span>
+/go <span style="color:#75715e"># etcdctl lease keep-alive 694d72b5ce961a07</span>
+lease 694d72b5ce961a07 keepalived with TTL<span style="color:#f92672">(</span>200<span style="color:#f92672">)</span>
+^C
+/go <span style="color:#75715e"># etcdctl lease revoke 694d72b5ce961a07</span>
+lease 694d72b5ce961a07 revoked
+/go <span style="color:#75715e"># etcdctl lease grant 100</span>
+lease 694d72b5ce961a0a granted with TTL<span style="color:#f92672">(</span>100s<span style="color:#f92672">)</span>
+/go <span style="color:#75715e"># etcdctl put /user lisi --lease 694d72b5ce961a0a</span>
+OK
+/go <span style="color:#75715e"># etcdctl get /user --prefix</span>
+/user
+lisi
+/go <span style="color:#75715e"># etcdctl lease timetolive 694d72b5ce961a0a</span>
+lease 694d72b5ce961a0a granted with TTL<span style="color:#f92672">(</span>100s<span style="color:#f92672">)</span>, remaining<span style="color:#f92672">(</span>7s<span style="color:#f92672">)</span>
+/go <span style="color:#75715e"># etcdctl lease timetolive 694d72b5ce961a0a --keys</span>
+lease 694d72b5ce961a0a already expired
+/go <span style="color:#75715e"># etcdctl lease grant 150</span>
+lease 694d72b5ce961a0f granted with TTL<span style="color:#f92672">(</span>150s<span style="color:#f92672">)</span>
+/go <span style="color:#75715e"># etcdctl lease timetolive 694d72b5ce961a0f</span>
+lease 694d72b5ce961a0f granted with TTL<span style="color:#f92672">(</span>150s<span style="color:#f92672">)</span>, remaining<span style="color:#f92672">(</span>134s<span style="color:#f92672">)</span>
+/go <span style="color:#75715e"># etcdctl put /user/name zhangsan --lease 694d72b5ce961a0f</span>
+OK
+/go <span style="color:#75715e"># etcdctl lease timetolive 694d72b5ce961a0f --keys</span>
+lease 694d72b5ce961a0f granted with TTL<span style="color:#f92672">(</span>150s<span style="color:#f92672">)</span>, remaining<span style="color:#f92672">(</span>61s<span style="color:#f92672">)</span>, attached keys<span style="color:#f92672">([</span>/user/name<span style="color:#f92672">])</span>
+/go <span style="color:#75715e"># etcdctl put /user/age 18 --lease 694d72b5ce961a0f</span>
+OK
+/go <span style="color:#75715e"># etcdctl lease timetolive 694d72b5ce961a0f --keys</span>
+lease 694d72b5ce961a0f granted with TTL<span style="color:#f92672">(</span>150s<span style="color:#f92672">)</span>, remaining<span style="color:#f92672">(</span>38s<span style="color:#f92672">)</span>, attached keys<span style="color:#f92672">([</span>/user/name /user/age<span style="color:#f92672">])</span>
+/go <span style="color:#75715e"># etcdctl lease timetolive 694d72b5ce961a0f</span>
+lease 694d72b5ce961a0f granted with TTL<span style="color:#f92672">(</span>150s<span style="color:#f92672">)</span>, remaining<span style="color:#f92672">(</span>30s<span style="color:#f92672">)</span>
+/go <span style="color:#75715e"># etcdctl get /user --prefix</span>
+/user/age
+<span style="color:#ae81ff">18</span>
+/user/name
+zhangsan
+/go <span style="color:#75715e"># etcdctl lease timetolive 694d72b5ce961a0f</span>
+lease 694d72b5ce961a0f already expired
+/go <span style="color:#75715e"># etcdctl get /user --prefix</span>
+/go <span style="color:#75715e"># etcdctl lease -h</span>
+NAME:
+	lease - Lease related commands
+
+USAGE:
+	etcdctl lease &lt;subcommand&gt; <span style="color:#f92672">[</span>flags<span style="color:#f92672">]</span>
+
+API VERSION:
+	3.4
+
+
+COMMANDS:
+	grant		Creates leases
+	keep-alive	Keeps leases alive <span style="color:#f92672">(</span>renew<span style="color:#f92672">)</span>
+	list		List all active leases
+	revoke		Revokes leases
+	timetolive	Get lease information
+
+OPTIONS:
+  -h, --help<span style="color:#f92672">[=</span>false<span style="color:#f92672">]</span>	help <span style="color:#66d9ef">for</span> lease
+
+GLOBAL OPTIONS:
+      --cacert<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>				verify certificates of TLS-enabled secure servers using this CA bundle
+      --cert<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>					identify secure client using this TLS certificate file
+      --command-timeout<span style="color:#f92672">=</span>5s			timeout <span style="color:#66d9ef">for</span> short running command <span style="color:#f92672">(</span>excluding dial timeout<span style="color:#f92672">)</span>
+      --debug<span style="color:#f92672">[=</span>false<span style="color:#f92672">]</span>				enable client-side debug logging
+      --dial-timeout<span style="color:#f92672">=</span>2s				dial timeout <span style="color:#66d9ef">for</span> client connections
+  -d, --discovery-srv<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>			domain name to query <span style="color:#66d9ef">for</span> SRV records describing cluster endpoints
+      --discovery-srv-name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>			service name to query when using DNS discovery
+      --endpoints<span style="color:#f92672">=[</span>127.0.0.1:2379<span style="color:#f92672">]</span>		gRPC endpoints
+      --hex<span style="color:#f92672">[=</span>false<span style="color:#f92672">]</span>				print byte strings as hex encoded strings
+      --insecure-discovery<span style="color:#f92672">[=</span>true<span style="color:#f92672">]</span>		accept insecure SRV records describing cluster endpoints
+      --insecure-skip-tls-verify<span style="color:#f92672">[=</span>false<span style="color:#f92672">]</span>	skip server certificate verification
+      --insecure-transport<span style="color:#f92672">[=</span>true<span style="color:#f92672">]</span>		disable transport security <span style="color:#66d9ef">for</span> client connections
+      --keepalive-time<span style="color:#f92672">=</span>2s			keepalive time <span style="color:#66d9ef">for</span> client connections
+      --keepalive-timeout<span style="color:#f92672">=</span>6s			keepalive timeout <span style="color:#66d9ef">for</span> client connections
+      --key<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>					identify secure client using this TLS key file
+      --password<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>				password <span style="color:#66d9ef">for</span> authentication <span style="color:#f92672">(</span><span style="color:#66d9ef">if</span> this option is used, --user option shouldn<span style="color:#960050;background-color:#1e0010">&#39;</span>t include password<span style="color:#f92672">)</span>
+      --user<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>					username<span style="color:#f92672">[</span>:password<span style="color:#f92672">]</span> <span style="color:#66d9ef">for</span> authentication <span style="color:#f92672">(</span>prompt <span style="color:#66d9ef">if</span> password is not supplied<span style="color:#f92672">)</span>
+  -w, --write-out<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;simple&#34;</span>			set the output format <span style="color:#f92672">(</span>fields, json, protobuf, simple, table<span style="color:#f92672">)</span>
+
+</code></pre></div><blockquote>
+<p>ps: etcd解读参考文献：</p>
+</blockquote>
+<pre><code>https://www.infoq.cn/article/etcd-interpretation-application-scenario-implement-principle</code></pre>
+
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/etcd/" rel="tag">etcd</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/docker/" rel="tag">docker</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="Ding Jianhui avatar" src="/img/logo.jpg" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name">关于 Ding Jianhui</span>
+	</div>
+</div>
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/blog/2020/06/05/go-cross-compile/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;上一篇</span>
+			<p class="pager__title">Go Cross Compile</p>
+		</a>
+	</div>
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/blog/2020/06/11/etcd-cluster-by-docker/" rel="next">
+			<span class="pager__subtitle">下一篇&thinsp;»</span>
+			<p class="pager__title">使用docker模拟etcd集群的创建</p>
+		</a>
+	</div>
+</nav>
+
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2020 Ding Jianhui.
+			<span class="footer__copyright-credits">基于 <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> 引擎和 <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a>主題</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/js/menu.js"></script>
+<script src="/js/custom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
+</body>
+</html>

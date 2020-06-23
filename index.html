@@ -12,7 +12,7 @@
 <meta property="og:description" content="没有播种，何来收获" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="http://dingjianhui.top/" />
-<meta property="og:updated_time" content="2020-06-17T14:15:53+08:00" />
+<meta property="og:updated_time" content="2020-06-19T16:45:07+08:00" />
 
 		<meta itemprop="name" content="Ding Jianhui 的个人博客 - 学习笔记">
 <meta itemprop="description" content="没有播种，何来收获">
@@ -54,7 +54,26 @@
 	<article class="list__item post">
 	<header class="list__header">
 		<h3 class="list__title post__title ">
-			<a href="/docker/centos-docker-install/" rel="bookmark">
+			<a href="/blog/2020/06/19/go-etcd-v3-service-discovery/" rel="bookmark">
+			Go Etcd V3 Service Discovery
+			</a>
+		</h3>
+		<p class="list__lead post__lead">Go 场景之实现 Etcd V3 服务注册与发现</p>
+		<div class="list__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Ding Jianhui</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-06-19T16:45:07&#43;08:00">2020-06-19</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/golang/" rel="category">golang</a>, <a class="meta__link" href="/categories/etcd/" rel="category">etcd</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		示意图 服务注册 1.服务提供者 创建服务 2.服务提供者 配置etcd 3.服务提供者 把服务注册到配置的etcd中 4.服务启动 5.服务关闭时反注册服务 (关闭时,回收资源)  package main import ( &#34;context&#34; &#34;etcd-service/service/utils&#34; &#34;fmt&#34; &#34;github.com/google/uuid&#34; &#34;github.com/gorilla/mux&#34; &#34;log&#34; &#34;net/http&#34; &#34;os&#34; &#34;os/signal&#34; &#34;strconv&#34; &#34;syscall&#34; ) // 服务提供者  // service 服务注册  func main() { // 1. 创建服务 	serviceId := uuid.New().String() // 服务ID 	serviceName := &#34;productservice&#34; // 服务名 	serviceAddress := &#34;192.168.123.178&#34; // 服务地址 	servicePort := 8081 // 服务端口  router := mux.NewRouter() server := http.
+	</div>
+</article><article class="list__item post">
+	<header class="list__header">
+		<h3 class="list__title post__title ">
+			<a href="/blog/2020/06/17/centos-docker-install/" rel="bookmark">
 			Centos Install Docker &amp; Docker Compose
 			</a>
 		</h3>
@@ -74,7 +93,7 @@
 </article><article class="list__item post">
 	<header class="list__header">
 		<h3 class="list__title post__title ">
-			<a href="/etcd/etcd-cluster-by-docker/" rel="bookmark">
+			<a href="/blog/2020/06/11/etcd-cluster-by-docker/" rel="bookmark">
 			使用docker模拟etcd集群的创建
 			</a>
 		</h3>
@@ -82,7 +101,7 @@
 	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Ding Jianhui</span>
 </div>
 <div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-06-11T17:14:58&#43;08:00">2020-06-11</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/etcd/" rel="category">etcd</a>
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-06-11T17:14:58&#43;08:00">2020-06-11</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/etcd/" rel="category">etcd</a>, <a class="meta__link" href="/categories/docker/" rel="category">docker</a>
 	</span>
 </div></div>
 	</header>
@@ -92,7 +111,7 @@
 </article><article class="list__item post">
 	<header class="list__header">
 		<h3 class="list__title post__title ">
-			<a href="/etcd/etcd-install/" rel="bookmark">
+			<a href="/blog/2020/06/11/etcd-install/" rel="bookmark">
 			etcd环境搭建(基于docker)
 			</a>
 		</h3>
@@ -100,7 +119,7 @@
 	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Ding Jianhui</span>
 </div>
 <div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-06-11T13:14:58&#43;08:00">2020-06-11</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/etcd/" rel="category">etcd</a>
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-06-11T13:14:58&#43;08:00">2020-06-11</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/etcd/" rel="category">etcd</a>, <a class="meta__link" href="/categories/docker/" rel="category">docker</a>
 	</span>
 </div></div>
 	</header>
@@ -111,7 +130,7 @@
 </article><article class="list__item post">
 	<header class="list__header">
 		<h3 class="list__title post__title ">
-			<a href="/golang/go-cross-compile/" rel="bookmark">
+			<a href="/blog/2020/06/05/go-cross-compile/" rel="bookmark">
 			Go Cross Compile
 			</a>
 		</h3>
@@ -131,7 +150,7 @@
 </article><article class="list__item post">
 	<header class="list__header">
 		<h3 class="list__title post__title ">
-			<a href="/hugo/basic-elements/" rel="bookmark">
+			<a href="/blog/basic-elements/" rel="bookmark">
 			Basic HTML Elements
 			</a>
 		</h3>
@@ -149,7 +168,7 @@
 </article><article class="list__item post">
 	<header class="list__header">
 		<h3 class="list__title post__title ">
-			<a href="/hugo/creating-a-new-theme/" rel="bookmark">
+			<a href="/blog/creating-a-new-theme/" rel="bookmark">
 			Creating a New Theme
 			</a>
 		</h3>
@@ -166,7 +185,7 @@ We&rsquo;ll start with creating a new site with a very basic template.
 </article><article class="list__item post">
 	<header class="list__header">
 		<h3 class="list__title post__title ">
-			<a href="/hugo/about/" rel="bookmark">
+			<a href="/blog/about/" rel="bookmark">
 			About Hugo
 			</a>
 		</h3>
@@ -185,13 +204,13 @@ Setup Some fun facts about Hugo:
 	</div>
 </article><article class="list__item post">
 	<figure class="list__thumbnail">
-		<a href="http://dingjianhui.top/hugo/goisforlovers/">
+		<a href="http://dingjianhui.top/blog/goisforlovers/">
 			<img src="/img/placeholder.png" alt="(Hu)go Template Primer" />
 		</a>
 	</figure>
 	<header class="list__header">
 		<h3 class="list__title post__title ">
-			<a href="/hugo/goisforlovers/" rel="bookmark">
+			<a href="/blog/goisforlovers/" rel="bookmark">
 			(Hu)go Template Primer
 			</a>
 		</h3>
@@ -214,7 +233,7 @@ similarities in Go templates.</p>
 </article><article class="list__item post">
 	<header class="list__header">
 		<h3 class="list__title post__title ">
-			<a href="/hugo/hugoisforlovers/" rel="bookmark">
+			<a href="/blog/hugoisforlovers/" rel="bookmark">
 			Getting Started with Hugo
 			</a>
 		</h3>
@@ -234,27 +253,13 @@ Step 2. Build the Docs Hugo has its own example site which happens to also be th
 Follow the following steps:
  Clone the Hugo repository Go into the repo Run hugo in server mode and build the docs Open your browser to http://localhost:1313  Corresponding pseudo commands:
 	</div>
-</article><article class="list__item post">
-	<header class="list__header">
-		<h3 class="list__title post__title ">
-			<a href="/hugo/migrate-from-jekyll/" rel="bookmark">
-			Migrate to Hugo from Jekyll
-			</a>
-		</h3>
-		<div class="list__meta meta"><div class="meta__item-author meta__item">
-	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Ding Jianhui</span>
-</div>
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2014-03-10T00:00:00Z">2014-03-10</time></div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		Move static content to static Jekyll has a rule that any directory not starting with _ will be copied as-is to the _site output. Hugo keeps all static content under static. You should therefore move it all there. With Jekyll, something that looked like
-▾ &lt;root&gt;/▾ images/logo.png should become
-▾ &lt;root&gt;/▾ static/▾ images/logo.png Additionally, you&rsquo;ll want any files that should reside at the root (such as CNAME) to be moved to static.
-	</div>
 </article>
 </main>
 
+<div class="pagination">
+	<span class="pagination__item pagination__item--current">1/2</span>
+	<a class="pagination__item pagination__item--next btn" href="/page/2/">»</a>
+</div>
 
 			</div>
 			<aside class="sidebar"><div class="widget-search widget">
@@ -270,11 +275,11 @@ Follow the following steps:
 	<h4 class="widget__title">近期文章</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
-			<li class="widget__item"><a class="widget__link" href="/docker/centos-docker-install/">Centos Install Docker &amp; Docker Compose</a></li>
-			<li class="widget__item"><a class="widget__link" href="/etcd/etcd-cluster-by-docker/">使用docker模拟etcd集群的创建</a></li>
-			<li class="widget__item"><a class="widget__link" href="/etcd/etcd-install/">etcd环境搭建(基于docker)</a></li>
-			<li class="widget__item"><a class="widget__link" href="/golang/go-cross-compile/">Go Cross Compile</a></li>
-			<li class="widget__item"><a class="widget__link" href="/hugo/basic-elements/">Basic HTML Elements</a></li>
+			<li class="widget__item"><a class="widget__link" href="/blog/2020/06/19/go-etcd-v3-service-discovery/">Go Etcd V3 Service Discovery</a></li>
+			<li class="widget__item"><a class="widget__link" href="/blog/2020/06/17/centos-docker-install/">Centos Install Docker &amp; Docker Compose</a></li>
+			<li class="widget__item"><a class="widget__link" href="/blog/2020/06/11/etcd-cluster-by-docker/">使用docker模拟etcd集群的创建</a></li>
+			<li class="widget__item"><a class="widget__link" href="/blog/2020/06/11/etcd-install/">etcd环境搭建(基于docker)</a></li>
+			<li class="widget__item"><a class="widget__link" href="/blog/2020/06/05/go-cross-compile/">Go Cross Compile</a></li>
 		</ul>
 	</div>
 </div>

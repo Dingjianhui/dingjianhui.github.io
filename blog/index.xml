@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blogs on Ding Jianhui 的个人博客 - 学习笔记</title>
+    <link>http://dingjianhui.top/blog/</link>
+    <description>Recent content in Blogs on Ding Jianhui 的个人博客 - 学习笔记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 19 Jun 2020 16:45:07 +0800</lastBuildDate>
+    
+	<atom:link href="http://dingjianhui.top/blog/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Go Etcd V3 Service Discovery</title>
+      <link>http://dingjianhui.top/blog/2020/06/19/go-etcd-v3-service-discovery/</link>
+      <pubDate>Fri, 19 Jun 2020 16:45:07 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/blog/2020/06/19/go-etcd-v3-service-discovery/</guid>
+      <description>示意图 服务注册 1.服务提供者 创建服务 2.服务提供者 配置etcd 3.服务提供者 把服务注册到配置的etcd中 4.服务启动 5.服务关闭时反注册服务 (关闭时,回收资源)  package main import ( &amp;#34;context&amp;#34; &amp;#34;etcd-service/service/utils&amp;#34; &amp;#34;fmt&amp;#34; &amp;#34;github.com/google/uuid&amp;#34; &amp;#34;github.com/gorilla/mux&amp;#34; &amp;#34;log&amp;#34; &amp;#34;net/http&amp;#34; &amp;#34;os&amp;#34; &amp;#34;os/signal&amp;#34; &amp;#34;strconv&amp;#34; &amp;#34;syscall&amp;#34; ) // 服务提供者  // service 服务注册  func main() { // 1. 创建服务 	serviceId := uuid.New().String() // 服务ID 	serviceName := &amp;#34;productservice&amp;#34; // 服务名 	serviceAddress := &amp;#34;192.168.123.178&amp;#34; // 服务地址 	servicePort := 8081 // 服务端口  router := mux.NewRouter() server := http.</description>
+    </item>
+    
+    <item>
+      <title>Centos Install Docker &amp; Docker Compose</title>
+      <link>http://dingjianhui.top/blog/2020/06/17/centos-docker-install/</link>
+      <pubDate>Wed, 17 Jun 2020 14:15:53 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/blog/2020/06/17/centos-docker-install/</guid>
+      <description>安装文档-以官方文档为准
+ 官方文档 https://docs.docker.com/engine/install/centos/  Step 1 卸载旧版本 $ sudo yum remove docker \  docker-client \  docker-client-latest \  docker-common \  docker-latest \  docker-latest-logrotate \  docker-logrotate \  docker-engine Step 2 设置存储库 安装utils工具包 （依赖） 官方源信息 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo 阿里云软件源 yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo  $ sudo yum install -y yum-utils $ sudo yum-config-manager \  --add-repo \  https://download.docker.com/linux/centos/docker-ce.repo Step 3 安装 docker 引擎 1.安装最新版本 $ sudo yum install docker-ce docker-ce-cli containerd.</description>
+    </item>
+    
+    <item>
+      <title>使用docker模拟etcd集群的创建</title>
+      <link>http://dingjianhui.top/blog/2020/06/11/etcd-cluster-by-docker/</link>
+      <pubDate>Thu, 11 Jun 2020 17:14:58 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/blog/2020/06/11/etcd-cluster-by-docker/</guid>
+      <description>实际中部署集群 使用不同机器 或 docker swarm 或 k8s 来部署  Step 1 创建一个专门的docker网络 创建docker网络 (使用的是bridge,指定了子网) docker network create etcdnet --subnet 172.25.0.0/16 创建完后建议用户重新登录  [tintin@localhost ttphp]$ docker network create etcdnet --subnet 172.25.0.0/16 Step 2 创建两个节点 一个节点为etcd1,一个节点为etcd2 节点下各自创建 conf 和 data  [tintin@localhost ttphp]$ cd etcds/ [tintin@localhost etcds]$ mkdir etcd1 etcd2 [tintin@localhost etcds]$ mkdir etcd1/conf etcd1/data [tintin@localhost etcds]$ mkdir etcd2/conf etcd2/data Step 3 创建每个节点的配置文件 etcd1/conf/etcd.yml (etcd1节点的配置文件) vim etcd1/conf/etcd.yml  name: etcd1 data-dir: /etcd/data listen-client-urls: http://172.</description>
+    </item>
+    
+    <item>
+      <title>etcd环境搭建(基于docker)</title>
+      <link>http://dingjianhui.top/blog/2020/06/11/etcd-install/</link>
+      <pubDate>Thu, 11 Jun 2020 13:14:58 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/blog/2020/06/11/etcd-install/</guid>
+      <description>etcd简介  A distributed, reliable key-value store for the most critical data of a distributed system
+ etcd是一个高可用的键值存储系统 etcd是由CoreOS开发并维护的,灵感来自于 ZooKeeper 等。它使用Go语言编写 Github: https://github.com/etcd-io/etcd 官网: https://etcd.io  功能特点 简单：基于 HTTP+JSON 的 API 让你用 curl 就可以轻松使用。 安全：可选 SSL 客户认证机制。 快速：每个实例每秒支持一千次写操作。 可信：使用 Raft 算法充分实现了分布式。  主要使用场景  主要用于共享配置 服务注册与发现 （Service Discovery） 分布式锁等  下载etcd并安装 下载地址：https://github.com/etcd-io/etcd/releases 我使用的方式是windows环境下载，然后上传至linux中 解压安装  [tintin@localhost tools]$ tar -zxvf etcd-v3.4.9-linux-amd64.tar.gz [tintin@localhost tools]$ mv etcd-v3.4.9-linux-amd64 ../etcd [tintin@localhost ttphp]$ cd ../etcd/ [tintin@localhost etcd]$ ls Documentation etcd etcdctl README-etcdctl.</description>
+    </item>
+    
+    <item>
+      <title>Go Cross Compile</title>
+      <link>http://dingjianhui.top/blog/2020/06/05/go-cross-compile/</link>
+      <pubDate>Fri, 05 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://dingjianhui.top/blog/2020/06/05/go-cross-compile/</guid>
+      <description>linux set GOOS=linux set GOARCH=amd64 go build -o build/hugo main.go  windows set GOOS=windows set GOARCH=amd64 go build -o build/hugo.exe main.go   PS：环境变量参数参考：
+ GOARCH: amd64, 386, arm, ppc64, … GOOS: linux, darwin, windows, netbsd, … </description>
+    </item>
+    
+    <item>
+      <title>Basic HTML Elements</title>
+      <link>http://dingjianhui.top/blog/basic-elements/</link>
+      <pubDate>Mon, 16 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://dingjianhui.top/blog/basic-elements/</guid>
+      <description>&lt;p&gt;The main purpose of this article is to make sure that all basic HTML Elements are decorated with CSS so as to not miss any possible elements when creating new themes for Hugo.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Creating a New Theme</title>
+      <link>http://dingjianhui.top/blog/creating-a-new-theme/</link>
+      <pubDate>Sun, 28 Sep 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://dingjianhui.top/blog/creating-a-new-theme/</guid>
+      <description>Introduction This tutorial will show you how to create a simple theme in Hugo. I assume that you are familiar with HTML, the bash command line, and that you are comfortable using Markdown to format content. I&amp;rsquo;ll explain how Hugo uses templates and how you can organize your templates to create a theme. I won&amp;rsquo;t cover using CSS to style your theme.
+We&amp;rsquo;ll start with creating a new site with a very basic template.</description>
+    </item>
+    
+    <item>
+      <title>About Hugo</title>
+      <link>http://dingjianhui.top/blog/about/</link>
+      <pubDate>Wed, 09 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://dingjianhui.top/blog/about/</guid>
+      <description>Hugo is a static site engine written in Go.
+It makes use of a variety of open source projects including:
+ Cobra Viper J Walter Weatherman Cast  Learn more and contribute on GitHub.
+Setup Some fun facts about Hugo:
+ Built in Go Loosely inspired by Jekyll Primarily developed by spf13 on the train while commuting to and from Manhattan. Coded in Vim using spf13-vim  Have questions or suggestions?</description>
+    </item>
+    
+    <item>
+      <title>(Hu)go Template Primer</title>
+      <link>http://dingjianhui.top/blog/goisforlovers/</link>
+      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://dingjianhui.top/blog/goisforlovers/</guid>
+      <description>&lt;p&gt;Hugo uses the excellent &lt;a href=&#34;https://golang.org/&#34;&gt;Go&lt;/a&gt; &lt;a href=&#34;https://golang.org/pkg/html/template/&#34;&gt;html/template&lt;/a&gt; library for
+its template engine. It is an extremely lightweight engine that provides a very
+small amount of logic. In our experience that it is just the right amount of
+logic to be able to create a good static website. If you have used other
+template systems from different languages or frameworks you will find a lot of
+similarities in Go templates.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Getting Started with Hugo</title>
+      <link>http://dingjianhui.top/blog/hugoisforlovers/</link>
+      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://dingjianhui.top/blog/hugoisforlovers/</guid>
+      <description>Step 1. Install Hugo Go to Hugo releases and download the appropriate version for your OS and architecture.
+Save it somewhere specific as we will be using it in the next step.
+More complete instructions are available at Install Hugo
+Step 2. Build the Docs Hugo has its own example site which happens to also be the documentation site you are reading right now.
+Follow the following steps:
+ Clone the Hugo repository Go into the repo Run hugo in server mode and build the docs Open your browser to http://localhost:1313  Corresponding pseudo commands:</description>
+    </item>
+    
+    <item>
+      <title>Migrate to Hugo from Jekyll</title>
+      <link>http://dingjianhui.top/blog/migrate-from-jekyll/</link>
+      <pubDate>Mon, 10 Mar 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://dingjianhui.top/blog/migrate-from-jekyll/</guid>
+      <description>Move static content to static Jekyll has a rule that any directory not starting with _ will be copied as-is to the _site output. Hugo keeps all static content under static. You should therefore move it all there. With Jekyll, something that looked like
+▾ &amp;lt;root&amp;gt;/▾ images/logo.png should become
+▾ &amp;lt;root&amp;gt;/▾ static/▾ images/logo.png Additionally, you&amp;rsquo;ll want any files that should reside at the root (such as CNAME) to be moved to static.</description>
+    </item>
+    
+  </channel>
+</rss>

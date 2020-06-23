@@ -6,24 +6,15 @@
     <description>Recent content in Categories on Ding Jianhui 的个人博客 - 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 17 Jun 2020 14:15:53 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 19 Jun 2020 16:45:07 +0800</lastBuildDate>
     
 	<atom:link href="http://dingjianhui.top/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>docker</title>
-      <link>http://dingjianhui.top/categories/docker/</link>
-      <pubDate>Wed, 17 Jun 2020 14:15:53 +0800</pubDate>
-      
-      <guid>http://dingjianhui.top/categories/docker/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>etcd</title>
       <link>http://dingjianhui.top/categories/etcd/</link>
-      <pubDate>Thu, 11 Jun 2020 17:14:58 +0800</pubDate>
+      <pubDate>Fri, 19 Jun 2020 16:45:07 +0800</pubDate>
       
       <guid>http://dingjianhui.top/categories/etcd/</guid>
       <description></description>
@@ -32,9 +23,18 @@
     <item>
       <title>golang</title>
       <link>http://dingjianhui.top/categories/golang/</link>
-      <pubDate>Fri, 05 Jun 2020 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 19 Jun 2020 16:45:07 +0800</pubDate>
       
       <guid>http://dingjianhui.top/categories/golang/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>docker</title>
+      <link>http://dingjianhui.top/categories/docker/</link>
+      <pubDate>Wed, 17 Jun 2020 14:15:53 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/categories/docker/</guid>
       <description></description>
     </item>
     
