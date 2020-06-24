@@ -6,10 +6,24 @@
     <description>Recent content in go on Ding Jianhui 的个人博客 - 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 19 Jun 2020 16:45:07 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 24 Jun 2020 09:04:03 +0800</lastBuildDate>
     
 	<atom:link href="http://dingjianhui.top/tags/go/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Go Defer 的使用</title>
+      <link>http://dingjianhui.top/blog/2020/06/24/go-defer-used/</link>
+      <pubDate>Wed, 24 Jun 2020 09:04:03 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/blog/2020/06/24/go-defer-used/</guid>
+      <description>defer介绍 关键字 defer 允许我们推迟到函数返回之前（或任意位置执行 return 语句之后）一刻才执行某个语句或函数 （为什么要在返回之后才执行这些语句？因为 return 语句同样可以包含一些操作，而不是单纯地返回某个值）。
+常用于释放某些已分配的资源、关闭数据库连接、断开Socket连接、解锁一个加锁的资源
+关键字 defer 的用法类似于面向对象编程语言 Java 和 C# 的 finally 语句块，它一般用于释放某些已分配的资源。
+三个简单的规则：
+1.defer定义时,defer函数的参数就被确定了 示例：
+package main import &amp;#34;fmt&amp;#34; func main() { DeferDef() DeferDef1() DeferDef2() } func DeferDef() { count := 1 defer fmt.Println(&amp;#34;defer executed, count的值为&amp;#34;,count) count++ fmt.Println(&amp;#34;before defer,count的值为&amp;#34;,count) } func DeferDef1() { count := 1 defer func(count int) { fmt.Println(&amp;#34;defer executed, count的值为&amp;#34;,count) }(count) count++ fmt.Println(&amp;#34;before defer,count的值为&amp;#34;,count) } func DeferDef2() { count := 1 defer func() { fmt.</description>
+    </item>
     
     <item>
       <title>Go Etcd V3 Service Discovery</title>
@@ -17,7 +31,7 @@
       <pubDate>Fri, 19 Jun 2020 16:45:07 +0800</pubDate>
       
       <guid>http://dingjianhui.top/blog/2020/06/19/go-etcd-v3-service-discovery/</guid>
-      <description>示意图 服务注册 1.服务提供者 创建服务 2.服务提供者 配置etcd 3.服务提供者 把服务注册到配置的etcd中 4.服务启动 5.服务关闭时反注册服务 (关闭时,回收资源)  package main import ( &amp;#34;context&amp;#34; &amp;#34;etcd-service/service/utils&amp;#34; &amp;#34;fmt&amp;#34; &amp;#34;github.com/google/uuid&amp;#34; &amp;#34;github.com/gorilla/mux&amp;#34; &amp;#34;log&amp;#34; &amp;#34;net/http&amp;#34; &amp;#34;os&amp;#34; &amp;#34;os/signal&amp;#34; &amp;#34;strconv&amp;#34; &amp;#34;syscall&amp;#34; ) // 服务提供者  // service 服务注册  func main() { // 1. 创建服务 	serviceId := uuid.New().String() // 服务ID 	serviceName := &amp;#34;productservice&amp;#34; // 服务名 	serviceAddress := &amp;#34;192.168.123.178&amp;#34; // 服务地址 	servicePort := 8081 // 服务端口  router := mux.NewRouter() server := http.</description>
+      <description>示意图 服务注册 1.服务提供者 创建服务 2.服务提供者 配置etcd 3.服务提供者 把服务注册到配置的etcd中 4.服务启动 5.服务关闭时反注册服务 (关闭时,回收资源)  package main import ( &amp;#34;context&amp;#34; &amp;#34;etcd-service/service/utils&amp;#34; &amp;#34;fmt&amp;#34; &amp;#34;github.com/google/uuid&amp;#34; &amp;#34;github.com/gorilla/mux&amp;#34; &amp;#34;log&amp;#34; &amp;#34;net/http&amp;#34; &amp;#34;os&amp;#34; &amp;#34;os/signal&amp;#34; &amp;#34;strconv&amp;#34; &amp;#34;syscall&amp;#34; ) // 服务提供者  // service 服务注册  func main() { // 1. 创建服务 	serviceId := uuid.New().String() // 服务ID 	serviceName := &amp;#34;productDetailService&amp;#34; // 服务名 	serviceAddress := &amp;#34;192.168.123.178&amp;#34; // 服务地址 	servicePort := 8081 // 服务端口  router := mux.NewRouter() server := http.</description>
     </item>
     
     <item>

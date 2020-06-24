@@ -4,17 +4,42 @@
   
   <url>
     <loc>http://dingjianhui.top/blog/</loc>
-    <lastmod>2020-06-19T16:45:07+08:00</lastmod>
+    <lastmod>2020-06-24T09:04:03+08:00</lastmod>
   </url>
   
   <url>
     <loc>http://dingjianhui.top/categories/</loc>
-    <lastmod>2020-06-19T16:45:07+08:00</lastmod>
+    <lastmod>2020-06-24T09:04:03+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://dingjianhui.top/tags/defer/</loc>
+    <lastmod>2020-06-24T09:04:03+08:00</lastmod>
   </url>
   
   <url>
     <loc>http://dingjianhui.top/</loc>
-    <lastmod>2020-06-19T16:45:07+08:00</lastmod>
+    <lastmod>2020-06-24T09:04:03+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://dingjianhui.top/tags/go/</loc>
+    <lastmod>2020-06-24T09:04:03+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://dingjianhui.top/blog/2020/06/24/go-defer-used/</loc>
+    <lastmod>2020-06-24T09:04:03+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://dingjianhui.top/categories/golang/</loc>
+    <lastmod>2020-06-24T09:04:03+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://dingjianhui.top/tags/</loc>
+    <lastmod>2020-06-24T09:04:03+08:00</lastmod>
   </url>
   
   <url>
@@ -28,22 +53,7 @@
   </url>
   
   <url>
-    <loc>http://dingjianhui.top/tags/go/</loc>
-    <lastmod>2020-06-19T16:45:07+08:00</lastmod>
-  </url>
-  
-  <url>
     <loc>http://dingjianhui.top/blog/2020/06/19/go-etcd-v3-service-discovery/</loc>
-    <lastmod>2020-06-19T16:45:07+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://dingjianhui.top/categories/golang/</loc>
-    <lastmod>2020-06-19T16:45:07+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://dingjianhui.top/tags/</loc>
     <lastmod>2020-06-19T16:45:07+08:00</lastmod>
   </url>
   
