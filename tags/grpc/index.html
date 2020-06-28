@@ -4,24 +4,24 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>defer - Ding Jianhui 的个人博客 - 学习笔记</title>
+	<title>grpc - Ding Jianhui 的个人博客 - 学习笔记</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
 	<meta name="description" content="">
-		<meta property="og:title" content="defer" />
+		<meta property="og:title" content="grpc" />
 <meta property="og:description" content="没有播种，何来收获" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="http://dingjianhui.top/tags/defer/" />
-<meta property="og:updated_time" content="2020-06-24T09:04:03+08:00" />
+<meta property="og:url" content="http://dingjianhui.top/tags/grpc/" />
+<meta property="og:updated_time" content="2020-06-28T13:47:36+08:00" />
 
-		<meta itemprop="name" content="defer">
+		<meta itemprop="name" content="grpc">
 <meta itemprop="description" content="没有播种，何来收获">
 		<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="defer"/>
+<meta name="twitter:title" content="grpc"/>
 <meta name="twitter:description" content="没有播种，何来收获"/>
 
 	<link rel="dns-prefetch" href="//fonts.googleapis.com">
 	<link rel="dns-prefetch" href="//fonts.gstatic.com">
-	<link rel="alternate" type="application/rss+xml" href="/tags/defer/index.xml" title="Ding Jianhui 的个人博客 - 学习笔记">
+	<link rel="alternate" type="application/rss+xml" href="/tags/grpc/index.xml" title="Ding Jianhui 的个人博客 - 学习笔记">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
 	<link rel="stylesheet" href="/css/style.css">
 	<link rel="stylesheet" href="/css/custom.css">
@@ -51,30 +51,46 @@
 			
 <main class="main list" role="main">
 	<header class="main__header">
-		<h1 class="main__title">defer</h1>
+		<h1 class="main__title">grpc</h1>
 	</header><article class="list__item post">
 	<header class="list__header">
 		<h3 class="list__title post__title ">
-			<a href="/blog/2020/06/24/go-defer-used/" rel="bookmark">
-			Go Defer 的使用
+			<a href="/blog/2020/06/28/go-grpc-quick-start/" rel="bookmark">
+			Go Grpc Quick Start
 			</a>
 		</h3>
-		<p class="list__lead post__lead">Go Defer的使用总结</p>
+		<p class="list__lead post__lead">Go - grpc的简单使用入门</p>
 		<div class="list__meta meta"><div class="meta__item-author meta__item">
 	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Ding Jianhui</span>
 </div>
 <div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-06-24T09:04:03&#43;08:00">2020-06-24</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/golang/" rel="category">golang</a>
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-06-28T13:47:36&#43;08:00">2020-06-28</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/golang/" rel="category">golang</a>
 	</span>
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		defer介绍 关键字 defer 允许我们推迟到函数返回之前（或任意位置执行 return 语句之后）一刻才执行某个语句或函数 （为什么要在返回之后才执行这些语句？因为 return 语句同样可以包含一些操作，而不是单纯地返回某个值）。
-常用于释放某些已分配的资源、关闭数据库连接、断开Socket连接、解锁一个加锁的资源
-关键字 defer 的用法类似于面向对象编程语言 Java 和 C# 的 finally 语句块，它一般用于释放某些已分配的资源。
-三个简单的规则：
-1.defer定义时,defer函数的参数就被确定了 示例：
-package main import &#34;fmt&#34; func main() { DeferDef() DeferDef1() DeferDef2() } func DeferDef() { count := 1 defer fmt.Println(&#34;defer executed, count的值为&#34;,count) count++ fmt.Println(&#34;before defer,count的值为&#34;,count) } func DeferDef1() { count := 1 defer func(count int) { fmt.Println(&#34;defer executed, count的值为&#34;,count) }(count) count++ fmt.Println(&#34;before defer,count的值为&#34;,count) } func DeferDef2() { count := 1 defer func() { fmt.
+		对于分布式系统而言,不同的服务分布在不同的节点上,一个服务要完成自己的功能经常需要调用其他服务的接口,比如典型的微服务架构。 通常这种服务调用方式有两种,一种是发送HTTP请求的方式,另一种则是RPC的方式,RPC是Remote Procedure Call(远程过程调用)的简称, 可以让我们像调用本地接口一样使用远程服务。相比HTTP调用,RPC的方式至少在以下几个方面有优势
+  传输效率
+RPC可以自定义TCP报文,基于TCP协议进行通信,比如dubbo;同时也支持使用HTTP2协议进行通信,比如gRPC。这相比传统的HTTP1.1协议报文体积会更小,传输效率会更高。
+  性能消耗
+RPC框架通常自带高效的序列化机制,序列化和反序列化耗时更低,序列化后的字节数通常也更小。
+  负责均衡
+RPC框架通常自带负载均衡策略,而HTTP请求要做负载均衡需要外部应用如Nginx的支持。
+  服务治理
+下游服务新增,重启,下线时能自动通知上游使用者,而HTTP的方式需要事先通知并修改相关配置。
+  grpc介绍 gRPC是由Google开发并开源的RPC框架,它具有以下特点
+  语言中立
+支持C,Java,Go等多种语言来构建RPC服务,这是gRPC被广泛的应用在微服务项目中的重要原因,因为不同的微服务可能用不同的语言构建。
+  基于HTTP/2协议
+支持双向流,消息头压缩,单TCP的多路复用,服务端推送等,这些特性使得gRPC更加适用于移动场景下的客户端和服务端之间的通信。
+  基于IDL定义服务
+编写.proto文件即可生成特定语言的数据结构、服务端接口和客户端Stub。
+  支持Protocol Buffer序列化
+Protocol Buffer是由Google开发的一种数据序列化协议(类似于XML、JSON、Hession),平台无关,压缩和传输效率高,语法简单,表达能力强。
+  使用前的准备工作   安装go
+  安装 Protocol buffer 编译器(protoc) V3版本 https://github.com/protocolbuffers/protobuf/releases
+  安装 Protocol buffer 编译器的 Go插件 (protoc-gen-go) go get github.com/golang/protobuf/protoc-gen-go
+Google Protocol Buffer( 简称 Protobuf)
 	</div>
 </article>
 </main>

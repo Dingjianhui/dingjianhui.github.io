@@ -6,10 +6,40 @@
     <description>Recent content in golang on Ding Jianhui 的个人博客 - 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 26 Jun 2020 15:50:48 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 28 Jun 2020 13:47:36 +0800</lastBuildDate>
     
 	<atom:link href="http://dingjianhui.top/categories/golang/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Go Grpc Quick Start</title>
+      <link>http://dingjianhui.top/blog/2020/06/28/go-grpc-quick-start/</link>
+      <pubDate>Sun, 28 Jun 2020 13:47:36 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/blog/2020/06/28/go-grpc-quick-start/</guid>
+      <description>对于分布式系统而言,不同的服务分布在不同的节点上,一个服务要完成自己的功能经常需要调用其他服务的接口,比如典型的微服务架构。 通常这种服务调用方式有两种,一种是发送HTTP请求的方式,另一种则是RPC的方式,RPC是Remote Procedure Call(远程过程调用)的简称, 可以让我们像调用本地接口一样使用远程服务。相比HTTP调用,RPC的方式至少在以下几个方面有优势
+  传输效率
+RPC可以自定义TCP报文,基于TCP协议进行通信,比如dubbo;同时也支持使用HTTP2协议进行通信,比如gRPC。这相比传统的HTTP1.1协议报文体积会更小,传输效率会更高。
+  性能消耗
+RPC框架通常自带高效的序列化机制,序列化和反序列化耗时更低,序列化后的字节数通常也更小。
+  负责均衡
+RPC框架通常自带负载均衡策略,而HTTP请求要做负载均衡需要外部应用如Nginx的支持。
+  服务治理
+下游服务新增,重启,下线时能自动通知上游使用者,而HTTP的方式需要事先通知并修改相关配置。
+  grpc介绍 gRPC是由Google开发并开源的RPC框架,它具有以下特点
+  语言中立
+支持C,Java,Go等多种语言来构建RPC服务,这是gRPC被广泛的应用在微服务项目中的重要原因,因为不同的微服务可能用不同的语言构建。
+  基于HTTP/2协议
+支持双向流,消息头压缩,单TCP的多路复用,服务端推送等,这些特性使得gRPC更加适用于移动场景下的客户端和服务端之间的通信。
+  基于IDL定义服务
+编写.proto文件即可生成特定语言的数据结构、服务端接口和客户端Stub。
+  支持Protocol Buffer序列化
+Protocol Buffer是由Google开发的一种数据序列化协议(类似于XML、JSON、Hession),平台无关,压缩和传输效率高,语法简单,表达能力强。
+  使用前的准备工作   安装go
+  安装 Protocol buffer 编译器(protoc) V3版本 https://github.com/protocolbuffers/protobuf/releases
+  安装 Protocol buffer 编译器的 Go插件 (protoc-gen-go) go get github.com/golang/protobuf/protoc-gen-go
+Google Protocol Buffer( 简称 Protobuf)</description>
+    </item>
     
     <item>
       <title>Go Etcd Simple Config Center</title>
