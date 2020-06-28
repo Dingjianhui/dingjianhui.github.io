@@ -6,10 +6,22 @@
     <description>Recent content in etcd on Ding Jianhui 的个人博客 - 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 19 Jun 2020 16:45:07 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 26 Jun 2020 15:50:48 +0800</lastBuildDate>
     
 	<atom:link href="http://dingjianhui.top/tags/etcd/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Go Etcd Simple Config Center</title>
+      <link>http://dingjianhui.top/blog/2020/06/26/go-etcd-simple-config-center/</link>
+      <pubDate>Fri, 26 Jun 2020 15:50:48 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/blog/2020/06/26/go-etcd-simple-config-center/</guid>
+      <description>简易示意图 Confd 一款高可用统一配置管理工具(go写的)
+Step 1. 构建Confd镜像(使用go镜像) [tintin@localhost ttphp]$ ls etcd etcds tools [tintin@localhost ttphp]$ mkdir build [tintin@localhost ttphp]$ mkdir build/confd [tintin@localhost ttphp]$ cd build/confd/ [tintin@localhost confd]$ vi Dockerfile Dockerfile 参考文档
+https://github.com/kelseyhightower/confd/blob/master/docs/installation.md
+FROM1.14.4-alpine3.12 as confdARG CONFD_VERSION=0.16.0ADD https://github.com/kelseyhightower/confd/archive/v${CONFD_VERSION}.tar.gz /tmp/RUN apk add --no-cache \  bzip2 \  make &amp;amp;&amp;amp; \  mkdir -p /go/src/github.com/kelseyhightower/confd &amp;amp;&amp;amp; \  cd /go/src/github.com/kelseyhightower/confd &amp;amp;&amp;amp; \  tar --strip-components=1 -zxf /tmp/v${CONFD_VERSION}.tar.gz &amp;amp;&amp;amp; \  go install github.com/kelseyhightower/confd &amp;amp;&amp;amp; \  rm -rf /tmp/v${CONFD_VERSION}.</description>
+    </item>
     
     <item>
       <title>Go Etcd V3 Service Discovery</title>

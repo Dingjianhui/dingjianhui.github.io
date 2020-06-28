@@ -6,10 +6,37 @@
     <description>Recent content in Tags on Ding Jianhui 的个人博客 - 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 24 Jun 2020 09:04:03 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 26 Jun 2020 15:50:48 +0800</lastBuildDate>
     
 	<atom:link href="http://dingjianhui.top/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>etcd</title>
+      <link>http://dingjianhui.top/tags/etcd/</link>
+      <pubDate>Fri, 26 Jun 2020 15:50:48 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/tags/etcd/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>go</title>
+      <link>http://dingjianhui.top/tags/go/</link>
+      <pubDate>Fri, 26 Jun 2020 15:50:48 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/tags/go/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>二叉树</title>
+      <link>http://dingjianhui.top/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/</link>
+      <pubDate>Wed, 24 Jun 2020 18:04:15 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>defer</title>
@@ -17,24 +44,6 @@
       <pubDate>Wed, 24 Jun 2020 09:04:03 +0800</pubDate>
       
       <guid>http://dingjianhui.top/tags/defer/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>go</title>
-      <link>http://dingjianhui.top/tags/go/</link>
-      <pubDate>Wed, 24 Jun 2020 09:04:03 +0800</pubDate>
-      
-      <guid>http://dingjianhui.top/tags/go/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>etcd</title>
-      <link>http://dingjianhui.top/tags/etcd/</link>
-      <pubDate>Fri, 19 Jun 2020 16:45:07 +0800</pubDate>
-      
-      <guid>http://dingjianhui.top/tags/etcd/</guid>
       <description></description>
     </item>
     

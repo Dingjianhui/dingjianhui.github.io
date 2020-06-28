@@ -135,7 +135,7 @@ defer executed, count的值为 1
 before defer,count的值为 2
 defer executed, count的值为 2
 </code></pre><p>注：<code>defer定义时,defer函数的参数就被确定了</code></p>
-<p>DeferDef和DeferDef2中的defer函数的参数在derer定义时值已经被赋值了，所以输出： <code>defer executed, count的值为 1</code> ,
+<p>DeferDef和DeferDef2中的defer函数的参数在defer定义时值已经被赋值了，所以输出： <code>defer executed, count的值为 1</code> ,
 DeferDef2中的defer函数是一个没有参数的函数,所以输出： <code>defer executed, count的值为 2</code></p>
 <p>那么我们怎么 突破GO的 defer 定义特性</p>
 <p>使用指针如下：</p>
@@ -307,6 +307,12 @@ leaving: b
 		<a class="pager__link" href="/blog/2020/06/19/go-etcd-v3-service-discovery/" rel="prev">
 			<span class="pager__subtitle">«&thinsp;上一篇</span>
 			<p class="pager__title">Go Etcd V3 Service Discovery</p>
+		</a>
+	</div>
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/blog/2020/06/24/go-binary-search-tree/" rel="next">
+			<span class="pager__subtitle">下一篇&thinsp;»</span>
+			<p class="pager__title">Go Binary Search Tree</p>
 		</a>
 	</div>
 </nav>

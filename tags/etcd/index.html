@@ -11,7 +11,7 @@
 <meta property="og:description" content="没有播种，何来收获" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="http://dingjianhui.top/tags/etcd/" />
-<meta property="og:updated_time" content="2020-06-19T16:45:07+08:00" />
+<meta property="og:updated_time" content="2020-06-26T15:50:48+08:00" />
 
 		<meta itemprop="name" content="etcd">
 <meta itemprop="description" content="没有播种，何来收获">
@@ -53,6 +53,28 @@
 	<header class="main__header">
 		<h1 class="main__title">etcd</h1>
 	</header><article class="list__item post">
+	<header class="list__header">
+		<h3 class="list__title post__title ">
+			<a href="/blog/2020/06/26/go-etcd-simple-config-center/" rel="bookmark">
+			Go Etcd Simple Config Center
+			</a>
+		</h3>
+		<p class="list__lead post__lead">Go ETCD 简易配置中心</p>
+		<div class="list__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Ding Jianhui</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-06-26T15:50:48&#43;08:00">2020-06-26</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/etcd/" rel="category">etcd</a>, <a class="meta__link" href="/categories/golang/" rel="category">golang</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		简易示意图 Confd 一款高可用统一配置管理工具(go写的)
+Step 1. 构建Confd镜像(使用go镜像) [tintin@localhost ttphp]$ ls etcd etcds tools [tintin@localhost ttphp]$ mkdir build [tintin@localhost ttphp]$ mkdir build/confd [tintin@localhost ttphp]$ cd build/confd/ [tintin@localhost confd]$ vi Dockerfile Dockerfile 参考文档
+https://github.com/kelseyhightower/confd/blob/master/docs/installation.md
+FROM1.14.4-alpine3.12 as confdARG CONFD_VERSION=0.16.0ADD https://github.com/kelseyhightower/confd/archive/v${CONFD_VERSION}.tar.gz /tmp/RUN apk add --no-cache \  bzip2 \  make &amp;&amp; \  mkdir -p /go/src/github.com/kelseyhightower/confd &amp;&amp; \  cd /go/src/github.com/kelseyhightower/confd &amp;&amp; \  tar --strip-components=1 -zxf /tmp/v${CONFD_VERSION}.tar.gz &amp;&amp; \  go install github.com/kelseyhightower/confd &amp;&amp; \  rm -rf /tmp/v${CONFD_VERSION}.
+	</div>
+</article><article class="list__item post">
 	<header class="list__header">
 		<h3 class="list__title post__title ">
 			<a href="/blog/2020/06/19/go-etcd-v3-service-discovery/" rel="bookmark">
@@ -127,11 +149,11 @@
 	<h4 class="widget__title">近期文章</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/blog/2020/06/26/go-etcd-simple-config-center/">Go Etcd Simple Config Center</a></li>
+			<li class="widget__item"><a class="widget__link" href="/blog/2020/06/24/go-binary-search-tree/">Go Binary Search Tree</a></li>
 			<li class="widget__item"><a class="widget__link" href="/blog/2020/06/24/go-defer-used/">Go Defer 的使用</a></li>
 			<li class="widget__item"><a class="widget__link" href="/blog/2020/06/19/go-etcd-v3-service-discovery/">Go Etcd V3 Service Discovery</a></li>
 			<li class="widget__item"><a class="widget__link" href="/blog/2020/06/17/centos-docker-install/">Centos Install Docker &amp; Docker Compose</a></li>
-			<li class="widget__item"><a class="widget__link" href="/blog/2020/06/11/etcd-cluster-by-docker/">使用docker模拟etcd集群的创建</a></li>
-			<li class="widget__item"><a class="widget__link" href="/blog/2020/06/11/etcd-install/">etcd环境搭建(基于docker)</a></li>
 		</ul>
 	</div>
 </div>
@@ -163,6 +185,7 @@
 		<a class="widget-taglist__link widget__link btn" href="/tags/etcd/" title="etcd">etcd</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/go/" title="go">go</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/hugo-theme/" title="hugo-theme">hugo-theme</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" title="二叉树">二叉树</a>
 	</div>
 </div>
 <div class="widget-social widget">

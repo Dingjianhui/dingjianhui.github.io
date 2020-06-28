@@ -4,12 +4,57 @@
   
   <url>
     <loc>http://dingjianhui.top/blog/</loc>
-    <lastmod>2020-06-24T09:04:03+08:00</lastmod>
+    <lastmod>2020-06-26T15:50:48+08:00</lastmod>
   </url>
   
   <url>
     <loc>http://dingjianhui.top/categories/</loc>
-    <lastmod>2020-06-24T09:04:03+08:00</lastmod>
+    <lastmod>2020-06-26T15:50:48+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://dingjianhui.top/</loc>
+    <lastmod>2020-06-26T15:50:48+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://dingjianhui.top/tags/etcd/</loc>
+    <lastmod>2020-06-26T15:50:48+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://dingjianhui.top/categories/etcd/</loc>
+    <lastmod>2020-06-26T15:50:48+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://dingjianhui.top/tags/go/</loc>
+    <lastmod>2020-06-26T15:50:48+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://dingjianhui.top/blog/2020/06/26/go-etcd-simple-config-center/</loc>
+    <lastmod>2020-06-26T15:50:48+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://dingjianhui.top/categories/golang/</loc>
+    <lastmod>2020-06-26T15:50:48+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://dingjianhui.top/tags/</loc>
+    <lastmod>2020-06-26T15:50:48+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://dingjianhui.top/blog/2020/06/24/go-binary-search-tree/</loc>
+    <lastmod>2020-06-24T18:04:15+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://dingjianhui.top/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/</loc>
+    <lastmod>2020-06-24T18:04:15+08:00</lastmod>
   </url>
   
   <url>
@@ -18,38 +63,8 @@
   </url>
   
   <url>
-    <loc>http://dingjianhui.top/</loc>
-    <lastmod>2020-06-24T09:04:03+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://dingjianhui.top/tags/go/</loc>
-    <lastmod>2020-06-24T09:04:03+08:00</lastmod>
-  </url>
-  
-  <url>
     <loc>http://dingjianhui.top/blog/2020/06/24/go-defer-used/</loc>
     <lastmod>2020-06-24T09:04:03+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://dingjianhui.top/categories/golang/</loc>
-    <lastmod>2020-06-24T09:04:03+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://dingjianhui.top/tags/</loc>
-    <lastmod>2020-06-24T09:04:03+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://dingjianhui.top/tags/etcd/</loc>
-    <lastmod>2020-06-19T16:45:07+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://dingjianhui.top/categories/etcd/</loc>
-    <lastmod>2020-06-19T16:45:07+08:00</lastmod>
   </url>
   
   <url>

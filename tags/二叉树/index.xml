@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>二叉树 on Ding Jianhui 的个人博客 - 学习笔记</title>
+    <link>http://dingjianhui.top/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/</link>
+    <description>Recent content in 二叉树 on Ding Jianhui 的个人博客 - 学习笔记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Wed, 24 Jun 2020 18:04:15 +0800</lastBuildDate>
+    
+	<atom:link href="http://dingjianhui.top/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Go Binary Search Tree</title>
+      <link>http://dingjianhui.top/blog/2020/06/24/go-binary-search-tree/</link>
+      <pubDate>Wed, 24 Jun 2020 18:04:15 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/blog/2020/06/24/go-binary-search-tree/</guid>
+      <description>二叉查找树(binary search tree) 特征：
+二叉查找树，也称二叉搜索树，或二叉排序树。 要么是一颗空树，要么就是具有如下性质的二叉树：
+（1） 若任意节点的左子树不空，则左子树上所有结点的值均小于它的根结点的值； （2） 若任意节点的右子树不空，则右子树上所有结点的值均大于它的根结点的值； （3） 任意节点的左、右子树也分别为二叉查找树； （4） 没有值相等的节点  1. 动态创建节点 func AddNode(tree *BSTree, root *BSTree) *BSTree { if root == nil { return tree } // 根节点 与 新节点对比 	// 新节点比 根节点大 放入右节点 	// 新节点比 根节点小 放入左节点 	if tree.Node &amp;gt; root.Node { root.RightNode = AddNode(tree,root.RightNode) } else if tree.Node &amp;lt; root.Node { root.LeftNode = AddNode(tree,root.LeftNode) } else { return root } return root } 2.</description>
+    </item>
+    
+  </channel>
+</rss>
