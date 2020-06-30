@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html class="no-js" lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Generate Local Certificate - Ding Jianhui 的个人博客 - 学习笔记</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="自签名https证书，本地浏览器测试">
+		<meta property="og:title" content="Generate Local Certificate" />
+<meta property="og:description" content="自签名https证书，本地浏览器测试" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://dingjianhui.top/blog/2020/06/30/generate-local-certificate/" />
+<meta property="article:published_time" content="2020-06-30T11:45:16+08:00" />
+<meta property="article:modified_time" content="2020-06-30T11:45:16+08:00" />
+
+		<meta itemprop="name" content="Generate Local Certificate">
+<meta itemprop="description" content="自签名https证书，本地浏览器测试">
+<meta itemprop="datePublished" content="2020-06-30T11:45:16&#43;08:00" />
+<meta itemprop="dateModified" content="2020-06-30T11:45:16&#43;08:00" />
+<meta itemprop="wordCount" content="121">
+
+
+
+<meta itemprop="keywords" content="https," />
+		<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Generate Local Certificate"/>
+<meta name="twitter:description" content="自签名https证书，本地浏览器测试"/>
+
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/custom.css">
+	<link rel="shortcut icon" href="/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo logo--mixed">
+		<a class="logo__link" href="/" title="Ding Jianhui" rel="home">
+			<div class="logo__item logo__imagebox">
+					<img class="logo__img" src="/img/logo.jpg">
+				</div><div class="logo__item logo__text">
+					<div class="logo__title">Ding Jianhui</div>
+					<div class="logo__tagline">有一种投资好过其他所有的投资: 那就是投资自己</div>
+				</div>
+		</a>
+	</div>
+		<div class="divider"></div>
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Generate Local Certificate</h1>
+			<p class="post__lead">自签名https证书，本地浏览器测试</p>
+			<div class="post__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Ding Jianhui</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-06-30T11:45:16&#43;08:00">2020-06-30</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/openssl/" rel="category">openssl</a>
+	</span>
+</div></div>
+		</header>
+<div class="post__toc toc">
+	<div class="toc__title">目录</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+  <ul>
+    <li><a href="#windows环境">windows环境</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+	</div>
+</div>
+<div class="content post__content clearfix">
+			<p>OpenSSL工具下载： <a href="http://slproweb.com/products/Win32OpenSSL.html">下载地址链接</a></p>
+<h2 id="windows环境">windows环境</h2>
+<h6 id="自签证书">自签证书</h6>
+<p>进入 bin目录</p>
+<ol>
+<li>
+<p>执行 <code>openssl.exe</code></p>
+</li>
+<li>
+<p>执行 <code>genrsa -des3 -out server.key 2048</code>（会生成server.key,私钥文件）</p>
+</li>
+<li>
+<p>创建证书请求：<code>req -new -key server.key -out server.csr</code>（会生成server.csr）</p>
+<p>其中common name 也就是域名</p>
+</li>
+<li>
+<p>删除密码 <code>rsa -in server.key -out server_no_passwd.key</code></p>
+</li>
+<li>
+<p>执行<code>x509 -req -days 365 -in server.csr -signkey server_no_passwd.key -out server.crt</code> (会生成server.crt)</p>
+</li>
+</ol>
+<h6 id="使用自签caserverclient证书和双向认证">使用自签CA、server、Client证书和双向认证</h6>
+<p>根证书（root certificate）是属于根证书颁发机构（CA）的公钥证书。 用以验证它所签发的证书（客户端、服务端）</p>
+<pre><code>创建CA公钥证书
+</code></pre>
+<ol>
+<li>执行 <code>openssl.exe</code></li>
+<li><code>genrsa -out ca.key 2048</code></li>
+<li><code>req -new -x509 -days 3650 -key ca.key -out ca.pem</code></li>
+</ol>
+<p>注意common name 请填写localhost</p>
+<pre><code>使用ca证书生成服务端证书
+</code></pre>
+<ol>
+<li><code>genrsa -out server.key 2048</code></li>
+<li><code>req -new -key server.key -out server.csr</code></li>
+<li><code>x509 -req -sha256 -CA ca.pem -CAkey ca.key -CAcreateserial -days 3650 -in server.csr -out server.pem</code></li>
+</ol>
+<p>出现错误，退出openssl.exe重进,注意common name 请填写localhost</p>
+<pre><code>使用ca证书生成客户端证书
+</code></pre>
+<ol>
+<li><code>ecparam -genkey -name secp384r1 -out client.key</code></li>
+<li><code>req -new -key client.key -out client.csr</code></li>
+<li><code>x509 -req -sha256 -CA ca.pem -CAkey ca.key -CAcreateserial -days 3650 -in client.csr -out client.pem</code></li>
+</ol>
+<p>出现错误，退出openssl.exe重进,注意common name 请填写localhost</p>
+
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/https/" rel="tag">https</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="Ding Jianhui avatar" src="/img/logo.jpg" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name">关于 Ding Jianhui</span>
+	</div>
+</div>
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/blog/2020/06/28/go-grpc-quick-start/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;上一篇</span>
+			<p class="pager__title">Go Grpc Quick Start</p>
+		</a>
+	</div>
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/blog/2020/06/30/go-interview-finishing/" rel="next">
+			<span class="pager__subtitle">下一篇&thinsp;»</span>
+			<p class="pager__title">Go Interview Finishing</p>
+		</a>
+	</div>
+</nav>
+
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2020 Ding Jianhui.
+			<span class="footer__copyright-credits">基于 <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> 引擎和 <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a>主題</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/js/menu.js"></script>
+<script src="/js/custom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
+</body>
+</html>
