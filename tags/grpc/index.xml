@@ -6,10 +6,24 @@
     <description>Recent content in grpc on Ding Jianhui 的个人博客 - 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 30 Jun 2020 14:53:25 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 01 Jul 2020 13:45:32 +0800</lastBuildDate>
     
 	<atom:link href="http://dingjianhui.top/tags/grpc/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Protobuf Grammar (Protobu3)</title>
+      <link>http://dingjianhui.top/blog/2020/07/01/protobuf-grammar/</link>
+      <pubDate>Wed, 01 Jul 2020 13:45:32 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/blog/2020/07/01/protobuf-grammar/</guid>
+      <description>Protobuf[1] 是一种语言中立、平台无关、可扩展的序列化数据的格式，可用于通信协议，数据存储等。
+ProtoBuf 在序列化数据方面，它是灵活的、高效的。 相比于 XML 来说，ProtoBuf 更加小巧、更加快速、更加简单。 一旦定义了要处理的数据的数据结构之后，就可以利用 ProtoBuf 的代码生成工具生成相关的代码。 甚至可以在无需重新部署程序的情况下更新数据结构。 只需使用 ProtoBuf 对数据结构进行一次描述，即可利用各种不同语言或从各种不同数据流中对你的结构化数据轻松读写。
+ProtoBuf 很适合做数据存储或 RPC 数据交换格式。可用于通讯协议、数据存储等 领域的语言无关、平台无关、可扩展的序列化结构数据格式。
+ Message 定义 在 Protobuf 中，所有结构化的数据都被称为 message。 假设你想要查询某个接口，这个接口需要传递些参数关键字和分页参数（当前页和每页记录数）， 那么我们就可以把这些参数都定义成一个对象，用 Protobuf 的话说就是定义一个 message。
+如下：我们有一个服务为通过商品ID来获取商品的库存, 那么我们需要定义商品ID请求参数prod_id,定义库存响应字段prod_stock
+syntax=&amp;#34;proto3&amp;#34;;package services;message ProdRequest { int32 prod_id = 1; // 传入的商品ID }message ProdResponse { int32 prod_stock = 1; // 响应的商品库存 }service ProdService { rpc GetProdStock (ProdRequest) returns (ProdResponse); // 通过商品ID获取商品库存方法 } syntax = &amp;quot;proto3&amp;quot;; 指定了整个 .proto 文件使用 Protobuf3 解析，否则默认会使用 Protobuf2 解析，必须将其放置在文件的第一行。 ProdRequest 这个 message 指定了1个数据字段，数据字段定义由 Field Types 数据类型 + Field Names 字段名 = Field Numbers 编号组成。 service 定义了 RPC 服务  字段类型   基础类型</description>
+    </item>
     
     <item>
       <title>Go Grpc Gateway</title>

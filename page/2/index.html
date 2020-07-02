@@ -12,7 +12,7 @@
 <meta property="og:description" content="没有播种，何来收获" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="http://dingjianhui.top/" />
-<meta property="og:updated_time" content="2020-06-30T14:53:25+08:00" />
+<meta property="og:updated_time" content="2020-07-01T13:45:32+08:00" />
 
 		<meta itemprop="name" content="Ding Jianhui 的个人博客 - 学习笔记">
 <meta itemprop="description" content="没有播种，何来收获">
@@ -52,6 +52,24 @@
 			
 <main class="main list" role="main">
 	<article class="list__item post">
+	<header class="list__header">
+		<h3 class="list__title post__title ">
+			<a href="/blog/2020/06/11/etcd-cluster-by-docker/" rel="bookmark">
+			使用docker模拟etcd集群的创建
+			</a>
+		</h3>
+		<div class="list__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Ding Jianhui</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-06-11T17:14:58&#43;08:00">2020-06-11</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/etcd/" rel="category">etcd</a>, <a class="meta__link" href="/categories/docker/" rel="category">docker</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		实际中部署集群 使用不同机器 或 docker swarm 或 k8s 来部署  Step 1 创建一个专门的docker网络 创建docker网络 (使用的是bridge,指定了子网) docker network create etcdnet --subnet 172.25.0.0/16 创建完后建议用户重新登录  [tintin@localhost ttphp]$ docker network create etcdnet --subnet 172.25.0.0/16 Step 2 创建两个节点 一个节点为etcd1,一个节点为etcd2 节点下各自创建 conf 和 data  [tintin@localhost ttphp]$ cd etcds/ [tintin@localhost etcds]$ mkdir etcd1 etcd2 [tintin@localhost etcds]$ mkdir etcd1/conf etcd1/data [tintin@localhost etcds]$ mkdir etcd2/conf etcd2/data Step 3 创建每个节点的配置文件 etcd1/conf/etcd.yml (etcd1节点的配置文件) vim etcd1/conf/etcd.yml  name: etcd1 data-dir: /etcd/data listen-client-urls: http://172.
+	</div>
+</article><article class="list__item post">
 	<header class="list__header">
 		<h3 class="list__title post__title ">
 			<a href="/blog/2020/06/11/etcd-install/" rel="bookmark">
@@ -236,11 +254,11 @@ Follow the following steps:
 	<h4 class="widget__title">近期文章</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/blog/2020/07/01/protobuf-grammar/">Protobuf Grammar (Protobu3)</a></li>
 			<li class="widget__item"><a class="widget__link" href="/blog/2020/06/30/go-grpc-gateway/">Go Grpc Gateway</a></li>
 			<li class="widget__item"><a class="widget__link" href="/blog/2020/06/30/go-interview-finishing/">Go Interview Finishing</a></li>
 			<li class="widget__item"><a class="widget__link" href="/blog/2020/06/30/generate-local-certificate/">Generate Local Certificate</a></li>
 			<li class="widget__item"><a class="widget__link" href="/blog/2020/06/28/go-grpc-quick-start/">Go Grpc Quick Start</a></li>
-			<li class="widget__item"><a class="widget__link" href="/blog/2020/06/26/go-etcd-simple-config-center/">Go Etcd Simple Config Center</a></li>
 		</ul>
 	</div>
 </div>

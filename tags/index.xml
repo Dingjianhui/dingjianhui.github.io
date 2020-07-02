@@ -6,10 +6,19 @@
     <description>Recent content in Tags on Ding Jianhui 的个人博客 - 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 30 Jun 2020 14:53:25 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 01 Jul 2020 13:45:32 +0800</lastBuildDate>
     
 	<atom:link href="http://dingjianhui.top/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>grpc</title>
+      <link>http://dingjianhui.top/tags/grpc/</link>
+      <pubDate>Wed, 01 Jul 2020 13:45:32 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/tags/grpc/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>go</title>
@@ -17,15 +26,6 @@
       <pubDate>Tue, 30 Jun 2020 14:53:25 +0800</pubDate>
       
       <guid>http://dingjianhui.top/tags/go/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>grpc</title>
-      <link>http://dingjianhui.top/tags/grpc/</link>
-      <pubDate>Tue, 30 Jun 2020 14:53:25 +0800</pubDate>
-      
-      <guid>http://dingjianhui.top/tags/grpc/</guid>
       <description></description>
     </item>
     

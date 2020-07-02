@@ -18,7 +18,7 @@
 <meta itemprop="description" content="Go - grpc的简单使用">
 <meta itemprop="datePublished" content="2020-06-28T13:47:36&#43;08:00" />
 <meta itemprop="dateModified" content="2020-06-28T13:47:36&#43;08:00" />
-<meta itemprop="wordCount" content="222">
+<meta itemprop="wordCount" content="224">
 
 
 
@@ -146,8 +146,8 @@ Protobuf和所有的序列化框架一样，都可以用于数据存储、通讯
 </ol>
 <h6 id="安装grpc">安装grpc</h6>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">go get -u google.golang.org/grpc
-</code></pre></div><h6 id="将中间文件生成go文件">将中间文件生成Go文件</h6>
-<p>中间件文件 <code>pbfiles/Prod.proto</code></p>
+</code></pre></div><h6 id="将protobuf文件生成go文件">将protobuf文件生成Go文件</h6>
+<p>创建一个protobuf文件 <code>pbfiles/Prod.proto</code></p>
 <pre><code>ProdRequest请求参数  ProdResponse响应结果  ProdService创建一个产品服务 服务里有一个方法(通过产品ID获取产品库库的方法)
 </code></pre>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-protobuf" data-lang="protobuf">syntax<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;proto3&#34;</span>;<span style="color:#960050;background-color:#1e0010">
@@ -204,6 +204,7 @@ protoc --go_out<span style="color:#f92672">=</span>plugins<span style="color:#f9
 } 
 </code></pre></div><p>运行服务 <code>go run server/main.go</code></p>
 <h6 id="创建客户端调用">创建客户端调用</h6>
+<p>将生成的<code>services/Prod.pb.go</code> 拷给客户端，这样客户端调用就像调用本地方法一样</p>
 <p>创建客户端调用 <code>client/main.go</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
