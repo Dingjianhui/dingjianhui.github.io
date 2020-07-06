@@ -12,7 +12,7 @@
 <meta property="og:description" content="没有播种，何来收获" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="http://dingjianhui.top/" />
-<meta property="og:updated_time" content="2020-07-01T13:45:32+08:00" />
+<meta property="og:updated_time" content="2020-07-03T15:07:02+08:00" />
 
 		<meta itemprop="name" content="Ding Jianhui 的个人博客 - 学习笔记">
 <meta itemprop="description" content="没有播种，何来收获">
@@ -52,6 +52,26 @@
 			
 <main class="main list" role="main">
 	<article class="list__item post">
+	<header class="list__header">
+		<h3 class="list__title post__title ">
+			<a href="/blog/2020/06/17/centos-docker-install/" rel="bookmark">
+			Centos Install Docker &amp; Docker Compose
+			</a>
+		</h3>
+		<p class="list__lead post__lead">Centos 7 - 安装docker 和 安装Docker Compose</p>
+		<div class="list__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Ding Jianhui</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-06-17T14:15:53&#43;08:00">2020-06-17</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/docker/" rel="category">docker</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		安装文档-以官方文档为准
+ 官方文档 https://docs.docker.com/engine/install/centos/  Step 1 卸载旧版本 $ sudo yum remove docker \  docker-client \  docker-client-latest \  docker-common \  docker-latest \  docker-latest-logrotate \  docker-logrotate \  docker-engine Step 2 设置存储库 安装utils工具包 （依赖） 官方源信息 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo 阿里云软件源 yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo  $ sudo yum install -y yum-utils $ sudo yum-config-manager \  --add-repo \  https://download.docker.com/linux/centos/docker-ce.repo Step 3 安装 docker 引擎 1.安装最新版本 $ sudo yum install docker-ce docker-ce-cli containerd.
+	</div>
+</article><article class="list__item post">
 	<header class="list__header">
 		<h3 class="list__title post__title ">
 			<a href="/blog/2020/06/11/etcd-cluster-by-docker/" rel="bookmark">
@@ -254,11 +274,11 @@ Follow the following steps:
 	<h4 class="widget__title">近期文章</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/blog/2020/07/03/go-grpc-stream/">Go Grpc Stream</a></li>
 			<li class="widget__item"><a class="widget__link" href="/blog/2020/07/01/protobuf-grammar/">Protobuf Grammar (Protobu3)</a></li>
 			<li class="widget__item"><a class="widget__link" href="/blog/2020/06/30/go-grpc-gateway/">Go Grpc Gateway</a></li>
 			<li class="widget__item"><a class="widget__link" href="/blog/2020/06/30/go-interview-finishing/">Go Interview Finishing</a></li>
 			<li class="widget__item"><a class="widget__link" href="/blog/2020/06/30/generate-local-certificate/">Generate Local Certificate</a></li>
-			<li class="widget__item"><a class="widget__link" href="/blog/2020/06/28/go-grpc-quick-start/">Go Grpc Quick Start</a></li>
 		</ul>
 	</div>
 </div>

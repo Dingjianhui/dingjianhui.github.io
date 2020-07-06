@@ -18,7 +18,7 @@
 <meta itemprop="description" content="Go ETCD 简易配置中心">
 <meta itemprop="datePublished" content="2020-06-26T15:50:48&#43;08:00" />
 <meta itemprop="dateModified" content="2020-06-26T15:50:48&#43;08:00" />
-<meta itemprop="wordCount" content="313">
+<meta itemprop="wordCount" content="315">
 
 
 
@@ -152,7 +152,8 @@ OK
 </code></pre></div><h6 id="step-5-生成配置文件">Step 5. 生成配置文件</h6>
 <p><code>FATAL dial tcp 127.0.0.1:23791: connect: connection refused</code>
 出现这个错误时，请检查etcd的节点是否开启，端口是否放行 <code>sudo iptables -I INPUT -p tcp --dport 23791 -j ACCEPT</code></p>
-<p><a href="https://github.com/kelseyhightower/confd/blob/master/docs/command-line-flags.md">https://github.com/kelseyhightower/confd/blob/master/docs/command-line-flags.md</a></p>
+<p>confd的命令文档
+<a href="https://github.com/kelseyhightower/confd/blob/master/docs/command-line-flags.md">https://github.com/kelseyhightower/confd/blob/master/docs/command-line-flags.md</a></p>
 <p>-onetime 一次生成并退出</p>
 <p><code>docker run -it --rm  --name confd  -v /home/tintin/ttphp/confdfiles:/etc/confd confd:my  -onetime -backend etcdv3 -node http://192.168.137.131:23791</code></p>
 <p>-interval int 定时生成 (interval 5 定时5秒生成一次配置文件)</p>
@@ -169,9 +170,20 @@ database_pass <span style="color:#f92672">=</span> <span style="color:#ae81ff">1
 <p><code>docker run -d --name confd  -v /home/tintin/ttphp/confdfiles:/etc/confd confd:my  -watch -backend etcdv3 -node http://192.168.137.131:23791</code></p>
 <p>confd一旦watch到key值变化了，立刻生成新配置文件,那么服务怎么更新配置信息</p>
 <p>思路：</p>
-<p>1.使用confd 的reload_cmd  完成 触发（如：服务设置一个重载配置的API，curl API）</p>
-<p>2.服务不多的话，服务可自己写监听配置文件，配置文件发生变化重载配置(可使用github上第三方的文件监听)</p>
-<p>3.配置文件变化后自动平滑重启http server,使用第三方库(<a href="https://github.com/jpillora/overseer">https://github.com/jpillora/overseer</a>)</p>
+<ol>
+<li>
+<p>服务不多的话，手动修改就好了</p>
+</li>
+<li>
+<p>使用confd 的reload_cmd  完成 触发（如：服务设置一个重载配置的API，curl API）</p>
+</li>
+<li>
+<p>自己写监听配置文件，配置文件发生变化重载配置(可使用github上第三方的文件监听)</p>
+</li>
+<li>
+<p>自己写监听配置文件，配置文件变化后自动平滑重启http server,使用第三方库(<a href="https://github.com/jpillora/overseer">https://github.com/jpillora/overseer</a>)</p>
+</li>
+</ol>
 <blockquote>
 <p>参考文档</p>
 </blockquote>

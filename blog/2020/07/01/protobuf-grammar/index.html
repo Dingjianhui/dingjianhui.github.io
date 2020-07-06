@@ -207,7 +207,7 @@ Protobuf 支持枚举类型,如下：我想查询商品的库存（在淘宝平�
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-protobuf" data-lang="protobuf"><span style="color:#66d9ef">import</span>   <span style="color:#e6db74">&#34;google/protobuf/timestamp.proto&#34;</span>;<span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">message</span> <span style="color:#a6e22e">OrderMain</span>{ <span style="color:#75715e">//主订单模型
-</span><span style="color:#75715e"></span>   google.protobuf.Timestamp order_time<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>;<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#75715e"></span>   google.protobuf.Timestamp order_time<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>;<span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span>}<span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010">
 </span></code></pre></div><p>go 客户端调用</p>
@@ -222,7 +222,7 @@ Protobuf 支持枚举类型,如下：我想查询商品的库存（在淘宝平�
 </span><span style="color:#75715e"></span>	 <span style="color:#a6e22e">t</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">timestamp</span>.<span style="color:#a6e22e">Timestamp</span>{<span style="color:#a6e22e">Seconds</span>:<span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Now</span>().<span style="color:#a6e22e">Unix</span>()}
     <span style="color:#75715e">// ......
 </span><span style="color:#75715e"></span>}
-</code></pre></div><ol start="5">
+</code></pre></div><ol start="6">
 <li>注释</li>
 </ol>
 <p>Protobuf 注释遵循 <code>C / C++</code> 规范，你可以使用 <code>//</code> 或者 <code>/* ... */</code> 符号。</p>
@@ -262,6 +262,12 @@ Protobuf 支持枚举类型,如下：我想查询商品的库存（在淘宝平�
 		<a class="pager__link" href="/blog/2020/06/30/go-grpc-gateway/" rel="prev">
 			<span class="pager__subtitle">«&thinsp;上一篇</span>
 			<p class="pager__title">Go Grpc Gateway</p>
+		</a>
+	</div>
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/blog/2020/07/03/go-grpc-stream/" rel="next">
+			<span class="pager__subtitle">下一篇&thinsp;»</span>
+			<p class="pager__title">Go Grpc Stream</p>
 		</a>
 	</div>
 </nav>

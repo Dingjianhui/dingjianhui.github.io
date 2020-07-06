@@ -6,10 +6,28 @@
     <description>Recent content in grpc on Ding Jianhui 的个人博客 - 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 01 Jul 2020 13:45:32 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 03 Jul 2020 15:07:02 +0800</lastBuildDate>
     
 	<atom:link href="http://dingjianhui.top/tags/grpc/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Go Grpc Stream</title>
+      <link>http://dingjianhui.top/blog/2020/07/03/go-grpc-stream/</link>
+      <pubDate>Fri, 03 Jul 2020 15:07:02 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/blog/2020/07/03/go-grpc-stream/</guid>
+      <description>官方文档(基于golang语言)
+流式RPC(服务端流式RPC、客户端流式RPC、双向流式RPC) https://www.grpc.io/docs/languages/go/basics
+官方案例： https://github.com/grpc/grpc-go/tree/master/examples/route_guide
+根据不同的业务场景, grpc 支持 4 种通信方式:
+ 客服端一次请求, 服务器一次应答 客服端一次请求, 服务器多次应答(流式) 客服端多次请求(流式), 服务器一次应答 客服端多次请求(流式), 服务器多次应答(流式)  为何要用流模式？
+如果传输较大数据呢？会带来
+1、数据包过大导致压力陡增
+2、需要等待客户端包全部发送，才能处理以及响应
+场景：假设我要从库里取 一批(x万到几十万)用户的积分.批量查询用户的积分
+setp 1. 创建UserModel.proto syntax = &amp;#34;proto3&amp;#34;;package pb;message UserInfo { int32 user_id = 1; // 用户ID  int32 user_score = 2; // 用户积分 }setp 2. 创建User.proto syntax = &amp;#34;proto3&amp;#34;;package pb;import &amp;#34;UserModel.proto&amp;#34;;message UserScoreRequest { repeated UserInfo users = 1;}message UserScoreResponse { repeated UserInfo users = 1;}// 需要支持Restful API 参考Product.</description>
+    </item>
     
     <item>
       <title>Protobuf Grammar (Protobu3)</title>
@@ -48,7 +66,7 @@ syntax=&amp;#34;proto3&amp;#34;;package services;message ProdRequest { int32 pro
 RPC可以自定义TCP报文,基于TCP协议进行通信,比如dubbo;同时也支持使用HTTP2协议进行通信,比如gRPC。这相比传统的HTTP1.1协议报文体积会更小,传输效率会更高。
   性能消耗
 RPC框架通常自带高效的序列化机制,序列化和反序列化耗时更低,序列化后的字节数通常也更小。
-  负责均衡
+  负载均衡
 RPC框架通常自带负载均衡策略,而HTTP请求要做负载均衡需要外部应用如Nginx的支持。
   服务治理
 下游服务新增,重启,下线时能自动通知上游使用者,而HTTP的方式需要事先通知并修改相关配置。

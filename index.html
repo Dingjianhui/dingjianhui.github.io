@@ -12,7 +12,7 @@
 <meta property="og:description" content="没有播种，何来收获" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="http://dingjianhui.top/" />
-<meta property="og:updated_time" content="2020-07-01T13:45:32+08:00" />
+<meta property="og:updated_time" content="2020-07-03T15:07:02+08:00" />
 
 		<meta itemprop="name" content="Ding Jianhui 的个人博客 - 学习笔记">
 <meta itemprop="description" content="没有播种，何来收获">
@@ -52,6 +52,32 @@
 			
 <main class="main list" role="main">
 	<article class="list__item post">
+	<header class="list__header">
+		<h3 class="list__title post__title ">
+			<a href="/blog/2020/07/03/go-grpc-stream/" rel="bookmark">
+			Go Grpc Stream
+			</a>
+		</h3>
+		<p class="list__lead post__lead">流式RPC的使用</p>
+		<div class="list__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Ding Jianhui</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-07-03T15:07:02&#43;08:00">2020-07-03</time></div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		官方文档(基于golang语言)
+流式RPC(服务端流式RPC、客户端流式RPC、双向流式RPC) https://www.grpc.io/docs/languages/go/basics
+官方案例： https://github.com/grpc/grpc-go/tree/master/examples/route_guide
+根据不同的业务场景, grpc 支持 4 种通信方式:
+ 客服端一次请求, 服务器一次应答 客服端一次请求, 服务器多次应答(流式) 客服端多次请求(流式), 服务器一次应答 客服端多次请求(流式), 服务器多次应答(流式)  为何要用流模式？
+如果传输较大数据呢？会带来
+1、数据包过大导致压力陡增
+2、需要等待客户端包全部发送，才能处理以及响应
+场景：假设我要从库里取 一批(x万到几十万)用户的积分.批量查询用户的积分
+setp 1. 创建UserModel.proto syntax = &#34;proto3&#34;;package pb;message UserInfo { int32 user_id = 1; // 用户ID  int32 user_score = 2; // 用户积分 }setp 2. 创建User.proto syntax = &#34;proto3&#34;;package pb;import &#34;UserModel.proto&#34;;message UserScoreRequest { repeated UserInfo users = 1;}message UserScoreResponse { repeated UserInfo users = 1;}// 需要支持Restful API 参考Product.
+	</div>
+</article><article class="list__item post">
 	<header class="list__header">
 		<h3 class="list__title post__title ">
 			<a href="/blog/2020/07/01/protobuf-grammar/" rel="bookmark">
@@ -162,7 +188,7 @@ windows环境 自签证书 进入 bin目录
 RPC可以自定义TCP报文,基于TCP协议进行通信,比如dubbo;同时也支持使用HTTP2协议进行通信,比如gRPC。这相比传统的HTTP1.1协议报文体积会更小,传输效率会更高。
   性能消耗
 RPC框架通常自带高效的序列化机制,序列化和反序列化耗时更低,序列化后的字节数通常也更小。
-  负责均衡
+  负载均衡
 RPC框架通常自带负载均衡策略,而HTTP请求要做负载均衡需要外部应用如Nginx的支持。
   服务治理
 下游服务新增,重启,下线时能自动通知上游使用者,而HTTP的方式需要事先通知并修改相关配置。
@@ -266,26 +292,6 @@ package main import &#34;fmt&#34; func main() { DeferDef() DeferDef1() DeferDef2
 	<div class="content list__excerpt post__content clearfix">
 		示意图 服务注册 1.服务提供者 创建服务 2.服务提供者 配置etcd 3.服务提供者 把服务注册到配置的etcd中 4.服务启动 5.服务关闭时反注册服务 (关闭时,回收资源)  package main import ( &#34;context&#34; &#34;etcd-service/service/utils&#34; &#34;fmt&#34; &#34;github.com/google/uuid&#34; &#34;github.com/gorilla/mux&#34; &#34;log&#34; &#34;net/http&#34; &#34;os&#34; &#34;os/signal&#34; &#34;strconv&#34; &#34;syscall&#34; ) // 服务提供者  // service 服务注册  func main() { // 1. 创建服务 	serviceId := uuid.New().String() // 服务ID 	serviceName := &#34;productDetailService&#34; // 服务名 	serviceAddress := &#34;192.168.123.178&#34; // 服务地址 	servicePort := 8081 // 服务端口  router := mux.NewRouter() server := http.
 	</div>
-</article><article class="list__item post">
-	<header class="list__header">
-		<h3 class="list__title post__title ">
-			<a href="/blog/2020/06/17/centos-docker-install/" rel="bookmark">
-			Centos Install Docker &amp; Docker Compose
-			</a>
-		</h3>
-		<p class="list__lead post__lead">Centos 7 - 安装docker 和 安装Docker Compose</p>
-		<div class="list__meta meta"><div class="meta__item-author meta__item">
-	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Ding Jianhui</span>
-</div>
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-06-17T14:15:53&#43;08:00">2020-06-17</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/docker/" rel="category">docker</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		安装文档-以官方文档为准
- 官方文档 https://docs.docker.com/engine/install/centos/  Step 1 卸载旧版本 $ sudo yum remove docker \  docker-client \  docker-client-latest \  docker-common \  docker-latest \  docker-latest-logrotate \  docker-logrotate \  docker-engine Step 2 设置存储库 安装utils工具包 （依赖） 官方源信息 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo 阿里云软件源 yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo  $ sudo yum install -y yum-utils $ sudo yum-config-manager \  --add-repo \  https://download.docker.com/linux/centos/docker-ce.repo Step 3 安装 docker 引擎 1.安装最新版本 $ sudo yum install docker-ce docker-ce-cli containerd.
-	</div>
 </article>
 </main>
 
@@ -308,11 +314,11 @@ package main import &#34;fmt&#34; func main() { DeferDef() DeferDef1() DeferDef2
 	<h4 class="widget__title">近期文章</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/blog/2020/07/03/go-grpc-stream/">Go Grpc Stream</a></li>
 			<li class="widget__item"><a class="widget__link" href="/blog/2020/07/01/protobuf-grammar/">Protobuf Grammar (Protobu3)</a></li>
 			<li class="widget__item"><a class="widget__link" href="/blog/2020/06/30/go-grpc-gateway/">Go Grpc Gateway</a></li>
 			<li class="widget__item"><a class="widget__link" href="/blog/2020/06/30/go-interview-finishing/">Go Interview Finishing</a></li>
 			<li class="widget__item"><a class="widget__link" href="/blog/2020/06/30/generate-local-certificate/">Generate Local Certificate</a></li>
-			<li class="widget__item"><a class="widget__link" href="/blog/2020/06/28/go-grpc-quick-start/">Go Grpc Quick Start</a></li>
 		</ul>
 	</div>
 </div>
