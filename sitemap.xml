@@ -4,12 +4,42 @@
   
   <url>
     <loc>http://dingjianhui.top/blog/</loc>
-    <lastmod>2020-07-03T15:07:02+08:00</lastmod>
+    <lastmod>2020-07-14T15:29:25+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://dingjianhui.top/categories/</loc>
+    <lastmod>2020-07-14T15:29:25+08:00</lastmod>
   </url>
   
   <url>
     <loc>http://dingjianhui.top/</loc>
-    <lastmod>2020-07-03T15:07:02+08:00</lastmod>
+    <lastmod>2020-07-14T15:29:25+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://dingjianhui.top/tags/go/</loc>
+    <lastmod>2020-07-14T15:29:25+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://dingjianhui.top/blog/2020/07/14/go-strings-byte-rune/</loc>
+    <lastmod>2020-07-14T15:29:25+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://dingjianhui.top/categories/golang/</loc>
+    <lastmod>2020-07-14T15:29:25+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://dingjianhui.top/tags/</loc>
+    <lastmod>2020-07-14T15:29:25+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://dingjianhui.top/blog/2020/07/07/go-scheduler/</loc>
+    <lastmod>2020-07-07T11:24:21+08:00</lastmod>
   </url>
   
   <url>
@@ -23,32 +53,12 @@
   </url>
   
   <url>
-    <loc>http://dingjianhui.top/tags/</loc>
-    <lastmod>2020-07-03T15:07:02+08:00</lastmod>
-  </url>
-  
-  <url>
     <loc>http://dingjianhui.top/blog/2020/07/01/protobuf-grammar/</loc>
     <lastmod>2020-07-01T13:45:32+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://dingjianhui.top/categories/</loc>
-    <lastmod>2020-06-30T14:53:25+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://dingjianhui.top/tags/go/</loc>
-    <lastmod>2020-06-30T14:53:25+08:00</lastmod>
-  </url>
-  
-  <url>
     <loc>http://dingjianhui.top/blog/2020/06/30/go-grpc-gateway/</loc>
-    <lastmod>2020-06-30T14:53:25+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://dingjianhui.top/categories/golang/</loc>
     <lastmod>2020-06-30T14:53:25+08:00</lastmod>
   </url>
   

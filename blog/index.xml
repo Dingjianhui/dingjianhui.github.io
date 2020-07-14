@@ -6,10 +6,29 @@
     <description>Recent content in Blogs on Ding Jianhui 的个人博客 - 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 03 Jul 2020 15:07:02 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 14 Jul 2020 15:29:25 +0800</lastBuildDate>
     
 	<atom:link href="http://dingjianhui.top/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Go Strings Byte Rune</title>
+      <link>http://dingjianhui.top/blog/2020/07/14/go-strings-byte-rune/</link>
+      <pubDate>Tue, 14 Jul 2020 15:29:25 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/blog/2020/07/14/go-strings-byte-rune/</guid>
+      <description>什么是string string 是不可变的字节序列,采用utf8编码的 字节切片(slice), 因此用len函数获取到的长度并不是字符个数，而是字节个数。 for循环遍历输出的也是各个字节。
+a := &amp;#34;Randal&amp;#34;; for i := 0; i &amp;lt; len(a); i++ { fmt.Printf(&amp;#34;%x &amp;#34;, a[i]) fmt.Printf(&amp;#34;%c &amp;#34;, a[i]) } // 输出结果 52 61 6e 64 61 6c a := &amp;#34;中国&amp;#34;; fmt.Println(len(a)) for i := 0; i &amp;lt; len(a); i++ { fmt.Printf(&amp;#34;%x &amp;#34;, a[i]) } for i := 0; i &amp;lt; len(a); i++ { fmt.Printf(&amp;#34;%c &amp;#34;, a[i]) } // 输出结果 6 E4 B8 AD E5 9B BD ä¸­å½ 什么是rune？ rune是int32的别名，代表字符的Unicode编码，采用4个字节存储， 将string转成rune就意味着任何一个字符都用4个字节来存储其unicode值， 这样每次遍历的时候返回的就是unicode值，而不再是字节了，这样就可以解决乱码问题了</description>
+    </item>
+    
+    <item>
+      <title>Go Scheduler</title>
+      <link>http://dingjianhui.top/blog/2020/07/07/go-scheduler/</link>
+      <pubDate>Tue, 07 Jul 2020 11:24:21 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/blog/2020/07/07/go-scheduler/</guid>
+      <description>地鼠用小车运着一堆待加工的砖。M就可以看作图中的地鼠，P就是小车，G就是小车里装的砖。 一图胜千言啊，弄清楚了它们三者的关系，下面我们就开始重点聊地鼠是如何在搬运砖块的。</description>
+    </item>
     
     <item>
       <title>Go Grpc Stream</title>
