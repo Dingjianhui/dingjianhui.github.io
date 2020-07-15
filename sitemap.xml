@@ -4,41 +4,36 @@
   
   <url>
     <loc>http://dingjianhui.top/blog/</loc>
-    <lastmod>2020-07-14T15:29:25+08:00</lastmod>
+    <lastmod>2020-07-07T11:24:21+08:00</lastmod>
   </url>
   
   <url>
     <loc>http://dingjianhui.top/categories/</loc>
-    <lastmod>2020-07-14T15:29:25+08:00</lastmod>
+    <lastmod>2020-07-07T11:24:21+08:00</lastmod>
   </url>
   
   <url>
     <loc>http://dingjianhui.top/</loc>
-    <lastmod>2020-07-14T15:29:25+08:00</lastmod>
+    <lastmod>2020-07-07T11:24:21+08:00</lastmod>
   </url>
   
   <url>
     <loc>http://dingjianhui.top/tags/go/</loc>
-    <lastmod>2020-07-14T15:29:25+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://dingjianhui.top/blog/2020/07/14/go-strings-byte-rune/</loc>
-    <lastmod>2020-07-14T15:29:25+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://dingjianhui.top/categories/golang/</loc>
-    <lastmod>2020-07-14T15:29:25+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://dingjianhui.top/tags/</loc>
-    <lastmod>2020-07-14T15:29:25+08:00</lastmod>
+    <lastmod>2020-07-07T11:24:21+08:00</lastmod>
   </url>
   
   <url>
     <loc>http://dingjianhui.top/blog/2020/07/07/go-scheduler/</loc>
+    <lastmod>2020-07-07T11:24:21+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://dingjianhui.top/categories/golang/</loc>
+    <lastmod>2020-07-07T11:24:21+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://dingjianhui.top/tags/</loc>
     <lastmod>2020-07-07T11:24:21+08:00</lastmod>
   </url>
   
@@ -160,6 +155,11 @@
   <url>
     <loc>http://dingjianhui.top/blog/2020/06/11/etcd-install/</loc>
     <lastmod>2020-06-11T13:14:58+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://dingjianhui.top/blog/2020/07/14/go-strings-byte-rune/</loc>
+    <lastmod>2020-06-06T15:29:25+08:00</lastmod>
   </url>
   
   <url>
