@@ -65,15 +65,6 @@ syntax=&amp;#34;proto3&amp;#34;;package services;message ProdRequest { int32 pro
     </item>
     
     <item>
-      <title>Go Interview Finishing</title>
-      <link>http://dingjianhui.top/blog/2020/06/30/go-interview-finishing/</link>
-      <pubDate>Tue, 30 Jun 2020 13:14:17 +0800</pubDate>
-      
-      <guid>http://dingjianhui.top/blog/2020/06/30/go-interview-finishing/</guid>
-      <description>Go Go的协程调度模型 Go里面单例模式用什么方法，原理是什么  mysql 主键索引与唯一索引的区别 Mysql选择B+树而不选择哈希或者B树的原因  redis Redis的数据类型有哪些 </description>
-    </item>
-    
-    <item>
       <title>Generate Local Certificate</title>
       <link>http://dingjianhui.top/blog/2020/06/30/generate-local-certificate/</link>
       <pubDate>Tue, 30 Jun 2020 11:45:16 +0800</pubDate>
@@ -197,11 +188,83 @@ package main import &amp;#34;fmt&amp;#34; func main() { DeferDef() DeferDef1() D
     </item>
     
     <item>
+      <title>Go Interview Finishing</title>
+      <link>http://dingjianhui.top/blog/2020/06/07/go-interview-finishing-1/</link>
+      <pubDate>Sun, 07 Jun 2020 13:14:17 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/blog/2020/06/07/go-interview-finishing-1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Go Interview Finishing</title>
+      <link>http://dingjianhui.top/blog/2020/06/07/go-interview-finishing-2/</link>
+      <pubDate>Sun, 07 Jun 2020 13:14:17 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/blog/2020/06/07/go-interview-finishing-2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Go Interview Finishing</title>
+      <link>http://dingjianhui.top/blog/2020/06/07/go-interview-finishing-3/</link>
+      <pubDate>Sun, 07 Jun 2020 13:14:17 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/blog/2020/06/07/go-interview-finishing-3/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Go Interview Finishing</title>
+      <link>http://dingjianhui.top/blog/2020/06/07/go-interview-finishing-4/</link>
+      <pubDate>Sun, 07 Jun 2020 13:14:17 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/blog/2020/06/07/go-interview-finishing-4/</guid>
+      <description>主键索引与唯一索引的区别  主键不允许为空值，唯一索引列允许为空值 一个表只能有一个主键，但是可以有多个唯一索引 主键可以被其他表引用为外键，而唯一索引不可以 主键一定会创建一个唯一索引，但是唯一索引列不一定是主键 主键是一种约束，而唯一索引是一种索引，是表的冗余数据结构，两者有着本质区别  </description>
+    </item>
+    
+    <item>
+      <title>Go Interview Finishing</title>
+      <link>http://dingjianhui.top/blog/2020/06/07/go-interview-finishing-5/</link>
+      <pubDate>Sun, 07 Jun 2020 13:14:17 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/blog/2020/06/07/go-interview-finishing-5/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Go Interview Finishing</title>
+      <link>http://dingjianhui.top/blog/2020/06/07/go-interview-finishing-6/</link>
+      <pubDate>Sun, 07 Jun 2020 13:14:17 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/blog/2020/06/07/go-interview-finishing-6/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Go Interview Finishing</title>
+      <link>http://dingjianhui.top/blog/2020/06/07/go-interview-finishing-7/</link>
+      <pubDate>Sun, 07 Jun 2020 13:14:17 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/blog/2020/06/07/go-interview-finishing-7/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Go Interview Finishing</title>
+      <link>http://dingjianhui.top/blog/2020/06/07/go-interview-finishing-8/</link>
+      <pubDate>Sun, 07 Jun 2020 13:14:17 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/blog/2020/06/07/go-interview-finishing-8/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Go Strings Byte Rune</title>
-      <link>http://dingjianhui.top/blog/2020/07/14/go-strings-byte-rune/</link>
+      <link>http://dingjianhui.top/blog/2020/06/06/go-strings-byte-rune/</link>
       <pubDate>Sat, 06 Jun 2020 15:29:25 +0800</pubDate>
       
-      <guid>http://dingjianhui.top/blog/2020/07/14/go-strings-byte-rune/</guid>
+      <guid>http://dingjianhui.top/blog/2020/06/06/go-strings-byte-rune/</guid>
       <description>什么是string string 是不可变的字节序列,采用utf8编码的 字节切片(slice), 因此用len函数获取到的长度并不是字符个数，而是字节个数。 for循环遍历输出的也是各个字节。
 a := &amp;#34;Randal&amp;#34;; for i := 0; i &amp;lt; len(a); i++ { fmt.Printf(&amp;#34;%x &amp;#34;, a[i]) fmt.Printf(&amp;#34;%c &amp;#34;, a[i]) } // 输出结果 52 61 6e 64 61 6c a := &amp;#34;中国&amp;#34;; fmt.Println(len(a)) for i := 0; i &amp;lt; len(a); i++ { fmt.Printf(&amp;#34;%x &amp;#34;, a[i]) } for i := 0; i &amp;lt; len(a); i++ { fmt.Printf(&amp;#34;%c &amp;#34;, a[i]) } // 输出结果 6 E4 B8 AD E5 9B BD ä¸­å½ 什么是rune？ rune是int32的别名，代表字符的Unicode编码，采用4个字节存储， 将string转成rune就意味着任何一个字符都用4个字节来存储其unicode值， 这样每次遍历的时候返回的就是unicode值，而不再是字节了，这样就可以解决乱码问题了</description>
     </item>

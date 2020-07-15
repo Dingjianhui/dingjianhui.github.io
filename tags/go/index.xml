@@ -142,10 +142,10 @@ package main import &amp;#34;fmt&amp;#34; func main() { DeferDef() DeferDef1() D
     
     <item>
       <title>Go Strings Byte Rune</title>
-      <link>http://dingjianhui.top/blog/2020/07/14/go-strings-byte-rune/</link>
+      <link>http://dingjianhui.top/blog/2020/06/06/go-strings-byte-rune/</link>
       <pubDate>Sat, 06 Jun 2020 15:29:25 +0800</pubDate>
       
-      <guid>http://dingjianhui.top/blog/2020/07/14/go-strings-byte-rune/</guid>
+      <guid>http://dingjianhui.top/blog/2020/06/06/go-strings-byte-rune/</guid>
       <description>什么是string string 是不可变的字节序列,采用utf8编码的 字节切片(slice), 因此用len函数获取到的长度并不是字符个数，而是字节个数。 for循环遍历输出的也是各个字节。
 a := &amp;#34;Randal&amp;#34;; for i := 0; i &amp;lt; len(a); i++ { fmt.Printf(&amp;#34;%x &amp;#34;, a[i]) fmt.Printf(&amp;#34;%c &amp;#34;, a[i]) } // 输出结果 52 61 6e 64 61 6c a := &amp;#34;中国&amp;#34;; fmt.Println(len(a)) for i := 0; i &amp;lt; len(a); i++ { fmt.Printf(&amp;#34;%x &amp;#34;, a[i]) } for i := 0; i &amp;lt; len(a); i++ { fmt.Printf(&amp;#34;%c &amp;#34;, a[i]) } // 输出结果 6 E4 B8 AD E5 9B BD ä¸­å½ 什么是rune？ rune是int32的别名，代表字符的Unicode编码，采用4个字节存储， 将string转成rune就意味着任何一个字符都用4个字节来存储其unicode值， 这样每次遍历的时候返回的就是unicode值，而不再是字节了，这样就可以解决乱码问题了</description>
     </item>

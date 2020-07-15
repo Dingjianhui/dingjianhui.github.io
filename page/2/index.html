@@ -54,25 +54,6 @@
 	<article class="list__item post">
 	<header class="list__header">
 		<h3 class="list__title post__title ">
-			<a href="/blog/2020/06/19/go-etcd-v3-service-discovery/" rel="bookmark">
-			Go Etcd V3 Service Discovery
-			</a>
-		</h3>
-		<p class="list__lead post__lead">Go 场景之实现 Etcd V3 服务注册与发现</p>
-		<div class="list__meta meta"><div class="meta__item-author meta__item">
-	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Ding Jianhui</span>
-</div>
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-06-19T16:45:07&#43;08:00">2020-06-19</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/golang/" rel="category">golang</a>, <a class="meta__link" href="/categories/etcd/" rel="category">etcd</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		示意图 服务注册 1.服务提供者 创建服务 2.服务提供者 配置etcd 3.服务提供者 把服务注册到配置的etcd中 4.服务启动 5.服务关闭时反注册服务 (关闭时,回收资源)  package main import ( &#34;context&#34; &#34;etcd-service/service/utils&#34; &#34;fmt&#34; &#34;github.com/google/uuid&#34; &#34;github.com/gorilla/mux&#34; &#34;log&#34; &#34;net/http&#34; &#34;os&#34; &#34;os/signal&#34; &#34;strconv&#34; &#34;syscall&#34; ) // 服务提供者  // service 服务注册  func main() { // 1. 创建服务 	serviceId := uuid.New().String() // 服务ID 	serviceName := &#34;productDetailService&#34; // 服务名 	serviceAddress := &#34;192.168.123.178&#34; // 服务地址 	servicePort := 8081 // 服务端口  router := mux.NewRouter() server := http.
-	</div>
-</article><article class="list__item post">
-	<header class="list__header">
-		<h3 class="list__title post__title ">
 			<a href="/blog/2020/06/17/centos-docker-install/" rel="bookmark">
 			Centos Install Docker &amp; Docker Compose
 			</a>
@@ -130,125 +111,121 @@
 </article><article class="list__item post">
 	<header class="list__header">
 		<h3 class="list__title post__title ">
-			<a href="/blog/2020/07/14/go-strings-byte-rune/" rel="bookmark">
-			Go Strings Byte Rune
+			<a href="/blog/2020/06/07/go-interview-finishing-1/" rel="bookmark">
+			Go Interview Finishing
 			</a>
 		</h3>
-		<p class="list__lead post__lead">Go - string、bytes、rune的区别</p>
+		<p class="list__lead post__lead">Go面试题整理(一)</p>
 		<div class="list__meta meta"><div class="meta__item-author meta__item">
 	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Ding Jianhui</span>
 </div>
 <div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-06-06T15:29:25&#43;08:00">2020-06-06</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/golang/" rel="category">golang</a>
-	</span>
-</div></div>
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-06-07T13:14:17&#43;08:00">2020-06-07</time></div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		什么是string string 是不可变的字节序列,采用utf8编码的 字节切片(slice), 因此用len函数获取到的长度并不是字符个数，而是字节个数。 for循环遍历输出的也是各个字节。
-a := &#34;Randal&#34;; for i := 0; i &lt; len(a); i++ { fmt.Printf(&#34;%x &#34;, a[i]) fmt.Printf(&#34;%c &#34;, a[i]) } // 输出结果 52 61 6e 64 61 6c a := &#34;中国&#34;; fmt.Println(len(a)) for i := 0; i &lt; len(a); i++ { fmt.Printf(&#34;%x &#34;, a[i]) } for i := 0; i &lt; len(a); i++ { fmt.Printf(&#34;%c &#34;, a[i]) } // 输出结果 6 E4 B8 AD E5 9B BD ä¸­å½ 什么是rune？ rune是int32的别名，代表字符的Unicode编码，采用4个字节存储， 将string转成rune就意味着任何一个字符都用4个字节来存储其unicode值， 这样每次遍历的时候返回的就是unicode值，而不再是字节了，这样就可以解决乱码问题了
+		
 	</div>
 </article><article class="list__item post">
 	<header class="list__header">
 		<h3 class="list__title post__title ">
-			<a href="/blog/2020/06/05/go-cross-compile/" rel="bookmark">
-			Go Cross Compile
+			<a href="/blog/2020/06/07/go-interview-finishing-2/" rel="bookmark">
+			Go Interview Finishing
 			</a>
 		</h3>
-		<p class="list__lead post__lead">windows - 开发环境下 go交叉编译</p>
+		<p class="list__lead post__lead">Go面试题整理(二)</p>
 		<div class="list__meta meta"><div class="meta__item-author meta__item">
 	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Ding Jianhui</span>
 </div>
 <div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-06-05T00:00:00Z">2020-06-05</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/hugo/" rel="category">hugo</a>, <a class="meta__link" href="/categories/golang/" rel="category">golang</a>
-	</span>
-</div></div>
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-06-07T13:14:17&#43;08:00">2020-06-07</time></div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		linux set GOOS=linux set GOARCH=amd64 go build -o build/hugo main.go  windows set GOOS=windows set GOARCH=amd64 go build -o build/hugo.exe main.go   PS：环境变量参数参考：
- GOARCH: amd64, 386, arm, ppc64, … GOOS: linux, darwin, windows, netbsd, … 
+		
 	</div>
 </article><article class="list__item post">
 	<header class="list__header">
 		<h3 class="list__title post__title ">
-			<a href="/blog/basic-elements/" rel="bookmark">
-			Basic HTML Elements
+			<a href="/blog/2020/06/07/go-interview-finishing-3/" rel="bookmark">
+			Go Interview Finishing
 			</a>
 		</h3>
+		<p class="list__lead post__lead">Go面试题整理(三)</p>
 		<div class="list__meta meta"><div class="meta__item-author meta__item">
 	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Ding Jianhui</span>
 </div>
 <div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2018-04-16T00:00:00Z">2018-04-16</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/hugo/" rel="category">hugo</a>
-	</span>
-</div></div>
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-06-07T13:14:17&#43;08:00">2020-06-07</time></div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		<p>The main purpose of this article is to make sure that all basic HTML Elements are decorated with CSS so as to not miss any possible elements when creating new themes for Hugo.</p>
+		
 	</div>
 </article><article class="list__item post">
 	<header class="list__header">
 		<h3 class="list__title post__title ">
-			<a href="/blog/creating-a-new-theme/" rel="bookmark">
-			Creating a New Theme
+			<a href="/blog/2020/06/07/go-interview-finishing-4/" rel="bookmark">
+			Go Interview Finishing
 			</a>
 		</h3>
+		<p class="list__lead post__lead">Go面试题整理(四)--Mysql</p>
 		<div class="list__meta meta"><div class="meta__item-author meta__item">
 	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Ding Jianhui</span>
 </div>
 <div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2014-09-28T00:00:00Z">2014-09-28</time></div></div>
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-06-07T13:14:17&#43;08:00">2020-06-07</time></div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		Introduction This tutorial will show you how to create a simple theme in Hugo. I assume that you are familiar with HTML, the bash command line, and that you are comfortable using Markdown to format content. I&rsquo;ll explain how Hugo uses templates and how you can organize your templates to create a theme. I won&rsquo;t cover using CSS to style your theme.
-We&rsquo;ll start with creating a new site with a very basic template.
+		主键索引与唯一索引的区别  主键不允许为空值，唯一索引列允许为空值 一个表只能有一个主键，但是可以有多个唯一索引 主键可以被其他表引用为外键，而唯一索引不可以 主键一定会创建一个唯一索引，但是唯一索引列不一定是主键 主键是一种约束，而唯一索引是一种索引，是表的冗余数据结构，两者有着本质区别  
 	</div>
 </article><article class="list__item post">
 	<header class="list__header">
 		<h3 class="list__title post__title ">
-			<a href="/blog/about/" rel="bookmark">
-			About Hugo
+			<a href="/blog/2020/06/07/go-interview-finishing-5/" rel="bookmark">
+			Go Interview Finishing
 			</a>
 		</h3>
+		<p class="list__lead post__lead">Go面试题整理(五)</p>
 		<div class="list__meta meta"><div class="meta__item-author meta__item">
 	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Ding Jianhui</span>
 </div>
 <div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2014-04-09T00:00:00Z">2014-04-09</time></div></div>
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-06-07T13:14:17&#43;08:00">2020-06-07</time></div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		Hugo is a static site engine written in Go.
-It makes use of a variety of open source projects including:
- Cobra Viper J Walter Weatherman Cast  Learn more and contribute on GitHub.
-Setup Some fun facts about Hugo:
- Built in Go Loosely inspired by Jekyll Primarily developed by spf13 on the train while commuting to and from Manhattan. Coded in Vim using spf13-vim  Have questions or suggestions?
+		
 	</div>
 </article><article class="list__item post">
-	<figure class="list__thumbnail">
-		<a href="http://dingjianhui.top/blog/goisforlovers/">
-			<img src="/img/placeholder.png" alt="(Hu)go Template Primer" />
-		</a>
-	</figure>
 	<header class="list__header">
 		<h3 class="list__title post__title ">
-			<a href="/blog/goisforlovers/" rel="bookmark">
-			(Hu)go Template Primer
+			<a href="/blog/2020/06/07/go-interview-finishing-6/" rel="bookmark">
+			Go Interview Finishing
 			</a>
 		</h3>
+		<p class="list__lead post__lead">Go面试题整理(六)</p>
 		<div class="list__meta meta"><div class="meta__item-author meta__item">
 	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Ding Jianhui</span>
 </div>
 <div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2014-04-02T00:00:00Z">2014-04-02</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/hugo/" rel="category">hugo</a>, <a class="meta__link" href="/categories/golang/" rel="category">golang</a>
-	</span>
-</div></div>
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-06-07T13:14:17&#43;08:00">2020-06-07</time></div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		<p>Hugo uses the excellent <a href="https://golang.org/">Go</a> <a href="https://golang.org/pkg/html/template/">html/template</a> library for
-its template engine. It is an extremely lightweight engine that provides a very
-small amount of logic. In our experience that it is just the right amount of
-logic to be able to create a good static website. If you have used other
-template systems from different languages or frameworks you will find a lot of
-similarities in Go templates.</p>
+		
+	</div>
+</article><article class="list__item post">
+	<header class="list__header">
+		<h3 class="list__title post__title ">
+			<a href="/blog/2020/06/07/go-interview-finishing-7/" rel="bookmark">
+			Go Interview Finishing
+			</a>
+		</h3>
+		<p class="list__lead post__lead">Go面试题整理(七)</p>
+		<div class="list__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Ding Jianhui</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-06-07T13:14:17&#43;08:00">2020-06-07</time></div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		
 	</div>
 </article>
 </main>
@@ -277,7 +254,7 @@ similarities in Go templates.</p>
 			<li class="widget__item"><a class="widget__link" href="/blog/2020/07/03/go-grpc-stream/">Go Grpc Stream</a></li>
 			<li class="widget__item"><a class="widget__link" href="/blog/2020/07/01/protobuf-grammar/">Protobuf Grammar (Protobu3)</a></li>
 			<li class="widget__item"><a class="widget__link" href="/blog/2020/06/30/go-grpc-gateway/">Go Grpc Gateway</a></li>
-			<li class="widget__item"><a class="widget__link" href="/blog/2020/06/30/go-interview-finishing/">Go Interview Finishing</a></li>
+			<li class="widget__item"><a class="widget__link" href="/blog/2020/06/30/generate-local-certificate/">Generate Local Certificate</a></li>
 		</ul>
 	</div>
 </div>
