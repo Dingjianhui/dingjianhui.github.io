@@ -6,10 +6,25 @@
     <description>Recent content on Ding Jianhui 的个人博客 - 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 07 Jul 2020 11:24:21 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 20 Jul 2020 17:42:49 +0800</lastBuildDate>
     
 	<atom:link href="http://dingjianhui.top/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Go Struct Default Value</title>
+      <link>http://dingjianhui.top/blog/2020/07/20/go-struct-default-value/</link>
+      <pubDate>Mon, 20 Jul 2020 17:42:49 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/blog/2020/07/20/go-struct-default-value/</guid>
+      <description>传参时，不改变属性默认值时就不传该参数
+比如php中
+public function addLog($log_type,$log_content,$admin_id,$admin_name,$type = 2) { ...... } 调用
+$this-&amp;gt;log-&amp;gt;addLog(0,&amp;quot;编辑角色 -- 该角色不存在&amp;quot;,$this-&amp;gt;admin_id,$this-&amp;gt;admin_name); $type就没有传  Golang中无法在参数中设置默认值，只能
+ 提供一个初始化函数，所有的字段都做为参数， 如果不需要的时候传该类型的零值，这把复杂度暴露给调用者； 提供多个初始化函数，针对每个场景都进行内部默认值设置。  高阶玩法 src/Object/User.go
+package Object type User struct { UserId int UserName string UserAge int } // 初始化User对象 userAttr 设置属性值的函数体 func NewUser(userAttr ...UserAttr) *User { user := new(User) UserAttrs(userAttr).Apply(user) return user } src/Object/UserAttr.go
+package Object type UserAttr func(user *User) // 用来定义User结构体的属性值函数  type UserAttrs []UserAttr // 执行设置属性值的函数 func (this UserAttrs) Apply(user *User) { // 遍历设置属性值的函数 	for _,withAttr := range this { withAttr(user) // 执行函数 	} } // 设置UserName属性的值 func WithUserName(userName string) UserAttr { return func(user *User) { user.</description>
+    </item>
     
     <item>
       <title>Go Scheduler</title>
@@ -194,7 +209,7 @@ package main import &amp;#34;fmt&amp;#34; func main() { DeferDef() DeferDef1() D
     </item>
     
     <item>
-      <title>Go Strings Byte Rune</title>
+      <title>Go String Byte Rune</title>
       <link>http://dingjianhui.top/blog/2020/06/06/go-strings-byte-rune/</link>
       <pubDate>Sat, 06 Jun 2020 15:29:25 +0800</pubDate>
       
