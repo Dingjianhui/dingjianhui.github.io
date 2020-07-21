@@ -12,7 +12,7 @@
 <meta property="og:description" content="没有播种，何来收获" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="http://dingjianhui.top/" />
-<meta property="og:updated_time" content="2020-07-20T17:42:49+08:00" />
+<meta property="og:updated_time" content="2020-07-21T16:12:41+08:00" />
 
 		<meta itemprop="name" content="Ding Jianhui 的个人博客 - 学习笔记">
 <meta itemprop="description" content="没有播种，何来收获">
@@ -52,6 +52,23 @@
 			
 <main class="main list" role="main">
 	<article class="list__item post">
+	<header class="list__header">
+		<h3 class="list__title post__title ">
+			<a href="/blog/2020/06/03/go-interview-finishing-4/" rel="bookmark">
+			Go Interview Finishing
+			</a>
+		</h3>
+		<p class="list__lead post__lead">Go面试题整理(四)--Mysql</p>
+		<div class="list__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Ding Jianhui</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-06-03T13:14:17&#43;08:00">2020-06-03</time></div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		主键索引与唯一索引的区别  主键不允许为空值，唯一索引列允许为空值 一个表只能有一个主键，但是可以有多个唯一索引 主键可以被其他表引用为外键，而唯一索引不可以 主键一定会创建一个唯一索引，但是唯一索引列不一定是主键 主键是一种约束，而唯一索引是一种索引，是表的冗余数据结构，两者有着本质区别  
+	</div>
+</article><article class="list__item post">
 	<header class="list__header">
 		<h3 class="list__title post__title ">
 			<a href="/blog/2020/06/03/go-interview-finishing-5/" rel="bookmark">
@@ -225,30 +242,13 @@ Step 2. Build the Docs Hugo has its own example site which happens to also be th
 Follow the following steps:
  Clone the Hugo repository Go into the repo Run hugo in server mode and build the docs Open your browser to http://localhost:1313  Corresponding pseudo commands:
 	</div>
-</article><article class="list__item post">
-	<header class="list__header">
-		<h3 class="list__title post__title ">
-			<a href="/blog/migrate-from-jekyll/" rel="bookmark">
-			Migrate to Hugo from Jekyll
-			</a>
-		</h3>
-		<div class="list__meta meta"><div class="meta__item-author meta__item">
-	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Ding Jianhui</span>
-</div>
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2014-03-10T00:00:00Z">2014-03-10</time></div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		Move static content to static Jekyll has a rule that any directory not starting with _ will be copied as-is to the _site output. Hugo keeps all static content under static. You should therefore move it all there. With Jekyll, something that looked like
-▾ &lt;root&gt;/▾ images/logo.png should become
-▾ &lt;root&gt;/▾ static/▾ images/logo.png Additionally, you&rsquo;ll want any files that should reside at the root (such as CNAME) to be moved to static.
-	</div>
 </article>
 </main>
 
 <div class="pagination">
 	<a class="pagination__item pagination__item--prev btn" href="/page/2/">«</a>
-	<span class="pagination__item pagination__item--current">3/3</span>
+	<span class="pagination__item pagination__item--current">3/4</span>
+	<a class="pagination__item pagination__item--next btn" href="/page/4/">»</a>
 </div>
 
 			</div>
@@ -265,11 +265,11 @@ Follow the following steps:
 	<h4 class="widget__title">近期文章</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/blog/2020/07/21/go-map/">Go Map</a></li>
 			<li class="widget__item"><a class="widget__link" href="/blog/2020/07/20/go-struct-default-value/">Go Struct Default Value</a></li>
 			<li class="widget__item"><a class="widget__link" href="/blog/2020/07/07/go-scheduler/">Go Scheduler</a></li>
 			<li class="widget__item"><a class="widget__link" href="/blog/2020/07/03/go-grpc-stream/">Go Grpc Stream</a></li>
 			<li class="widget__item"><a class="widget__link" href="/blog/2020/07/01/protobuf-grammar/">Protobuf Grammar (Protobu3)</a></li>
-			<li class="widget__item"><a class="widget__link" href="/blog/2020/06/30/go-grpc-gateway/">Go Grpc Gateway</a></li>
 		</ul>
 	</div>
 </div>

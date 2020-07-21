@@ -6,10 +6,20 @@
     <description>Recent content in Blogs on Ding Jianhui 的个人博客 - 学习笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 20 Jul 2020 17:42:49 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 21 Jul 2020 16:12:41 +0800</lastBuildDate>
     
 	<atom:link href="http://dingjianhui.top/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Go Map</title>
+      <link>http://dingjianhui.top/blog/2020/07/21/go-map/</link>
+      <pubDate>Tue, 21 Jul 2020 16:12:41 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/blog/2020/07/21/go-map/</guid>
+      <description>Map(集合) Map 是一种无序的键值对的集合
+定义初始化 // 定义map type ( UserMap map[string]interface{} ) // 初始化map func NewUser() UserMap { return make(map[string]interface{}) // 使用make初始化 } 设置值 // 设置值 func (this UserMap) With(key string,val interface{}) UserMap { this[key] = val return this } 排序打印 // 按key排序 func (this UserMap) SortByKeys(order string) []string { keys := []string{} for key,_ := range this { keys = append(keys,key) } if order == &amp;#34;asc&amp;#34; { sort.Sort(sort.StringSlice(keys)) // 强制转换为StringSlice类型 	} else if order == &amp;#34;desc&amp;#34; { sort.</description>
+    </item>
     
     <item>
       <title>Go Struct Default Value</title>
