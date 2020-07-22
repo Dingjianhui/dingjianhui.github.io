@@ -5,24 +5,24 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Ding Jianhui 的个人博客 - 学习笔记</title>
+	<title>Ding Jianhui 的个人博客 - 笔记</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
-	<meta name="description" content="没有播种，何来收获">
-		<meta property="og:title" content="Ding Jianhui 的个人博客 - 学习笔记" />
-<meta property="og:description" content="没有播种，何来收获" />
+	<meta name="description" content="Ding Jianhui 的个人博客|笔记|golang|etcd|grpc">
+		<meta property="og:title" content="Ding Jianhui 的个人博客 - 笔记" />
+<meta property="og:description" content="Ding Jianhui 的个人博客|笔记|golang|etcd|grpc" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="http://dingjianhui.top/" />
 <meta property="og:updated_time" content="2020-07-21T16:12:41+08:00" />
 
-		<meta itemprop="name" content="Ding Jianhui 的个人博客 - 学习笔记">
-<meta itemprop="description" content="没有播种，何来收获">
+		<meta itemprop="name" content="Ding Jianhui 的个人博客 - 笔记">
+<meta itemprop="description" content="Ding Jianhui 的个人博客|笔记|golang|etcd|grpc">
 		<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Ding Jianhui 的个人博客 - 学习笔记"/>
-<meta name="twitter:description" content="没有播种，何来收获"/>
+<meta name="twitter:title" content="Ding Jianhui 的个人博客 - 笔记"/>
+<meta name="twitter:description" content="Ding Jianhui 的个人博客|笔记|golang|etcd|grpc"/>
 
 	<link rel="dns-prefetch" href="//fonts.googleapis.com">
 	<link rel="dns-prefetch" href="//fonts.gstatic.com">
-	<link rel="alternate" type="application/rss+xml" href="/index.xml" title="Ding Jianhui 的个人博客 - 学习笔记">
+	<link rel="alternate" type="application/rss+xml" href="/index.xml" title="Ding Jianhui 的个人博客 - 笔记">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
 	<link rel="stylesheet" href="/css/style.css">
 	<link rel="stylesheet" href="/css/custom.css">
@@ -35,12 +35,12 @@
 	<div class="container header__container">
 		
 	<div class="logo logo--mixed">
-		<a class="logo__link" href="/" title="Ding Jianhui" rel="home">
+		<a class="logo__link" href="/" title="Ding Jianhui 的个人博客 - 笔记" rel="home">
 			<div class="logo__item logo__imagebox">
 					<img class="logo__img" src="/img/logo.jpg">
 				</div><div class="logo__item logo__text">
-					<div class="logo__title">Ding Jianhui</div>
-					<div class="logo__tagline">有一种投资好过其他所有的投资: 那就是投资自己</div>
+					<div class="logo__title">Ding Jianhui 的个人博客 - 笔记</div>
+					<div class="logo__tagline">好记性不如烂笔头</div>
 				</div>
 		</a>
 	</div>
@@ -71,6 +71,9 @@
 		Map(集合) Map 是一种无序的键值对的集合
 定义初始化 // 定义map type ( UserMap map[string]interface{} ) // 初始化map func NewUser() UserMap { return make(map[string]interface{}) // 使用make初始化 } 设置值 // 设置值 func (this UserMap) With(key string,val interface{}) UserMap { this[key] = val return this } 排序打印 // 按key排序 func (this UserMap) SortByKeys(order string) []string { keys := []string{} for key,_ := range this { keys = append(keys,key) } if order == &#34;asc&#34; { sort.Sort(sort.StringSlice(keys)) // 强制转换为StringSlice类型 	} else if order == &#34;desc&#34; { sort.
 	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/blog/2020/07/21/go-map/">阅读全文…</a>
+	</div>
 </article><article class="list__item post">
 	<header class="list__header">
 		<h3 class="list__title post__title ">
@@ -95,6 +98,9 @@ $this-&gt;log-&gt;addLog(0,&quot;编辑角色 -- 该角色不存在&quot;,$this-
  提供一个初始化函数，所有的字段都做为参数， 如果不需要的时候传该类型的零值，这把复杂度暴露给调用者； 提供多个初始化函数，针对每个场景都进行内部默认值设置。  高阶玩法 src/Object/User.go
 package Object type User struct { UserId int UserName string UserAge int } // 初始化User对象 userAttr 设置属性值的函数体 func NewUser(userAttr ...UserAttr) *User { user := new(User) UserAttrs(userAttr).Apply(user) return user } src/Object/UserAttr.go
 package Object type UserAttr func(user *User) // 用来定义User结构体的属性值函数  type UserAttrs []UserAttr // 执行设置属性值的函数 func (this UserAttrs) Apply(user *User) { // 遍历设置属性值的函数 	for _,withAttr := range this { withAttr(user) // 执行函数 	} } // 设置UserName属性的值 func WithUserName(userName string) UserAttr { return func(user *User) { user.
+	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/blog/2020/07/20/go-struct-default-value/">阅读全文…</a>
 	</div>
 </article><article class="list__item post">
 	<header class="list__header">
@@ -149,6 +155,9 @@ M执行的G阻塞操作返回后，由于没有了P，失去切换上下文执�
 场景：假设我要从库里取 一批(x万到几十万)用户的积分.批量查询用户的积分
 setp 1. 创建UserModel.proto syntax = &#34;proto3&#34;;package pb;message UserInfo { int32 user_id = 1; // 用户ID  int32 user_score = 2; // 用户积分 }setp 2. 创建User.proto syntax = &#34;proto3&#34;;package pb;import &#34;UserModel.proto&#34;;message UserScoreRequest { repeated UserInfo users = 1;}message UserScoreResponse { repeated UserInfo users = 1;}// 需要支持Restful API 参考Product.
 	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/blog/2020/07/03/go-grpc-stream/">阅读全文…</a>
+	</div>
 </article><article class="list__item post">
 	<header class="list__header">
 		<h3 class="list__title post__title ">
@@ -173,6 +182,9 @@ ProtoBuf 很适合做数据存储或 RPC 数据交换格式。可用于通讯协
 如下：我们有一个服务为通过商品ID来获取商品的库存, 那么我们需要定义商品ID请求参数prod_id,定义库存响应字段prod_stock
 syntax=&#34;proto3&#34;;package services;message ProdRequest { int32 prod_id = 1; // 传入的商品ID }message ProdResponse { int32 prod_stock = 1; // 响应的商品库存 }service ProdService { rpc GetProdStock (ProdRequest) returns (ProdResponse); // 通过商品ID获取商品库存方法 } syntax = &quot;proto3&quot;; 指定了整个 .proto 文件使用 Protobuf3 解析，否则默认会使用 Protobuf2 解析，必须将其放置在文件的第一行。 ProdRequest 这个 message 指定了1个数据字段，数据字段定义由 Field Types 数据类型 + Field Names 字段名 = Field Numbers 编号组成。 service 定义了 RPC 服务  字段类型   基础类型
 	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/blog/2020/07/01/protobuf-grammar/">阅读全文…</a>
+	</div>
 </article><article class="list__item post">
 	<header class="list__header">
 		<h3 class="list__title post__title ">
@@ -194,6 +206,9 @@ syntax=&#34;proto3&#34;;package services;message ProdRequest { int32 prod_id = 1
 通常我们把rpc用作内部通信，而使用RESTful Api进行外部通信
 服务器收到Http请求后grpc-gateway把他转换成grpc处理，然后以JSON格式返回
 安装  安装 Protocol buffer 编译器(protoc) V3版本 https://github.com/protocolbuffers/protobuf/releases 安装 Protocol buffer 编译器的 Go插件 (protoc-gen-go) go get github.com/golang/protobuf/protoc-gen-go 安装 Protocol buffer 编译器的插件-grpc-gateway go get github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway 安装 Protocol buffer 编译器的插件-swagger go get github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger  使用 1. 使用Protocol buffer定义gRPC服务 server/pbfiles/Prod.proto:  syntax=&#34;proto3&#34;;package services;message ProdRequest { int32 prod_id =1; //传入的商品ID }message ProdResponse{ int32 prod_stock=1;//商品库存 }service ProdService { rpc GetProdStock (ProdRequest) returns (ProdResponse);}2. 添加google.api.http annotation 到 *.proto 文件中 可以将文件拷至 server/pbfiles中，也可以引用外部资源的方式 server/pbfiles/Prod.
+	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/blog/2020/06/30/go-grpc-gateway/">阅读全文…</a>
 	</div>
 </article><article class="list__item post">
 	<header class="list__header">
@@ -222,6 +237,9 @@ windows环境 自签证书 进入 bin目录
   执行x509 -req -days 365 -in server.csr -signkey server_no_passwd.key -out server.crt (会生成server.crt)
   使用自签CA、server、Client证书和双向认证 根证书（root certificate）是属于根证书颁发机构（CA）的公钥证书。 用以验证它所签发的证书（客户端、服务端）
 创建CA公钥证书   执行 openssl.exe genrsa -out ca.key 2048 req -new -x509 -days 3650 -key ca.
+	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/blog/2020/06/30/generate-local-certificate/">阅读全文…</a>
 	</div>
 </article><article class="list__item post">
 	<header class="list__header">
@@ -263,6 +281,9 @@ Protocol Buffer是由Google开发的一种数据序列化协议(类似于XML、J
   安装 Protocol buffer 编译器的 Go插件 (protoc-gen-go) go get github.com/golang/protobuf/protoc-gen-go
 Google Protocol Buffer( 简称 Protobuf)
 	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/blog/2020/06/28/go-grpc-quick-start/">阅读全文…</a>
+	</div>
 </article><article class="list__item post">
 	<header class="list__header">
 		<h3 class="list__title post__title ">
@@ -285,6 +306,9 @@ Step 1. 构建Confd镜像(使用go镜像) [tintin@localhost ttphp]$ ls etcd etcd
 https://github.com/kelseyhightower/confd/blob/master/docs/installation.md
 FROM1.14.4-alpine3.12 as confdARG CONFD_VERSION=0.16.0ADD https://github.com/kelseyhightower/confd/archive/v${CONFD_VERSION}.tar.gz /tmp/RUN apk add --no-cache \  bzip2 \  make &amp;&amp; \  mkdir -p /go/src/github.com/kelseyhightower/confd &amp;&amp; \  cd /go/src/github.com/kelseyhightower/confd &amp;&amp; \  tar --strip-components=1 -zxf /tmp/v${CONFD_VERSION}.tar.gz &amp;&amp; \  go install github.com/kelseyhightower/confd &amp;&amp; \  rm -rf /tmp/v${CONFD_VERSION}.
 	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/blog/2020/06/26/go-etcd-simple-config-center/">阅读全文…</a>
+	</div>
 </article><article class="list__item post">
 	<header class="list__header">
 		<h3 class="list__title post__title ">
@@ -306,6 +330,9 @@ FROM1.14.4-alpine3.12 as confdARG CONFD_VERSION=0.16.0ADD https://github.com/kel
 二叉查找树，也称二叉搜索树，或二叉排序树。 要么是一颗空树，要么就是具有如下性质的二叉树：
 （1） 若任意节点的左子树不空，则左子树上所有结点的值均小于它的根结点的值； （2） 若任意节点的右子树不空，则右子树上所有结点的值均大于它的根结点的值； （3） 任意节点的左、右子树也分别为二叉查找树； （4） 没有值相等的节点  1. 动态创建节点 func AddNode(tree *BSTree, root *BSTree) *BSTree { if root == nil { return tree } // 根节点 与 新节点对比 	// 新节点比 根节点大 放入右节点 	// 新节点比 根节点小 放入左节点 	if tree.Node &gt; root.Node { root.RightNode = AddNode(tree,root.RightNode) } else if tree.Node &lt; root.Node { root.LeftNode = AddNode(tree,root.LeftNode) } else { return root } return root } 2.
 	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/blog/2020/06/24/go-binary-search-tree/">阅读全文…</a>
+	</div>
 </article>
 </main>
 
@@ -323,18 +350,6 @@ FROM1.14.4-alpine3.12 as confdARG CONFD_VERSION=0.16.0ADD https://github.com/kel
 		<input class="widget-search__submit" type="submit" value="Search">
 		<input type="hidden" name="sitesearch" value="http://dingjianhui.top/" />
 	</form>
-</div>
-<div class="widget-recent widget">
-	<h4 class="widget__title">近期文章</h4>
-	<div class="widget__content">
-		<ul class="widget__list">
-			<li class="widget__item"><a class="widget__link" href="/blog/2020/07/21/go-map/">Go Map</a></li>
-			<li class="widget__item"><a class="widget__link" href="/blog/2020/07/20/go-struct-default-value/">Go Struct Default Value</a></li>
-			<li class="widget__item"><a class="widget__link" href="/blog/2020/07/07/go-scheduler/">Go Scheduler</a></li>
-			<li class="widget__item"><a class="widget__link" href="/blog/2020/07/03/go-grpc-stream/">Go Grpc Stream</a></li>
-			<li class="widget__item"><a class="widget__link" href="/blog/2020/07/01/protobuf-grammar/">Protobuf Grammar (Protobu3)</a></li>
-		</ul>
-	</div>
 </div>
 <div class="widget-categories widget">
 	<h4 class="widget__title">分类</h4>
@@ -361,16 +376,33 @@ FROM1.14.4-alpine3.12 as confdARG CONFD_VERSION=0.16.0ADD https://github.com/kel
 <div class="widget-taglist widget">
 	<h4 class="widget__title">标签</h4>
 	<div class="widget__content">
-		<a class="widget-taglist__link widget__link btn" href="/tags/centos7/" title="centos7">centos7</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/defer/" title="defer">defer</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/docker/" title="docker">docker</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/etcd/" title="etcd">etcd</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/go/" title="go">go</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/grpc/" title="grpc">grpc</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/https/" title="https">https</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/hugo-theme/" title="hugo-theme">hugo-theme</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/topic/" title="topic">topic</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" title="二叉树">二叉树</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/centos7/" title="centos7">centos7 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/defer/" title="defer">defer (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/docker/" title="docker">docker (3)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/etcd/" title="etcd">etcd (4)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/go/" title="go">go (15)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/grpc/" title="grpc">grpc (4)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/https/" title="https">https (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/hugo-theme/" title="hugo-theme">hugo-theme (3)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/topic/" title="topic">topic (8)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" title="二叉树">二叉树 (1)</a>
+	</div>
+</div>
+<div class="widget-recent widget">
+	<h4 class="widget__title">近期文章</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/blog/2020/07/21/go-map/">Go Map</a></li>
+			<li class="widget__item"><a class="widget__link" href="/blog/2020/07/20/go-struct-default-value/">Go Struct Default Value</a></li>
+			<li class="widget__item"><a class="widget__link" href="/blog/2020/07/07/go-scheduler/">Go Scheduler</a></li>
+			<li class="widget__item"><a class="widget__link" href="/blog/2020/07/03/go-grpc-stream/">Go Grpc Stream</a></li>
+			<li class="widget__item"><a class="widget__link" href="/blog/2020/07/01/protobuf-grammar/">Protobuf Grammar (Protobu3)</a></li>
+			<li class="widget__item"><a class="widget__link" href="/blog/2020/06/30/go-grpc-gateway/">Go Grpc Gateway</a></li>
+			<li class="widget__item"><a class="widget__link" href="/blog/2020/06/30/generate-local-certificate/">Generate Local Certificate</a></li>
+			<li class="widget__item"><a class="widget__link" href="/blog/2020/06/28/go-grpc-quick-start/">Go Grpc Quick Start</a></li>
+			<li class="widget__item"><a class="widget__link" href="/blog/2020/06/26/go-etcd-simple-config-center/">Go Etcd Simple Config Center</a></li>
+			<li class="widget__item"><a class="widget__link" href="/blog/2020/06/24/go-binary-search-tree/">Go Binary Search Tree</a></li>
+		</ul>
 	</div>
 </div>
 <div class="widget-social widget">

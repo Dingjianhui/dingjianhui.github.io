@@ -4,24 +4,24 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>grpc - Ding Jianhui 的个人博客 - 学习笔记</title>
+	<title>grpc - Ding Jianhui 的个人博客 - 笔记</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
 	<meta name="description" content="">
 		<meta property="og:title" content="grpc" />
-<meta property="og:description" content="没有播种，何来收获" />
+<meta property="og:description" content="Ding Jianhui 的个人博客|笔记|golang|etcd|grpc" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="http://dingjianhui.top/tags/grpc/" />
 <meta property="og:updated_time" content="2020-07-03T15:07:02+08:00" />
 
 		<meta itemprop="name" content="grpc">
-<meta itemprop="description" content="没有播种，何来收获">
+<meta itemprop="description" content="Ding Jianhui 的个人博客|笔记|golang|etcd|grpc">
 		<meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="grpc"/>
-<meta name="twitter:description" content="没有播种，何来收获"/>
+<meta name="twitter:description" content="Ding Jianhui 的个人博客|笔记|golang|etcd|grpc"/>
 
 	<link rel="dns-prefetch" href="//fonts.googleapis.com">
 	<link rel="dns-prefetch" href="//fonts.gstatic.com">
-	<link rel="alternate" type="application/rss+xml" href="/tags/grpc/index.xml" title="Ding Jianhui 的个人博客 - 学习笔记">
+	<link rel="alternate" type="application/rss+xml" href="/tags/grpc/index.xml" title="Ding Jianhui 的个人博客 - 笔记">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
 	<link rel="stylesheet" href="/css/style.css">
 	<link rel="stylesheet" href="/css/custom.css">
@@ -34,12 +34,12 @@
 	<div class="container header__container">
 		
 	<div class="logo logo--mixed">
-		<a class="logo__link" href="/" title="Ding Jianhui" rel="home">
+		<a class="logo__link" href="/" title="Ding Jianhui 的个人博客 - 笔记" rel="home">
 			<div class="logo__item logo__imagebox">
 					<img class="logo__img" src="/img/logo.jpg">
 				</div><div class="logo__item logo__text">
-					<div class="logo__title">Ding Jianhui</div>
-					<div class="logo__tagline">有一种投资好过其他所有的投资: 那就是投资自己</div>
+					<div class="logo__title">Ding Jianhui 的个人博客 - 笔记</div>
+					<div class="logo__tagline">好记性不如烂笔头</div>
 				</div>
 		</a>
 	</div>
@@ -80,6 +80,9 @@
 场景：假设我要从库里取 一批(x万到几十万)用户的积分.批量查询用户的积分
 setp 1. 创建UserModel.proto syntax = &#34;proto3&#34;;package pb;message UserInfo { int32 user_id = 1; // 用户ID  int32 user_score = 2; // 用户积分 }setp 2. 创建User.proto syntax = &#34;proto3&#34;;package pb;import &#34;UserModel.proto&#34;;message UserScoreRequest { repeated UserInfo users = 1;}message UserScoreResponse { repeated UserInfo users = 1;}// 需要支持Restful API 参考Product.
 	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/blog/2020/07/03/go-grpc-stream/">阅读全文…</a>
+	</div>
 </article><article class="list__item post">
 	<header class="list__header">
 		<h3 class="list__title post__title ">
@@ -104,6 +107,9 @@ ProtoBuf 很适合做数据存储或 RPC 数据交换格式。可用于通讯协
 如下：我们有一个服务为通过商品ID来获取商品的库存, 那么我们需要定义商品ID请求参数prod_id,定义库存响应字段prod_stock
 syntax=&#34;proto3&#34;;package services;message ProdRequest { int32 prod_id = 1; // 传入的商品ID }message ProdResponse { int32 prod_stock = 1; // 响应的商品库存 }service ProdService { rpc GetProdStock (ProdRequest) returns (ProdResponse); // 通过商品ID获取商品库存方法 } syntax = &quot;proto3&quot;; 指定了整个 .proto 文件使用 Protobuf3 解析，否则默认会使用 Protobuf2 解析，必须将其放置在文件的第一行。 ProdRequest 这个 message 指定了1个数据字段，数据字段定义由 Field Types 数据类型 + Field Names 字段名 = Field Numbers 编号组成。 service 定义了 RPC 服务  字段类型   基础类型
 	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/blog/2020/07/01/protobuf-grammar/">阅读全文…</a>
+	</div>
 </article><article class="list__item post">
 	<header class="list__header">
 		<h3 class="list__title post__title ">
@@ -125,6 +131,9 @@ syntax=&#34;proto3&#34;;package services;message ProdRequest { int32 prod_id = 1
 通常我们把rpc用作内部通信，而使用RESTful Api进行外部通信
 服务器收到Http请求后grpc-gateway把他转换成grpc处理，然后以JSON格式返回
 安装  安装 Protocol buffer 编译器(protoc) V3版本 https://github.com/protocolbuffers/protobuf/releases 安装 Protocol buffer 编译器的 Go插件 (protoc-gen-go) go get github.com/golang/protobuf/protoc-gen-go 安装 Protocol buffer 编译器的插件-grpc-gateway go get github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway 安装 Protocol buffer 编译器的插件-swagger go get github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger  使用 1. 使用Protocol buffer定义gRPC服务 server/pbfiles/Prod.proto:  syntax=&#34;proto3&#34;;package services;message ProdRequest { int32 prod_id =1; //传入的商品ID }message ProdResponse{ int32 prod_stock=1;//商品库存 }service ProdService { rpc GetProdStock (ProdRequest) returns (ProdResponse);}2. 添加google.api.http annotation 到 *.proto 文件中 可以将文件拷至 server/pbfiles中，也可以引用外部资源的方式 server/pbfiles/Prod.
+	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/blog/2020/06/30/go-grpc-gateway/">阅读全文…</a>
 	</div>
 </article><article class="list__item post">
 	<header class="list__header">
@@ -166,6 +175,9 @@ Protocol Buffer是由Google开发的一种数据序列化协议(类似于XML、J
   安装 Protocol buffer 编译器的 Go插件 (protoc-gen-go) go get github.com/golang/protobuf/protoc-gen-go
 Google Protocol Buffer( 简称 Protobuf)
 	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/blog/2020/06/28/go-grpc-quick-start/">阅读全文…</a>
+	</div>
 </article>
 </main>
 
@@ -180,18 +192,6 @@ Google Protocol Buffer( 简称 Protobuf)
 		<input class="widget-search__submit" type="submit" value="Search">
 		<input type="hidden" name="sitesearch" value="http://dingjianhui.top/" />
 	</form>
-</div>
-<div class="widget-recent widget">
-	<h4 class="widget__title">近期文章</h4>
-	<div class="widget__content">
-		<ul class="widget__list">
-			<li class="widget__item"><a class="widget__link" href="/blog/2020/07/21/go-map/">Go Map</a></li>
-			<li class="widget__item"><a class="widget__link" href="/blog/2020/07/20/go-struct-default-value/">Go Struct Default Value</a></li>
-			<li class="widget__item"><a class="widget__link" href="/blog/2020/07/07/go-scheduler/">Go Scheduler</a></li>
-			<li class="widget__item"><a class="widget__link" href="/blog/2020/07/03/go-grpc-stream/">Go Grpc Stream</a></li>
-			<li class="widget__item"><a class="widget__link" href="/blog/2020/07/01/protobuf-grammar/">Protobuf Grammar (Protobu3)</a></li>
-		</ul>
-	</div>
 </div>
 <div class="widget-categories widget">
 	<h4 class="widget__title">分类</h4>
@@ -218,16 +218,33 @@ Google Protocol Buffer( 简称 Protobuf)
 <div class="widget-taglist widget">
 	<h4 class="widget__title">标签</h4>
 	<div class="widget__content">
-		<a class="widget-taglist__link widget__link btn" href="/tags/centos7/" title="centos7">centos7</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/defer/" title="defer">defer</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/docker/" title="docker">docker</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/etcd/" title="etcd">etcd</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/go/" title="go">go</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/grpc/" title="grpc">grpc</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/https/" title="https">https</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/hugo-theme/" title="hugo-theme">hugo-theme</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/topic/" title="topic">topic</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" title="二叉树">二叉树</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/centos7/" title="centos7">centos7 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/defer/" title="defer">defer (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/docker/" title="docker">docker (3)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/etcd/" title="etcd">etcd (4)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/go/" title="go">go (15)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/grpc/" title="grpc">grpc (4)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/https/" title="https">https (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/hugo-theme/" title="hugo-theme">hugo-theme (3)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/topic/" title="topic">topic (8)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" title="二叉树">二叉树 (1)</a>
+	</div>
+</div>
+<div class="widget-recent widget">
+	<h4 class="widget__title">近期文章</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/blog/2020/07/21/go-map/">Go Map</a></li>
+			<li class="widget__item"><a class="widget__link" href="/blog/2020/07/20/go-struct-default-value/">Go Struct Default Value</a></li>
+			<li class="widget__item"><a class="widget__link" href="/blog/2020/07/07/go-scheduler/">Go Scheduler</a></li>
+			<li class="widget__item"><a class="widget__link" href="/blog/2020/07/03/go-grpc-stream/">Go Grpc Stream</a></li>
+			<li class="widget__item"><a class="widget__link" href="/blog/2020/07/01/protobuf-grammar/">Protobuf Grammar (Protobu3)</a></li>
+			<li class="widget__item"><a class="widget__link" href="/blog/2020/06/30/go-grpc-gateway/">Go Grpc Gateway</a></li>
+			<li class="widget__item"><a class="widget__link" href="/blog/2020/06/30/generate-local-certificate/">Generate Local Certificate</a></li>
+			<li class="widget__item"><a class="widget__link" href="/blog/2020/06/28/go-grpc-quick-start/">Go Grpc Quick Start</a></li>
+			<li class="widget__item"><a class="widget__link" href="/blog/2020/06/26/go-etcd-simple-config-center/">Go Etcd Simple Config Center</a></li>
+			<li class="widget__item"><a class="widget__link" href="/blog/2020/06/24/go-binary-search-tree/">Go Binary Search Tree</a></li>
+		</ul>
 	</div>
 </div>
 <div class="widget-social widget">

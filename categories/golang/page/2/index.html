@@ -4,24 +4,24 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>golang - Ding Jianhui 的个人博客 - 学习笔记</title>
+	<title>golang - Ding Jianhui 的个人博客 - 笔记</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
 	<meta name="description" content="">
 		<meta property="og:title" content="golang" />
-<meta property="og:description" content="没有播种，何来收获" />
+<meta property="og:description" content="Ding Jianhui 的个人博客|笔记|golang|etcd|grpc" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="http://dingjianhui.top/categories/golang/" />
 <meta property="og:updated_time" content="2020-07-21T16:12:41+08:00" />
 
 		<meta itemprop="name" content="golang">
-<meta itemprop="description" content="没有播种，何来收获">
+<meta itemprop="description" content="Ding Jianhui 的个人博客|笔记|golang|etcd|grpc">
 		<meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="golang"/>
-<meta name="twitter:description" content="没有播种，何来收获"/>
+<meta name="twitter:description" content="Ding Jianhui 的个人博客|笔记|golang|etcd|grpc"/>
 
 	<link rel="dns-prefetch" href="//fonts.googleapis.com">
 	<link rel="dns-prefetch" href="//fonts.gstatic.com">
-	<link rel="alternate" type="application/rss+xml" href="/categories/golang/index.xml" title="Ding Jianhui 的个人博客 - 学习笔记">
+	<link rel="alternate" type="application/rss+xml" href="/categories/golang/index.xml" title="Ding Jianhui 的个人博客 - 笔记">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
 	<link rel="stylesheet" href="/css/style.css">
 	<link rel="stylesheet" href="/css/custom.css">
@@ -34,12 +34,12 @@
 	<div class="container header__container">
 		
 	<div class="logo logo--mixed">
-		<a class="logo__link" href="/" title="Ding Jianhui" rel="home">
+		<a class="logo__link" href="/" title="Ding Jianhui 的个人博客 - 笔记" rel="home">
 			<div class="logo__item logo__imagebox">
 					<img class="logo__img" src="/img/logo.jpg">
 				</div><div class="logo__item logo__text">
-					<div class="logo__title">Ding Jianhui</div>
-					<div class="logo__tagline">有一种投资好过其他所有的投资: 那就是投资自己</div>
+					<div class="logo__title">Ding Jianhui 的个人博客 - 笔记</div>
+					<div class="logo__tagline">好记性不如烂笔头</div>
 				</div>
 		</a>
 	</div>
@@ -71,6 +71,9 @@
 	<div class="content list__excerpt post__content clearfix">
 		示意图 服务注册 1.服务提供者 创建服务 2.服务提供者 配置etcd 3.服务提供者 把服务注册到配置的etcd中 4.服务启动 5.服务关闭时反注册服务 (关闭时,回收资源)  package main import ( &#34;context&#34; &#34;etcd-service/service/utils&#34; &#34;fmt&#34; &#34;github.com/google/uuid&#34; &#34;github.com/gorilla/mux&#34; &#34;log&#34; &#34;net/http&#34; &#34;os&#34; &#34;os/signal&#34; &#34;strconv&#34; &#34;syscall&#34; ) // 服务提供者  // service 服务注册  func main() { // 1. 创建服务 	serviceId := uuid.New().String() // 服务ID 	serviceName := &#34;productDetailService&#34; // 服务名 	serviceAddress := &#34;192.168.123.178&#34; // 服务地址 	servicePort := 8081 // 服务端口  router := mux.NewRouter() server := http.
 	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/blog/2020/06/19/go-etcd-v3-service-discovery/">阅读全文…</a>
+	</div>
 </article><article class="list__item post">
 	<header class="list__header">
 		<h3 class="list__title post__title ">
@@ -90,6 +93,9 @@
 	<div class="content list__excerpt post__content clearfix">
 		什么是string string 是不可变的字节序列,采用utf8编码的 字节切片(slice), 因此用len函数获取到的长度并不是字符个数，而是字节个数。 for循环遍历输出的也是各个字节。
 a := &#34;Randal&#34;; for i := 0; i &lt; len(a); i++ { fmt.Printf(&#34;%x &#34;, a[i]) fmt.Printf(&#34;%c &#34;, a[i]) } // 输出结果 52 61 6e 64 61 6c a := &#34;中国&#34;; fmt.Println(len(a)) for i := 0; i &lt; len(a); i++ { fmt.Printf(&#34;%x &#34;, a[i]) } for i := 0; i &lt; len(a); i++ { fmt.Printf(&#34;%c &#34;, a[i]) } // 输出结果 6 E4 B8 AD E5 9B BD ä¸­å½ 什么是rune？ rune是int32的别名，代表字符的Unicode编码，采用4个字节存储， 将string转成rune就意味着任何一个字符都用4个字节来存储其unicode值， 这样每次遍历的时候返回的就是unicode值，而不再是字节了，这样就可以解决乱码问题了
+	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/blog/2020/06/06/go-strings-byte-rune/">阅读全文…</a>
 	</div>
 </article><article class="list__item post">
 	<header class="list__header">
@@ -139,6 +145,9 @@ logic to be able to create a good static website. If you have used other
 template systems from different languages or frameworks you will find a lot of
 similarities in Go templates.</p>
 	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/blog/goisforlovers/">阅读全文…</a>
+	</div>
 </article><article class="list__item post">
 	<header class="list__header">
 		<h3 class="list__title post__title ">
@@ -162,6 +171,9 @@ Step 2. Build the Docs Hugo has its own example site which happens to also be th
 Follow the following steps:
  Clone the Hugo repository Go into the repo Run hugo in server mode and build the docs Open your browser to http://localhost:1313  Corresponding pseudo commands:
 	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/blog/hugoisforlovers/">阅读全文…</a>
+	</div>
 </article>
 </main>
 
@@ -180,18 +192,6 @@ Follow the following steps:
 		<input class="widget-search__submit" type="submit" value="Search">
 		<input type="hidden" name="sitesearch" value="http://dingjianhui.top/" />
 	</form>
-</div>
-<div class="widget-recent widget">
-	<h4 class="widget__title">近期文章</h4>
-	<div class="widget__content">
-		<ul class="widget__list">
-			<li class="widget__item"><a class="widget__link" href="/blog/2020/07/21/go-map/">Go Map</a></li>
-			<li class="widget__item"><a class="widget__link" href="/blog/2020/07/20/go-struct-default-value/">Go Struct Default Value</a></li>
-			<li class="widget__item"><a class="widget__link" href="/blog/2020/07/07/go-scheduler/">Go Scheduler</a></li>
-			<li class="widget__item"><a class="widget__link" href="/blog/2020/07/03/go-grpc-stream/">Go Grpc Stream</a></li>
-			<li class="widget__item"><a class="widget__link" href="/blog/2020/07/01/protobuf-grammar/">Protobuf Grammar (Protobu3)</a></li>
-		</ul>
-	</div>
 </div>
 <div class="widget-categories widget">
 	<h4 class="widget__title">分类</h4>
@@ -218,16 +218,33 @@ Follow the following steps:
 <div class="widget-taglist widget">
 	<h4 class="widget__title">标签</h4>
 	<div class="widget__content">
-		<a class="widget-taglist__link widget__link btn" href="/tags/centos7/" title="centos7">centos7</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/defer/" title="defer">defer</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/docker/" title="docker">docker</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/etcd/" title="etcd">etcd</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/go/" title="go">go</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/grpc/" title="grpc">grpc</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/https/" title="https">https</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/hugo-theme/" title="hugo-theme">hugo-theme</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/topic/" title="topic">topic</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" title="二叉树">二叉树</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/centos7/" title="centos7">centos7 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/defer/" title="defer">defer (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/docker/" title="docker">docker (3)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/etcd/" title="etcd">etcd (4)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/go/" title="go">go (15)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/grpc/" title="grpc">grpc (4)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/https/" title="https">https (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/hugo-theme/" title="hugo-theme">hugo-theme (3)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/topic/" title="topic">topic (8)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" title="二叉树">二叉树 (1)</a>
+	</div>
+</div>
+<div class="widget-recent widget">
+	<h4 class="widget__title">近期文章</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/blog/2020/07/21/go-map/">Go Map</a></li>
+			<li class="widget__item"><a class="widget__link" href="/blog/2020/07/20/go-struct-default-value/">Go Struct Default Value</a></li>
+			<li class="widget__item"><a class="widget__link" href="/blog/2020/07/07/go-scheduler/">Go Scheduler</a></li>
+			<li class="widget__item"><a class="widget__link" href="/blog/2020/07/03/go-grpc-stream/">Go Grpc Stream</a></li>
+			<li class="widget__item"><a class="widget__link" href="/blog/2020/07/01/protobuf-grammar/">Protobuf Grammar (Protobu3)</a></li>
+			<li class="widget__item"><a class="widget__link" href="/blog/2020/06/30/go-grpc-gateway/">Go Grpc Gateway</a></li>
+			<li class="widget__item"><a class="widget__link" href="/blog/2020/06/30/generate-local-certificate/">Generate Local Certificate</a></li>
+			<li class="widget__item"><a class="widget__link" href="/blog/2020/06/28/go-grpc-quick-start/">Go Grpc Quick Start</a></li>
+			<li class="widget__item"><a class="widget__link" href="/blog/2020/06/26/go-etcd-simple-config-center/">Go Etcd Simple Config Center</a></li>
+			<li class="widget__item"><a class="widget__link" href="/blog/2020/06/24/go-binary-search-tree/">Go Binary Search Tree</a></li>
+		</ul>
 	</div>
 </div>
 <div class="widget-social widget">
