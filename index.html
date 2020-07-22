@@ -1,435 +1,409 @@
 <!DOCTYPE html>
-<html class="no-js" lang="zh-cn">
+<html lang="zh-cn">
 <head>
-	<meta name="generator" content="Hugo 0.73.0-DEV" />
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Ding Jianhui 的个人博客 - 笔记</title>
-	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
-	<meta name="description" content="Ding Jianhui 的个人博客|笔记|golang|etcd|grpc">
-		<meta property="og:title" content="Ding Jianhui 的个人博客 - 笔记" />
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Ding Jianhui 的个人博客 - 笔记</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="dingo" /><meta name="description" content="Ding Jianhui 的个人博客|笔记|golang|etcd|grpc" /><meta name="keywords" content="dingo, golang, 笔记" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.73.0-DEV with theme even" />
+
+
+<link rel="canonical" href="http://dingjianhui.top/" />
+  <link href="http://dingjianhui.top/index.xml" rel="alternate" type="application/rss+xml" title="Ding Jianhui 的个人博客 - 笔记" />
+  <link href="http://dingjianhui.top/index.xml" rel="feed" type="application/rss+xml" title="Ding Jianhui 的个人博客 - 笔记" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Ding Jianhui 的个人博客 - 笔记" />
 <meta property="og:description" content="Ding Jianhui 的个人博客|笔记|golang|etcd|grpc" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="http://dingjianhui.top/" />
 <meta property="og:updated_time" content="2020-07-21T16:12:41+08:00" />
-
-		<meta itemprop="name" content="Ding Jianhui 的个人博客 - 笔记">
-<meta itemprop="description" content="Ding Jianhui 的个人博客|笔记|golang|etcd|grpc">
-		<meta name="twitter:card" content="summary"/>
+<meta itemprop="name" content="Ding Jianhui 的个人博客 - 笔记">
+<meta itemprop="description" content="Ding Jianhui 的个人博客|笔记|golang|etcd|grpc"><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Ding Jianhui 的个人博客 - 笔记"/>
 <meta name="twitter:description" content="Ding Jianhui 的个人博客|笔记|golang|etcd|grpc"/>
 
-	<link rel="dns-prefetch" href="//fonts.googleapis.com">
-	<link rel="dns-prefetch" href="//fonts.gstatic.com">
-	<link rel="alternate" type="application/rss+xml" href="/index.xml" title="Ding Jianhui 的个人博客 - 笔记">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
-	<link rel="stylesheet" href="/css/style.css">
-	<link rel="stylesheet" href="/css/custom.css">
-	<link rel="shortcut icon" href="/favicon.ico">
-		
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
 </head>
-<body class="body">
-	<div class="container container--outer">
-		<header class="header">
-	<div class="container header__container">
-		
-	<div class="logo logo--mixed">
-		<a class="logo__link" href="/" title="Ding Jianhui 的个人博客 - 笔记" rel="home">
-			<div class="logo__item logo__imagebox">
-					<img class="logo__img" src="/img/logo.jpg">
-				</div><div class="logo__item logo__text">
-					<div class="logo__title">Ding Jianhui 的个人博客 - 笔记</div>
-					<div class="logo__tagline">好记性不如烂笔头</div>
-				</div>
-		</a>
-	</div>
-		<div class="divider"></div>
-	</div>
-</header>
-		<div class="wrapper flex">
-			<div class="primary">
-			
-<main class="main list" role="main">
-	<article class="list__item post">
-	<header class="list__header">
-		<h3 class="list__title post__title ">
-			<a href="/blog/2020/07/21/go-map/" rel="bookmark">
-			Go Map
-			</a>
-		</h3>
-		<p class="list__lead post__lead">Go Map 使用案例</p>
-		<div class="list__meta meta"><div class="meta__item-author meta__item">
-	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Ding Jianhui</span>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">dingo</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
 </div>
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-07-21T16:12:41&#43;08:00">2020-07-21</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/golang/" rel="category">golang</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		Map(集合) Map 是一种无序的键值对的集合
-定义初始化 // 定义map type ( UserMap map[string]interface{} ) // 初始化map func NewUser() UserMap { return make(map[string]interface{}) // 使用make初始化 } 设置值 // 设置值 func (this UserMap) With(key string,val interface{}) UserMap { this[key] = val return this } 排序打印 // 按key排序 func (this UserMap) SortByKeys(order string) []string { keys := []string{} for key,_ := range this { keys = append(keys,key) } if order == &#34;asc&#34; { sort.Sort(sort.StringSlice(keys)) // 强制转换为StringSlice类型 	} else if order == &#34;desc&#34; { sort.
-	</div>
-	<div class="list__footer clearfix">
-		<a class="list__footer-readmore btn" href="/blog/2020/07/21/go-map/">阅读全文…</a>
-	</div>
-</article><article class="list__item post">
-	<header class="list__header">
-		<h3 class="list__title post__title ">
-			<a href="/blog/2020/07/20/go-struct-default-value/" rel="bookmark">
-			Go Struct Default Value
-			</a>
-		</h3>
-		<p class="list__lead post__lead">Golang技巧之默认值设置的高阶玩法</p>
-		<div class="list__meta meta"><div class="meta__item-author meta__item">
-	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Ding Jianhui</span>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">dingo</a>
 </div>
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-07-20T17:42:49&#43;08:00">2020-07-20</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/golang/" rel="category">golang</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		传参时，不改变属性默认值时就不传该参数
-比如php中
-public function addLog($log_type,$log_content,$admin_id,$admin_name,$type = 2) { ...... } 调用
-$this-&gt;log-&gt;addLog(0,&quot;编辑角色 -- 该角色不存在&quot;,$this-&gt;admin_id,$this-&gt;admin_name); $type就没有传  Golang中无法在参数中设置默认值，只能
- 提供一个初始化函数，所有的字段都做为参数， 如果不需要的时候传该类型的零值，这把复杂度暴露给调用者； 提供多个初始化函数，针对每个场景都进行内部默认值设置。  高阶玩法 src/Object/User.go
-package Object type User struct { UserId int UserName string UserAge int } // 初始化User对象 userAttr 设置属性值的函数体 func NewUser(userAttr ...UserAttr) *User { user := new(User) UserAttrs(userAttr).Apply(user) return user } src/Object/UserAttr.go
-package Object type UserAttr func(user *User) // 用来定义User结构体的属性值函数  type UserAttrs []UserAttr // 执行设置属性值的函数 func (this UserAttrs) Apply(user *User) { // 遍历设置属性值的函数 	for _,withAttr := range this { withAttr(user) // 执行函数 	} } // 设置UserName属性的值 func WithUserName(userName string) UserAttr { return func(user *User) { user.
-	</div>
-	<div class="list__footer clearfix">
-		<a class="list__footer-readmore btn" href="/blog/2020/07/20/go-struct-default-value/">阅读全文…</a>
-	</div>
-</article><article class="list__item post">
-	<header class="list__header">
-		<h3 class="list__title post__title ">
-			<a href="/blog/2020/07/07/go-scheduler/" rel="bookmark">
-			Go Scheduler
-			</a>
-		</h3>
-		<p class="list__lead post__lead">Go - 协程调度理解</p>
-		<div class="list__meta meta"><div class="meta__item-author meta__item">
-	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Ding Jianhui</span>
-</div>
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-07-07T11:24:21&#43;08:00">2020-07-07</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/golang/" rel="category">golang</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		调度逻辑 1. P、M、G的定义  P: processor(代表处理器核)，P的数量决定了系统内最大可并行的G的数量（前提：系统的物理cpu核数&gt;=P的数量）； P的最大作用还是其拥有的各种G对象队列、链表、一些cache和状态。 M: Work Thread(代表工作线程),在绑定有效的p后，进入schedule循环；而schedule循环的机制大致是从各种队列、 p的本地队列中获取G，切换到G的执行栈上并执行G的函数，调用goexit做清理工作并回到m，如此反复。 M并不保留G状态，这是G可以跨M调度的基础。 G: goroutine(代表协程)，存储了goroutine的执行stack信息、goroutine状态以及goroutine的任务函数等； 另外G对象是可以重用的。  2. P和M的绑定关系  运行的M都必须绑定一个P P保存着一个协程G的队列 调度器还拥有一个全局的G队列 M从队列中提取G，并执行  3. 抢占式调度逻辑（找G的顺序）  1/61的几率在全局队列中找G，60/61的几率在本地队列找G 如果全局队列找不到G，从P的本地队列找G 如果找不到，从其他P的本地队列中窃取G(提高资源利用率) 如果找不到，则从全局队列中拿取一部分G到本地队列，这里拿取的“一部分”满足一个公式 n=min(len(GQ)/GOMAXPROCS + 1, len(GQ/2))  4. 阻塞过程 如果当前的M执行的G调用syscall阻塞
- 那么P会与M解绑 M负责执行阻塞的G P带着队列中的G绑定到新的M中，继续执行其他G  虽然当前G进入阻塞，但并没有影响到P去执行其他G
-M执行的G阻塞操作返回后，由于没有了P，失去切换上下文执行后续逻辑的机会， 因此尝试获取新的P去执行，如果获取不到P，M就把当前G放入全局队列等待调度，自己置于休眠状态。
-5. 线程自旋 线程自旋相对于线程阻塞，表现为循环执行指定的逻辑，而不进入阻塞状态。 在go的调度逻辑中，为了实现高性能的并发，如果全局队列和本地队列都为空， 绑定P的M没有G可以执行，会进入自旋状态等待新的G，不会进入阻塞状态休眠，减少了M的上下文切换成本。
-注意只有绑定了P的M会进入自旋状态，因此最多会有GOMAXPROCS个自旋线程， 避免了浪费过多系统资源，其余未绑定的空闲M依然会进入休眠状态。
-总结：go的协程调度就是 P将G合理的分配给某个M的过程  参考文章
- https://tonybai.com/2017/06/23/an-intro-about-goroutine-scheduler/ https://medium.com/@ankur_anand/illustrated-tales-of-go-runtime-scheduler-74809ef6d19b https://lessisbetter.site/2019/03/10/golang-scheduler-1-history/ 
-	</div>
-</article><article class="list__item post">
-	<header class="list__header">
-		<h3 class="list__title post__title ">
-			<a href="/blog/2020/07/03/go-grpc-stream/" rel="bookmark">
-			Go Grpc Stream
-			</a>
-		</h3>
-		<p class="list__lead post__lead">流式RPC的使用</p>
-		<div class="list__meta meta"><div class="meta__item-author meta__item">
-	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Ding Jianhui</span>
-</div>
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-07-03T15:07:02&#43;08:00">2020-07-03</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/golang/" rel="category">golang</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		官方文档(基于golang语言)
-流式RPC(服务端流式RPC、客户端流式RPC、双向流式RPC) https://www.grpc.io/docs/languages/go/basics
-官方案例： https://github.com/grpc/grpc-go/tree/master/examples/route_guide
-根据不同的业务场景, grpc 支持 4 种通信方式:
- 客服端一次请求, 服务器一次应答 客服端一次请求, 服务器多次应答(流式) 客服端多次请求(流式), 服务器一次应答 客服端多次请求(流式), 服务器多次应答(流式)  为何要用流模式？
-如果传输较大数据呢？会带来
-1、数据包过大导致压力陡增
-2、需要等待客户端包全部发送，才能处理以及响应
-场景：假设我要从库里取 一批(x万到几十万)用户的积分.批量查询用户的积分
-setp 1. 创建UserModel.proto syntax = &#34;proto3&#34;;package pb;message UserInfo { int32 user_id = 1; // 用户ID  int32 user_score = 2; // 用户积分 }setp 2. 创建User.proto syntax = &#34;proto3&#34;;package pb;import &#34;UserModel.proto&#34;;message UserScoreRequest { repeated UserInfo users = 1;}message UserScoreResponse { repeated UserInfo users = 1;}// 需要支持Restful API 参考Product.
-	</div>
-	<div class="list__footer clearfix">
-		<a class="list__footer-readmore btn" href="/blog/2020/07/03/go-grpc-stream/">阅读全文…</a>
-	</div>
-</article><article class="list__item post">
-	<header class="list__header">
-		<h3 class="list__title post__title ">
-			<a href="/blog/2020/07/01/protobuf-grammar/" rel="bookmark">
-			Protobuf Grammar (Protobu3)
-			</a>
-		</h3>
-		<p class="list__lead post__lead">Protobu3 语法-常用语法</p>
-		<div class="list__meta meta"><div class="meta__item-author meta__item">
-	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Ding Jianhui</span>
-</div>
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-07-01T13:45:32&#43;08:00">2020-07-01</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/golang/" rel="category">golang</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		Protobuf[1] 是一种语言中立、平台无关、可扩展的序列化数据的格式，可用于通信协议，数据存储等。
-ProtoBuf 在序列化数据方面，它是灵活的、高效的。 相比于 XML 来说，ProtoBuf 更加小巧、更加快速、更加简单。 一旦定义了要处理的数据的数据结构之后，就可以利用 ProtoBuf 的代码生成工具生成相关的代码。 甚至可以在无需重新部署程序的情况下更新数据结构。 只需使用 ProtoBuf 对数据结构进行一次描述，即可利用各种不同语言或从各种不同数据流中对你的结构化数据轻松读写。
-ProtoBuf 很适合做数据存储或 RPC 数据交换格式。可用于通讯协议、数据存储等 领域的语言无关、平台无关、可扩展的序列化结构数据格式。
- Message 定义 在 Protobuf 中，所有结构化的数据都被称为 message。 假设你想要查询某个接口，这个接口需要传递些参数关键字和分页参数（当前页和每页记录数）， 那么我们就可以把这些参数都定义成一个对象，用 Protobuf 的话说就是定义一个 message。
-如下：我们有一个服务为通过商品ID来获取商品的库存, 那么我们需要定义商品ID请求参数prod_id,定义库存响应字段prod_stock
-syntax=&#34;proto3&#34;;package services;message ProdRequest { int32 prod_id = 1; // 传入的商品ID }message ProdResponse { int32 prod_stock = 1; // 响应的商品库存 }service ProdService { rpc GetProdStock (ProdRequest) returns (ProdResponse); // 通过商品ID获取商品库存方法 } syntax = &quot;proto3&quot;; 指定了整个 .proto 文件使用 Protobuf3 解析，否则默认会使用 Protobuf2 解析，必须将其放置在文件的第一行。 ProdRequest 这个 message 指定了1个数据字段，数据字段定义由 Field Types 数据类型 + Field Names 字段名 = Field Numbers 编号组成。 service 定义了 RPC 服务  字段类型   基础类型
-	</div>
-	<div class="list__footer clearfix">
-		<a class="list__footer-readmore btn" href="/blog/2020/07/01/protobuf-grammar/">阅读全文…</a>
-	</div>
-</article><article class="list__item post">
-	<header class="list__header">
-		<h3 class="list__title post__title ">
-			<a href="/blog/2020/06/30/go-grpc-gateway/" rel="bookmark">
-			Go Grpc Gateway
-			</a>
-		</h3>
-		<p class="list__lead post__lead">Go - 使用grpc-gateway同时提供rpc和http接口(RESTful JSON API)</p>
-		<div class="list__meta meta"><div class="meta__item-author meta__item">
-	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Ding Jianhui</span>
-</div>
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-06-30T14:53:25&#43;08:00">2020-06-30</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/golang/" rel="category">golang</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		前言 grpc很棒-支持多种语言来构建rpc服务,快速、易于使用、带宽高效， 但是我们仍然希望提供供传统的RESTful JSON API，兼容老系统
-通常我们把rpc用作内部通信，而使用RESTful Api进行外部通信
-服务器收到Http请求后grpc-gateway把他转换成grpc处理，然后以JSON格式返回
-安装  安装 Protocol buffer 编译器(protoc) V3版本 https://github.com/protocolbuffers/protobuf/releases 安装 Protocol buffer 编译器的 Go插件 (protoc-gen-go) go get github.com/golang/protobuf/protoc-gen-go 安装 Protocol buffer 编译器的插件-grpc-gateway go get github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway 安装 Protocol buffer 编译器的插件-swagger go get github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger  使用 1. 使用Protocol buffer定义gRPC服务 server/pbfiles/Prod.proto:  syntax=&#34;proto3&#34;;package services;message ProdRequest { int32 prod_id =1; //传入的商品ID }message ProdResponse{ int32 prod_stock=1;//商品库存 }service ProdService { rpc GetProdStock (ProdRequest) returns (ProdResponse);}2. 添加google.api.http annotation 到 *.proto 文件中 可以将文件拷至 server/pbfiles中，也可以引用外部资源的方式 server/pbfiles/Prod.
-	</div>
-	<div class="list__footer clearfix">
-		<a class="list__footer-readmore btn" href="/blog/2020/06/30/go-grpc-gateway/">阅读全文…</a>
-	</div>
-</article><article class="list__item post">
-	<header class="list__header">
-		<h3 class="list__title post__title ">
-			<a href="/blog/2020/06/30/generate-local-certificate/" rel="bookmark">
-			Generate Local Certificate
-			</a>
-		</h3>
-		<p class="list__lead post__lead">自签名https证书，本地浏览器测试</p>
-		<div class="list__meta meta"><div class="meta__item-author meta__item">
-	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Ding Jianhui</span>
-</div>
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-06-30T11:45:16&#43;08:00">2020-06-30</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/openssl/" rel="category">openssl</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		OpenSSL工具下载： 下载地址链接
-windows环境 自签证书 进入 bin目录
-  执行 openssl.exe
-  执行 genrsa -des3 -out server.key 2048（会生成server.key,私钥文件）
-  创建证书请求：req -new -key server.key -out server.csr（会生成server.csr）
-其中common name 也就是域名
-  删除密码 rsa -in server.key -out server_no_passwd.key
-  执行x509 -req -days 365 -in server.csr -signkey server_no_passwd.key -out server.crt (会生成server.crt)
-  使用自签CA、server、Client证书和双向认证 根证书（root certificate）是属于根证书颁发机构（CA）的公钥证书。 用以验证它所签发的证书（客户端、服务端）
-创建CA公钥证书   执行 openssl.exe genrsa -out ca.key 2048 req -new -x509 -days 3650 -key ca.
-	</div>
-	<div class="list__footer clearfix">
-		<a class="list__footer-readmore btn" href="/blog/2020/06/30/generate-local-certificate/">阅读全文…</a>
-	</div>
-</article><article class="list__item post">
-	<header class="list__header">
-		<h3 class="list__title post__title ">
-			<a href="/blog/2020/06/28/go-grpc-quick-start/" rel="bookmark">
-			Go Grpc Quick Start
-			</a>
-		</h3>
-		<p class="list__lead post__lead">Go - grpc的简单使用入门</p>
-		<div class="list__meta meta"><div class="meta__item-author meta__item">
-	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Ding Jianhui</span>
-</div>
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-06-28T13:47:36&#43;08:00">2020-06-28</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/golang/" rel="category">golang</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		对于分布式系统而言,不同的服务分布在不同的节点上,一个服务要完成自己的功能经常需要调用其他服务的接口,比如典型的微服务架构。 通常这种服务调用方式有两种,一种是发送HTTP请求的方式,另一种则是RPC的方式,RPC是Remote Procedure Call(远程过程调用)的简称, 可以让我们像调用本地接口一样使用远程服务。相比HTTP调用,RPC的方式至少在以下几个方面有优势
-  传输效率
-RPC可以自定义TCP报文,基于TCP协议进行通信,比如dubbo;同时也支持使用HTTP2协议进行通信,比如gRPC。这相比传统的HTTP1.1协议报文体积会更小,传输效率会更高。
-  性能消耗
-RPC框架通常自带高效的序列化机制,序列化和反序列化耗时更低,序列化后的字节数通常也更小。
-  负载均衡
-RPC框架通常自带负载均衡策略,而HTTP请求要做负载均衡需要外部应用如Nginx的支持。
-  服务治理
-下游服务新增,重启,下线时能自动通知上游使用者,而HTTP的方式需要事先通知并修改相关配置。
-  grpc介绍 gRPC是由Google开发并开源的RPC框架,它具有以下特点
-  语言中立
-支持C,Java,Go等多种语言来构建RPC服务,这是gRPC被广泛的应用在微服务项目中的重要原因,因为不同的微服务可能用不同的语言构建。
-  基于HTTP/2协议
-支持双向流,消息头压缩,单TCP的多路复用,服务端推送等,这些特性使得gRPC更加适用于移动场景下的客户端和服务端之间的通信。
-  基于IDL定义服务
-编写.proto文件即可生成特定语言的数据结构、服务端接口和客户端Stub。
-  支持Protocol Buffer序列化
-Protocol Buffer是由Google开发的一种数据序列化协议(类似于XML、JSON、Hession),平台无关,压缩和传输效率高,语法简单,表达能力强。
-  使用前的准备工作   安装go
-  安装 Protocol buffer 编译器(protoc) V3版本 https://github.com/protocolbuffers/protobuf/releases
-  安装 Protocol buffer 编译器的 Go插件 (protoc-gen-go) go get github.com/golang/protobuf/protoc-gen-go
-Google Protocol Buffer( 简称 Protobuf)
-	</div>
-	<div class="list__footer clearfix">
-		<a class="list__footer-readmore btn" href="/blog/2020/06/28/go-grpc-quick-start/">阅读全文…</a>
-	</div>
-</article><article class="list__item post">
-	<header class="list__header">
-		<h3 class="list__title post__title ">
-			<a href="/blog/2020/06/26/go-etcd-simple-config-center/" rel="bookmark">
-			Go Etcd Simple Config Center
-			</a>
-		</h3>
-		<p class="list__lead post__lead">Go ETCD 简易配置中心</p>
-		<div class="list__meta meta"><div class="meta__item-author meta__item">
-	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Ding Jianhui</span>
-</div>
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-06-26T15:50:48&#43;08:00">2020-06-26</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/etcd/" rel="category">etcd</a>, <a class="meta__link" href="/categories/golang/" rel="category">golang</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		简易示意图 Confd 一款高可用统一配置管理工具(go写的)
-Step 1. 构建Confd镜像(使用go镜像) [tintin@localhost ttphp]$ ls etcd etcds tools [tintin@localhost ttphp]$ mkdir build [tintin@localhost ttphp]$ mkdir build/confd [tintin@localhost ttphp]$ cd build/confd/ [tintin@localhost confd]$ vi Dockerfile Dockerfile 参考文档
-https://github.com/kelseyhightower/confd/blob/master/docs/installation.md
-FROM1.14.4-alpine3.12 as confdARG CONFD_VERSION=0.16.0ADD https://github.com/kelseyhightower/confd/archive/v${CONFD_VERSION}.tar.gz /tmp/RUN apk add --no-cache \  bzip2 \  make &amp;&amp; \  mkdir -p /go/src/github.com/kelseyhightower/confd &amp;&amp; \  cd /go/src/github.com/kelseyhightower/confd &amp;&amp; \  tar --strip-components=1 -zxf /tmp/v${CONFD_VERSION}.tar.gz &amp;&amp; \  go install github.com/kelseyhightower/confd &amp;&amp; \  rm -rf /tmp/v${CONFD_VERSION}.
-	</div>
-	<div class="list__footer clearfix">
-		<a class="list__footer-readmore btn" href="/blog/2020/06/26/go-etcd-simple-config-center/">阅读全文…</a>
-	</div>
-</article><article class="list__item post">
-	<header class="list__header">
-		<h3 class="list__title post__title ">
-			<a href="/blog/2020/06/24/go-binary-search-tree/" rel="bookmark">
-			Go Binary Search Tree
-			</a>
-		</h3>
-		<p class="list__lead post__lead">Go练习之二叉查找树</p>
-		<div class="list__meta meta"><div class="meta__item-author meta__item">
-	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Ding Jianhui</span>
-</div>
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-06-24T18:04:15&#43;08:00">2020-06-24</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/golang/" rel="category">golang</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		二叉查找树(binary search tree) 特征：
-二叉查找树，也称二叉搜索树，或二叉排序树。 要么是一颗空树，要么就是具有如下性质的二叉树：
-（1） 若任意节点的左子树不空，则左子树上所有结点的值均小于它的根结点的值； （2） 若任意节点的右子树不空，则右子树上所有结点的值均大于它的根结点的值； （3） 任意节点的左、右子树也分别为二叉查找树； （4） 没有值相等的节点  1. 动态创建节点 func AddNode(tree *BSTree, root *BSTree) *BSTree { if root == nil { return tree } // 根节点 与 新节点对比 	// 新节点比 根节点大 放入右节点 	// 新节点比 根节点小 放入左节点 	if tree.Node &gt; root.Node { root.RightNode = AddNode(tree,root.RightNode) } else if tree.Node &lt; root.Node { root.LeftNode = AddNode(tree,root.LeftNode) } else { return root } return root } 2.
-	</div>
-	<div class="list__footer clearfix">
-		<a class="list__footer-readmore btn" href="/blog/2020/06/24/go-binary-search-tree/">阅读全文…</a>
-	</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <section id="posts" class="posts">
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/2020/07/21/go-map/">Go Map 使用案例</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-07-21 </span>
+      <div class="post-category">
+          <a href="/categories/golang/"> golang </a>
+          </div>
+        <span class="more-meta"> 约 470 字 </span>
+        <span class="more-meta"> 预计阅读 1 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      Map(集合) Map 是一种无序的键值对的集合 定义初始化 1 2 3 4 5 6 7 8 9 // 定义map type ( UserMap map[string]interface{} ) // 初始化map func NewUser() UserMap { return make(map[string]interface{}) // 使用make初始化 } 设
+    </div>
+    <div class="read-more">
+      <a href="/post/2020/07/21/go-map/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
 </article>
-</main>
 
-<div class="pagination">
-	<span class="pagination__item pagination__item--current">1/4</span>
-	<a class="pagination__item pagination__item--next btn" href="/page/2/">»</a>
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/2020/07/20/go-struct-default-value/">Golang技巧之默认值设置的高阶玩法</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-07-20 </span>
+      <div class="post-category">
+          <a href="/categories/golang/"> golang </a>
+          </div>
+        <span class="more-meta"> 约 541 字 </span>
+        <span class="more-meta"> 预计阅读 2 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      传参时，不改变属性默认值时就不传该参数 普通玩法 比如php中 1 2 3 4 public function addLog($log_type,$log_content,$admin_id,$admin_name,$type = 2) { ...... } 调用 $this-&gt;log-&gt;addLog(0,
+    </div>
+    <div class="read-more">
+      <a href="/post/2020/07/20/go-struct-default-value/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/2020/07/07/go-scheduler/">Go - 协程调度简单理解</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-07-07 </span>
+      <div class="post-category">
+          <a href="/categories/golang/"> golang </a>
+          </div>
+        <span class="more-meta"> 约 929 字 </span>
+        <span class="more-meta"> 预计阅读 2 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      调度逻辑 1. P、M、G的定义 P: processor(代表处理器核)，P的数量决定了系统内最大可并行的G的数量（前提：系统的物理cpu核数&gt;
+    </div>
+    <div class="read-more">
+      <a href="/post/2020/07/07/go-scheduler/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/2020/07/03/go-grpc-stream/">Go 流式RPC的使用</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-07-03 </span>
+      <div class="post-category">
+          <a href="/categories/golang/"> golang </a>
+          </div>
+        <span class="more-meta"> 约 2328 字 </span>
+        <span class="more-meta"> 预计阅读 5 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      官方文档(基于golang语言) 流式RPC(服务端流式RPC、客户端流式RPC、双向流式RPC) https://www.grpc.io/docs/languages/go/basics 官方案例： https://github.com/grpc/grpc-go/tree/master/examples/route_guide 根据不同的业务场景, grpc 支持 4 种
+    </div>
+    <div class="read-more">
+      <a href="/post/2020/07/03/go-grpc-stream/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/2020/07/01/protobuf-grammar/">Protobuf语法-常用语法 (Protobu3)</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-07-01 </span>
+      <div class="post-category">
+          <a href="/categories/golang/"> golang </a>
+          </div>
+        <span class="more-meta"> 约 1383 字 </span>
+        <span class="more-meta"> 预计阅读 3 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      前言 Protobuf[1] 是一种语言中立、平台无关、可扩展的序列化数据的格式，可用于通信协议，数据存储等。 ProtoBuf 在序列化数据方面，它是灵活的、高效的。 相比于 XML 来说，
+    </div>
+    <div class="read-more">
+      <a href="/post/2020/07/01/protobuf-grammar/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/2020/06/30/go-grpc-gateway/">Go - grpc-gateway的使用</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-06-30 </span>
+      <div class="post-category">
+          <a href="/categories/golang/"> golang </a>
+          </div>
+        <span class="more-meta"> 约 632 字 </span>
+        <span class="more-meta"> 预计阅读 2 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      前言 grpc很棒-支持多种语言来构建rpc服务,快速、易于使用、带宽高效， 但是我们仍然希望提供供传统的RESTful JSON API，兼容老系统 通常
+    </div>
+    <div class="read-more">
+      <a href="/post/2020/06/30/go-grpc-gateway/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/2020/06/30/generate-local-certificate/">自签名https证书，本地浏览器测试</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-06-30 </span>
+      <div class="post-category">
+          <a href="/categories/openssl/"> openssl </a>
+          </div>
+        <span class="more-meta"> 约 455 字 </span>
+        <span class="more-meta"> 预计阅读 1 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      OpenSSL工具下载： 下载地址链接 windows环境 自签证书 进入 bin目录 执行 openssl.exe 执行 genrsa -des3 -out server.key 2048（会生成server.key,私钥文件
+    </div>
+    <div class="read-more">
+      <a href="/post/2020/06/30/generate-local-certificate/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/2020/06/28/go-grpc-quick-start/">Go - grpc的简单使用</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-06-28 </span>
+      <div class="post-category">
+          <a href="/categories/golang/"> golang </a>
+          </div>
+        <span class="more-meta"> 约 1603 字 </span>
+        <span class="more-meta"> 预计阅读 4 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      前言 对于分布式系统而言,不同的服务分布在不同的节点上,一个服务要完成自己的功能经常需要调用其他服务的接口,比如典型的微服务架构。 通常这种服务
+    </div>
+    <div class="read-more">
+      <a href="/post/2020/06/28/go-grpc-quick-start/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/2020/06/26/go-etcd-simple-config-center/">Go ETCD 简易配置中心</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-06-26 </span>
+      <div class="post-category">
+          <a href="/categories/etcd/"> etcd </a>
+          <a href="/categories/golang/"> golang </a>
+          </div>
+        <span class="more-meta"> 约 886 字 </span>
+        <span class="more-meta"> 预计阅读 2 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      简易示意图 Confd简介 一款高可用统一配置管理工具(go写的) Confd安装使用 Step 1. 构建Confd镜像(使用go镜像) 1 2 3 4 5 6 [tintin@localhost ttphp]$ ls etcd etcds
+    </div>
+    <div class="read-more">
+      <a href="/post/2020/06/26/go-etcd-simple-config-center/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/2020/06/24/go-binary-search-tree/">Go 二叉查找树练习</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-06-24 </span>
+      <div class="post-category">
+          <a href="/categories/golang/"> golang </a>
+          </div>
+        <span class="more-meta"> 约 1693 字 </span>
+        <span class="more-meta"> 预计阅读 4 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      二叉查找树(binary search tree) 特征： 二叉查找树，也称二叉搜索树，或二叉排序树。 要么是一颗空树，要么就是具有如下性质的二叉树： （1） 若任意节点的
+    </div>
+    <div class="read-more">
+      <a href="/post/2020/06/24/go-binary-search-tree/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    </section>
+  
+  <nav class="pagination">
+    
+    <a class="next" href="/page/2/">
+        <span class="next-text">下一页</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+  </nav>
+        </div>
+        
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/dingjianhui" class="iconfont icon-github" title="github"></a>
+  <a href="http://dingjianhui.top/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
 
-			</div>
-			<aside class="sidebar"><div class="widget-search widget">
-	<form class="widget-search__form" role="search" method="get" action="https://google.com/search">
-		<label>
-			<input class="widget-search__field" type="search" placeholder="搜索..." value="" name="q" aria-label="搜索...">
-		</label>
-		<input class="widget-search__submit" type="submit" value="Search">
-		<input type="hidden" name="sitesearch" value="http://dingjianhui.top/" />
-	</form>
-</div>
-<div class="widget-categories widget">
-	<h4 class="widget__title">分类</h4>
-	<div class="widget__content">
-		<ul class="widget__list">
-			<li class="widget__item">
-				<a class="widget__link" href="/categories/docker/">docker</a>
-			</li>
-			<li class="widget__item">
-				<a class="widget__link" href="/categories/etcd/">etcd</a>
-			</li>
-			<li class="widget__item">
-				<a class="widget__link" href="/categories/golang/">golang</a>
-			</li>
-			<li class="widget__item">
-				<a class="widget__link" href="/categories/hugo/">hugo</a>
-			</li>
-			<li class="widget__item">
-				<a class="widget__link" href="/categories/openssl/">openssl</a>
-			</li>
-		</ul>
-	</div>
-</div>
-<div class="widget-taglist widget">
-	<h4 class="widget__title">标签</h4>
-	<div class="widget__content">
-		<a class="widget-taglist__link widget__link btn" href="/tags/centos7/" title="centos7">centos7 (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/defer/" title="defer">defer (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/docker/" title="docker">docker (3)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/etcd/" title="etcd">etcd (4)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/go/" title="go">go (15)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/grpc/" title="grpc">grpc (4)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/https/" title="https">https (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/hugo-theme/" title="hugo-theme">hugo-theme (3)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/topic/" title="topic">topic (8)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" title="二叉树">二叉树 (1)</a>
-	</div>
-</div>
-<div class="widget-recent widget">
-	<h4 class="widget__title">近期文章</h4>
-	<div class="widget__content">
-		<ul class="widget__list">
-			<li class="widget__item"><a class="widget__link" href="/blog/2020/07/21/go-map/">Go Map</a></li>
-			<li class="widget__item"><a class="widget__link" href="/blog/2020/07/20/go-struct-default-value/">Go Struct Default Value</a></li>
-			<li class="widget__item"><a class="widget__link" href="/blog/2020/07/07/go-scheduler/">Go Scheduler</a></li>
-			<li class="widget__item"><a class="widget__link" href="/blog/2020/07/03/go-grpc-stream/">Go Grpc Stream</a></li>
-			<li class="widget__item"><a class="widget__link" href="/blog/2020/07/01/protobuf-grammar/">Protobuf Grammar (Protobu3)</a></li>
-			<li class="widget__item"><a class="widget__link" href="/blog/2020/06/30/go-grpc-gateway/">Go Grpc Gateway</a></li>
-			<li class="widget__item"><a class="widget__link" href="/blog/2020/06/30/generate-local-certificate/">Generate Local Certificate</a></li>
-			<li class="widget__item"><a class="widget__link" href="/blog/2020/06/28/go-grpc-quick-start/">Go Grpc Quick Start</a></li>
-			<li class="widget__item"><a class="widget__link" href="/blog/2020/06/26/go-etcd-simple-config-center/">Go Etcd Simple Config Center</a></li>
-			<li class="widget__item"><a class="widget__link" href="/blog/2020/06/24/go-binary-search-tree/">Go Binary Search Tree</a></li>
-		</ul>
-	</div>
-</div>
-<div class="widget-social widget">
-	<h4 class="widget-social__title widget__title">社交</h4>
-	<div class="widget-social__content widget__content">
-		<div class="widget-social__item widget__item">
-			<a class="widget-social__link widget__link btn" title="GitHub" rel="noopener noreferrer" href="https://github.com/dingjianhui" target="_blank">
-				<svg class="widget-social__link-icon icon icon-github" width="24" height="24" viewBox="0 0 384 374"><path d="m192 0c-106.1 0-192 85.8-192 191.7 0 84.7 55 156.6 131.3 181.9 9.6 1.8 13.1-4.2 13.1-9.2 0-4.6-.2-16.6-.3-32.6-53.4 11.6-64.7-25.7-64.7-25.7-8.7-22.1-21.3-28-21.3-28-17.4-11.9 1.3-11.6 1.3-11.6 19.3 1.4 29.4 19.8 29.4 19.8 17.1 29.3 44.9 20.8 55.9 15.9 1.7-12.4 6.7-20.8 12.2-25.6-42.6-4.8-87.5-21.3-87.5-94.8 0-20.9 7.5-38 19.8-51.4-2-4.9-8.6-24.3 1.9-50.7 0 0 16.1-5.2 52.8 19.7 15.3-4.2 31.7-6.4 48.1-6.5 16.3.1 32.7 2.2 48.1 6.5 36.7-24.8 52.8-19.7 52.8-19.7 10.5 26.4 3.9 45.9 1.9 50.7 12.3 13.4 19.7 30.5 19.7 51.4 0 73.7-44.9 89.9-87.7 94.6 6.9 5.9 13 17.6 13 35.5 0 25.6-.2 46.3-.2 52.6 0 5.1 3.5 11.1 13.2 9.2 76.2-25.5 131.2-97.3 131.2-182 0-105.9-86-191.7-192-191.7z"/></svg>
-				<span>GitHub</span>
-			</a>
-		</div>
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
 
-		
-	</div>
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Ding JianHui</span>
+  </span>
 </div>
-</aside>
-		</div>
-		<footer class="footer">
-	<div class="container footer__container flex">
-		
-		<div class="footer__copyright">
-			&copy; 2020 Ding Jianhui.
-			<span class="footer__copyright-credits">基于 <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> 引擎和 <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a>主題</span>
-		</div>
-	</div>
-</footer>
-	</div>
-<script async defer src="/js/menu.js"></script>
-<script src="/js/custom.js"></script></body>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+
+
+
+
+
+
+
+
+</body>
 </html>

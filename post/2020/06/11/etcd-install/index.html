@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>etcd入门之基于docker的环境搭建 - Ding Jianhui 的个人博客 - 笔记</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="dingo" /><meta name="description" content="etcd入门之基于docker的环境搭建" /><meta name="keywords" content="dingo, golang, 笔记" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.73.0-DEV with theme even" />
+
+
+<link rel="canonical" href="http://dingjianhui.top/post/2020/06/11/etcd-install/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="etcd入门之基于docker的环境搭建" />
+<meta property="og:description" content="etcd入门之基于docker的环境搭建" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://dingjianhui.top/post/2020/06/11/etcd-install/" />
+<meta property="article:published_time" content="2020-06-11T13:14:58+08:00" />
+<meta property="article:modified_time" content="2020-06-11T13:14:58+08:00" />
+<meta itemprop="name" content="etcd入门之基于docker的环境搭建">
+<meta itemprop="description" content="etcd入门之基于docker的环境搭建">
+<meta itemprop="datePublished" content="2020-06-11T13:14:58&#43;08:00" />
+<meta itemprop="dateModified" content="2020-06-11T13:14:58&#43;08:00" />
+<meta itemprop="wordCount" content="1385">
+
+
+
+<meta itemprop="keywords" content="etcd,docker," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="etcd入门之基于docker的环境搭建"/>
+<meta name="twitter:description" content="etcd入门之基于docker的环境搭建"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">dingo</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">dingo</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">etcd入门之基于docker的环境搭建</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-06-11 </span>
+        <div class="post-category">
+            <a href="/categories/etcd/"> etcd </a>
+            <a href="/categories/docker/"> docker </a>
+            </div>
+          <span class="more-meta"> 约 1385 字 </span>
+          <span class="more-meta"> 预计阅读 3 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#etcd简介">etcd简介</a></li>
+        <li><a href="#功能特点">功能特点</a></li>
+        <li><a href="#主要使用场景">主要使用场景</a></li>
+        <li><a href="#下载etcd并安装">下载etcd并安装</a></li>
+        <li><a href="#启动etcd">启动etcd</a></li>
+        <li><a href="#etcdctl-是客户端工具的使用">Etcdctl 是客户端工具的使用</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h3 id="etcd简介">etcd简介</h3>
+<blockquote>
+<p>A distributed, reliable key-value store for the most critical data of a distributed system</p>
+</blockquote>
+<pre><code>etcd是一个高可用的键值存储系统
+etcd是由CoreOS开发并维护的,灵感来自于 ZooKeeper 等。它使用Go语言编写
+
+Github: https://github.com/etcd-io/etcd
+官网:  https://etcd.io
+</code></pre>
+<h3 id="功能特点">功能特点</h3>
+<pre><code>简单：基于 HTTP+JSON 的 API 让你用 curl 就可以轻松使用。
+安全：可选 SSL 客户认证机制。
+快速：每个实例每秒支持一千次写操作。
+可信：使用 Raft 算法充分实现了分布式。
+</code></pre>
+<h3 id="主要使用场景">主要使用场景</h3>
+<ol>
+<li>主要用于共享配置</li>
+<li>服务注册与发现 （Service Discovery）</li>
+<li>分布式锁等</li>
+</ol>
+<h3 id="下载etcd并安装">下载etcd并安装</h3>
+<pre><code>下载地址：https://github.com/etcd-io/etcd/releases
+我使用的方式是windows环境下载，然后上传至linux中 解压安装
+</code></pre>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="o">[</span>tintin@localhost tools<span class="o">]</span>$ tar -zxvf etcd-v3.4.9-linux-amd64.tar.gz
+<span class="o">[</span>tintin@localhost tools<span class="o">]</span>$ mv etcd-v3.4.9-linux-amd64 ../etcd
+<span class="o">[</span>tintin@localhost ttphp<span class="o">]</span>$ <span class="nb">cd</span> ../etcd/
+<span class="o">[</span>tintin@localhost etcd<span class="o">]</span>$ ls
+Documentation  etcd  etcdctl  README-etcdctl.md  README.md  READMEv2-etcdctl.md
+</code></pre></td></tr></table>
+</div>
+</div><pre><code>创建映射文件 conf data
+</code></pre>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="o">[</span>tintin@localhost etcd<span class="o">]</span>$ <span class="nb">cd</span> ../
+<span class="o">[</span>tintin@localhost ttphp<span class="o">]</span>$ mkdir etcds
+<span class="o">[</span>tintin@localhost ttphp<span class="o">]</span>$ <span class="nb">cd</span> etcds/
+<span class="o">[</span>tintin@localhost etcds<span class="o">]</span>$ mkdir etcd0
+<span class="o">[</span>tintin@localhost etcds<span class="o">]</span>$ mkdir etcd0/conf etcd0/data
+</code></pre></td></tr></table>
+</div>
+</div><pre><code>下载golang容器
+使用golang镜像方面以后有修改源码的时候可重新编译，因为etcd是go编写的
+当然也可以直接使用纯净的apline镜像或其他镜像
+</code></pre>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="o">[</span>tintin@localhost etcds<span class="o">]</span>$ docker pull golang:1.14.4-alpine3.12
+<span class="o">[</span>tintin@localhost etcds<span class="o">]</span>$ docker images
+<span class="o">[</span>tintin@localhost etcds<span class="o">]</span>$ docker run -it  --name etcd  -p 2379:2379 <span class="se">\
+</span><span class="se"></span>-v /home/tintin/ttphp/etcds/etcd0:/etcd golang:1.14.4-alpine3.12 sh
+Ctrl+D // 退出容器
+<span class="o">[</span>tintin@localhost etcds<span class="o">]</span>$ docker start etcd
+<span class="o">[</span>tintin@localhost etcds<span class="o">]</span>$ docker cp /home/tintin/ttphp/etcd/etcd etcd:/usr/bin <span class="o">&amp;&amp;</span> <span class="se">\
+</span><span class="se"></span>docker cp /home/tintin/ttphp/etcd/etcdctl etcd:/usr/bin
+<span class="o">[</span>tintin@localhost etcds<span class="o">]</span>$ <span class="nb">cd</span> /home/tintin/ttphp/etcds/etcd0/conf/
+<span class="o">[</span>tintin@localhost conf<span class="o">]</span>$ vim etcd.yml
+</code></pre></td></tr></table>
+</div>
+</div><pre><code> 创建配置文件etcd.yml
+</code></pre>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="k">name</span><span class="p">:</span><span class="w"> </span>$(hostname<span class="w"> </span>-s)<span class="w">
+</span><span class="w"></span><span class="k">data_dir</span><span class="p">:</span><span class="w"> </span>/etcd/data<span class="w">
+</span><span class="w"></span><span class="k">listen-client-urls</span><span class="p">:</span><span class="w"> </span>http<span class="p">:</span>//<span class="m">0.0.0.0</span><span class="p">:</span><span class="m">2379</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><h3 id="启动etcd">启动etcd</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="o">[</span>tintin@localhost conf<span class="o">]</span>$ docker <span class="nb">exec</span> -it etcd sh
+/go <span class="c1"># etcdctl version</span>
+etcdctl version: 3.4.9
+API version: 3.4
+/go <span class="c1"># etcd --version</span>
+etcd Version: 3.4.9
+Git SHA: 54ba95891
+Go Version: go1.12.17
+Go OS/Arch: linux/amd64
+/go <span class="c1"># etcd --config-file  /etcd/conf/etcd.yml</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="etcdctl-是客户端工具的使用">Etcdctl 是客户端工具的使用</h3>
+<pre><code>etcd v3.4.9 的API版本是 v3
+另外开一个终端进入容器 docker exec -it etcd sh
+简单的kv测试
+</code></pre>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="o">[</span>tintin@localhost conf<span class="o">]</span>$ docker <span class="nb">exec</span> -it etcd sh
+/go <span class="c1"># etcdctl put /user/101/name zhangsan</span>
+OK
+/go <span class="c1"># etcdctl put /user/101/age 18</span>
+OK
+/go <span class="c1"># etcdctl get /user/101/name</span>
+/user/101/name
+zhangsan
+/go <span class="c1"># etcdctl get /user/101</span>
+/go <span class="c1"># etcdctl get /user/101 --prefix</span>
+/user/101/age
+<span class="m">18</span>
+/user/101/name
+zhangsan
+/go <span class="c1"># etcdctl del /user/101 --prefix</span>
+<span class="m">2</span>
+/go <span class="c1"># etcdctl get /user/101 --prefix</span>
+</code></pre></td></tr></table>
+</div>
+</div><pre><code>lease 租约的使用,和redis设置过期是有区别的
+创建一个租约（好比租房合同），并设置过期时间 
+etcdctl lease grant 20  这好比 设置了一个 20秒的租约
+
+查看租约列表
+   etcdctl lease list
+
+查看信息（剩余时间）
+  etcdctl lease timetolive   xxxxxxx
+
+删除租约 
+  etcdctl lease revoke   xxxxxxx
+
+保持租约始终存活
+  etcdctl lease keep-alive xxxxx
+  
+把key和租约关联
+    etcdctl put /user shenyi --lease=xxxxxooo 
+    一旦租约过期，或被删掉,key就没了
+
+    etcdctl lease timetolive   xxxxxxx --keys 
+    可以查看该租约下的所有key
+</code></pre>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span><span class="lnt">86
+</span><span class="lnt">87
+</span><span class="lnt">88
+</span><span class="lnt">89
+</span><span class="lnt">90
+</span><span class="lnt">91
+</span><span class="lnt">92
+</span><span class="lnt">93
+</span><span class="lnt">94
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">/go <span class="c1"># etcdctl lease grant 200</span>
+lease 694d72b5ce961a04 granted with TTL<span class="o">(</span>200s<span class="o">)</span>
+/go <span class="c1"># etcdctl lease timetolive 694d72b5ce961a04</span>
+lease 694d72b5ce961a04 granted with TTL<span class="o">(</span>200s<span class="o">)</span>, remaining<span class="o">(</span>178s<span class="o">)</span>
+/go <span class="c1"># etcdctl lease list</span>
+found <span class="m">1</span> leases
+694d72b5ce961a04
+/go <span class="c1"># etcdctl lease revoke 694d72b5ce961a04</span>
+lease 694d72b5ce961a04 revoked
+/go <span class="c1"># etcdctl lease list</span>
+found <span class="m">0</span> leases
+/go <span class="c1"># etcdctl lease grant 200</span>
+lease 694d72b5ce961a07 granted with TTL<span class="o">(</span>200s<span class="o">)</span>
+/go <span class="c1"># etcdctl lease timetolive 694d72b5ce961a07</span>
+lease 694d72b5ce961a07 granted with TTL<span class="o">(</span>200s<span class="o">)</span>, remaining<span class="o">(</span>185s<span class="o">)</span>
+/go <span class="c1"># etcdctl lease keep-alive 694d72b5ce961a07</span>
+lease 694d72b5ce961a07 keepalived with TTL<span class="o">(</span>200<span class="o">)</span>
+^C
+/go <span class="c1"># etcdctl lease revoke 694d72b5ce961a07</span>
+lease 694d72b5ce961a07 revoked
+/go <span class="c1"># etcdctl lease grant 100</span>
+lease 694d72b5ce961a0a granted with TTL<span class="o">(</span>100s<span class="o">)</span>
+/go <span class="c1"># etcdctl put /user lisi --lease 694d72b5ce961a0a</span>
+OK
+/go <span class="c1"># etcdctl get /user --prefix</span>
+/user
+lisi
+/go <span class="c1"># etcdctl lease timetolive 694d72b5ce961a0a</span>
+lease 694d72b5ce961a0a granted with TTL<span class="o">(</span>100s<span class="o">)</span>, remaining<span class="o">(</span>7s<span class="o">)</span>
+/go <span class="c1"># etcdctl lease timetolive 694d72b5ce961a0a --keys</span>
+lease 694d72b5ce961a0a already expired
+/go <span class="c1"># etcdctl lease grant 150</span>
+lease 694d72b5ce961a0f granted with TTL<span class="o">(</span>150s<span class="o">)</span>
+/go <span class="c1"># etcdctl lease timetolive 694d72b5ce961a0f</span>
+lease 694d72b5ce961a0f granted with TTL<span class="o">(</span>150s<span class="o">)</span>, remaining<span class="o">(</span>134s<span class="o">)</span>
+/go <span class="c1"># etcdctl put /user/name zhangsan --lease 694d72b5ce961a0f</span>
+OK
+/go <span class="c1"># etcdctl lease timetolive 694d72b5ce961a0f --keys</span>
+lease 694d72b5ce961a0f granted with TTL<span class="o">(</span>150s<span class="o">)</span>, remaining<span class="o">(</span>61s<span class="o">)</span>, attached keys<span class="o">([</span>/user/name<span class="o">])</span>
+/go <span class="c1"># etcdctl put /user/age 18 --lease 694d72b5ce961a0f</span>
+OK
+/go <span class="c1"># etcdctl lease timetolive 694d72b5ce961a0f --keys</span>
+lease 694d72b5ce961a0f granted with TTL<span class="o">(</span>150s<span class="o">)</span>, remaining<span class="o">(</span>38s<span class="o">)</span>, attached keys<span class="o">([</span>/user/name /user/age<span class="o">])</span>
+/go <span class="c1"># etcdctl lease timetolive 694d72b5ce961a0f</span>
+lease 694d72b5ce961a0f granted with TTL<span class="o">(</span>150s<span class="o">)</span>, remaining<span class="o">(</span>30s<span class="o">)</span>
+/go <span class="c1"># etcdctl get /user --prefix</span>
+/user/age
+<span class="m">18</span>
+/user/name
+zhangsan
+/go <span class="c1"># etcdctl lease timetolive 694d72b5ce961a0f</span>
+lease 694d72b5ce961a0f already expired
+/go <span class="c1"># etcdctl get /user --prefix</span>
+/go <span class="c1"># etcdctl lease -h</span>
+NAME:
+	lease - Lease related commands
+
+USAGE:
+	etcdctl lease &lt;subcommand&gt; <span class="o">[</span>flags<span class="o">]</span>
+
+API VERSION:
+	3.4
+
+
+COMMANDS:
+	grant		Creates leases
+	keep-alive	Keeps leases alive <span class="o">(</span>renew<span class="o">)</span>
+	list		List all active leases
+	revoke		Revokes leases
+	timetolive	Get lease information
+
+OPTIONS:
+  -h, --help<span class="o">[=</span>false<span class="o">]</span>	<span class="nb">help</span> <span class="k">for</span> lease
+
+GLOBAL OPTIONS:
+      --cacert<span class="o">=</span><span class="s2">&#34;&#34;</span>				verify certificates of TLS-enabled secure servers using this CA bundle
+      --cert<span class="o">=</span><span class="s2">&#34;&#34;</span>					identify secure client using this TLS certificate file
+      --command-timeout<span class="o">=</span>5s			timeout <span class="k">for</span> short running <span class="nb">command</span> <span class="o">(</span>excluding dial timeout<span class="o">)</span>
+      --debug<span class="o">[=</span>false<span class="o">]</span>				<span class="nb">enable</span> client-side debug logging
+      --dial-timeout<span class="o">=</span>2s				dial timeout <span class="k">for</span> client connections
+  -d, --discovery-srv<span class="o">=</span><span class="s2">&#34;&#34;</span>			domain name to query <span class="k">for</span> SRV records describing cluster endpoints
+      --discovery-srv-name<span class="o">=</span><span class="s2">&#34;&#34;</span>			service name to query when using DNS discovery
+      --endpoints<span class="o">=[</span>127.0.0.1:2379<span class="o">]</span>		gRPC endpoints
+      --hex<span class="o">[=</span>false<span class="o">]</span>				print byte strings as hex encoded strings
+      --insecure-discovery<span class="o">[=</span>true<span class="o">]</span>		accept insecure SRV records describing cluster endpoints
+      --insecure-skip-tls-verify<span class="o">[=</span>false<span class="o">]</span>	skip server certificate verification
+      --insecure-transport<span class="o">[=</span>true<span class="o">]</span>		disable transport security <span class="k">for</span> client connections
+      --keepalive-time<span class="o">=</span>2s			keepalive <span class="nb">time</span> <span class="k">for</span> client connections
+      --keepalive-timeout<span class="o">=</span>6s			keepalive timeout <span class="k">for</span> client connections
+      --key<span class="o">=</span><span class="s2">&#34;&#34;</span>					identify secure client using this TLS key file
+      --password<span class="o">=</span><span class="s2">&#34;&#34;</span>				password <span class="k">for</span> authentication <span class="o">(</span><span class="k">if</span> this option is used, --user option shouldn<span class="err">&#39;</span>t include password<span class="o">)</span>
+      --user<span class="o">=</span><span class="s2">&#34;&#34;</span>					username<span class="o">[</span>:password<span class="o">]</span> <span class="k">for</span> authentication <span class="o">(</span>prompt <span class="k">if</span> password is not supplied<span class="o">)</span>
+  -w, --write-out<span class="o">=</span><span class="s2">&#34;simple&#34;</span>			<span class="nb">set</span> the output format <span class="o">(</span>fields, json, protobuf, simple, table<span class="o">)</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>ps: etcd解读参考文献：</p>
+</blockquote>
+<pre><code>https://www.infoq.cn/article/etcd-interpretation-application-scenario-implement-principle</code></pre>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">dingo</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2020-06-11
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/etcd/">etcd</a>
+          <a href="/tags/docker/">docker</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/2020/06/11/etcd-cluster-by-docker/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">使用docker模拟etcd集群的创建</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/2020/06/06/go-strings-byte-rune/">
+            <span class="next-text nav-default">Go - string、byte、rune的区别</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/dingjianhui" class="iconfont icon-github" title="github"></a>
+  <a href="http://dingjianhui.top/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Ding JianHui</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

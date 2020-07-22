@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Go Defer的使用总结 - Ding Jianhui 的个人博客 - 笔记</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="dingo" /><meta name="description" content="Go Defer的使用总结" /><meta name="keywords" content="dingo, golang, 笔记" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.73.0-DEV with theme even" />
+
+
+<link rel="canonical" href="http://dingjianhui.top/post/2020/06/24/go-defer-used/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Go Defer的使用总结" />
+<meta property="og:description" content="Go Defer的使用总结" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://dingjianhui.top/post/2020/06/24/go-defer-used/" />
+<meta property="article:published_time" content="2020-06-24T09:04:03+08:00" />
+<meta property="article:modified_time" content="2020-06-24T09:04:03+08:00" />
+<meta itemprop="name" content="Go Defer的使用总结">
+<meta itemprop="description" content="Go Defer的使用总结">
+<meta itemprop="datePublished" content="2020-06-24T09:04:03&#43;08:00" />
+<meta itemprop="dateModified" content="2020-06-24T09:04:03&#43;08:00" />
+<meta itemprop="wordCount" content="1562">
+
+
+
+<meta itemprop="keywords" content="defer,go," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Go Defer的使用总结"/>
+<meta name="twitter:description" content="Go Defer的使用总结"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">dingo</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">dingo</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Go Defer的使用总结</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-06-24 </span>
+        <div class="post-category">
+            <a href="/categories/golang/"> golang </a>
+            </div>
+          <span class="more-meta"> 约 1562 字 </span>
+          <span class="more-meta"> 预计阅读 4 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#defer介绍">defer介绍</a></li>
+    <li><a href="#defer规则">defer规则</a>
+      <ul>
+        <li><a href="#1defer定义时defer函数的参数就被确定了">1.defer定义时,defer函数的参数就被确定了</a></li>
+        <li><a href="#2按照后进先出的顺序执行延迟的函数调用">2.按照后进先出的顺序执行延迟的函数调用</a></li>
+        <li><a href="#3被-defer-的函数可以读取和修改带名称的返回值">3.被 defer 的函数可以读取和修改带名称的返回值</a></li>
+      </ul>
+    </li>
+    <li><a href="#defer-用法-释放资源">defer 用法-释放资源</a></li>
+    <li><a href="#defer-用法-处理异常">defer 用法-处理异常</a></li>
+    <li><a href="#defer-用法-实现代码追踪">defer 用法-实现代码追踪</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="defer介绍">defer介绍</h2>
+<p>关键字 defer 允许我们推迟到函数返回之前（或任意位置执行 <code>return</code> 语句之后）一刻才执行某个语句或函数
+（为什么要在返回之后才执行这些语句？因为 <code>return</code> 语句同样可以包含一些操作，而不是单纯地返回某个值）。</p>
+<p>常用于释放某些已分配的资源、关闭数据库连接、断开Socket连接、解锁一个加锁的资源</p>
+<p>关键字 defer 的用法类似于面向对象编程语言 Java 和 C# 的 <code>finally</code> 语句块，它一般用于释放某些已分配的资源。</p>
+<p><code>三个简单的规则</code>：</p>
+<h2 id="defer规则">defer规则</h2>
+<h3 id="1defer定义时defer函数的参数就被确定了">1.defer定义时,defer函数的参数就被确定了</h3>
+<p>示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-Go" data-lang="Go"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="s">&#34;fmt&#34;</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span>  <span class="p">{</span>
+	<span class="nf">DeferDef</span><span class="p">()</span>
+	<span class="nf">DeferDef1</span><span class="p">()</span>
+	<span class="nf">DeferDef2</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">DeferDef</span><span class="p">()</span>  <span class="p">{</span>
+	<span class="nx">count</span> <span class="o">:=</span> <span class="mi">1</span>
+	<span class="k">defer</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;defer executed, count的值为&#34;</span><span class="p">,</span><span class="nx">count</span><span class="p">)</span>
+	<span class="nx">count</span><span class="o">++</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;before defer,count的值为&#34;</span><span class="p">,</span><span class="nx">count</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">DeferDef1</span><span class="p">()</span>  <span class="p">{</span>
+	<span class="nx">count</span> <span class="o">:=</span> <span class="mi">1</span>
+	<span class="k">defer</span> <span class="kd">func</span><span class="p">(</span><span class="nx">count</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;defer executed, count的值为&#34;</span><span class="p">,</span><span class="nx">count</span><span class="p">)</span>
+	<span class="p">}(</span><span class="nx">count</span><span class="p">)</span>
+	<span class="nx">count</span><span class="o">++</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;before defer,count的值为&#34;</span><span class="p">,</span><span class="nx">count</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">DeferDef2</span><span class="p">()</span>  <span class="p">{</span>
+	<span class="nx">count</span> <span class="o">:=</span> <span class="mi">1</span>
+	<span class="k">defer</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;defer executed, count的值为&#34;</span><span class="p">,</span><span class="nx">count</span><span class="p">)</span>
+	<span class="p">}()</span>
+	<span class="nx">count</span><span class="o">++</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;before defer,count的值为&#34;</span><span class="p">,</span><span class="nx">count</span><span class="p">)</span>
+<span class="p">}</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><p>输出:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">before defer,count的值为 2
+defer executed, count的值为 1
+before defer,count的值为 2
+defer executed, count的值为 1
+before defer,count的值为 2
+defer executed, count的值为 2
+</code></pre></td></tr></table>
+</div>
+</div><p>注：<code>defer定义时,defer函数的参数就被确定了</code></p>
+<p>DeferDef和DeferDef2中的defer函数的参数在defer定义时值已经被赋值了，所以输出： <code>defer executed, count的值为 1</code> ,
+DeferDef2中的defer函数是一个没有参数的函数,所以输出： <code>defer executed, count的值为 2</code></p>
+<p>那么我们怎么 突破GO的 defer 定义特性</p>
+<p>使用指针如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-Go" data-lang="Go"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="s">&#34;fmt&#34;</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span>  <span class="p">{</span>
+	<span class="nf">DeferDefTest</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">DeferDefTest</span><span class="p">()</span> <span class="p">(</span><span class="nx">ret</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">ret</span> <span class="p">=</span> <span class="mi">1</span>
+	<span class="k">defer</span> <span class="nf">Show</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">ret</span><span class="p">)</span>
+	<span class="nx">ret</span><span class="o">++</span>
+	<span class="k">return</span> <span class="nx">ret</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">Show</span><span class="p">(</span><span class="nx">ret</span> <span class="o">*</span><span class="kt">int</span><span class="p">)</span>  <span class="p">{</span>
+	<span class="o">*</span><span class="nx">ret</span><span class="o">++</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;defer executed,ret的值为:&#34;</span><span class="p">,</span><span class="o">*</span><span class="nx">ret</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>输出</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">defer executed,ret的值为: 3
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="2按照后进先出的顺序执行延迟的函数调用">2.按照后进先出的顺序执行延迟的函数调用</h3>
+<p>当有多个 defer 行为被注册时，它们会以逆序执行（类似栈，即后进先出）：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-Go" data-lang="Go">	<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+		<span class="k">defer</span> <span class="kd">func</span><span class="p">(</span><span class="nx">idx</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
+			<span class="nx">fmt</span><span class="p">.</span><span class="nf">Print</span><span class="p">(</span><span class="nx">idx</span><span class="p">)</span>
+		<span class="p">}(</span><span class="nx">i</span><span class="p">)</span>
+	<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>上面的代码将会输出：<code>5 4 3 2 1</code></p>
+<h3 id="3被-defer-的函数可以读取和修改带名称的返回值">3.被 defer 的函数可以读取和修改带名称的返回值</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-Go" data-lang="Go"><span class="kd">func</span> <span class="nf">c</span><span class="p">()</span> <span class="p">(</span><span class="nx">i</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">defer</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span> <span class="nx">i</span><span class="o">++</span> <span class="p">}()</span>
+    <span class="k">return</span> <span class="mi">1</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><code>defer</code> 的函数是在 <code>return</code> 之后执行，可以修改带名称的返回值，上面的函数 <code>c</code> 返回的是 <code>2</code>。</p>
+<h2 id="defer-用法-释放资源">defer 用法-释放资源</h2>
+<p>例如，让我们看一个打开两个文件并将一个文件的内容复制到另一个文件的函数：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-Go" data-lang="Go"><span class="kd">func</span> <span class="nf">CopyFile</span><span class="p">(</span><span class="nx">dstName</span><span class="p">,</span> <span class="nx">srcName</span> <span class="kt">string</span><span class="p">)</span> <span class="p">(</span><span class="nx">written</span> <span class="kt">int64</span><span class="p">,</span> <span class="nx">err</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">src</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">os</span><span class="p">.</span><span class="nf">Open</span><span class="p">(</span><span class="nx">srcName</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+        <span class="k">return</span>
+    <span class="p">}</span>
+
+    <span class="nx">dst</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">os</span><span class="p">.</span><span class="nf">Create</span><span class="p">(</span><span class="nx">dstName</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+        <span class="k">return</span>
+    <span class="p">}</span>
+
+    <span class="nx">written</span><span class="p">,</span> <span class="nx">err</span> <span class="p">=</span> <span class="nx">io</span><span class="p">.</span><span class="nf">Copy</span><span class="p">(</span><span class="nx">dst</span><span class="p">,</span> <span class="nx">src</span><span class="p">)</span>
+    <span class="nx">dst</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
+    <span class="nx">src</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
+    <span class="k">return</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>这可行，但是有一个错误。如果对os.Create的调用失败，该函数将返回而不关闭源文件。
+通过在第二个return语句之前调用src.Close可以很容易地解决此问题，但是如果函数更复杂，
+则问题可能不会那么容易被发现和解决。
+通过引入<code>defer</code>语句，我们可以确保文件始终关闭</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-Go" data-lang="Go"><span class="kd">func</span> <span class="nf">CopyFile</span><span class="p">(</span><span class="nx">dstName</span><span class="p">,</span> <span class="nx">srcName</span> <span class="kt">string</span><span class="p">)</span> <span class="p">(</span><span class="nx">written</span> <span class="kt">int64</span><span class="p">,</span> <span class="nx">err</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">src</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">os</span><span class="p">.</span><span class="nf">Open</span><span class="p">(</span><span class="nx">srcName</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+        <span class="k">return</span>
+    <span class="p">}</span>
+    <span class="k">defer</span> <span class="nx">src</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
+
+    <span class="nx">dst</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">os</span><span class="p">.</span><span class="nf">Create</span><span class="p">(</span><span class="nx">dstName</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+        <span class="k">return</span>
+    <span class="p">}</span>
+    <span class="k">defer</span> <span class="nx">dst</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="nx">io</span><span class="p">.</span><span class="nf">Copy</span><span class="p">(</span><span class="nx">dst</span><span class="p">,</span> <span class="nx">src</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>这样无论函数中有<code>return</code>语句多少，文件都将被关闭</p>
+<h2 id="defer-用法-处理异常">defer 用法-处理异常</h2>
+<p>panic抛出异常后，如果不处理应用程序会崩溃。
+为了防止程序崩溃，我们可以在<code>defer</code>的函数里使用<code>recover</code>来捕获中异常：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-Go" data-lang="Go"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="s">&#34;fmt&#34;</span>
+
+<span class="kd">func</span> <span class="nf">doSomething</span><span class="p">()</span> <span class="p">{</span>
+	<span class="k">defer</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
+		<span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nb">recover</span><span class="p">();</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+			<span class="nx">fmt</span><span class="p">.</span><span class="nf">Print</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+		<span class="p">}</span>
+
+	<span class="p">}()</span>
+
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Running...&#34;</span><span class="p">)</span>
+	<span class="nb">panic</span><span class="p">(</span><span class="s">&#34;run error&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nf">doSomething</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>输出：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Running...
+run error
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="defer-用法-实现代码追踪">defer 用法-实现代码追踪</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-Go" data-lang="Go"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="s">&#34;fmt&#34;</span>
+
+<span class="c1">// 一个基础但十分实用的实现代码执行追踪的方案就是在进入和离开某个函数打印相关的消息，
+</span><span class="c1">// 即可以提炼为下面两个函数：
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">trace</span><span class="p">(</span><span class="nx">s</span> <span class="kt">string</span><span class="p">)</span>   <span class="p">{</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;entering:&#34;</span><span class="p">,</span> <span class="nx">s</span><span class="p">)</span> <span class="p">}</span>
+<span class="kd">func</span> <span class="nf">untrace</span><span class="p">(</span><span class="nx">s</span> <span class="kt">string</span><span class="p">)</span> <span class="p">{</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;leaving:&#34;</span><span class="p">,</span> <span class="nx">s</span><span class="p">)</span> <span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">a</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nf">trace</span><span class="p">(</span><span class="s">&#34;a&#34;</span><span class="p">)</span>
+	<span class="k">defer</span> <span class="nf">untrace</span><span class="p">(</span><span class="s">&#34;a&#34;</span><span class="p">)</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;in a&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">b</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nf">trace</span><span class="p">(</span><span class="s">&#34;b&#34;</span><span class="p">)</span>
+	<span class="k">defer</span> <span class="nf">untrace</span><span class="p">(</span><span class="s">&#34;b&#34;</span><span class="p">)</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;in b&#34;</span><span class="p">)</span>
+	<span class="nf">a</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nf">b</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>输出：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">entering: b
+in b
+entering: a
+in a
+leaving: a
+leaving: b
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>参考文献</p>
+</blockquote>
+<pre><code>https://blog.golang.org/defer-panic-and-recover</code></pre>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">dingo</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2020-06-24
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/defer/">defer</a>
+          <a href="/tags/go/">go</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/2020/06/24/go-binary-search-tree/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Go 二叉查找树练习</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/2020/06/19/go-etcd-v3-service-discovery/">
+            <span class="next-text nav-default">Go 实现 Etcd V3 服务注册与发现</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/dingjianhui" class="iconfont icon-github" title="github"></a>
+  <a href="http://dingjianhui.top/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Ding JianHui</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

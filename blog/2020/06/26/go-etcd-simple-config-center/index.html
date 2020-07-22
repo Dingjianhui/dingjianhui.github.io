@@ -1,140 +1,277 @@
 <!DOCTYPE html>
-<html class="no-js" lang="zh-cn">
+<html lang="zh-cn">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Go Etcd Simple Config Center - Ding Jianhui 的个人博客 - 笔记</title>
-	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
-	<meta name="description" content="Go ETCD 简易配置中心">
-		<meta property="og:title" content="Go Etcd Simple Config Center" />
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Go Etcd Simple Config Center - Ding Jianhui 的个人博客 - 笔记</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="dingo" /><meta name="description" content="Go ETCD 简易配置中心" /><meta name="keywords" content="dingo, golang, 笔记" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.73.0-DEV with theme even" />
+
+
+<link rel="canonical" href="http://dingjianhui.top/blog/2020/06/26/go-etcd-simple-config-center/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Go Etcd Simple Config Center" />
 <meta property="og:description" content="Go ETCD 简易配置中心" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://dingjianhui.top/blog/2020/06/26/go-etcd-simple-config-center/" />
 <meta property="article:published_time" content="2020-06-26T15:50:48+08:00" />
 <meta property="article:modified_time" content="2020-06-26T15:50:48+08:00" />
-
-		<meta itemprop="name" content="Go Etcd Simple Config Center">
+<meta itemprop="name" content="Go Etcd Simple Config Center">
 <meta itemprop="description" content="Go ETCD 简易配置中心">
 <meta itemprop="datePublished" content="2020-06-26T15:50:48&#43;08:00" />
 <meta itemprop="dateModified" content="2020-06-26T15:50:48&#43;08:00" />
-<meta itemprop="wordCount" content="315">
+<meta itemprop="wordCount" content="871">
 
 
 
-<meta itemprop="keywords" content="etcd,go," />
-		<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="etcd,go," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Go Etcd Simple Config Center"/>
 <meta name="twitter:description" content="Go ETCD 简易配置中心"/>
 
-	<link rel="dns-prefetch" href="//fonts.googleapis.com">
-	<link rel="dns-prefetch" href="//fonts.gstatic.com">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
-	<link rel="stylesheet" href="/css/style.css">
-	<link rel="stylesheet" href="/css/custom.css">
-	<link rel="shortcut icon" href="/favicon.ico">
-		
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
 </head>
-<body class="body">
-	<div class="container container--outer">
-		<header class="header">
-	<div class="container header__container">
-		
-	<div class="logo logo--mixed">
-		<a class="logo__link" href="/" title="Ding Jianhui 的个人博客 - 笔记" rel="home">
-			<div class="logo__item logo__imagebox">
-					<img class="logo__img" src="/img/logo.jpg">
-				</div><div class="logo__item logo__text">
-					<div class="logo__title">Ding Jianhui 的个人博客 - 笔记</div>
-					<div class="logo__tagline">好记性不如烂笔头</div>
-				</div>
-		</a>
-	</div>
-		<div class="divider"></div>
-	</div>
-</header>
-		<div class="wrapper flex">
-			<div class="primary">
-			
-<main class="main" role="main">
-	<article class="post">
-		<header class="post__header">
-			<h1 class="post__title">Go Etcd Simple Config Center</h1>
-			<p class="post__lead">Go ETCD 简易配置中心</p>
-			<div class="post__meta meta"><div class="meta__item-author meta__item">
-	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Ding Jianhui</span>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">dingo</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
 </div>
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-06-26T15:50:48&#43;08:00">2020-06-26</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/etcd/" rel="category">etcd</a>, <a class="meta__link" href="/categories/golang/" rel="category">golang</a>
-	</span>
-</div></div>
-		</header><div class="content post__content clearfix">
-			<h6 id="简易示意图">简易示意图</h6>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">dingo</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+  <div class="post-content">
+    <h6 id="简易示意图">简易示意图</h6>
 <p><img src="/img/etcd_simple_config.jpg" alt="avatar"></p>
 <h6 id="confd">Confd</h6>
 <p>一款高可用统一配置管理工具(go写的)</p>
 <h6 id="step-1-构建confd镜像使用go镜像">Step 1. 构建Confd镜像(使用go镜像)</h6>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#f92672">[</span>tintin@localhost ttphp<span style="color:#f92672">]</span>$ ls
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="o">[</span>tintin@localhost ttphp<span class="o">]</span>$ ls
 etcd  etcds  tools
-<span style="color:#f92672">[</span>tintin@localhost ttphp<span style="color:#f92672">]</span>$ mkdir build
-<span style="color:#f92672">[</span>tintin@localhost ttphp<span style="color:#f92672">]</span>$ mkdir build/confd
-<span style="color:#f92672">[</span>tintin@localhost ttphp<span style="color:#f92672">]</span>$ cd build/confd/
-<span style="color:#f92672">[</span>tintin@localhost confd<span style="color:#f92672">]</span>$ vi Dockerfile
-</code></pre></div><p>Dockerfile 参考文档</p>
+<span class="o">[</span>tintin@localhost ttphp<span class="o">]</span>$ mkdir build
+<span class="o">[</span>tintin@localhost ttphp<span class="o">]</span>$ mkdir build/confd
+<span class="o">[</span>tintin@localhost ttphp<span class="o">]</span>$ <span class="nb">cd</span> build/confd/
+<span class="o">[</span>tintin@localhost confd<span class="o">]</span>$ vi Dockerfile
+</code></pre></td></tr></table>
+</div>
+</div><p>Dockerfile 参考文档</p>
 <p><a href="https://github.com/kelseyhightower/confd/blob/master/docs/installation.md">https://github.com/kelseyhightower/confd/blob/master/docs/installation.md</a></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Dockerfile" data-lang="Dockerfile"><span style="color:#66d9ef">FROM</span><span style="color:#e6db74"> 1.14.4-alpine3.12 as confd</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">ARG</span> CONFD_VERSION<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>.16.0<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">ADD</span> https://github.com/kelseyhightower/confd/archive/v<span style="color:#e6db74">${</span>CONFD_VERSION<span style="color:#e6db74">}</span>.tar.gz /tmp/<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> apk add --no-cache <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    bzip2 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    make <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>  mkdir -p /go/src/github.com/kelseyhightower/confd <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>  cd /go/src/github.com/kelseyhightower/confd <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>  tar --strip-components<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> -zxf /tmp/v<span style="color:#e6db74">${</span>CONFD_VERSION<span style="color:#e6db74">}</span>.tar.gz <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>  go install github.com/kelseyhightower/confd <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>  rm -rf /tmp/v<span style="color:#e6db74">${</span>CONFD_VERSION<span style="color:#e6db74">}</span>.tar.gz<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">ENTRYPOINT</span> [<span style="color:#e6db74">&#34;/go/bin/confd&#34;</span>]<span style="color:#960050;background-color:#1e0010">
-</span></code></pre></div><p>构建镜像 docker build -t confd:my .</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-Dockerfile" data-lang="Dockerfile"><span class="k">FROM</span><span class="s"> 1.14.4-alpine3.12 as confd</span><span class="err">
+</span><span class="err"></span><span class="k">ARG</span> <span class="nv">CONFD_VERSION</span><span class="o">=</span><span class="m">0</span>.16.0<span class="err">
+</span><span class="err"></span><span class="k">ADD</span> https://github.com/kelseyhightower/confd/archive/v<span class="si">${</span><span class="nv">CONFD_VERSION</span><span class="si">}</span>.tar.gz /tmp/<span class="err">
+</span><span class="err"></span><span class="k">RUN</span> apk add --no-cache <span class="se">\
+</span><span class="se"></span>    bzip2 <span class="se">\
+</span><span class="se"></span>    make <span class="o">&amp;&amp;</span> <span class="se">\
+</span><span class="se"></span>  mkdir -p /go/src/github.com/kelseyhightower/confd <span class="o">&amp;&amp;</span> <span class="se">\
+</span><span class="se"></span>  <span class="nb">cd</span> /go/src/github.com/kelseyhightower/confd <span class="o">&amp;&amp;</span> <span class="se">\
+</span><span class="se"></span>  tar --strip-components<span class="o">=</span><span class="m">1</span> -zxf /tmp/v<span class="si">${</span><span class="nv">CONFD_VERSION</span><span class="si">}</span>.tar.gz <span class="o">&amp;&amp;</span> <span class="se">\
+</span><span class="se"></span>  go install github.com/kelseyhightower/confd <span class="o">&amp;&amp;</span> <span class="se">\
+</span><span class="se"></span>  rm -rf /tmp/v<span class="si">${</span><span class="nv">CONFD_VERSION</span><span class="si">}</span>.tar.gz<span class="err">
+</span><span class="err"></span><span class="k">ENTRYPOINT</span> <span class="p">[</span><span class="s2">&#34;/go/bin/confd&#34;</span><span class="p">]</span><span class="err">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>构建镜像 docker build -t confd:my .</p>
 <p>查看镜像 docker images</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#f92672">[</span>tintin@localhost confd<span style="color:#f92672">]</span>$ docker build -t confd:my .
-<span style="color:#f92672">[</span>tintin@localhost confd<span style="color:#f92672">]</span>$ docker images
-</code></pre></div><h6 id="step-2-创建映射文件confdfiles">Step 2. 创建映射文件confdfiles</h6>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="o">[</span>tintin@localhost confd<span class="o">]</span>$ docker build -t confd:my .
+<span class="o">[</span>tintin@localhost confd<span class="o">]</span>$ docker images
+</code></pre></td></tr></table>
+</div>
+</div><h6 id="step-2-创建映射文件confdfiles">Step 2. 创建映射文件confdfiles</h6>
 <p>默认配置文件在 <code>/etc/confd/</code> 中,需要将配置文件映射到这个文件夹下 (<code>confdfiles</code>映射到<code>/etc/confd/</code>)</p>
 <p>confdfiles/conf.d(配置文件)  confdfiles/dest(目标文件)  confdfiles/templates(模板文件)</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#f92672">[</span>tintin@localhost ttphp<span style="color:#f92672">]</span>$ ls
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="o">[</span>tintin@localhost ttphp<span class="o">]</span>$ ls
 build  etcd  etcds  tools
-<span style="color:#f92672">[</span>tintin@localhost ttphp<span style="color:#f92672">]</span>$ pwd
+<span class="o">[</span>tintin@localhost ttphp<span class="o">]</span>$ <span class="nb">pwd</span>
 /home/tintin/ttphp
-<span style="color:#f92672">[</span>tintin@localhost ttphp<span style="color:#f92672">]</span>$ mkdir confdfiles
-<span style="color:#f92672">[</span>tintin@localhost ttphp<span style="color:#f92672">]</span>$ mkdir -p confdfiles/<span style="color:#f92672">{</span>conf.d,templates,dest<span style="color:#f92672">}</span>
-<span style="color:#f92672">[</span>tintin@localhost ttphp<span style="color:#f92672">]</span>$ ls
+<span class="o">[</span>tintin@localhost ttphp<span class="o">]</span>$ mkdir confdfiles
+<span class="o">[</span>tintin@localhost ttphp<span class="o">]</span>$ mkdir -p confdfiles/<span class="o">{</span>conf.d,templates,dest<span class="o">}</span>
+<span class="o">[</span>tintin@localhost ttphp<span class="o">]</span>$ ls
 build  confdfiles  etcd  etcds  tools
-<span style="color:#f92672">[</span>tintin@localhost ttphp<span style="color:#f92672">]</span>$ cd confdfiles/
-<span style="color:#f92672">[</span>tintin@localhost confdfiles<span style="color:#f92672">]</span>$ ls
+<span class="o">[</span>tintin@localhost ttphp<span class="o">]</span>$ <span class="nb">cd</span> confdfiles/
+<span class="o">[</span>tintin@localhost confdfiles<span class="o">]</span>$ ls
 conf.d  dest  templates
-</code></pre></div><h6 id="step-3-配置config">Step 3. 配置config</h6>
+</code></pre></td></tr></table>
+</div>
+</div><h6 id="step-3-配置config">Step 3. 配置config</h6>
 <p><code>confdfiles/conf.d/myconfig.toml</code></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">[template]
-src = <span style="color:#e6db74">&#34;myconfig.conf.tmpl&#34;</span>
-dest = <span style="color:#e6db74">&#34;/etc/confd/dest/myconfig.conf&#34;</span>
-keys = [
-    <span style="color:#e6db74">&#34;/myconfig/mysql/user&#34;</span>,
-    <span style="color:#e6db74">&#34;/myconfig/mysql/pass&#34;</span>,
-]
-</code></pre></div><p><code>confdfiles/templates/myconfig.conf.tmp</code></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">[this is myconfig]
-database_user= {{getv <span style="color:#e6db74">&#34;/myconfig/mysql/user&#34;</span>}}
-database_pass = {{getv <span style="color:#e6db74">&#34;/myconfig/mysql/pass&#34;</span>}}
-</code></pre></div><h6 id="step-4-配置etcd">Step 4. 配置etcd</h6>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="p">[</span>template<span class="p">]</span><span class="w">
+</span><span class="w"></span>src<span class="w"> </span>=<span class="w"> </span><span class="s2">&#34;myconfig.conf.tmpl&#34;</span><span class="w">
+</span><span class="w"></span>dest<span class="w"> </span>=<span class="w"> </span><span class="s2">&#34;/etc/confd/dest/myconfig.conf&#34;</span><span class="w">
+</span><span class="w"></span>keys<span class="w"> </span>=<span class="w"> </span><span class="p">[</span><span class="w">
+</span><span class="w">    </span><span class="s2">&#34;/myconfig/mysql/user&#34;</span><span class="p">,</span><span class="w">
+</span><span class="w">    </span><span class="s2">&#34;/myconfig/mysql/pass&#34;</span><span class="p">,</span><span class="w">
+</span><span class="w"></span><span class="p">]</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><p><code>confdfiles/templates/myconfig.conf.tmp</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="p">[</span>this<span class="w"> </span>is<span class="w"> </span>myconfig<span class="p">]</span><span class="w">
+</span><span class="w"></span>database_user=<span class="w"> </span>{{getv<span class="w"> </span><span class="s2">&#34;/myconfig/mysql/user&#34;</span>}}<span class="w">
+</span><span class="w"></span>database_pass<span class="w"> </span>=<span class="w"> </span>{{getv<span class="w"> </span><span class="s2">&#34;/myconfig/mysql/pass&#34;</span>}}<span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><h6 id="step-4-配置etcd">Step 4. 配置etcd</h6>
 <p><a href="/blog/2020/06/11/etcd-cluster-by-docker/" title="使用docker模拟etcd集群的创建">使用docker模拟etcd集群的创建</a></p>
 <p>将配置注册到etcd中</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#f92672">[</span>tintin@localhost confdfiles<span style="color:#f92672">]</span>$ docker exec -it etcd1 sh
-/go <span style="color:#75715e"># etcdctl put /myconfig/mysql/user root</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="o">[</span>tintin@localhost confdfiles<span class="o">]</span>$ docker <span class="nb">exec</span> -it etcd1 sh
+/go <span class="c1"># etcdctl put /myconfig/mysql/user root</span>
 OK
-/go <span style="color:#75715e"># etcdctl put /myconfig/mysql/pass 123456</span>
+/go <span class="c1"># etcdctl put /myconfig/mysql/pass 123456</span>
 OK
 /go #
-</code></pre></div><h6 id="step-5-生成配置文件">Step 5. 生成配置文件</h6>
+</code></pre></td></tr></table>
+</div>
+</div><h6 id="step-5-生成配置文件">Step 5. 生成配置文件</h6>
 <p><code>FATAL dial tcp 127.0.0.1:23791: connect: connection refused</code>
 出现这个错误时，请检查etcd的节点是否开启，端口是否放行 <code>sudo iptables -I INPUT -p tcp --dport 23791 -j ACCEPT</code></p>
 <p>confd的命令文档
@@ -143,14 +280,27 @@ OK
 <p><code>docker run -it --rm  --name confd  -v /home/tintin/ttphp/confdfiles:/etc/confd confd:my  -onetime -backend etcdv3 -node http://192.168.137.131:23791</code></p>
 <p>-interval int 定时生成 (interval 5 定时5秒生成一次配置文件)</p>
 <p><code>docker run -it -d --rm  --name confd  -v /home/tintin/ttphp/confdfiles:/etc/confd confd:my  -interval 5 -backend etcdv3 -node http://192.168.137.131:23791</code></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#f92672">[</span>tintin@localhost confdfiles<span style="color:#f92672">]</span>$ docker run -it --rm  --name confd <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>-v /home/tintin/ttphp/confdfiles:/etc/confd confd:my -onetime <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>-backend etcdv3 -node http://192.168.137.131:23791
-<span style="color:#f92672">[</span>tintin@localhost confdfiles<span style="color:#f92672">]</span>$ cat /home/tintin/ttphp/confdfiles/dest/myconfig.conf 
-<span style="color:#f92672">[</span>this is myconfig<span style="color:#f92672">]</span>
-database_user<span style="color:#f92672">=</span> root
-database_pass <span style="color:#f92672">=</span> <span style="color:#ae81ff">123456</span>
-</code></pre></div><h6 id="step-6-监听etcd配置">Step 6. 监听etcd配置</h6>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="o">[</span>tintin@localhost confdfiles<span class="o">]</span>$ docker run -it --rm  --name confd <span class="se">\
+</span><span class="se"></span>-v /home/tintin/ttphp/confdfiles:/etc/confd confd:my -onetime <span class="se">\
+</span><span class="se"></span>-backend etcdv3 -node http://192.168.137.131:23791
+<span class="o">[</span>tintin@localhost confdfiles<span class="o">]</span>$ cat /home/tintin/ttphp/confdfiles/dest/myconfig.conf 
+<span class="o">[</span>this is myconfig<span class="o">]</span>
+<span class="nv">database_user</span><span class="o">=</span> root
+<span class="nv">database_pass</span> <span class="o">=</span> <span class="m">123456</span>
+</code></pre></td></tr></table>
+</div>
+</div><h6 id="step-6-监听etcd配置">Step 6. 监听etcd配置</h6>
 <p>-watch会监听key的值变化</p>
 <p><code>docker run -d --name confd  -v /home/tintin/ttphp/confdfiles:/etc/confd confd:my  -watch -backend etcdv3 -node http://192.168.137.131:23791</code></p>
 <p>confd一旦watch到key值变化了，立刻生成新配置文件,那么服务怎么更新配置信息</p>
@@ -175,65 +325,66 @@ database_pass <span style="color:#f92672">=</span> <span style="color:#ae81ff">1
 <pre><code>https://github.com/kelseyhightower/confd
 https://github.com/kelseyhightower/confd/blob/master/docs/quick-start-guide.md</code></pre>
 
-		</div>
-		<footer class="post__footer">
-			
-<div class="post__tags tags clearfix">
-	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
-	<ul class="tags__list">
-		<li class="tags__item">
-			<a class="tags__link btn" href="/tags/etcd/" rel="tag">etcd</a>
-		</li>
-		<li class="tags__item">
-			<a class="tags__link btn" href="/tags/go/" rel="tag">go</a>
-		</li>
-	</ul>
-</div>
-		</footer>
-	</article>
-</main>
+  </div>
+</article>
+        </div>
+        
 
-<div class="authorbox clearfix">
-	<figure class="authorbox__avatar">
-		<img alt="Ding Jianhui avatar" src="/img/logo.jpg" class="avatar" height="90" width="90">
-	</figure>
-	<div class="authorbox__header">
-		<span class="authorbox__name">关于 Ding Jianhui</span>
-	</div>
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/dingjianhui" class="iconfont icon-github" title="github"></a>
+  <a href="http://dingjianhui.top/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
 
-<nav class="pager flex">
-	<div class="pager__item pager__item--prev">
-		<a class="pager__link" href="/blog/2020/06/24/go-binary-search-tree/" rel="prev">
-			<span class="pager__subtitle">«&thinsp;上一篇</span>
-			<p class="pager__title">Go Binary Search Tree</p>
-		</a>
-	</div>
-	<div class="pager__item pager__item--next">
-		<a class="pager__link" href="/blog/2020/06/28/go-grpc-quick-start/" rel="next">
-			<span class="pager__subtitle">下一篇&thinsp;»</span>
-			<p class="pager__title">Go Grpc Quick Start</p>
-		</a>
-	</div>
-</nav>
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Ding JianHui</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
 
 
 
-			</div>
-			
-		</div>
-		<footer class="footer">
-	<div class="container footer__container flex">
-		
-		<div class="footer__copyright">
-			&copy; 2020 Ding Jianhui.
-			<span class="footer__copyright-credits">基于 <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> 引擎和 <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a>主題</span>
-		</div>
-	</div>
-</footer>
-	</div>
-<script async defer src="/js/menu.js"></script>
-<script src="/js/custom.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+
+
+
+
+
+
+
+
 </body>
 </html>

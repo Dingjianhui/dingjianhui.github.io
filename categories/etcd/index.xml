@@ -6,6 +6,7 @@
     <description>Recent content in etcd on Ding Jianhui 的个人博客 - 笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
+    <copyright>Ding JianHui</copyright>
     <lastBuildDate>Fri, 26 Jun 2020 15:50:48 +0800</lastBuildDate>
     
 	<atom:link href="http://dingjianhui.top/categories/etcd/index.xml" rel="self" type="application/rss+xml" />
@@ -17,10 +18,16 @@
       <pubDate>Fri, 26 Jun 2020 15:50:48 +0800</pubDate>
       
       <guid>http://dingjianhui.top/blog/2020/06/26/go-etcd-simple-config-center/</guid>
-      <description>简易示意图 Confd 一款高可用统一配置管理工具(go写的)
-Step 1. 构建Confd镜像(使用go镜像) [tintin@localhost ttphp]$ ls etcd etcds tools [tintin@localhost ttphp]$ mkdir build [tintin@localhost ttphp]$ mkdir build/confd [tintin@localhost ttphp]$ cd build/confd/ [tintin@localhost confd]$ vi Dockerfile Dockerfile 参考文档
-https://github.com/kelseyhightower/confd/blob/master/docs/installation.md
-FROM1.14.4-alpine3.12 as confdARG CONFD_VERSION=0.16.0ADD https://github.com/kelseyhightower/confd/archive/v${CONFD_VERSION}.tar.gz /tmp/RUN apk add --no-cache \  bzip2 \  make &amp;amp;&amp;amp; \  mkdir -p /go/src/github.com/kelseyhightower/confd &amp;amp;&amp;amp; \  cd /go/src/github.com/kelseyhightower/confd &amp;amp;&amp;amp; \  tar --strip-components=1 -zxf /tmp/v${CONFD_VERSION}.tar.gz &amp;amp;&amp;amp; \  go install github.com/kelseyhightower/confd &amp;amp;&amp;amp; \  rm -rf /tmp/v${CONFD_VERSION}.</description>
+      <description>简易示意图 Confd 一款高可用统一配置管理工具(go写的) Step 1. 构建Confd镜像(使用go镜像) 1 2 3 4 5 6 [tintin@localhost ttphp]$ ls etcd etcds tools [tintin@localhost ttphp]$ mkdir build [tintin@localhost ttphp]$ mkdir build/confd [tintin@localhost ttphp]$ cd build/confd/ [tintin@localhost confd]$</description>
+    </item>
+    
+    <item>
+      <title>Go ETCD 简易配置中心</title>
+      <link>http://dingjianhui.top/post/2020/06/26/go-etcd-simple-config-center/</link>
+      <pubDate>Fri, 26 Jun 2020 15:50:48 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/post/2020/06/26/go-etcd-simple-config-center/</guid>
+      <description>简易示意图 Confd简介 一款高可用统一配置管理工具(go写的) Confd安装使用 Step 1. 构建Confd镜像(使用go镜像) 1 2 3 4 5 6 [tintin@localhost ttphp]$ ls etcd etcds</description>
     </item>
     
     <item>
@@ -29,7 +36,16 @@ FROM1.14.4-alpine3.12 as confdARG CONFD_VERSION=0.16.0ADD https://github.com/kel
       <pubDate>Fri, 19 Jun 2020 16:45:07 +0800</pubDate>
       
       <guid>http://dingjianhui.top/blog/2020/06/19/go-etcd-v3-service-discovery/</guid>
-      <description>示意图 服务注册 1.服务提供者 创建服务 2.服务提供者 配置etcd 3.服务提供者 把服务注册到配置的etcd中 4.服务启动 5.服务关闭时反注册服务 (关闭时,回收资源)  package main import ( &amp;#34;context&amp;#34; &amp;#34;etcd-service/service/utils&amp;#34; &amp;#34;fmt&amp;#34; &amp;#34;github.com/google/uuid&amp;#34; &amp;#34;github.com/gorilla/mux&amp;#34; &amp;#34;log&amp;#34; &amp;#34;net/http&amp;#34; &amp;#34;os&amp;#34; &amp;#34;os/signal&amp;#34; &amp;#34;strconv&amp;#34; &amp;#34;syscall&amp;#34; ) // 服务提供者  // service 服务注册  func main() { // 1. 创建服务 	serviceId := uuid.New().String() // 服务ID 	serviceName := &amp;#34;productDetailService&amp;#34; // 服务名 	serviceAddress := &amp;#34;192.168.123.178&amp;#34; // 服务地址 	servicePort := 8081 // 服务端口  router := mux.NewRouter() server := http.</description>
+      <description>示意图 服务注册 1.服务提供者 创建服务 2.服务提供者 配置etcd 3.服务提供者 把服务注册到配置的etcd中 4.服务启动 5.服务关闭时反注册服务</description>
+    </item>
+    
+    <item>
+      <title>Go 实现 Etcd V3 服务注册与发现</title>
+      <link>http://dingjianhui.top/post/2020/06/19/go-etcd-v3-service-discovery/</link>
+      <pubDate>Fri, 19 Jun 2020 16:45:07 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/post/2020/06/19/go-etcd-v3-service-discovery/</guid>
+      <description>示意图 服务注册 1.服务提供者 创建服务 2.服务提供者 配置etcd 3.服务提供者 把服务注册到配置的etcd中 4.服务启动 5.服务关闭时反注册服务</description>
     </item>
     
     <item>
@@ -38,7 +54,25 @@ FROM1.14.4-alpine3.12 as confdARG CONFD_VERSION=0.16.0ADD https://github.com/kel
       <pubDate>Thu, 11 Jun 2020 17:14:58 +0800</pubDate>
       
       <guid>http://dingjianhui.top/blog/2020/06/11/etcd-cluster-by-docker/</guid>
-      <description>实际中部署集群 使用不同机器 或 docker swarm 或 k8s 来部署  Step 1 创建一个专门的docker网络 创建docker网络 (使用的是bridge,指定了子网) docker network create etcdnet --subnet 172.25.0.0/16 创建完后建议用户重新登录  [tintin@localhost ttphp]$ docker network create etcdnet --subnet 172.25.0.0/16 Step 2 创建两个节点 一个节点为etcd1,一个节点为etcd2 节点下各自创建 conf 和 data  [tintin@localhost ttphp]$ cd etcds/ [tintin@localhost etcds]$ mkdir etcd1 etcd2 [tintin@localhost etcds]$ mkdir etcd1/conf etcd1/data [tintin@localhost etcds]$ mkdir etcd2/conf etcd2/data Step 3 创建每个节点的配置文件 etcd1/conf/etcd.yml (etcd1节点的配置文件) vim etcd1/conf/etcd.yml  name: etcd1 data-dir: /etcd/data listen-client-urls: http://172.</description>
+      <description>实际中部署集群 使用不同机器 或 docker swarm 或 k8s 来部署 Step 1 创建一个专门的docker网络 创建docker网络 (使用的是bridge,指定了子网) docker network create etcdnet</description>
+    </item>
+    
+    <item>
+      <title>使用docker模拟etcd集群的创建</title>
+      <link>http://dingjianhui.top/post/2020/06/11/etcd-cluster-by-docker/</link>
+      <pubDate>Thu, 11 Jun 2020 17:14:58 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/post/2020/06/11/etcd-cluster-by-docker/</guid>
+      <description>实际中部署集群 使用不同机器 或 docker swarm 或 k8s 来部署 Step 1 创建一个专门的docker网络 创建docker网络 (使用的是bridge,指定了子网) docker network create etcdnet</description>
+    </item>
+    
+    <item>
+      <title>etcd入门之基于docker的环境搭建</title>
+      <link>http://dingjianhui.top/post/2020/06/11/etcd-install/</link>
+      <pubDate>Thu, 11 Jun 2020 13:14:58 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/post/2020/06/11/etcd-install/</guid>
+      <description>etcd简介 A distributed, reliable key-value store for the most critical data of a distributed system etcd是一个高可用的键值存储系统 etcd是由CoreOS开发并维护的,灵感来自于 ZooKeeper 等。它使用Go语</description>
     </item>
     
     <item>
@@ -47,8 +81,7 @@ FROM1.14.4-alpine3.12 as confdARG CONFD_VERSION=0.16.0ADD https://github.com/kel
       <pubDate>Thu, 11 Jun 2020 13:14:58 +0800</pubDate>
       
       <guid>http://dingjianhui.top/blog/2020/06/11/etcd-install/</guid>
-      <description>etcd简介  A distributed, reliable key-value store for the most critical data of a distributed system
- etcd是一个高可用的键值存储系统 etcd是由CoreOS开发并维护的,灵感来自于 ZooKeeper 等。它使用Go语言编写 Github: https://github.com/etcd-io/etcd 官网: https://etcd.io  功能特点 简单：基于 HTTP+JSON 的 API 让你用 curl 就可以轻松使用。 安全：可选 SSL 客户认证机制。 快速：每个实例每秒支持一千次写操作。 可信：使用 Raft 算法充分实现了分布式。  主要使用场景  主要用于共享配置 服务注册与发现 （Service Discovery） 分布式锁等  下载etcd并安装 下载地址：https://github.com/etcd-io/etcd/releases 我使用的方式是windows环境下载，然后上传至linux中 解压安装  [tintin@localhost tools]$ tar -zxvf etcd-v3.4.9-linux-amd64.tar.gz [tintin@localhost tools]$ mv etcd-v3.4.9-linux-amd64 ../etcd [tintin@localhost ttphp]$ cd ../etcd/ [tintin@localhost etcd]$ ls Documentation etcd etcdctl README-etcdctl.</description>
+      <description>etcd简介 A distributed, reliable key-value store for the most critical data of a distributed system etcd是一个高可用的键值存储系统 etcd是由CoreOS开发并维护的,灵感来自于 ZooKeeper 等。它使用Go语</description>
     </item>
     
   </channel>

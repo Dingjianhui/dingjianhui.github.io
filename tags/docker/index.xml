@@ -6,10 +6,20 @@
     <description>Recent content in docker on Ding Jianhui 的个人博客 - 笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
+    <copyright>Ding JianHui</copyright>
     <lastBuildDate>Wed, 17 Jun 2020 14:15:53 +0800</lastBuildDate>
     
 	<atom:link href="http://dingjianhui.top/tags/docker/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Centos 7系统中安装docker &amp; Docker Compose</title>
+      <link>http://dingjianhui.top/post/2020/06/17/centos-docker-install/</link>
+      <pubDate>Wed, 17 Jun 2020 14:15:53 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/post/2020/06/17/centos-docker-install/</guid>
+      <description>安装文档-以官方文档为准 官方文档 https://docs.docker.com/engine/install/centos/ Step 1 卸载旧版本 1 2 3 4 5 6 7 8 $ sudo yum remove docker \ docker-client \ docker-client-latest \ docker-common \ docker-latest \ docker-latest-logrotate \ docker-logrotate \ docker-engine Step 2 设置存储库 安装utils工具包 （依</description>
+    </item>
     
     <item>
       <title>Centos Install Docker &amp; Docker Compose</title>
@@ -17,8 +27,7 @@
       <pubDate>Wed, 17 Jun 2020 14:15:53 +0800</pubDate>
       
       <guid>http://dingjianhui.top/blog/2020/06/17/centos-docker-install/</guid>
-      <description>安装文档-以官方文档为准
- 官方文档 https://docs.docker.com/engine/install/centos/  Step 1 卸载旧版本 $ sudo yum remove docker \  docker-client \  docker-client-latest \  docker-common \  docker-latest \  docker-latest-logrotate \  docker-logrotate \  docker-engine Step 2 设置存储库 安装utils工具包 （依赖） 官方源信息 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo 阿里云软件源 yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo  $ sudo yum install -y yum-utils $ sudo yum-config-manager \  --add-repo \  https://download.docker.com/linux/centos/docker-ce.repo Step 3 安装 docker 引擎 1.安装最新版本 $ sudo yum install docker-ce docker-ce-cli containerd.</description>
+      <description>安装文档-以官方文档为准 官方文档 https://docs.docker.com/engine/install/centos/ Step 1 卸载旧版本 1 2 3 4 5 6 7 8 $ sudo yum remove docker \ docker-client \ docker-client-latest \ docker-common \ docker-latest \ docker-latest-logrotate \ docker-logrotate \ docker-engine Step 2 设置存储库 安装utils工具包 （依</description>
     </item>
     
     <item>
@@ -27,7 +36,25 @@
       <pubDate>Thu, 11 Jun 2020 17:14:58 +0800</pubDate>
       
       <guid>http://dingjianhui.top/blog/2020/06/11/etcd-cluster-by-docker/</guid>
-      <description>实际中部署集群 使用不同机器 或 docker swarm 或 k8s 来部署  Step 1 创建一个专门的docker网络 创建docker网络 (使用的是bridge,指定了子网) docker network create etcdnet --subnet 172.25.0.0/16 创建完后建议用户重新登录  [tintin@localhost ttphp]$ docker network create etcdnet --subnet 172.25.0.0/16 Step 2 创建两个节点 一个节点为etcd1,一个节点为etcd2 节点下各自创建 conf 和 data  [tintin@localhost ttphp]$ cd etcds/ [tintin@localhost etcds]$ mkdir etcd1 etcd2 [tintin@localhost etcds]$ mkdir etcd1/conf etcd1/data [tintin@localhost etcds]$ mkdir etcd2/conf etcd2/data Step 3 创建每个节点的配置文件 etcd1/conf/etcd.yml (etcd1节点的配置文件) vim etcd1/conf/etcd.yml  name: etcd1 data-dir: /etcd/data listen-client-urls: http://172.</description>
+      <description>实际中部署集群 使用不同机器 或 docker swarm 或 k8s 来部署 Step 1 创建一个专门的docker网络 创建docker网络 (使用的是bridge,指定了子网) docker network create etcdnet</description>
+    </item>
+    
+    <item>
+      <title>使用docker模拟etcd集群的创建</title>
+      <link>http://dingjianhui.top/post/2020/06/11/etcd-cluster-by-docker/</link>
+      <pubDate>Thu, 11 Jun 2020 17:14:58 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/post/2020/06/11/etcd-cluster-by-docker/</guid>
+      <description>实际中部署集群 使用不同机器 或 docker swarm 或 k8s 来部署 Step 1 创建一个专门的docker网络 创建docker网络 (使用的是bridge,指定了子网) docker network create etcdnet</description>
+    </item>
+    
+    <item>
+      <title>etcd入门之基于docker的环境搭建</title>
+      <link>http://dingjianhui.top/post/2020/06/11/etcd-install/</link>
+      <pubDate>Thu, 11 Jun 2020 13:14:58 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/post/2020/06/11/etcd-install/</guid>
+      <description>etcd简介 A distributed, reliable key-value store for the most critical data of a distributed system etcd是一个高可用的键值存储系统 etcd是由CoreOS开发并维护的,灵感来自于 ZooKeeper 等。它使用Go语</description>
     </item>
     
     <item>
@@ -36,8 +63,7 @@
       <pubDate>Thu, 11 Jun 2020 13:14:58 +0800</pubDate>
       
       <guid>http://dingjianhui.top/blog/2020/06/11/etcd-install/</guid>
-      <description>etcd简介  A distributed, reliable key-value store for the most critical data of a distributed system
- etcd是一个高可用的键值存储系统 etcd是由CoreOS开发并维护的,灵感来自于 ZooKeeper 等。它使用Go语言编写 Github: https://github.com/etcd-io/etcd 官网: https://etcd.io  功能特点 简单：基于 HTTP+JSON 的 API 让你用 curl 就可以轻松使用。 安全：可选 SSL 客户认证机制。 快速：每个实例每秒支持一千次写操作。 可信：使用 Raft 算法充分实现了分布式。  主要使用场景  主要用于共享配置 服务注册与发现 （Service Discovery） 分布式锁等  下载etcd并安装 下载地址：https://github.com/etcd-io/etcd/releases 我使用的方式是windows环境下载，然后上传至linux中 解压安装  [tintin@localhost tools]$ tar -zxvf etcd-v3.4.9-linux-amd64.tar.gz [tintin@localhost tools]$ mv etcd-v3.4.9-linux-amd64 ../etcd [tintin@localhost ttphp]$ cd ../etcd/ [tintin@localhost etcd]$ ls Documentation etcd etcdctl README-etcdctl.</description>
+      <description>etcd简介 A distributed, reliable key-value store for the most critical data of a distributed system etcd是一个高可用的键值存储系统 etcd是由CoreOS开发并维护的,灵感来自于 ZooKeeper 等。它使用Go语</description>
     </item>
     
   </channel>

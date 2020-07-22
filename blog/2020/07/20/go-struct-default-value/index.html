@@ -1,81 +1,139 @@
 <!DOCTYPE html>
-<html class="no-js" lang="zh-cn">
+<html lang="zh-cn">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Go Struct Default Value - Ding Jianhui 的个人博客 - 笔记</title>
-	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
-	<meta name="description" content="Golang技巧之默认值设置的高阶玩法">
-		<meta property="og:title" content="Go Struct Default Value" />
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Go Struct Default Value - Ding Jianhui 的个人博客 - 笔记</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="dingo" /><meta name="description" content="Golang技巧之默认值设置的高阶玩法" /><meta name="keywords" content="dingo, golang, 笔记" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.73.0-DEV with theme even" />
+
+
+<link rel="canonical" href="http://dingjianhui.top/blog/2020/07/20/go-struct-default-value/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Go Struct Default Value" />
 <meta property="og:description" content="Golang技巧之默认值设置的高阶玩法" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://dingjianhui.top/blog/2020/07/20/go-struct-default-value/" />
 <meta property="article:published_time" content="2020-07-20T17:42:49+08:00" />
 <meta property="article:modified_time" content="2020-07-20T17:42:49+08:00" />
-
-		<meta itemprop="name" content="Go Struct Default Value">
+<meta itemprop="name" content="Go Struct Default Value">
 <meta itemprop="description" content="Golang技巧之默认值设置的高阶玩法">
 <meta itemprop="datePublished" content="2020-07-20T17:42:49&#43;08:00" />
 <meta itemprop="dateModified" content="2020-07-20T17:42:49&#43;08:00" />
-<meta itemprop="wordCount" content="139">
+<meta itemprop="wordCount" content="521">
 
 
 
-<meta itemprop="keywords" content="go," />
-		<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="go," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Go Struct Default Value"/>
 <meta name="twitter:description" content="Golang技巧之默认值设置的高阶玩法"/>
 
-	<link rel="dns-prefetch" href="//fonts.googleapis.com">
-	<link rel="dns-prefetch" href="//fonts.gstatic.com">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
-	<link rel="stylesheet" href="/css/style.css">
-	<link rel="stylesheet" href="/css/custom.css">
-	<link rel="shortcut icon" href="/favicon.ico">
-		
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
 </head>
-<body class="body">
-	<div class="container container--outer">
-		<header class="header">
-	<div class="container header__container">
-		
-	<div class="logo logo--mixed">
-		<a class="logo__link" href="/" title="Ding Jianhui 的个人博客 - 笔记" rel="home">
-			<div class="logo__item logo__imagebox">
-					<img class="logo__img" src="/img/logo.jpg">
-				</div><div class="logo__item logo__text">
-					<div class="logo__title">Ding Jianhui 的个人博客 - 笔记</div>
-					<div class="logo__tagline">好记性不如烂笔头</div>
-				</div>
-		</a>
-	</div>
-		<div class="divider"></div>
-	</div>
-</header>
-		<div class="wrapper flex">
-			<div class="primary">
-			
-<main class="main" role="main">
-	<article class="post">
-		<header class="post__header">
-			<h1 class="post__title">Go Struct Default Value</h1>
-			<p class="post__lead">Golang技巧之默认值设置的高阶玩法</p>
-			<div class="post__meta meta"><div class="meta__item-author meta__item">
-	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Ding Jianhui</span>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">dingo</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
 </div>
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-07-20T17:42:49&#43;08:00">2020-07-20</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/golang/" rel="category">golang</a>
-	</span>
-</div></div>
-		</header><div class="content post__content clearfix">
-			<p>传参时，不改变属性默认值时就不传该参数</p>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">dingo</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+  <div class="post-content">
+    <p>传参时，不改变属性默认值时就不传该参数</p>
 <p>比如<code>php</code>中</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">    public function addLog($log_type,$log_content,$admin_id,$admin_name,$type = 2)
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-php" data-lang="php">    public function addLog($log_type,$log_content,$admin_id,$admin_name,$type = 2)
     {
         ......
     }
-</code></pre></div><p>调用</p>
+</code></pre></td></tr></table>
+</div>
+</div><p>调用</p>
 <pre><code>$this-&gt;log-&gt;addLog(0,&quot;编辑角色 -- 该角色不存在&quot;,$this-&gt;admin_id,$this-&gt;admin_name);
 
 $type就没有传
@@ -88,128 +146,213 @@ $type就没有传
 </ol>
 <h4 id="高阶玩法">高阶玩法</h4>
 <p>src/Object/User.go</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">Object</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">Object</span>
 
-<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">User</span> <span style="color:#66d9ef">struct</span> {
-	<span style="color:#a6e22e">UserId</span> <span style="color:#66d9ef">int</span>
-	<span style="color:#a6e22e">UserName</span> <span style="color:#66d9ef">string</span>
-	<span style="color:#a6e22e">UserAge</span> <span style="color:#66d9ef">int</span>
+<span class="kd">type</span> <span class="nx">User</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">UserId</span> <span class="kt">int</span>
+	<span class="nx">UserName</span> <span class="kt">string</span>
+	<span class="nx">UserAge</span> <span class="kt">int</span>
 
-}
+<span class="p">}</span>
 
-<span style="color:#75715e">// 初始化User对象 userAttr 设置属性值的函数体
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">NewUser</span>(<span style="color:#a6e22e">userAttr</span> <span style="color:#f92672">...</span><span style="color:#a6e22e">UserAttr</span>) <span style="color:#f92672">*</span><span style="color:#a6e22e">User</span> {
-	<span style="color:#a6e22e">user</span> <span style="color:#f92672">:=</span> new(<span style="color:#a6e22e">User</span>)
-	<span style="color:#a6e22e">UserAttrs</span>(<span style="color:#a6e22e">userAttr</span>).<span style="color:#a6e22e">Apply</span>(<span style="color:#a6e22e">user</span>)
-	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">user</span>
-}
-</code></pre></div><p>src/Object/UserAttr.go</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">Object</span>
-
-<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">UserAttr</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">user</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">User</span>) <span style="color:#75715e">// 用来定义User结构体的属性值函数
-</span><span style="color:#75715e"></span>
-<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">UserAttrs</span> []<span style="color:#a6e22e">UserAttr</span>
-
-<span style="color:#75715e">// 执行设置属性值的函数 
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">this</span> <span style="color:#a6e22e">UserAttrs</span>) <span style="color:#a6e22e">Apply</span>(<span style="color:#a6e22e">user</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">User</span>)  {
-	<span style="color:#75715e">// 遍历设置属性值的函数
-</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>,<span style="color:#a6e22e">withAttr</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">this</span> {
-		<span style="color:#a6e22e">withAttr</span>(<span style="color:#a6e22e">user</span>) <span style="color:#75715e">// 执行函数
-</span><span style="color:#75715e"></span>	}
-}
-
-<span style="color:#75715e">// 设置UserName属性的值
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">WithUserName</span>(<span style="color:#a6e22e">userName</span> <span style="color:#66d9ef">string</span>) <span style="color:#a6e22e">UserAttr</span> {
-	<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">user</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">User</span>) {
-		<span style="color:#a6e22e">user</span>.<span style="color:#a6e22e">UserName</span> = <span style="color:#a6e22e">userName</span>
-	}
-}
-
-<span style="color:#75715e">// 设置UserAge属性的值
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">WithUserAge</span>(<span style="color:#a6e22e">userAge</span> <span style="color:#66d9ef">int</span>) <span style="color:#a6e22e">UserAttr</span> {
-	<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">user</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">User</span>) {
-		<span style="color:#a6e22e">user</span>.<span style="color:#a6e22e">UserAge</span> = <span style="color:#a6e22e">userAge</span>
-	}
-}
-
-</code></pre></div><p>src/main.go</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
-
-<span style="color:#f92672">import</span> (
-	<span style="color:#e6db74">&#34;basicgo/src/Object&#34;</span>
-	<span style="color:#e6db74">&#34;fmt&#34;</span>
-)
-
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>()  {
-	<span style="color:#75715e">// 初始化User对象
-</span><span style="color:#75715e"></span>	<span style="color:#75715e">// 这样就可以设置属性的默认值
-</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">user</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">Object</span>.<span style="color:#a6e22e">NewUser</span>(
-		<span style="color:#a6e22e">Object</span>.<span style="color:#a6e22e">WithUserName</span>(<span style="color:#e6db74">&#34;zhangsan&#34;</span>),
-		<span style="color:#a6e22e">Object</span>.<span style="color:#a6e22e">WithUserAge</span>(<span style="color:#ae81ff">18</span>),
-		)
-	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">user</span>)
-	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">user</span>.<span style="color:#a6e22e">UserName</span>)
-
-
-
-}
-</code></pre></div>
-		</div>
-		<footer class="post__footer">
-			
-<div class="post__tags tags clearfix">
-	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
-	<ul class="tags__list">
-		<li class="tags__item">
-			<a class="tags__link btn" href="/tags/go/" rel="tag">go</a>
-		</li>
-	</ul>
+<span class="c1">// 初始化User对象 userAttr 设置属性值的函数体
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">NewUser</span><span class="p">(</span><span class="nx">userAttr</span> <span class="o">...</span><span class="nx">UserAttr</span><span class="p">)</span> <span class="o">*</span><span class="nx">User</span> <span class="p">{</span>
+	<span class="nx">user</span> <span class="o">:=</span> <span class="nb">new</span><span class="p">(</span><span class="nx">User</span><span class="p">)</span>
+	<span class="nf">UserAttrs</span><span class="p">(</span><span class="nx">userAttr</span><span class="p">).</span><span class="nf">Apply</span><span class="p">(</span><span class="nx">user</span><span class="p">)</span>
+	<span class="k">return</span> <span class="nx">user</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
 </div>
-		</footer>
-	</article>
-</main>
+</div><p>src/Object/UserAttr.go</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">Object</span>
 
-<div class="authorbox clearfix">
-	<figure class="authorbox__avatar">
-		<img alt="Ding Jianhui avatar" src="/img/logo.jpg" class="avatar" height="90" width="90">
-	</figure>
-	<div class="authorbox__header">
-		<span class="authorbox__name">关于 Ding Jianhui</span>
-	</div>
+<span class="kd">type</span> <span class="nx">UserAttr</span> <span class="kd">func</span><span class="p">(</span><span class="nx">user</span> <span class="o">*</span><span class="nx">User</span><span class="p">)</span> <span class="c1">// 用来定义User结构体的属性值函数
+</span><span class="c1"></span>
+<span class="kd">type</span> <span class="nx">UserAttrs</span> <span class="p">[]</span><span class="nx">UserAttr</span>
+
+<span class="c1">// 执行设置属性值的函数 
+</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">this</span> <span class="nx">UserAttrs</span><span class="p">)</span> <span class="nf">Apply</span><span class="p">(</span><span class="nx">user</span> <span class="o">*</span><span class="nx">User</span><span class="p">)</span>  <span class="p">{</span>
+	<span class="c1">// 遍历设置属性值的函数
+</span><span class="c1"></span>	<span class="k">for</span> <span class="nx">_</span><span class="p">,</span><span class="nx">withAttr</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">this</span> <span class="p">{</span>
+		<span class="nf">withAttr</span><span class="p">(</span><span class="nx">user</span><span class="p">)</span> <span class="c1">// 执行函数
+</span><span class="c1"></span>	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// 设置UserName属性的值
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">WithUserName</span><span class="p">(</span><span class="nx">userName</span> <span class="kt">string</span><span class="p">)</span> <span class="nx">UserAttr</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="kd">func</span><span class="p">(</span><span class="nx">user</span> <span class="o">*</span><span class="nx">User</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">user</span><span class="p">.</span><span class="nx">UserName</span> <span class="p">=</span> <span class="nx">userName</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// 设置UserAge属性的值
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">WithUserAge</span><span class="p">(</span><span class="nx">userAge</span> <span class="kt">int</span><span class="p">)</span> <span class="nx">UserAttr</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="kd">func</span><span class="p">(</span><span class="nx">user</span> <span class="o">*</span><span class="nx">User</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">user</span><span class="p">.</span><span class="nx">UserAge</span> <span class="p">=</span> <span class="nx">userAge</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><p>src/main.go</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+	<span class="s">&#34;basicgo/src/Object&#34;</span>
+	<span class="s">&#34;fmt&#34;</span>
+<span class="p">)</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span>  <span class="p">{</span>
+	<span class="c1">// 初始化User对象
+</span><span class="c1"></span>	<span class="c1">// 这样就可以设置属性的默认值
+</span><span class="c1"></span>	<span class="nx">user</span> <span class="o">:=</span> <span class="nx">Object</span><span class="p">.</span><span class="nf">NewUser</span><span class="p">(</span>
+		<span class="nx">Object</span><span class="p">.</span><span class="nf">WithUserName</span><span class="p">(</span><span class="s">&#34;zhangsan&#34;</span><span class="p">),</span>
+		<span class="nx">Object</span><span class="p">.</span><span class="nf">WithUserAge</span><span class="p">(</span><span class="mi">18</span><span class="p">),</span>
+		<span class="p">)</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">user</span><span class="p">)</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">user</span><span class="p">.</span><span class="nx">UserName</span><span class="p">)</span>
+
+
+
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+  </div>
+</article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/dingjianhui" class="iconfont icon-github" title="github"></a>
+  <a href="http://dingjianhui.top/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
 
-<nav class="pager flex">
-	<div class="pager__item pager__item--prev">
-		<a class="pager__link" href="/blog/2020/07/07/go-scheduler/" rel="prev">
-			<span class="pager__subtitle">«&thinsp;上一篇</span>
-			<p class="pager__title">Go Scheduler</p>
-		</a>
-	</div>
-	<div class="pager__item pager__item--next">
-		<a class="pager__link" href="/blog/2020/07/21/go-map/" rel="next">
-			<span class="pager__subtitle">下一篇&thinsp;»</span>
-			<p class="pager__title">Go Map</p>
-		</a>
-	</div>
-</nav>
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Ding JianHui</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
 
 
 
-			</div>
-			
-		</div>
-		<footer class="footer">
-	<div class="container footer__container flex">
-		
-		<div class="footer__copyright">
-			&copy; 2020 Ding Jianhui.
-			<span class="footer__copyright-credits">基于 <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> 引擎和 <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a>主題</span>
-		</div>
-	</div>
-</footer>
-	</div>
-<script async defer src="/js/menu.js"></script>
-<script src="/js/custom.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+
+
+
+
+
+
+
+
 </body>
 </html>

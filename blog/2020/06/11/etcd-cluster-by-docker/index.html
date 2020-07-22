@@ -1,115 +1,211 @@
 <!DOCTYPE html>
-<html class="no-js" lang="zh-cn">
+<html lang="zh-cn">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>使用docker模拟etcd集群的创建 - Ding Jianhui 的个人博客 - 笔记</title>
-	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
-	<meta name="description" content="使用docker模拟etcd集群的创建">
-		<meta property="og:title" content="使用docker模拟etcd集群的创建" />
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>使用docker模拟etcd集群的创建 - Ding Jianhui 的个人博客 - 笔记</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="dingo" /><meta name="description" content="使用docker模拟etcd集群的创建" /><meta name="keywords" content="dingo, golang, 笔记" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.73.0-DEV with theme even" />
+
+
+<link rel="canonical" href="http://dingjianhui.top/blog/2020/06/11/etcd-cluster-by-docker/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="使用docker模拟etcd集群的创建" />
 <meta property="og:description" content="使用docker模拟etcd集群的创建" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://dingjianhui.top/blog/2020/06/11/etcd-cluster-by-docker/" />
 <meta property="article:published_time" content="2020-06-11T17:14:58+08:00" />
 <meta property="article:modified_time" content="2020-06-11T17:14:58+08:00" />
-
-		<meta itemprop="name" content="使用docker模拟etcd集群的创建">
+<meta itemprop="name" content="使用docker模拟etcd集群的创建">
 <meta itemprop="description" content="使用docker模拟etcd集群的创建">
 <meta itemprop="datePublished" content="2020-06-11T17:14:58&#43;08:00" />
 <meta itemprop="dateModified" content="2020-06-11T17:14:58&#43;08:00" />
-<meta itemprop="wordCount" content="597">
+<meta itemprop="wordCount" content="1536">
 
 
 
-<meta itemprop="keywords" content="etcd,docker," />
-		<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="etcd,docker," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="使用docker模拟etcd集群的创建"/>
 <meta name="twitter:description" content="使用docker模拟etcd集群的创建"/>
 
-	<link rel="dns-prefetch" href="//fonts.googleapis.com">
-	<link rel="dns-prefetch" href="//fonts.gstatic.com">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
-	<link rel="stylesheet" href="/css/style.css">
-	<link rel="stylesheet" href="/css/custom.css">
-	<link rel="shortcut icon" href="/favicon.ico">
-		
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
 </head>
-<body class="body">
-	<div class="container container--outer">
-		<header class="header">
-	<div class="container header__container">
-		
-	<div class="logo logo--mixed">
-		<a class="logo__link" href="/" title="Ding Jianhui 的个人博客 - 笔记" rel="home">
-			<div class="logo__item logo__imagebox">
-					<img class="logo__img" src="/img/logo.jpg">
-				</div><div class="logo__item logo__text">
-					<div class="logo__title">Ding Jianhui 的个人博客 - 笔记</div>
-					<div class="logo__tagline">好记性不如烂笔头</div>
-				</div>
-		</a>
-	</div>
-		<div class="divider"></div>
-	</div>
-</header>
-		<div class="wrapper flex">
-			<div class="primary">
-			
-<main class="main" role="main">
-	<article class="post">
-		<header class="post__header">
-			<h1 class="post__title">使用docker模拟etcd集群的创建</h1>
-			<div class="post__meta meta"><div class="meta__item-author meta__item">
-	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Ding Jianhui</span>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">dingo</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
 </div>
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-06-11T17:14:58&#43;08:00">2020-06-11</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/etcd/" rel="category">etcd</a>, <a class="meta__link" href="/categories/docker/" rel="category">docker</a>
-	</span>
-</div></div>
-		</header><div class="content post__content clearfix">
-			<pre><code>实际中部署集群 使用不同机器 或 docker swarm  或 k8s  来部署
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">dingo</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+  <div class="post-content">
+    <pre><code>实际中部署集群 使用不同机器 或 docker swarm  或 k8s  来部署
 </code></pre>
 <h2 id="step-1--创建一个专门的docker网络">Step 1  创建一个专门的docker网络</h2>
 <pre><code>创建docker网络  (使用的是bridge,指定了子网)
 docker network  create etcdnet  --subnet 172.25.0.0/16
 创建完后建议用户重新登录
 </code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#f92672">[</span>tintin@localhost ttphp<span style="color:#f92672">]</span>$ docker network  create etcdnet  --subnet 172.25.0.0/16 
-</code></pre></div><h2 id="step-2-创建两个节点">Step 2 创建两个节点</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="o">[</span>tintin@localhost ttphp<span class="o">]</span>$ docker network  create etcdnet  --subnet 172.25.0.0/16 
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="step-2-创建两个节点">Step 2 创建两个节点</h2>
 <pre><code>一个节点为etcd1,一个节点为etcd2
 节点下各自创建 conf 和 data
 </code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#f92672">[</span>tintin@localhost ttphp<span style="color:#f92672">]</span>$ cd etcds/
-<span style="color:#f92672">[</span>tintin@localhost etcds<span style="color:#f92672">]</span>$ mkdir etcd1 etcd2
-<span style="color:#f92672">[</span>tintin@localhost etcds<span style="color:#f92672">]</span>$ mkdir etcd1/conf etcd1/data
-<span style="color:#f92672">[</span>tintin@localhost etcds<span style="color:#f92672">]</span>$ mkdir etcd2/conf etcd2/data
-</code></pre></div><h2 id="step-3-创建每个节点的配置文件">Step 3 创建每个节点的配置文件</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="o">[</span>tintin@localhost ttphp<span class="o">]</span>$ <span class="nb">cd</span> etcds/
+<span class="o">[</span>tintin@localhost etcds<span class="o">]</span>$ mkdir etcd1 etcd2
+<span class="o">[</span>tintin@localhost etcds<span class="o">]</span>$ mkdir etcd1/conf etcd1/data
+<span class="o">[</span>tintin@localhost etcds<span class="o">]</span>$ mkdir etcd2/conf etcd2/data
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="step-3-创建每个节点的配置文件">Step 3 创建每个节点的配置文件</h2>
 <pre><code>etcd1/conf/etcd.yml (etcd1节点的配置文件)
 vim etcd1/conf/etcd.yml
 </code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">name</span>: etcd1
-<span style="color:#66d9ef">data-dir</span>: /etcd/data
-<span style="color:#66d9ef">listen-client-urls</span>: http://<span style="color:#ae81ff">172.25.0.101</span>:<span style="color:#ae81ff">2379</span>, http://<span style="color:#ae81ff">127.0.0.1</span>:<span style="color:#ae81ff">2379</span>
-<span style="color:#66d9ef">advertise-client-urls</span>: http://<span style="color:#ae81ff">172.25.0.101</span>:<span style="color:#ae81ff">2379</span>
-<span style="color:#66d9ef">listen-peer-urls</span>: http://<span style="color:#ae81ff">172.25.0.101</span>:<span style="color:#ae81ff">2380</span>
-<span style="color:#66d9ef">initial-advertise-peer-urls</span>: http://<span style="color:#ae81ff">172.25.0.101</span>:<span style="color:#ae81ff">2380</span>
-<span style="color:#66d9ef">initial-cluster</span>: etcd1=http://<span style="color:#ae81ff">172.25.0.101</span>:<span style="color:#ae81ff">2380</span>,etcd2=http://<span style="color:#ae81ff">172.25.0.102</span>:<span style="color:#ae81ff">2380</span>
-<span style="color:#66d9ef">initial-cluster-token</span>: etcd-cluster-token
-<span style="color:#66d9ef">initial-cluster-state</span>: new
-</code></pre></div><pre><code>etcd2/conf/etcd.yml (etcd2节点的配置文件)
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="k">name</span><span class="p">:</span><span class="w"> </span>etcd1<span class="w">
+</span><span class="w"></span><span class="k">data-dir</span><span class="p">:</span><span class="w"> </span>/etcd/data<span class="w">
+</span><span class="w"></span><span class="k">listen-client-urls</span><span class="p">:</span><span class="w"> </span>http<span class="p">:</span>//<span class="m">172.25.0.101</span><span class="p">:</span><span class="m">2379</span><span class="p">,</span><span class="w"> </span>http<span class="p">:</span>//<span class="m">127.0.0.1</span><span class="p">:</span><span class="m">2379</span><span class="w">
+</span><span class="w"></span><span class="k">advertise-client-urls</span><span class="p">:</span><span class="w"> </span>http<span class="p">:</span>//<span class="m">172.25.0.101</span><span class="p">:</span><span class="m">2379</span><span class="w">
+</span><span class="w"></span><span class="k">listen-peer-urls</span><span class="p">:</span><span class="w"> </span>http<span class="p">:</span>//<span class="m">172.25.0.101</span><span class="p">:</span><span class="m">2380</span><span class="w">
+</span><span class="w"></span><span class="k">initial-advertise-peer-urls</span><span class="p">:</span><span class="w"> </span>http<span class="p">:</span>//<span class="m">172.25.0.101</span><span class="p">:</span><span class="m">2380</span><span class="w">
+</span><span class="w"></span><span class="k">initial-cluster</span><span class="p">:</span><span class="w"> </span>etcd1=http<span class="p">:</span>//<span class="m">172.25.0.101</span><span class="p">:</span><span class="m">2380</span><span class="p">,</span>etcd2=http<span class="p">:</span>//<span class="m">172.25.0.102</span><span class="p">:</span><span class="m">2380</span><span class="w">
+</span><span class="w"></span><span class="k">initial-cluster-token</span><span class="p">:</span><span class="w"> </span>etcd-cluster-token<span class="w">
+</span><span class="w"></span><span class="k">initial-cluster-state</span><span class="p">:</span><span class="w"> </span>new<span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><pre><code>etcd2/conf/etcd.yml (etcd2节点的配置文件)
 vim etcd2/conf/etcd.yml
 </code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">name</span>: etcd2
-<span style="color:#66d9ef">data-dir</span>: /etcd/data
-<span style="color:#66d9ef">listen-client-urls</span>: http://<span style="color:#ae81ff">172.25.0.102</span>:<span style="color:#ae81ff">2379</span>, http://<span style="color:#ae81ff">127.0.0.1</span>:<span style="color:#ae81ff">2379</span>
-<span style="color:#66d9ef">advertise-client-urls</span>: http://<span style="color:#ae81ff">172.25.0.102</span>:<span style="color:#ae81ff">2379</span>
-<span style="color:#66d9ef">listen-peer-urls</span>: http://<span style="color:#ae81ff">172.25.0.102</span>:<span style="color:#ae81ff">2380</span>
-<span style="color:#66d9ef">initial-advertise-peer-urls</span>: http://<span style="color:#ae81ff">172.25.0.102</span>:<span style="color:#ae81ff">2380</span>
-<span style="color:#66d9ef">initial-cluster</span>: etcd1=http://<span style="color:#ae81ff">172.25.0.101</span>:<span style="color:#ae81ff">2380</span>,etcd2=http://<span style="color:#ae81ff">172.25.0.102</span>:<span style="color:#ae81ff">2380</span>
-<span style="color:#66d9ef">initial-cluster-token</span>: etcd-cluster-token
-<span style="color:#66d9ef">initial-cluster-state</span>: new
-</code></pre></div><pre><code>ETCD参数说明
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="k">name</span><span class="p">:</span><span class="w"> </span>etcd2<span class="w">
+</span><span class="w"></span><span class="k">data-dir</span><span class="p">:</span><span class="w"> </span>/etcd/data<span class="w">
+</span><span class="w"></span><span class="k">listen-client-urls</span><span class="p">:</span><span class="w"> </span>http<span class="p">:</span>//<span class="m">172.25.0.102</span><span class="p">:</span><span class="m">2379</span><span class="p">,</span><span class="w"> </span>http<span class="p">:</span>//<span class="m">127.0.0.1</span><span class="p">:</span><span class="m">2379</span><span class="w">
+</span><span class="w"></span><span class="k">advertise-client-urls</span><span class="p">:</span><span class="w"> </span>http<span class="p">:</span>//<span class="m">172.25.0.102</span><span class="p">:</span><span class="m">2379</span><span class="w">
+</span><span class="w"></span><span class="k">listen-peer-urls</span><span class="p">:</span><span class="w"> </span>http<span class="p">:</span>//<span class="m">172.25.0.102</span><span class="p">:</span><span class="m">2380</span><span class="w">
+</span><span class="w"></span><span class="k">initial-advertise-peer-urls</span><span class="p">:</span><span class="w"> </span>http<span class="p">:</span>//<span class="m">172.25.0.102</span><span class="p">:</span><span class="m">2380</span><span class="w">
+</span><span class="w"></span><span class="k">initial-cluster</span><span class="p">:</span><span class="w"> </span>etcd1=http<span class="p">:</span>//<span class="m">172.25.0.101</span><span class="p">:</span><span class="m">2380</span><span class="p">,</span>etcd2=http<span class="p">:</span>//<span class="m">172.25.0.102</span><span class="p">:</span><span class="m">2380</span><span class="w">
+</span><span class="w"></span><span class="k">initial-cluster-token</span><span class="p">:</span><span class="w"> </span>etcd-cluster-token<span class="w">
+</span><span class="w"></span><span class="k">initial-cluster-state</span><span class="p">:</span><span class="w"> </span>new<span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><pre><code>ETCD参数说明
 
 name: 节点名称
 data-dir: 数据存储目录
@@ -137,63 +233,135 @@ initial-cluster-state: 节点初始化方式，new 表示如果没有集群不�
 拷贝 docker cp etcd testgo:/usr/bin &amp;&amp; docker cp etcdctl testgo:/usr/bin 
 重新构建镜像 docker commit testgo etcd:my
 </code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#f92672">[</span>tintin@localhost etcds<span style="color:#f92672">]</span>$ docker run --name testgo -it golang:1.14.4-alpine3.12 sh
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="o">[</span>tintin@localhost etcds<span class="o">]</span>$ docker run --name testgo -it golang:1.14.4-alpine3.12 sh
 Ctrl+D 退出
-<span style="color:#f92672">[</span>tintin@localhost etcds<span style="color:#f92672">]</span>$ docker start testgo
-<span style="color:#f92672">[</span>tintin@localhost etcds<span style="color:#f92672">]</span>$ docker cp /home/tintin/ttphp/etcd/etcd testgo:/usr/bin <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>docker cp /home/tintin/ttphp/etcd/etcdctl testgo:/usr/bin
-<span style="color:#f92672">[</span>tintin@localhost etcds<span style="color:#f92672">]</span>$ docker commit testgo etcd:my
-<span style="color:#f92672">[</span>tintin@localhost etcds<span style="color:#f92672">]</span>$ docker images
-<span style="color:#f92672">[</span>tintin@localhost etcds<span style="color:#f92672">]</span>$ docker ps
-<span style="color:#f92672">[</span>tintin@localhost etcds<span style="color:#f92672">]</span>$ docker stop testgo 
-<span style="color:#f92672">[</span>tintin@localhost etcds<span style="color:#f92672">]</span>$ docker rm testgo 
-</code></pre></div><h2 id="step-5-使用新镜像创建两个容器">Step 5 使用新镜像创建两个容器</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#f92672">[</span>tintin@localhost etcds<span style="color:#f92672">]</span>$ docker run -d --name etcd1 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>--network etcdnet  --ip 172.25.0.101 -p 23791:2379 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>-v /home/tintin/ttphp/etcds/etcd1:/etcd etcd:my <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>etcd --config-file /etcd/conf/etcd.yml
-<span style="color:#f92672">[</span>tintin@localhost etcds<span style="color:#f92672">]</span>$ docker run -d --name etcd2 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>--network etcdnet  --ip 172.25.0.102 -p 23792:2379 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>-v /home/tintin/ttphp/etcds/etcd2:/etcd etcd:my <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>etcd --config-file /etcd/conf/etcd.yml
-<span style="color:#f92672">[</span>tintin@localhost etcds<span style="color:#f92672">]</span>$ docker ps
+<span class="o">[</span>tintin@localhost etcds<span class="o">]</span>$ docker start testgo
+<span class="o">[</span>tintin@localhost etcds<span class="o">]</span>$ docker cp /home/tintin/ttphp/etcd/etcd testgo:/usr/bin <span class="o">&amp;&amp;</span> <span class="se">\
+</span><span class="se"></span>docker cp /home/tintin/ttphp/etcd/etcdctl testgo:/usr/bin
+<span class="o">[</span>tintin@localhost etcds<span class="o">]</span>$ docker commit testgo etcd:my
+<span class="o">[</span>tintin@localhost etcds<span class="o">]</span>$ docker images
+<span class="o">[</span>tintin@localhost etcds<span class="o">]</span>$ docker ps
+<span class="o">[</span>tintin@localhost etcds<span class="o">]</span>$ docker stop testgo 
+<span class="o">[</span>tintin@localhost etcds<span class="o">]</span>$ docker rm testgo 
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="step-5-使用新镜像创建两个容器">Step 5 使用新镜像创建两个容器</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="o">[</span>tintin@localhost etcds<span class="o">]</span>$ docker run -d --name etcd1 <span class="se">\
+</span><span class="se"></span>--network etcdnet  --ip 172.25.0.101 -p 23791:2379 <span class="se">\
+</span><span class="se"></span>-v /home/tintin/ttphp/etcds/etcd1:/etcd etcd:my <span class="se">\
+</span><span class="se"></span>etcd --config-file /etcd/conf/etcd.yml
+<span class="o">[</span>tintin@localhost etcds<span class="o">]</span>$ docker run -d --name etcd2 <span class="se">\
+</span><span class="se"></span>--network etcdnet  --ip 172.25.0.102 -p 23792:2379 <span class="se">\
+</span><span class="se"></span>-v /home/tintin/ttphp/etcds/etcd2:/etcd etcd:my <span class="se">\
+</span><span class="se"></span>etcd --config-file /etcd/conf/etcd.yml
+<span class="o">[</span>tintin@localhost etcds<span class="o">]</span>$ docker ps
 
-</code></pre></div><h2 id="step-6-测试">Step 6 测试</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#f92672">[</span>tintin@localhost etcds<span style="color:#f92672">]</span>$ cd ../etcd
-<span style="color:#f92672">[</span>tintin@localhost etcd<span style="color:#f92672">]</span>$ ls
-<span style="color:#f92672">[</span>tintin@localhost etcd<span style="color:#f92672">]</span>$ ./etcdctl --endpoints http://localhost:23791 member list
-97f72e8299c69562, started, etcd1, http://172.25.0.101:2380, http://172.25.0.101:2379, false
-aea8ea6030d288e8, started, etcd2, http://172.25.0.102:2380, http://172.25.0.102:2379, false
-<span style="color:#f92672">[</span>tintin@localhost etcd<span style="color:#f92672">]</span>$ ./etcdctl --endpoints http://localhost:23792 member list
-97f72e8299c69562, started, etcd1, http://172.25.0.101:2380, http://172.25.0.101:2379, false
-aea8ea6030d288e8, started, etcd2, http://172.25.0.102:2380, http://172.25.0.102:2379, false
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="step-6-测试">Step 6 测试</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="o">[</span>tintin@localhost etcds<span class="o">]</span>$ <span class="nb">cd</span> ../etcd
+<span class="o">[</span>tintin@localhost etcd<span class="o">]</span>$ ls
+<span class="o">[</span>tintin@localhost etcd<span class="o">]</span>$ ./etcdctl --endpoints http://localhost:23791 member list
+97f72e8299c69562, started, etcd1, http://172.25.0.101:2380, http://172.25.0.101:2379, <span class="nb">false</span>
+aea8ea6030d288e8, started, etcd2, http://172.25.0.102:2380, http://172.25.0.102:2379, <span class="nb">false</span>
+<span class="o">[</span>tintin@localhost etcd<span class="o">]</span>$ ./etcdctl --endpoints http://localhost:23792 member list
+97f72e8299c69562, started, etcd1, http://172.25.0.101:2380, http://172.25.0.101:2379, <span class="nb">false</span>
+aea8ea6030d288e8, started, etcd2, http://172.25.0.102:2380, http://172.25.0.102:2379, <span class="nb">false</span>
 
-</code></pre></div><pre><code>也可以进入任意一个容器
+</code></pre></td></tr></table>
+</div>
+</div><pre><code>也可以进入任意一个容器
 如果是v2版本，可以使用  ETCDCTL_API=2 etcdctl member list 和 ETCDCTL_API=3 etcdctl member list 来查看
 
 how can I know which node is leader ？
 详情查看 https://github.com/etcd-io/etcd/issues/9417
 </code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#f92672">[</span>tintin@localhost etcds<span style="color:#f92672">]</span>$ docker exec -it etcd1 sh
-/go <span style="color:#75715e"># etcdctl member list</span>
-97f72e8299c69562, started, etcd1, http://172.25.0.101:2380, http://172.25.0.101:2379, false
-aea8ea6030d288e8, started, etcd2, http://172.25.0.102:2380, http://172.25.0.102:2379, false
-/go <span style="color:#75715e"># etcdctl version</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="o">[</span>tintin@localhost etcds<span class="o">]</span>$ docker <span class="nb">exec</span> -it etcd1 sh
+/go <span class="c1"># etcdctl member list</span>
+97f72e8299c69562, started, etcd1, http://172.25.0.101:2380, http://172.25.0.101:2379, <span class="nb">false</span>
+aea8ea6030d288e8, started, etcd2, http://172.25.0.102:2380, http://172.25.0.102:2379, <span class="nb">false</span>
+/go <span class="c1"># etcdctl version</span>
 etcdctl version: 3.4.9
 API version: 3.4
-/go <span style="color:#75715e"># ETCDCTL_API=3 etcdctl member list</span>
-97f72e8299c69562, started, etcd1, http://172.25.0.101:2380, http://172.25.0.101:2379, false
-aea8ea6030d288e8, started, etcd2, http://172.25.0.102:2380, http://172.25.0.102:2379, false
-/go <span style="color:#75715e"># ETCDCTL_API=2 etcdctl member list</span>
-unexpected status code <span style="color:#ae81ff">404</span>
-/go <span style="color:#75715e"># ETCDCTL_API=3 etcdctl -w table --endpoints=etcd1:2379,etcd2:2379 endpoint status</span>
+/go <span class="c1"># ETCDCTL_API=3 etcdctl member list</span>
+97f72e8299c69562, started, etcd1, http://172.25.0.101:2380, http://172.25.0.101:2379, <span class="nb">false</span>
+aea8ea6030d288e8, started, etcd2, http://172.25.0.102:2380, http://172.25.0.102:2379, <span class="nb">false</span>
+/go <span class="c1"># ETCDCTL_API=2 etcdctl member list</span>
+unexpected status code <span class="m">404</span>
+/go <span class="c1"># ETCDCTL_API=3 etcdctl -w table --endpoints=etcd1:2379,etcd2:2379 endpoint status</span>
 +------------+------------------+---------+---------+-----------+------------+-----------+------------+--------------------+--------+
-|  ENDPOINT  |        ID        | VERSION | DB SIZE | IS LEADER | IS LEARNER | RAFT TERM | RAFT INDEX | RAFT APPLIED INDEX | ERRORS |
+<span class="p">|</span>  ENDPOINT  <span class="p">|</span>        ID        <span class="p">|</span> VERSION <span class="p">|</span> DB SIZE <span class="p">|</span> IS LEADER <span class="p">|</span> IS LEARNER <span class="p">|</span> RAFT TERM <span class="p">|</span> RAFT INDEX <span class="p">|</span> RAFT APPLIED INDEX <span class="p">|</span> ERRORS <span class="p">|</span>
 +------------+------------------+---------+---------+-----------+------------+-----------+------------+--------------------+--------+
-| etcd1:2379 | 97f72e8299c69562 |   3.4.9 |   <span style="color:#ae81ff">20</span> kB |      true |      false |        <span style="color:#ae81ff">30</span> |          <span style="color:#ae81ff">9</span> |                  <span style="color:#ae81ff">9</span> |        |
-| etcd2:2379 | aea8ea6030d288e8 |   3.4.9 |   <span style="color:#ae81ff">20</span> kB |     false |      false |        <span style="color:#ae81ff">30</span> |          <span style="color:#ae81ff">9</span> |                  <span style="color:#ae81ff">9</span> |        |
+<span class="p">|</span> etcd1:2379 <span class="p">|</span> 97f72e8299c69562 <span class="p">|</span>   3.4.9 <span class="p">|</span>   <span class="m">20</span> kB <span class="p">|</span>      <span class="nb">true</span> <span class="p">|</span>      <span class="nb">false</span> <span class="p">|</span>        <span class="m">30</span> <span class="p">|</span>          <span class="m">9</span> <span class="p">|</span>                  <span class="m">9</span> <span class="p">|</span>        <span class="p">|</span>
+<span class="p">|</span> etcd2:2379 <span class="p">|</span> aea8ea6030d288e8 <span class="p">|</span>   3.4.9 <span class="p">|</span>   <span class="m">20</span> kB <span class="p">|</span>     <span class="nb">false</span> <span class="p">|</span>      <span class="nb">false</span> <span class="p">|</span>        <span class="m">30</span> <span class="p">|</span>          <span class="m">9</span> <span class="p">|</span>                  <span class="m">9</span> <span class="p">|</span>        <span class="p">|</span>
 +------------+------------------+---------+---------+-----------+------------+-----------+------------+--------------------+--------+
-</code></pre></div><h2 id="step-7-go初步调用etcd测试">Step 7 Go初步调用etcd测试</h2>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="step-7-go初步调用etcd测试">Step 7 Go初步调用etcd测试</h2>
 <pre><code>文档地址： https://godoc.org/go.etcd.io/etcd/clientv3
 
 安装客户端库   go get go.etcd.io/etcd/clientv3
@@ -208,107 +376,167 @@ unexpected status code <span style="color:#ae81ff">404</span>
 
 参考:https://colobu.com/2020/04/09/accidents-of-etcd-and-go-module/
 </code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Go" data-lang="Go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-Go" data-lang="Go"><span class="kn">package</span> <span class="nx">main</span>
 
-<span style="color:#f92672">import</span> (
-	<span style="color:#e6db74">&#34;context&#34;</span>
-	<span style="color:#e6db74">&#34;go.etcd.io/etcd/clientv3&#34;</span>
-	<span style="color:#e6db74">&#34;log&#34;</span>
-	<span style="color:#e6db74">&#34;time&#34;</span>
-)
+<span class="kn">import</span> <span class="p">(</span>
+	<span class="s">&#34;context&#34;</span>
+	<span class="s">&#34;go.etcd.io/etcd/clientv3&#34;</span>
+	<span class="s">&#34;log&#34;</span>
+	<span class="s">&#34;time&#34;</span>
+<span class="p">)</span>
 
-<span style="color:#75715e">// etcd简单的kv操作
-</span><span style="color:#75715e"></span>
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>()  {
-	<span style="color:#a6e22e">config</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">clientv3</span>.<span style="color:#a6e22e">Config</span>{
-		<span style="color:#a6e22e">Endpoints</span>:            []<span style="color:#66d9ef">string</span>{<span style="color:#e6db74">&#34;192.168.137.130:23791&#34;</span>,<span style="color:#e6db74">&#34;192.168.137.130:23792&#34;</span>},
-		<span style="color:#a6e22e">DialTimeout</span>:          <span style="color:#ae81ff">10</span><span style="color:#f92672">*</span><span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Second</span>,
-	}
-	<span style="color:#a6e22e">client</span>,<span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">clientv3</span>.<span style="color:#a6e22e">New</span>(<span style="color:#a6e22e">config</span>)
-	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
-		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">err</span>.<span style="color:#a6e22e">Error</span>())
-	}
-	<span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">Close</span>()
+<span class="c1">// etcd简单的kv操作
+</span><span class="c1"></span>
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span>  <span class="p">{</span>
+	<span class="nx">config</span> <span class="o">:=</span> <span class="nx">clientv3</span><span class="p">.</span><span class="nx">Config</span><span class="p">{</span>
+		<span class="nx">Endpoints</span><span class="p">:</span>            <span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">&#34;192.168.137.130:23791&#34;</span><span class="p">,</span><span class="s">&#34;192.168.137.130:23792&#34;</span><span class="p">},</span>
+		<span class="nx">DialTimeout</span><span class="p">:</span>          <span class="mi">10</span><span class="o">*</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">,</span>
+	<span class="p">}</span>
+	<span class="nx">client</span><span class="p">,</span><span class="nx">err</span> <span class="o">:=</span> <span class="nx">clientv3</span><span class="p">.</span><span class="nf">New</span><span class="p">(</span><span class="nx">config</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">log</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">())</span>
+	<span class="p">}</span>
+	<span class="k">defer</span> <span class="nx">client</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
 
-	<span style="color:#a6e22e">kv</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">clientv3</span>.<span style="color:#a6e22e">NewKV</span>(<span style="color:#a6e22e">client</span>)
-	<span style="color:#a6e22e">ctx</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Background</span>()
-	<span style="color:#a6e22e">resp</span>,<span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">kv</span>.<span style="color:#a6e22e">Put</span>(<span style="color:#a6e22e">ctx</span>,<span style="color:#e6db74">&#34;/services/user&#34;</span>,<span style="color:#e6db74">&#34;user1&#34;</span>)
-	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
-		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">err</span>.<span style="color:#a6e22e">Error</span>())
-	}
-	<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">resp</span>)
-}
+	<span class="nx">kv</span> <span class="o">:=</span> <span class="nx">clientv3</span><span class="p">.</span><span class="nf">NewKV</span><span class="p">(</span><span class="nx">client</span><span class="p">)</span>
+	<span class="nx">ctx</span> <span class="o">:=</span> <span class="nx">context</span><span class="p">.</span><span class="nf">Background</span><span class="p">()</span>
+	<span class="nx">resp</span><span class="p">,</span><span class="nx">err</span> <span class="o">:=</span> <span class="nx">kv</span><span class="p">.</span><span class="nf">Put</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span><span class="s">&#34;/services/user&#34;</span><span class="p">,</span><span class="s">&#34;user1&#34;</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">log</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">())</span>
+	<span class="p">}</span>
+	<span class="nx">log</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">resp</span><span class="p">)</span>
+<span class="p">}</span>
 
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#f92672">[</span>tintin@localhost ttphp<span style="color:#f92672">]</span>$ docker exec -it etcd1 sh
-/go <span style="color:#75715e"># etcdctl get / --prefix</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="o">[</span>tintin@localhost ttphp<span class="o">]</span>$ docker <span class="nb">exec</span> -it etcd1 sh
+/go <span class="c1"># etcdctl get / --prefix</span>
 /services/user
 user1
 /go #
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#f92672">[</span>tintin@localhost ~<span style="color:#f92672">]</span>$ docker exec -it etcd2 sh
-/go <span style="color:#75715e"># etcdctl get / --prefix</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="o">[</span>tintin@localhost ~<span class="o">]</span>$ docker <span class="nb">exec</span> -it etcd2 sh
+/go <span class="c1"># etcdctl get / --prefix</span>
 /services/user
 user1
 /go #
-</code></pre></div>
-		</div>
-		<footer class="post__footer">
-			
-<div class="post__tags tags clearfix">
-	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
-	<ul class="tags__list">
-		<li class="tags__item">
-			<a class="tags__link btn" href="/tags/etcd/" rel="tag">etcd</a>
-		</li>
-		<li class="tags__item">
-			<a class="tags__link btn" href="/tags/docker/" rel="tag">docker</a>
-		</li>
-	</ul>
+</code></pre></td></tr></table>
 </div>
-		</footer>
-	</article>
-</main>
+</div>
+  </div>
+</article>
+        </div>
+        
 
-<div class="authorbox clearfix">
-	<figure class="authorbox__avatar">
-		<img alt="Ding Jianhui avatar" src="/img/logo.jpg" class="avatar" height="90" width="90">
-	</figure>
-	<div class="authorbox__header">
-		<span class="authorbox__name">关于 Ding Jianhui</span>
-	</div>
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/dingjianhui" class="iconfont icon-github" title="github"></a>
+  <a href="http://dingjianhui.top/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
 
-<nav class="pager flex">
-	<div class="pager__item pager__item--prev">
-		<a class="pager__link" href="/blog/2020/06/11/etcd-install/" rel="prev">
-			<span class="pager__subtitle">«&thinsp;上一篇</span>
-			<p class="pager__title">etcd环境搭建(基于docker)</p>
-		</a>
-	</div>
-	<div class="pager__item pager__item--next">
-		<a class="pager__link" href="/blog/2020/06/17/centos-docker-install/" rel="next">
-			<span class="pager__subtitle">下一篇&thinsp;»</span>
-			<p class="pager__title">Centos Install Docker &amp; Docker Compose</p>
-		</a>
-	</div>
-</nav>
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Ding JianHui</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
 
 
 
-			</div>
-			
-		</div>
-		<footer class="footer">
-	<div class="container footer__container flex">
-		
-		<div class="footer__copyright">
-			&copy; 2020 Ding Jianhui.
-			<span class="footer__copyright-credits">基于 <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> 引擎和 <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a>主題</span>
-		</div>
-	</div>
-</footer>
-	</div>
-<script async defer src="/js/menu.js"></script>
-<script src="/js/custom.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+
+
+
+
+
+
+
+
 </body>
 </html>

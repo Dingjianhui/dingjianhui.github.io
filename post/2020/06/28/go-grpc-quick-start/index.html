@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Go - grpc的简单使用 - Ding Jianhui 的个人博客 - 笔记</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="dingo" /><meta name="description" content="Go - grpc的简单使用" /><meta name="keywords" content="dingo, golang, 笔记" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.73.0-DEV with theme even" />
+
+
+<link rel="canonical" href="http://dingjianhui.top/post/2020/06/28/go-grpc-quick-start/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Go - grpc的简单使用" />
+<meta property="og:description" content="Go - grpc的简单使用" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://dingjianhui.top/post/2020/06/28/go-grpc-quick-start/" />
+<meta property="article:published_time" content="2020-06-28T13:47:36+08:00" />
+<meta property="article:modified_time" content="2020-06-28T13:47:36+08:00" />
+<meta itemprop="name" content="Go - grpc的简单使用">
+<meta itemprop="description" content="Go - grpc的简单使用">
+<meta itemprop="datePublished" content="2020-06-28T13:47:36&#43;08:00" />
+<meta itemprop="dateModified" content="2020-06-28T13:47:36&#43;08:00" />
+<meta itemprop="wordCount" content="1603">
+
+
+
+<meta itemprop="keywords" content="go,grpc," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Go - grpc的简单使用"/>
+<meta name="twitter:description" content="Go - grpc的简单使用"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">dingo</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">dingo</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Go - grpc的简单使用</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-06-28 </span>
+        <div class="post-category">
+            <a href="/categories/golang/"> golang </a>
+            </div>
+          <span class="more-meta"> 约 1603 字 </span>
+          <span class="more-meta"> 预计阅读 4 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#前言">前言</a></li>
+    <li><a href="#grpc介绍">grpc介绍</a></li>
+    <li><a href="#使用前的准备工作">使用前的准备工作</a></li>
+    <li><a href="#安装grpc">安装grpc</a></li>
+    <li><a href="#定义proto文件">定义proto文件</a></li>
+    <li><a href="#生成go文件">生成Go文件</a></li>
+    <li><a href="#创建grpc服务">创建grpc服务</a></li>
+    <li><a href="#创建客户端调用">创建客户端调用</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="前言">前言</h2>
+<p>对于分布式系统而言,不同的服务分布在不同的节点上,一个服务要完成自己的功能经常需要调用其他服务的接口,比如典型的微服务架构。
+通常这种服务调用方式有两种,一种是<code>发送HTTP请求的方式</code>,另一种则是<code>RPC的方式</code>,RPC是<code>Remote Procedure Call</code>(远程过程调用)的简称,
+可以让我们像调用本地接口一样使用远程服务。相比HTTP调用,RPC的方式至少在以下几个方面有优势</p>
+<ul>
+<li>传输效率
+RPC可以自定义TCP报文,基于TCP协议进行通信,比如dubbo;同时也支持使用HTTP2协议进行通信,比如gRPC。这相比传统的HTTP1.1协议报文体积会更小,传输效率会更高。</li>
+<li>性能消耗
+RPC框架通常自带高效的序列化机制,序列化和反序列化耗时更低,序列化后的字节数通常也更小。</li>
+<li>负载均衡
+RPC框架通常自带负载均衡策略,而HTTP请求要做负载均衡需要外部应用如Nginx的支持。</li>
+<li>服务治理
+下游服务新增,重启,下线时能自动通知上游使用者,而HTTP的方式需要事先通知并修改相关配置。</li>
+</ul>
+<h2 id="grpc介绍">grpc介绍</h2>
+<p>gRPC是由Google开发并开源的RPC框架,它具有以下特点</p>
+<ul>
+<li>
+<p>语言中立</p>
+<p>支持C,Java,Go等多种语言来构建RPC服务,这是gRPC被广泛的应用在微服务项目中的重要原因,因为不同的微服务可能用不同的语言构建。</p>
+</li>
+<li>
+<p>基于HTTP/2协议</p>
+<p>支持双向流,消息头压缩,单TCP的多路复用,服务端推送等,这些特性使得gRPC更加适用于移动场景下的客户端和服务端之间的通信。</p>
+</li>
+<li>
+<p>基于IDL定义服务</p>
+<p>编写.proto文件即可生成特定语言的数据结构、服务端接口和客户端Stub。</p>
+</li>
+<li>
+<p>支持Protocol Buffer序列化</p>
+<p>Protocol Buffer是由Google开发的一种数据序列化协议(类似于XML、JSON、Hession),平台无关,压缩和传输效率高,语法简单,表达能力强。</p>
+</li>
+</ul>
+<h2 id="使用前的准备工作">使用前的准备工作</h2>
+<ol>
+<li>
+<p>安装go</p>
+</li>
+<li>
+<p>安装 Protocol buffer 编译器(protoc) V3版本 <code>https://github.com/protocolbuffers/protobuf/releases</code></p>
+</li>
+<li>
+<p>安装 Protocol buffer 编译器的 Go插件 (protoc-gen-go) <code>go get github.com/golang/protobuf/protoc-gen-go</code></p>
+<p>Google Protocol Buffer( 简称 Protobuf)</p>
+<p>是Google出品的序列化框架，与开发语言无关，和平台无关，具有良好的可扩展性。
+Protobuf和所有的序列化框架一样，都可以用于数据存储、通讯协议。</p>
+<p>Portobuf的序列化的结果体积要比XML、JSON小很多，XML和JSON的描述信息太多了，导致消息要大；
+此外Portobuf还使用了Varint 编码，减少数据对空间的占用。</p>
+<p>Portobuf序列化和反序列化速度比XML、JSON快很多，是直接把对象和字节数组做转换，而XML和JSON还需要构建成XML或者JSON对象结构。</p>
+<p>相关文档: <code>https://developers.google.com/protocol-buffers/docs/gotutorial</code></p>
+</li>
+</ol>
+<h2 id="安装grpc">安装grpc</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">go get -u google.golang.org/grpc
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="定义proto文件">定义proto文件</h2>
+<p>定义 <code>proto</code> 文件， 定义请求 <code>Request</code> 和 响应 <code>Response</code> 的格式，然后定义一个服务<code> Service</code>， Service可以包含多个方法。
+创建一个<code>proto</code>文件 <code>pbfiles/Prod.proto</code></p>
+<pre><code>ProdRequest请求参数  ProdResponse响应结果  ProdService创建一个产品服务 服务里有一个方法(通过产品ID获取产品库库的方法)
+</code></pre>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-protobuf" data-lang="protobuf"><span class="n">syntax</span><span class="o">=</span><span class="s">&#34;proto3&#34;</span><span class="p">;</span><span class="err">
+</span><span class="err"></span><span class="kn">package</span> <span class="nn">services</span><span class="p">;</span><span class="err">
+</span><span class="err"></span><span class="kd">message</span>  <span class="nc">ProdRequest</span> <span class="p">{</span><span class="err">
+</span><span class="err"></span>  <span class="kt">int32</span> <span class="n">prod_id</span> <span class="o">=</span><span class="mi">1</span><span class="p">;</span>   <span class="c1">//传入的商品ID
+</span><span class="c1"></span><span class="p">}</span><span class="err">
+</span><span class="err"></span><span class="kd">message</span> <span class="nc">ProdResponse</span><span class="p">{</span><span class="err">
+</span><span class="err"></span>  <span class="kt">int32</span> <span class="n">prod_stock</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="c1">//商品库存
+</span><span class="c1"></span><span class="p">}</span><span class="err">
+</span><span class="err"></span><span class="kd">service</span> <span class="n">ProdService</span> <span class="p">{</span><span class="err">
+</span><span class="err"></span>  <span class="k">rpc</span> <span class="n">GetProdStock</span> <span class="p">(</span><span class="n">ProdRequest</span><span class="p">)</span> <span class="k">returns</span> <span class="p">(</span><span class="n">ProdResponse</span><span class="p">);</span><span class="err">
+</span><span class="err"></span><span class="p">}</span><span class="err">
+</span></code></pre></td></tr></table>
+</div>
+</div><h2 id="生成go文件">生成Go文件</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="nb">cd</span> pbfiles
+protoc --go_out<span class="o">=</span><span class="nv">plugins</span><span class="o">=</span>grpc:../services/ Prod.proto
+</code></pre></td></tr></table>
+</div>
+</div><p>会生成一个go文件 <code>services/Prod.pb.go</code></p>
+<h2 id="创建grpc服务">创建grpc服务</h2>
+<p>创建产品业务服务 <code>services/ProdService.go</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">services</span>
+
+<span class="kn">import</span> <span class="s">&#34;context&#34;</span>
+
+<span class="kd">type</span> <span class="nx">ProdService</span> <span class="kd">struct</span> <span class="p">{</span>
+
+<span class="p">}</span>
+
+<span class="c1">// 获取产品库存
+</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">this</span> <span class="o">*</span><span class="nx">ProdService</span><span class="p">)</span> <span class="nf">GetProdStock</span><span class="p">(</span><span class="nx">ctx</span> <span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span> <span class="nx">req</span> <span class="o">*</span><span class="nx">ProdRequest</span><span class="p">)</span> <span class="p">(</span><span class="o">*</span><span class="nx">ProdResponse</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span>  <span class="p">{</span>
+	<span class="c1">// todo 业务流程
+</span><span class="c1"></span>	<span class="c1">// ......
+</span><span class="c1"></span>
+	<span class="nx">stock</span> <span class="o">:=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">ProdId</span>  <span class="c1">// 为了演示，返回的库存为商品ID
+</span><span class="c1"></span>	<span class="k">return</span> <span class="o">&amp;</span><span class="nx">ProdResponse</span><span class="p">{</span><span class="nx">ProdStock</span><span class="p">:</span><span class="nx">stock</span><span class="p">},</span><span class="kc">nil</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>创建服务 <code>server/main.go</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+	<span class="s">&#34;google.golang.org/grpc&#34;</span>
+	<span class="s">&#34;grpc/services&#34;</span>
+	<span class="s">&#34;log&#34;</span>
+	<span class="s">&#34;net&#34;</span>
+<span class="p">)</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span>  <span class="p">{</span>
+	<span class="nx">rpcServer</span> <span class="o">:=</span> <span class="nx">grpc</span><span class="p">.</span><span class="nf">NewServer</span><span class="p">()</span>
+	<span class="c1">// 把产品业务服务注册到 grpc服务中
+</span><span class="c1"></span>	<span class="nx">services</span><span class="p">.</span><span class="nf">RegisterProdServiceServer</span><span class="p">(</span><span class="nx">rpcServer</span><span class="p">,</span><span class="nb">new</span><span class="p">(</span><span class="nx">services</span><span class="p">.</span><span class="nx">ProdService</span><span class="p">))</span>
+	<span class="nx">lis</span><span class="p">,</span><span class="nx">err</span> <span class="o">:=</span> <span class="nx">net</span><span class="p">.</span><span class="nf">Listen</span><span class="p">(</span><span class="s">&#34;tcp&#34;</span><span class="p">,</span><span class="s">&#34;:8081&#34;</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">log</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">())</span>
+	<span class="p">}</span>
+	<span class="nx">rpcServer</span><span class="p">.</span><span class="nf">Serve</span><span class="p">(</span><span class="nx">lis</span><span class="p">)</span>
+<span class="p">}</span> 
+</code></pre></td></tr></table>
+</div>
+</div><p>运行服务 <code>go run server/main.go</code></p>
+<h2 id="创建客户端调用">创建客户端调用</h2>
+<p>将生成的<code>services/Prod.pb.go</code> 拷给客户端，这样客户端调用就像调用本地方法一样</p>
+<p>创建客户端调用 <code>client/main.go</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+	<span class="s">&#34;context&#34;</span>
+	<span class="s">&#34;fmt&#34;</span>
+	<span class="s">&#34;google.golang.org/grpc&#34;</span>
+	<span class="s">&#34;grpc/services&#34;</span>
+	<span class="s">&#34;log&#34;</span>
+<span class="p">)</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span>  <span class="p">{</span>
+	<span class="c1">// grpc.WithInsecure() 禁用https
+</span><span class="c1"></span>	<span class="nx">conn</span><span class="p">,</span><span class="nx">err</span> <span class="o">:=</span> <span class="nx">grpc</span><span class="p">.</span><span class="nf">Dial</span><span class="p">(</span><span class="s">&#34;:8081&#34;</span><span class="p">,</span><span class="nx">grpc</span><span class="p">.</span><span class="nf">WithInsecure</span><span class="p">())</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">log</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">())</span>
+	<span class="p">}</span>
+
+	<span class="k">defer</span> <span class="nx">conn</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
+
+	<span class="nx">prodClient</span> <span class="o">:=</span> <span class="nx">services</span><span class="p">.</span><span class="nf">NewProdServiceClient</span><span class="p">(</span><span class="nx">conn</span><span class="p">)</span>
+	<span class="nx">prodRes</span><span class="p">,</span><span class="nx">err</span> <span class="o">:=</span> <span class="nx">prodClient</span><span class="p">.</span><span class="nf">GetProdStock</span><span class="p">(</span><span class="nx">context</span><span class="p">.</span><span class="nf">Background</span><span class="p">(),</span><span class="o">&amp;</span><span class="nx">services</span><span class="p">.</span><span class="nx">ProdRequest</span><span class="p">{</span><span class="nx">ProdId</span><span class="p">:</span><span class="mi">20</span><span class="p">})</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">log</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">())</span>
+	<span class="p">}</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">prodRes</span><span class="p">.</span><span class="nx">ProdStock</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>调用 <code>go run client/main.go</code></p>
+<blockquote>
+<p>官方文档案例</p>
+</blockquote>
+<pre><code>https://grpc.io/docs/languages/go/quickstart/
+https://github.com/grpc/grpc-go/tree/master/examples/helloworld
+</code></pre>
+<blockquote>
+<p>参考文献</p>
+</blockquote>
+<pre><code>https://www.cnblogs.com/takumicx/p/10059448.html</code></pre>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">dingo</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2020-06-28
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/go/">go</a>
+          <a href="/tags/grpc/">grpc</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/2020/06/30/generate-local-certificate/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">自签名https证书，本地浏览器测试</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/2020/06/26/go-etcd-simple-config-center/">
+            <span class="next-text nav-default">Go ETCD 简易配置中心</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/dingjianhui" class="iconfont icon-github" title="github"></a>
+  <a href="http://dingjianhui.top/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Ding JianHui</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
