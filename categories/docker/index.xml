@@ -22,24 +22,6 @@
     </item>
     
     <item>
-      <title>Centos Install Docker &amp; Docker Compose</title>
-      <link>http://dingjianhui.top/blog/2020/06/17/centos-docker-install/</link>
-      <pubDate>Wed, 17 Jun 2020 14:15:53 +0800</pubDate>
-      
-      <guid>http://dingjianhui.top/blog/2020/06/17/centos-docker-install/</guid>
-      <description>安装文档-以官方文档为准 官方文档 https://docs.docker.com/engine/install/centos/ Step 1 卸载旧版本 1 2 3 4 5 6 7 8 $ sudo yum remove docker \ docker-client \ docker-client-latest \ docker-common \ docker-latest \ docker-latest-logrotate \ docker-logrotate \ docker-engine Step 2 设置存储库 安装utils工具包 （依</description>
-    </item>
-    
-    <item>
-      <title>使用docker模拟etcd集群的创建</title>
-      <link>http://dingjianhui.top/blog/2020/06/11/etcd-cluster-by-docker/</link>
-      <pubDate>Thu, 11 Jun 2020 17:14:58 +0800</pubDate>
-      
-      <guid>http://dingjianhui.top/blog/2020/06/11/etcd-cluster-by-docker/</guid>
-      <description>实际中部署集群 使用不同机器 或 docker swarm 或 k8s 来部署 Step 1 创建一个专门的docker网络 创建docker网络 (使用的是bridge,指定了子网) docker network create etcdnet</description>
-    </item>
-    
-    <item>
       <title>使用docker模拟etcd集群的创建</title>
       <link>http://dingjianhui.top/post/2020/06/11/etcd-cluster-by-docker/</link>
       <pubDate>Thu, 11 Jun 2020 17:14:58 +0800</pubDate>
@@ -54,15 +36,6 @@
       <pubDate>Thu, 11 Jun 2020 13:14:58 +0800</pubDate>
       
       <guid>http://dingjianhui.top/post/2020/06/11/etcd-install/</guid>
-      <description>etcd简介 A distributed, reliable key-value store for the most critical data of a distributed system etcd是一个高可用的键值存储系统 etcd是由CoreOS开发并维护的,灵感来自于 ZooKeeper 等。它使用Go语</description>
-    </item>
-    
-    <item>
-      <title>etcd环境搭建(基于docker)</title>
-      <link>http://dingjianhui.top/blog/2020/06/11/etcd-install/</link>
-      <pubDate>Thu, 11 Jun 2020 13:14:58 +0800</pubDate>
-      
-      <guid>http://dingjianhui.top/blog/2020/06/11/etcd-install/</guid>
       <description>etcd简介 A distributed, reliable key-value store for the most critical data of a distributed system etcd是一个高可用的键值存储系统 etcd是由CoreOS开发并维护的,灵感来自于 ZooKeeper 等。它使用Go语</description>
     </item>
     

@@ -21,14 +21,5 @@
       <description>安装文档-以官方文档为准 官方文档 https://docs.docker.com/engine/install/centos/ Step 1 卸载旧版本 1 2 3 4 5 6 7 8 $ sudo yum remove docker \ docker-client \ docker-client-latest \ docker-common \ docker-latest \ docker-latest-logrotate \ docker-logrotate \ docker-engine Step 2 设置存储库 安装utils工具包 （依</description>
     </item>
     
-    <item>
-      <title>Centos Install Docker &amp; Docker Compose</title>
-      <link>http://dingjianhui.top/blog/2020/06/17/centos-docker-install/</link>
-      <pubDate>Wed, 17 Jun 2020 14:15:53 +0800</pubDate>
-      
-      <guid>http://dingjianhui.top/blog/2020/06/17/centos-docker-install/</guid>
-      <description>安装文档-以官方文档为准 官方文档 https://docs.docker.com/engine/install/centos/ Step 1 卸载旧版本 1 2 3 4 5 6 7 8 $ sudo yum remove docker \ docker-client \ docker-client-latest \ docker-common \ docker-latest \ docker-latest-logrotate \ docker-logrotate \ docker-engine Step 2 设置存储库 安装utils工具包 （依</description>
-    </item>
-    
   </channel>
 </rss>
