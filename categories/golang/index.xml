@@ -6,11 +6,20 @@
     <description>Recent content in golang on Ding Jianhui 的个人博客 - 笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <copyright>Ding JianHui</copyright>
-    <lastBuildDate>Tue, 21 Jul 2020 16:12:41 +0800</lastBuildDate>
+    <copyright>dingo(Ding JianHui)</copyright>
+    <lastBuildDate>Thu, 23 Jul 2020 15:05:10 +0800</lastBuildDate>
     
 	<atom:link href="http://dingjianhui.top/categories/golang/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>golang Test 的简单使用</title>
+      <link>http://dingjianhui.top/post/2020/07/22/go-test/</link>
+      <pubDate>Thu, 23 Jul 2020 15:05:10 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/post/2020/07/22/go-test/</guid>
+      <description>简介 go 自带单元测试和性能测试模块，仅需要很少的代码就可以快速测试一段需求代码 准则 需要创建一个名称以 _test.go 结尾的文件 该文件包含 测试用例 (如：Tes</description>
+    </item>
     
     <item>
       <title>Go Map 使用案例</title>
@@ -27,7 +36,7 @@
       <pubDate>Mon, 20 Jul 2020 17:42:49 +0800</pubDate>
       
       <guid>http://dingjianhui.top/post/2020/07/20/go-struct-default-value/</guid>
-      <description>传参时，不改变属性默认值时就不传该参数 普通玩法 比如php中 1 2 3 4 public function addLog($log_type,$log_content,$admin_id,$admin_name,$type = 2) { ...... } 调用 $this-&amp;gt;log-&amp;gt;addLog(0,</description>
+      <description>传参时，不改变属性默认值时就不传该参数 1. 普通玩法 比如php中 1 2 3 4 public function addLog($log_type,$log_content,$admin_id,$admin_name,$type = 2) { ...... } 调用 $this-&amp;gt;log-&amp;gt;addLog(0</description>
     </item>
     
     <item>

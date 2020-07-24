@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>golang Test 的简单使用 - Ding Jianhui 的个人博客 - 笔记</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="dingo" /><meta name="description" content="简介 go 自带单元测试和性能测试模块，仅需要很少的代码就可以快速测试一段需求代码 准则 需要创建一个名称以 _test.go 结尾的文件 该文件包含 测试用例 (如：Tes" /><meta name="keywords" content="dingo, golang, 笔记" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.73.0-DEV with theme even" />
+
+
+<link rel="canonical" href="http://dingjianhui.top/post/2020/07/22/go-test/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="golang Test 的简单使用" />
+<meta property="og:description" content="简介 go 自带单元测试和性能测试模块，仅需要很少的代码就可以快速测试一段需求代码 准则 需要创建一个名称以 _test.go 结尾的文件 该文件包含 测试用例 (如：Tes" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://dingjianhui.top/post/2020/07/22/go-test/" />
+<meta property="article:published_time" content="2020-07-23T15:05:10+08:00" />
+<meta property="article:modified_time" content="2020-07-23T15:05:10+08:00" />
+<meta itemprop="name" content="golang Test 的简单使用">
+<meta itemprop="description" content="简介 go 自带单元测试和性能测试模块，仅需要很少的代码就可以快速测试一段需求代码 准则 需要创建一个名称以 _test.go 结尾的文件 该文件包含 测试用例 (如：Tes">
+<meta itemprop="datePublished" content="2020-07-23T15:05:10&#43;08:00" />
+<meta itemprop="dateModified" content="2020-07-23T15:05:10&#43;08:00" />
+<meta itemprop="wordCount" content="1623">
+
+
+
+<meta itemprop="keywords" content="go," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="golang Test 的简单使用"/>
+<meta name="twitter:description" content="简介 go 自带单元测试和性能测试模块，仅需要很少的代码就可以快速测试一段需求代码 准则 需要创建一个名称以 _test.go 结尾的文件 该文件包含 测试用例 (如：Tes"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+<script data-ad-client="ca-pub-8764182409666792" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">dingo</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">dingo</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">golang Test 的简单使用</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-07-23 </span>
+        <div class="post-category">
+            <a href="/categories/golang/"> golang </a>
+            </div>
+          <span class="more-meta"> 约 1623 字 </span>
+          <span class="more-meta"> 预计阅读 4 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#简介">简介</a></li>
+    <li><a href="#准则">准则</a></li>
+    <li><a href="#1-单元测试">1. 单元测试</a>
+      <ul>
+        <li><a href="#11-单元测试示例">1.1 单元测试示例</a></li>
+        <li><a href="#12-table-driven-test表驱动测试">1.2 Table-Driven Test(表驱动测试)</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-性能测试">2. 性能测试</a>
+      <ul>
+        <li><a href="#21-基准测试">2.1 基准测试</a></li>
+        <li><a href="#22-优化">2.2 优化</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="简介">简介</h2>
+<p>go 自带单元测试和性能测试模块，仅需要很少的代码就可以快速测试一段需求代码</p>
+<h2 id="准则">准则</h2>
+<ol>
+<li>需要创建一个名称以 <code>_test.go</code> 结尾的文件</li>
+<li>该文件包含 测试用例 (如：<code>TestXxx</code> 函数)</li>
+</ol>
+<p>测试用例有四种形式：</p>
+<pre><code>TestXxxx(t *testing.T)    // 基本测试用例
+BenchmarkXxxx(b *testing.B) // 压力测试的测试用例
+Example_Xxx()  // 测试控制台输出的例子
+TestMain(m *testing.M) // 测试 Main 函数
+</code></pre>
+<h2 id="1-单元测试">1. 单元测试</h2>
+<p>单元测试（<code>unit testing</code>），是指对软件中的最小可测试单元进行检查和验证</p>
+<h3 id="11-单元测试示例">1.1 单元测试示例</h3>
+<p>要测试的业务函数 <code>mytest/Helper.go</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="c1">// 业务函数--累加字符串
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">Join</span><span class="p">(</span><span class="nx">strs</span> <span class="o">...</span><span class="kt">string</span><span class="p">)</span>  <span class="kt">string</span>  <span class="p">{</span>
+	<span class="nx">ret</span> <span class="o">:=</span> <span class="s">&#34;&#34;</span>
+	<span class="k">for</span> <span class="nx">_</span><span class="p">,</span><span class="nx">s</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">strs</span> <span class="p">{</span>
+		<span class="nx">ret</span> <span class="o">+=</span> <span class="nx">s</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="nx">ret</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>测试代码 <code>mytest/Helper_test.go</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="c1">// 基本测试用例(测试Join函数)  testing.T 普通测试用例
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">TestJoin</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span> <span class="p">{</span>
+	<span class="kd">var</span> <span class="p">(</span>
+		<span class="nx">expected</span> <span class="p">=</span> <span class="s">&#34;ab&#34;</span> <span class="c1">// 期望结果
+</span><span class="c1"></span>	<span class="p">)</span>
+	<span class="nx">actual</span> <span class="o">:=</span> <span class="nf">Join</span><span class="p">(</span><span class="s">&#34;a&#34;</span><span class="p">,</span><span class="s">&#34;b&#34;</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nx">actual</span> <span class="o">!=</span> <span class="nx">expected</span> <span class="p">{</span>
+		<span class="nx">t</span><span class="p">.</span><span class="nf">Errorf</span><span class="p">(</span><span class="s">&#34;业务结果没有达到期望的结果! \n 业务结果： %s，期望的结果： %s \n&#34;</span><span class="p">,</span> <span class="nx">actual</span><span class="p">,</span> <span class="nx">expected</span><span class="p">)</span>
+	<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+		<span class="nx">t</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="s">&#34;测试通过了&#34;</span><span class="p">)</span> <span class="c1">// 记录信息
+</span><span class="c1"></span>	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>运行</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">D:<span class="se">\w</span>ww<span class="se">\c</span>ourse<span class="se">\b</span>asicgo<span class="se">\m</span>ytest&gt;go <span class="nb">test</span> -v
+<span class="o">===</span> RUN   TestJoin
+    TestJoin: Helper_test.go:16: 测试通过了
+--- PASS: TestJoin <span class="o">(</span>0.00s<span class="o">)</span>
+PASS
+ok      basicgo/mytest  0.165s
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="12-table-driven-test表驱动测试">1.2 Table-Driven Test(表驱动测试)</h3>
+<p>从“表”里面查找信息而不使用if 、else等逻辑语句的编程模式。
+使用表驱动测试，生成代码比复杂逻辑代码更简单，更容易修改</p>
+<p>借助工具包自动生成测试文件(如：https://github.com/cweill/gotests)</p>
+<p>也可直接goland工具生成 （右键-&gt;generate-&gt;tests for file或tests for package）</p>
+<p>生成的测试代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">TestJoin1</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span> <span class="p">{</span>
+	<span class="kd">type</span> <span class="nx">args</span> <span class="kd">struct</span> <span class="p">{</span>
+		<span class="nx">strs</span> <span class="p">[]</span><span class="kt">string</span>
+	<span class="p">}</span>
+	<span class="nx">tests</span> <span class="o">:=</span> <span class="p">[]</span><span class="kd">struct</span> <span class="p">{</span>
+		<span class="nx">name</span> <span class="kt">string</span>
+		<span class="nx">args</span> <span class="nx">args</span>
+		<span class="nx">want</span> <span class="kt">string</span>
+	<span class="p">}{</span>
+		<span class="c1">// TODO: Add test cases.
+</span><span class="c1"></span>	<span class="p">}</span>
+	<span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">tt</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">tests</span> <span class="p">{</span>
+		<span class="nx">t</span><span class="p">.</span><span class="nf">Run</span><span class="p">(</span><span class="nx">tt</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span> <span class="p">{</span>
+			<span class="k">if</span> <span class="nx">got</span> <span class="o">:=</span> <span class="nf">Join</span><span class="p">(</span><span class="nx">tt</span><span class="p">.</span><span class="nx">args</span><span class="p">.</span><span class="nx">strs</span><span class="o">...</span><span class="p">);</span> <span class="nx">got</span> <span class="o">!=</span> <span class="nx">tt</span><span class="p">.</span><span class="nx">want</span> <span class="p">{</span>
+				<span class="nx">t</span><span class="p">.</span><span class="nf">Errorf</span><span class="p">(</span><span class="s">&#34;Join() = %v, want %v&#34;</span><span class="p">,</span> <span class="nx">got</span><span class="p">,</span> <span class="nx">tt</span><span class="p">.</span><span class="nx">want</span><span class="p">)</span>
+			<span class="p">}</span>
+		<span class="p">})</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>修改一下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">TestJoin1</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span> <span class="p">{</span>
+	<span class="kd">type</span> <span class="nx">args</span> <span class="kd">struct</span> <span class="p">{</span>
+		<span class="nx">strs</span> <span class="p">[]</span><span class="kt">string</span>
+	<span class="p">}</span>
+	<span class="nx">tests</span> <span class="o">:=</span> <span class="p">[]</span><span class="kd">struct</span> <span class="p">{</span>
+		<span class="nx">name</span> <span class="kt">string</span> <span class="c1">// 测试案例名称
+</span><span class="c1"></span>		<span class="nx">args</span> <span class="nx">args</span>   <span class="c1">// 传给被测函数的参数
+</span><span class="c1"></span>		<span class="nx">want</span> <span class="kt">string</span> <span class="c1">// 预期返回的结果
+</span><span class="c1"></span>	<span class="p">}{</span>
+		<span class="c1">// TODO: Add test cases. 添加测试案例
+</span><span class="c1"></span>		<span class="p">{</span><span class="s">&#34;case1&#34;</span><span class="p">,</span><span class="nx">args</span><span class="p">{[]</span><span class="kt">string</span><span class="p">{</span><span class="s">&#34;a&#34;</span><span class="p">,</span><span class="s">&#34;b&#34;</span><span class="p">}},</span><span class="s">&#34;ab&#34;</span><span class="p">},</span>
+		<span class="p">{</span><span class="s">&#34;case2&#34;</span><span class="p">,</span><span class="nx">args</span><span class="p">{[]</span><span class="kt">string</span><span class="p">{</span><span class="s">&#34;a&#34;</span><span class="p">,</span><span class="s">&#34;c&#34;</span><span class="p">}},</span><span class="s">&#34;bb&#34;</span><span class="p">},</span> <span class="c1">// 错误案例
+</span><span class="c1"></span>		<span class="p">{</span><span class="s">&#34;case3&#34;</span><span class="p">,</span><span class="nx">args</span><span class="p">{[]</span><span class="kt">string</span><span class="p">{</span><span class="s">&#34;d&#34;</span><span class="p">,</span><span class="s">&#34;e&#34;</span><span class="p">}},</span><span class="s">&#34;de&#34;</span><span class="p">},</span>
+		<span class="p">{</span><span class="s">&#34;case3&#34;</span><span class="p">,</span><span class="nx">args</span><span class="p">{[]</span><span class="kt">string</span><span class="p">{</span><span class="s">&#34;f&#34;</span><span class="p">,</span><span class="s">&#34;g&#34;</span><span class="p">}},</span><span class="s">&#34;fg&#34;</span><span class="p">},</span>
+	<span class="p">}</span>
+	<span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">tt</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">tests</span> <span class="p">{</span>
+		<span class="nx">t</span><span class="p">.</span><span class="nf">Run</span><span class="p">(</span><span class="nx">tt</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span> <span class="p">{</span>
+			<span class="k">if</span> <span class="nx">got</span> <span class="o">:=</span> <span class="nf">Join</span><span class="p">(</span><span class="nx">tt</span><span class="p">.</span><span class="nx">args</span><span class="p">.</span><span class="nx">strs</span><span class="o">...</span><span class="p">);</span> <span class="nx">got</span> <span class="o">!=</span> <span class="nx">tt</span><span class="p">.</span><span class="nx">want</span> <span class="p">{</span>
+				<span class="nx">t</span><span class="p">.</span><span class="nf">Errorf</span><span class="p">(</span><span class="s">&#34;Join() = %v, want %v&#34;</span><span class="p">,</span> <span class="nx">got</span><span class="p">,</span> <span class="nx">tt</span><span class="p">.</span><span class="nx">want</span><span class="p">)</span>
+			<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+				<span class="nx">t</span><span class="p">.</span><span class="nf">Log</span><span class="p">(</span><span class="s">&#34;测试通过了&#34;</span><span class="p">)</span> <span class="c1">// 记录信息
+</span><span class="c1"></span>			<span class="p">}</span>
+		<span class="p">})</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>运行 <code>case2失败了</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">D:<span class="se">\w</span>ww<span class="se">\c</span>ourse<span class="se">\b</span>asicgo<span class="se">\m</span>ytest&gt;go <span class="nb">test</span> -v
+<span class="o">===</span> RUN   TestJoin
+    TestJoin: Helper_test.go:16: 测试通过了
+--- PASS: TestJoin <span class="o">(</span>0.00s<span class="o">)</span>
+<span class="o">===</span> RUN   <span class="nv">TestJoin1</span>
+<span class="o">===</span> RUN   TestJoin1/case1
+    TestJoin1/case1: Helper_test.go:40: <span class="nv">测试通过了</span>
+<span class="o">===</span> RUN   TestJoin1/case2
+    TestJoin1/case2: Helper_test.go:38: Join<span class="o">()</span> <span class="o">=</span> ac, want <span class="nv">bb</span>
+<span class="o">===</span> RUN   TestJoin1/case3
+    TestJoin1/case3: Helper_test.go:40: <span class="nv">测试通过了</span>
+<span class="o">===</span> RUN   TestJoin1/case3#01
+    TestJoin1/case3#01: Helper_test.go:40: 测试通过了
+--- FAIL: TestJoin1 <span class="o">(</span>0.00s<span class="o">)</span>
+    --- PASS: TestJoin1/case1 <span class="o">(</span>0.00s<span class="o">)</span>
+    --- FAIL: TestJoin1/case2 <span class="o">(</span>0.00s<span class="o">)</span>
+    --- PASS: TestJoin1/case3 <span class="o">(</span>0.00s<span class="o">)</span>
+    --- PASS: TestJoin1/case3#01 <span class="o">(</span>0.00s<span class="o">)</span>
+FAIL
+<span class="nb">exit</span> status <span class="m">1</span>
+FAIL    basicgo/mytest  0.162s
+
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="2-性能测试">2. 性能测试</h2>
+<h3 id="21-基准测试">2.1 基准测试</h3>
+<p>基准测试 属于性能测试的一种</p>
+<p>是指：对某个特定场景的&ndash;某项性能指标&mdash;进行定量的和可对比的测试</p>
+<p>测试代码 <code>mytest/Helper_test.go</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="c1">// 压力测试的测试用例(测试Join函数) testing.B : 压力测试
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">BenchmarkJoin</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">B</span><span class="p">){</span>
+	<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="nx">t</span><span class="p">.</span><span class="nx">N</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+		<span class="nf">Join</span><span class="p">(</span><span class="nx">strconv</span><span class="p">.</span><span class="nf">Itoa</span><span class="p">(</span><span class="nx">i</span><span class="p">))</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>调用 go test -bench=.</p>
+<pre><code>1、.是一个正则代表 全部
+2、默认测试时间是1秒。如果1秒内就结束了，那么N会以 1、2、5、10、20、50自动递增
+3、加入-count 参数 会更刺激些
+</code></pre>
+<p>测试结果</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">D:<span class="se">\w</span>ww<span class="se">\c</span>ourse<span class="se">\b</span>asicgo<span class="se">\m</span>ytest&gt;go <span class="nb">test</span> -bench<span class="o">=</span>.
+goos: windows
+goarch: amd64
+pkg: basicgo/mytest
+BenchmarkJoin-8         <span class="m">33383965</span>                37.1 ns/op
+PASS
+ok      basicgo/mytest  1.446s
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="22-优化">2.2 优化</h3>
+<p>业务函数 <code>mytest/Helper.go</code> 三种方法</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="c1">// 业务函数--累加字符串
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">Join</span><span class="p">(</span><span class="nx">strs</span> <span class="o">...</span><span class="kt">string</span><span class="p">)</span>  <span class="kt">string</span>  <span class="p">{</span>
+	<span class="nx">ret</span> <span class="o">:=</span> <span class="s">&#34;&#34;</span>
+	<span class="k">for</span> <span class="nx">_</span><span class="p">,</span><span class="nx">s</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">strs</span> <span class="p">{</span>
+		<span class="nx">ret</span> <span class="o">+=</span> <span class="nx">s</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="nx">ret</span>
+<span class="p">}</span>
+
+<span class="c1">// 业务函数--累加字符串--使用go内置包
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">Join1</span><span class="p">(</span><span class="nx">strs</span> <span class="o">...</span><span class="kt">string</span><span class="p">)</span>  <span class="kt">string</span>  <span class="p">{</span>
+	<span class="k">return</span> <span class="nx">strings</span><span class="p">.</span><span class="nf">Join</span><span class="p">(</span><span class="nx">strs</span><span class="p">,</span><span class="s">&#34;&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">// 业务函数--累加字符串--使用字节缓冲区buffer
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">Join2</span><span class="p">(</span><span class="nx">strs</span> <span class="o">...</span><span class="kt">string</span><span class="p">)</span>  <span class="kt">string</span>  <span class="p">{</span>
+	<span class="kd">var</span> <span class="nx">bf</span> <span class="nx">bytes</span><span class="p">.</span><span class="nx">Buffer</span>
+	<span class="k">for</span> <span class="nx">_</span><span class="p">,</span><span class="nx">s</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">strs</span> <span class="p">{</span>
+		<span class="nx">bf</span><span class="p">.</span><span class="nf">WriteString</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="nx">bf</span><span class="p">.</span><span class="nf">String</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>测试用例 <code>mytest/Helper_test.go</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="c1">// 压力测试的测试用例(测试Join函数) testing.B : 压力测试
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">BenchmarkJoin</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">B</span><span class="p">){</span>
+	<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="nx">t</span><span class="p">.</span><span class="nx">N</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+		<span class="nf">Join</span><span class="p">(</span><span class="nx">strconv</span><span class="p">.</span><span class="nf">Itoa</span><span class="p">(</span><span class="nx">i</span><span class="p">))</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// 压力测试的测试用例(测试Join1函数) testing.B : 压力测试
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">BenchmarkJoin1</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">B</span><span class="p">){</span>
+	<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="nx">t</span><span class="p">.</span><span class="nx">N</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+		<span class="nf">Join1</span><span class="p">(</span><span class="nx">strconv</span><span class="p">.</span><span class="nf">Itoa</span><span class="p">(</span><span class="nx">i</span><span class="p">))</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// 压力测试的测试用例(测试Join2函数) testing.B : 压力测试
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">BenchmarkJoin2</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">B</span><span class="p">){</span>
+	<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="nx">t</span><span class="p">.</span><span class="nx">N</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+		<span class="nf">Join2</span><span class="p">(</span><span class="nx">strconv</span><span class="p">.</span><span class="nf">Itoa</span><span class="p">(</span><span class="nx">i</span><span class="p">))</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>调用</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">D:<span class="se">\w</span>ww<span class="se">\c</span>ourse<span class="se">\b</span>asicgo<span class="se">\m</span>ytest&gt;go <span class="nb">test</span> -bench<span class="o">=</span>.
+goos: windows
+goarch: amd64
+pkg: basicgo/mytest
+BenchmarkJoin-8         <span class="m">33386844</span>                37.3 ns/op
+BenchmarkJoin1-8        <span class="m">41437322</span>                30.0 ns/op
+BenchmarkJoin2-8        <span class="m">14756880</span>                82.2 ns/op
+PASS
+ok      basicgo/mytest  4.027s
+
+D:<span class="se">\w</span>ww<span class="se">\c</span>ourse<span class="se">\b</span>asicgo<span class="se">\m</span>ytest&gt;go <span class="nb">test</span> -bench<span class="o">=</span>.
+goos: windows
+goarch: amd64
+pkg: basicgo/mytest
+BenchmarkJoin-8         <span class="m">33886052</span>                37.0 ns/op
+BenchmarkJoin1-8        <span class="m">42922138</span>                30.0 ns/op
+BenchmarkJoin2-8        <span class="m">14859778</span>                82.1 ns/op
+PASS
+ok      basicgo/mytest  4.081s
+
+D:<span class="se">\w</span>ww<span class="se">\c</span>ourse<span class="se">\b</span>asicgo<span class="se">\m</span>ytest&gt;go <span class="nb">test</span> -bench<span class="o">=</span>.
+goos: windows
+goarch: amd64
+pkg: basicgo/mytest
+BenchmarkJoin-8         <span class="m">31632139</span>                36.9 ns/op
+BenchmarkJoin1-8        <span class="m">42917379</span>                29.9 ns/op
+BenchmarkJoin2-8        <span class="m">15230397</span>                82.6 ns/op
+PASS
+ok      basicgo/mytest  4.028s
+
+</code></pre></td></tr></table>
+</div>
+</div><p><code>BenchmarkJoin1-8</code> 循环执行的次数最多，每次循环花费的时间最短</p>
+<p>所以累加字符串使用<code>go内置包</code>，性能是最好的</p>
+<blockquote>
+<p>官方文档</p>
+<p><a href="https://godoc.org/testing">https://godoc.org/testing</a></p>
+<p>详细使用参考</p>
+<p><a href="https://books.studygolang.com/The-Golang-Standard-Library-by-Example/chapter09/09.1.html">https://books.studygolang.com/The-Golang-Standard-Library-by-Example/chapter09/09.1.html</a></p>
+</blockquote>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">dingo</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2020-07-23
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/go/">go</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/2020/07/21/go-map/">
+            <span class="next-text nav-default">Go Map 使用案例</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/dingjianhui" class="iconfont icon-github" title="github"></a>
+  <a href="http://dingjianhui.top/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">dingo(Ding JianHui)</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

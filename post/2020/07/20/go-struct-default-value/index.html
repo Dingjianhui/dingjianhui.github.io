@@ -49,7 +49,7 @@
 <meta itemprop="description" content="Golang技巧之默认值设置的高阶玩法">
 <meta itemprop="datePublished" content="2020-07-20T17:42:49&#43;08:00" />
 <meta itemprop="dateModified" content="2020-07-20T17:42:49&#43;08:00" />
-<meta itemprop="wordCount" content="541">
+<meta itemprop="wordCount" content="543">
 
 
 
@@ -125,7 +125,7 @@
         <div class="post-category">
             <a href="/categories/golang/"> golang </a>
             </div>
-          <span class="more-meta"> 约 541 字 </span>
+          <span class="more-meta"> 约 543 字 </span>
           <span class="more-meta"> 预计阅读 2 分钟 </span>
         
       </div>
@@ -138,8 +138,8 @@
   <ul>
     <li>
       <ul>
-        <li><a href="#普通玩法">普通玩法</a></li>
-        <li><a href="#高阶玩法">高阶玩法</a></li>
+        <li><a href="#1-普通玩法">1. 普通玩法</a></li>
+        <li><a href="#2-高阶玩法">2. 高阶玩法</a></li>
       </ul>
     </li>
   </ul>
@@ -148,7 +148,7 @@
 </div>
     <div class="post-content">
       <p>传参时，不改变属性默认值时就不传该参数</p>
-<h3 id="普通玩法">普通玩法</h3>
+<h3 id="1-普通玩法">1. 普通玩法</h3>
 <p>比如<code>php</code>中</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -175,7 +175,7 @@
 如果不需要的时候传该类型的零值，这把复杂度暴露给调用者；</li>
 <li>提供多个初始化函数，针对每个场景都进行内部默认值设置。</li>
 </ol>
-<h3 id="高阶玩法">高阶玩法</h3>
+<h3 id="2-高阶玩法">2. 高阶玩法</h3>
 <p>src/Object/User.go</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -393,7 +393,7 @@
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
-    <span class="author">Ding JianHui</span>
+    <span class="author">dingo(Ding JianHui)</span>
   </span>
 </div>
     </footer>
