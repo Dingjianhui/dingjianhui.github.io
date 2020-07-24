@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>协程 on Ding Jianhui 的个人博客 - 笔记</title>
+    <link>http://dingjianhui.top/tags/%E5%8D%8F%E7%A8%8B/</link>
+    <description>Recent content in 协程 on Ding Jianhui 的个人博客 - 笔记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>dingo(Ding JianHui)</copyright>
+    <lastBuildDate>Tue, 07 Jul 2020 11:24:21 +0800</lastBuildDate>
+    
+	<atom:link href="http://dingjianhui.top/tags/%E5%8D%8F%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Golang 中协程调度的简单理解</title>
+      <link>http://dingjianhui.top/post/2020/07/07/go-scheduler/</link>
+      <pubDate>Tue, 07 Jul 2020 11:24:21 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/post/2020/07/07/go-scheduler/</guid>
+      <description>调度逻辑 1. P、M、G的定义 P: processor(代表处理器核)，P的数量决定了系统内最大可并行的G的数量（前提：系统的物理cpu核数&amp;gt;</description>
+    </item>
+    
+  </channel>
+</rss>

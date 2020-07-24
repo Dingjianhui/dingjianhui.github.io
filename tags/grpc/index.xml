@@ -13,7 +13,7 @@
     
     
     <item>
-      <title>Go 流式RPC的使用</title>
+      <title>流式RPC的使用例子(基于Golang)</title>
       <link>http://dingjianhui.top/post/2020/07/03/go-grpc-stream/</link>
       <pubDate>Fri, 03 Jul 2020 15:07:02 +0800</pubDate>
       
@@ -31,7 +31,7 @@
     </item>
     
     <item>
-      <title>Go - grpc-gateway的使用</title>
+      <title>使用grpc-gateway同时提供rpc和Restful接口-Golang</title>
       <link>http://dingjianhui.top/post/2020/06/30/go-grpc-gateway/</link>
       <pubDate>Tue, 30 Jun 2020 14:53:25 +0800</pubDate>
       
@@ -40,7 +40,7 @@
     </item>
     
     <item>
-      <title>Go - grpc的简单使用</title>
+      <title>grpc的优势与安装使用-Golang</title>
       <link>http://dingjianhui.top/post/2020/06/28/go-grpc-quick-start/</link>
       <pubDate>Sun, 28 Jun 2020 13:47:36 +0800</pubDate>
       

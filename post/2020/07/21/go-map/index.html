@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Go Map 使用案例 - Ding Jianhui 的个人博客 - 笔记</title>
+  <title>Golang Map的使用案例--设置值、排序、多个map排序 - Ding Jianhui 的个人博客 - 笔记</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="dingo" /><meta name="description" content="Go Map 使用案例" /><meta name="keywords" content="dingo, golang, 笔记" />
+<meta name="author" content="dingo" /><meta name="description" content="Map(集合) Map 是一种无序的键值对的集合 定义初始化 1 2 3 4 5 6 7 8 9 // 定义map type ( UserMap map[string]interface{} ) // 初始化map func NewUser() UserMap { return make(map[string]interface{}) // 使用make初始化 } 设" /><meta name="keywords" content="dingo, golang, 笔记" />
 
 
 
@@ -39,14 +39,14 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="Go Map 使用案例" />
-<meta property="og:description" content="Go Map 使用案例" />
+<meta property="og:title" content="Golang Map的使用案例--设置值、排序、多个map排序" />
+<meta property="og:description" content="Map(集合) Map 是一种无序的键值对的集合 定义初始化 1 2 3 4 5 6 7 8 9 // 定义map type ( UserMap map[string]interface{} ) // 初始化map func NewUser() UserMap { return make(map[string]interface{}) // 使用make初始化 } 设" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://dingjianhui.top/post/2020/07/21/go-map/" />
 <meta property="article:published_time" content="2020-07-21T16:12:41+08:00" />
 <meta property="article:modified_time" content="2020-07-21T16:12:41+08:00" />
-<meta itemprop="name" content="Go Map 使用案例">
-<meta itemprop="description" content="Go Map 使用案例">
+<meta itemprop="name" content="Golang Map的使用案例--设置值、排序、多个map排序">
+<meta itemprop="description" content="Map(集合) Map 是一种无序的键值对的集合 定义初始化 1 2 3 4 5 6 7 8 9 // 定义map type ( UserMap map[string]interface{} ) // 初始化map func NewUser() UserMap { return make(map[string]interface{}) // 使用make初始化 } 设">
 <meta itemprop="datePublished" content="2020-07-21T16:12:41&#43;08:00" />
 <meta itemprop="dateModified" content="2020-07-21T16:12:41&#43;08:00" />
 <meta itemprop="wordCount" content="470">
@@ -54,8 +54,8 @@
 
 
 <meta itemprop="keywords" content="go," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Go Map 使用案例"/>
-<meta name="twitter:description" content="Go Map 使用案例"/>
+<meta name="twitter:title" content="Golang Map的使用案例--设置值、排序、多个map排序"/>
+<meta name="twitter:description" content="Map(集合) Map 是一种无序的键值对的集合 定义初始化 1 2 3 4 5 6 7 8 9 // 定义map type ( UserMap map[string]interface{} ) // 初始化map func NewUser() UserMap { return make(map[string]interface{}) // 使用make初始化 } 设"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -118,7 +118,7 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">Go Map 使用案例</h1>
+      <h1 class="post-title">Golang Map的使用案例--设置值、排序、多个map排序</h1>
 
       <div class="post-meta">
         <span class="post-time"> 2020-07-21 </span>
@@ -363,7 +363,7 @@
       <nav class="post-nav">
         <a class="prev" href="/post/2020/07/22/go-test/">
             <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">golang Test 的简单使用</span>
+            <span class="prev-text nav-default">Golang 测试用例的写法-单元测试、性能测试</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
         <a class="next" href="/post/2020/07/20/go-struct-default-value/">

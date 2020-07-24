@@ -3,48 +3,55 @@
   
   <url>
     <loc>http://dingjianhui.top/categories/</loc>
-    <lastmod>2020-07-23T15:05:10+08:00</lastmod>
+    <lastmod>2020-07-24T11:56:29+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>http://dingjianhui.top/</loc>
-    <lastmod>2020-07-23T15:05:10+08:00</lastmod>
+    <lastmod>2020-07-24T11:56:29+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>http://dingjianhui.top/tags/go/</loc>
-    <lastmod>2020-07-23T15:05:10+08:00</lastmod>
+    <lastmod>2020-07-24T11:56:29+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>http://dingjianhui.top/categories/golang/</loc>
-    <lastmod>2020-07-23T15:05:10+08:00</lastmod>
+    <lastmod>2020-07-24T11:56:29+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://dingjianhui.top/post/2020/07/22/go-test/</loc>
-    <lastmod>2020-07-23T15:05:10+08:00</lastmod>
+    <loc>http://dingjianhui.top/post/2020/07/24/go-reflect/</loc>
+    <lastmod>2020-07-24T11:56:29+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>http://dingjianhui.top/post/</loc>
-    <lastmod>2020-07-23T15:05:10+08:00</lastmod>
+    <lastmod>2020-07-24T11:56:29+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>http://dingjianhui.top/tags/</loc>
+    <lastmod>2020-07-24T11:56:29+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://dingjianhui.top/post/2020/07/22/go-test/</loc>
     <lastmod>2020-07-23T15:05:10+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -72,14 +79,21 @@
   </url>
   
   <url>
-    <loc>http://dingjianhui.top/post/2020/07/03/go-grpc-stream/</loc>
-    <lastmod>2020-07-03T15:07:02+08:00</lastmod>
+    <loc>http://dingjianhui.top/tags/%E5%8D%8F%E7%A8%8B/</loc>
+    <lastmod>2020-07-07T11:24:21+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>http://dingjianhui.top/tags/grpc/</loc>
+    <lastmod>2020-07-03T15:07:02+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://dingjianhui.top/post/2020/07/03/go-grpc-stream/</loc>
     <lastmod>2020-07-03T15:07:02+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -135,13 +149,6 @@
   </url>
   
   <url>
-    <loc>http://dingjianhui.top/categories/etcd/</loc>
-    <lastmod>2020-06-26T15:50:48+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>http://dingjianhui.top/post/2020/06/26/go-etcd-simple-config-center/</loc>
     <lastmod>2020-06-26T15:50:48+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -149,14 +156,14 @@
   </url>
   
   <url>
-    <loc>http://dingjianhui.top/post/2020/06/24/go-binary-search-tree/</loc>
+    <loc>http://dingjianhui.top/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/</loc>
     <lastmod>2020-06-24T18:04:15+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://dingjianhui.top/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/</loc>
+    <loc>http://dingjianhui.top/post/2020/06/24/go-binary-search-tree/</loc>
     <lastmod>2020-06-24T18:04:15+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -228,13 +235,6 @@
   <url>
     <loc>http://dingjianhui.top/post/2020/06/06/go-strings-byte-rune/</loc>
     <lastmod>2020-06-06T15:29:25+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://dingjianhui.top/categories/hugo/</loc>
-    <lastmod>2020-06-05T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>

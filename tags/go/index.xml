@@ -7,13 +7,22 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>dingo(Ding JianHui)</copyright>
-    <lastBuildDate>Thu, 23 Jul 2020 15:05:10 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 24 Jul 2020 11:56:29 +0800</lastBuildDate>
     
 	<atom:link href="http://dingjianhui.top/tags/go/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>golang Test 的简单使用</title>
+      <title>Golang的反射理解与示例使用</title>
+      <link>http://dingjianhui.top/post/2020/07/24/go-reflect/</link>
+      <pubDate>Fri, 24 Jul 2020 11:56:29 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/post/2020/07/24/go-reflect/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Golang 测试用例的写法-单元测试、性能测试</title>
       <link>http://dingjianhui.top/post/2020/07/22/go-test/</link>
       <pubDate>Thu, 23 Jul 2020 15:05:10 +0800</pubDate>
       
@@ -22,7 +31,7 @@
     </item>
     
     <item>
-      <title>Go Map 使用案例</title>
+      <title>Golang Map的使用案例--设置值、排序、多个map排序</title>
       <link>http://dingjianhui.top/post/2020/07/21/go-map/</link>
       <pubDate>Tue, 21 Jul 2020 16:12:41 +0800</pubDate>
       
@@ -40,7 +49,7 @@
     </item>
     
     <item>
-      <title>Go - 协程调度简单理解</title>
+      <title>Golang 中协程调度的简单理解</title>
       <link>http://dingjianhui.top/post/2020/07/07/go-scheduler/</link>
       <pubDate>Tue, 07 Jul 2020 11:24:21 +0800</pubDate>
       
@@ -49,7 +58,7 @@
     </item>
     
     <item>
-      <title>Go 流式RPC的使用</title>
+      <title>流式RPC的使用例子(基于Golang)</title>
       <link>http://dingjianhui.top/post/2020/07/03/go-grpc-stream/</link>
       <pubDate>Fri, 03 Jul 2020 15:07:02 +0800</pubDate>
       
@@ -67,7 +76,7 @@
     </item>
     
     <item>
-      <title>Go - grpc-gateway的使用</title>
+      <title>使用grpc-gateway同时提供rpc和Restful接口-Golang</title>
       <link>http://dingjianhui.top/post/2020/06/30/go-grpc-gateway/</link>
       <pubDate>Tue, 30 Jun 2020 14:53:25 +0800</pubDate>
       
@@ -76,7 +85,7 @@
     </item>
     
     <item>
-      <title>Go - grpc的简单使用</title>
+      <title>grpc的优势与安装使用-Golang</title>
       <link>http://dingjianhui.top/post/2020/06/28/go-grpc-quick-start/</link>
       <pubDate>Sun, 28 Jun 2020 13:47:36 +0800</pubDate>
       
@@ -85,7 +94,7 @@
     </item>
     
     <item>
-      <title>Go ETCD 简易配置中心</title>
+      <title>Golang &#43; Etcd &#43; Confd 实现简易的配置中心</title>
       <link>http://dingjianhui.top/post/2020/06/26/go-etcd-simple-config-center/</link>
       <pubDate>Fri, 26 Jun 2020 15:50:48 +0800</pubDate>
       
@@ -94,7 +103,7 @@
     </item>
     
     <item>
-      <title>Go 二叉查找树练习</title>
+      <title>使用Golang实现二叉查找树案例</title>
       <link>http://dingjianhui.top/post/2020/06/24/go-binary-search-tree/</link>
       <pubDate>Wed, 24 Jun 2020 18:04:15 +0800</pubDate>
       
@@ -103,7 +112,7 @@
     </item>
     
     <item>
-      <title>Go Defer的使用总结</title>
+      <title>Golang中Defer的机制解读与defer的用法</title>
       <link>http://dingjianhui.top/post/2020/06/24/go-defer-used/</link>
       <pubDate>Wed, 24 Jun 2020 09:04:03 +0800</pubDate>
       
@@ -112,7 +121,7 @@
     </item>
     
     <item>
-      <title>Go 实现 Etcd V3 服务注册与发现</title>
+      <title>Go &#43; Etcd V3 实现 服务注册与发现</title>
       <link>http://dingjianhui.top/post/2020/06/19/go-etcd-v3-service-discovery/</link>
       <pubDate>Fri, 19 Jun 2020 16:45:07 +0800</pubDate>
       
@@ -121,7 +130,7 @@
     </item>
     
     <item>
-      <title>Go - string、byte、rune的区别</title>
+      <title>Golang中string、byte、rune的区别</title>
       <link>http://dingjianhui.top/post/2020/06/06/go-strings-byte-rune/</link>
       <pubDate>Sat, 06 Jun 2020 15:29:25 +0800</pubDate>
       

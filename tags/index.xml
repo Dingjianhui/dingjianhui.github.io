@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>dingo(Ding JianHui)</copyright>
-    <lastBuildDate>Thu, 23 Jul 2020 15:05:10 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 24 Jul 2020 11:56:29 +0800</lastBuildDate>
     
 	<atom:link href="http://dingjianhui.top/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,9 +15,18 @@
     <item>
       <title>go</title>
       <link>http://dingjianhui.top/tags/go/</link>
-      <pubDate>Thu, 23 Jul 2020 15:05:10 +0800</pubDate>
+      <pubDate>Fri, 24 Jul 2020 11:56:29 +0800</pubDate>
       
       <guid>http://dingjianhui.top/tags/go/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>协程</title>
+      <link>http://dingjianhui.top/tags/%E5%8D%8F%E7%A8%8B/</link>
+      <pubDate>Tue, 07 Jul 2020 11:24:21 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/tags/%E5%8D%8F%E7%A8%8B/</guid>
       <description></description>
     </item>
     

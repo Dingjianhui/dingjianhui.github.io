@@ -13,7 +13,7 @@
     
     
     <item>
-      <title>Go Defer的使用总结</title>
+      <title>Golang中Defer的机制解读与defer的用法</title>
       <link>http://dingjianhui.top/post/2020/06/24/go-defer-used/</link>
       <pubDate>Wed, 24 Jun 2020 09:04:03 +0800</pubDate>
       
