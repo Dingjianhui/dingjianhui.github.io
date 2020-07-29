@@ -13,7 +13,7 @@
     
     
     <item>
-      <title>Go ETCD 简易配置中心</title>
+      <title>Golang &#43; Etcd &#43; Confd 实现简易的配置中心</title>
       <link>http://dingjianhui.top/post/2020/06/26/go-etcd-simple-config-center/</link>
       <pubDate>Fri, 26 Jun 2020 15:50:48 +0800</pubDate>
       
@@ -22,7 +22,7 @@
     </item>
     
     <item>
-      <title>Go 实现 Etcd V3 服务注册与发现</title>
+      <title>Go &#43; Etcd V3 实现 服务注册与发现</title>
       <link>http://dingjianhui.top/post/2020/06/19/go-etcd-v3-service-discovery/</link>
       <pubDate>Fri, 19 Jun 2020 16:45:07 +0800</pubDate>
       
@@ -40,7 +40,7 @@
     </item>
     
     <item>
-      <title>etcd入门之基于docker的环境搭建</title>
+      <title>etcd入门之环境搭建与命令使用(基于docker)</title>
       <link>http://dingjianhui.top/post/2020/06/11/etcd-install/</link>
       <pubDate>Thu, 11 Jun 2020 13:14:58 +0800</pubDate>
       

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>rpc on Ding Jianhui 的个人博客 - 笔记</title>
+    <link>http://dingjianhui.top/categories/rpc/</link>
+    <description>Recent content in rpc on Ding Jianhui 的个人博客 - 笔记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>dingo(Ding JianHui)</copyright>
+    <lastBuildDate>Fri, 03 Jul 2020 15:07:02 +0800</lastBuildDate>
+    
+	<atom:link href="http://dingjianhui.top/categories/rpc/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>流式RPC的使用例子(基于Golang)</title>
+      <link>http://dingjianhui.top/post/2020/07/03/go-grpc-stream/</link>
+      <pubDate>Fri, 03 Jul 2020 15:07:02 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/post/2020/07/03/go-grpc-stream/</guid>
+      <description>官方文档(基于golang语言) 流式RPC(服务端流式RPC、客户端流式RPC、双向流式RPC) https://www.grpc.io/docs/languages/go/basics 官方案例： https://github.com/grpc/grpc-go/tree/master/examples/route_guide 根据不同的业务场景, grpc 支持 4 种</description>
+    </item>
+    
+    <item>
+      <title>Protobuf语法-常用语法 (Protobu3)</title>
+      <link>http://dingjianhui.top/post/2020/07/01/protobuf-grammar/</link>
+      <pubDate>Wed, 01 Jul 2020 13:45:32 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/post/2020/07/01/protobuf-grammar/</guid>
+      <description>前言 Protobuf[1] 是一种语言中立、平台无关、可扩展的序列化数据的格式，可用于通信协议，数据存储等。 ProtoBuf 在序列化数据方面，它是灵活的、高效的。 相比于 XML 来说，</description>
+    </item>
+    
+    <item>
+      <title>使用grpc-gateway同时提供rpc和Restful接口-Golang</title>
+      <link>http://dingjianhui.top/post/2020/06/30/go-grpc-gateway/</link>
+      <pubDate>Tue, 30 Jun 2020 14:53:25 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/post/2020/06/30/go-grpc-gateway/</guid>
+      <description>前言 grpc很棒-支持多种语言来构建rpc服务,快速、易于使用、带宽高效， 但是我们仍然希望提供供传统的RESTful JSON API，兼容老系统 通常</description>
+    </item>
+    
+    <item>
+      <title>grpc的优势与安装使用-Golang</title>
+      <link>http://dingjianhui.top/post/2020/06/28/go-grpc-quick-start/</link>
+      <pubDate>Sun, 28 Jun 2020 13:47:36 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/post/2020/06/28/go-grpc-quick-start/</guid>
+      <description>前言 对于分布式系统而言,不同的服务分布在不同的节点上,一个服务要完成自己的功能经常需要调用其他服务的接口,比如典型的微服务架构。 通常这种服务</description>
+    </item>
+    
+  </channel>
+</rss>

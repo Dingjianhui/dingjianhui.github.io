@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>protobuf on Ding Jianhui 的个人博客 - 笔记</title>
+    <link>http://dingjianhui.top/tags/protobuf/</link>
+    <description>Recent content in protobuf on Ding Jianhui 的个人博客 - 笔记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>dingo(Ding JianHui)</copyright>
+    <lastBuildDate>Wed, 01 Jul 2020 13:45:32 +0800</lastBuildDate>
+    
+	<atom:link href="http://dingjianhui.top/tags/protobuf/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Protobuf语法-常用语法 (Protobu3)</title>
+      <link>http://dingjianhui.top/post/2020/07/01/protobuf-grammar/</link>
+      <pubDate>Wed, 01 Jul 2020 13:45:32 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/post/2020/07/01/protobuf-grammar/</guid>
+      <description>前言 Protobuf[1] 是一种语言中立、平台无关、可扩展的序列化数据的格式，可用于通信协议，数据存储等。 ProtoBuf 在序列化数据方面，它是灵活的、高效的。 相比于 XML 来说，</description>
+    </item>
+    
+  </channel>
+</rss>

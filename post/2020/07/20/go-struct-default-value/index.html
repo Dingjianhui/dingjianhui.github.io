@@ -49,7 +49,7 @@
 <meta itemprop="description" content="传参时，不改变属性默认值时就不传该参数 1. 普通玩法 比如php中 1 2 3 4 public function addLog($log_type,$log_content,$admin_id,$admin_name,$type = 2) { ...... } 调用 $this-&gt;log-&gt;addLog(0">
 <meta itemprop="datePublished" content="2020-07-20T17:42:49&#43;08:00" />
 <meta itemprop="dateModified" content="2020-07-20T17:42:49&#43;08:00" />
-<meta itemprop="wordCount" content="543">
+<meta itemprop="wordCount" content="602">
 
 
 
@@ -125,7 +125,7 @@
         <div class="post-category">
             <a href="/categories/golang/"> golang </a>
             </div>
-          <span class="more-meta"> 约 543 字 </span>
+          <span class="more-meta"> 约 602 字 </span>
           <span class="more-meta"> 预计阅读 2 分钟 </span>
         
       </div>
@@ -205,11 +205,11 @@
 
 <span class="p">}</span>
 
-<span class="c1">// 初始化User对象 userAttr 设置属性值的函数体
+<span class="c1">// 初始化User对象         userAttr 设置属性值的函数(可变参数，可变参数是一个初始化后的切片)
 </span><span class="c1"></span><span class="kd">func</span> <span class="nf">NewUser</span><span class="p">(</span><span class="nx">userAttr</span> <span class="o">...</span><span class="nx">UserAttr</span><span class="p">)</span> <span class="o">*</span><span class="nx">User</span> <span class="p">{</span>
 	<span class="nx">user</span> <span class="o">:=</span> <span class="nb">new</span><span class="p">(</span><span class="nx">User</span><span class="p">)</span>
-	<span class="nf">UserAttrs</span><span class="p">(</span><span class="nx">userAttr</span><span class="p">).</span><span class="nf">Apply</span><span class="p">(</span><span class="nx">user</span><span class="p">)</span>
-	<span class="k">return</span> <span class="nx">user</span>
+	<span class="nf">UserAttrs</span><span class="p">(</span><span class="nx">userAttr</span><span class="p">).</span><span class="nf">Apply</span><span class="p">(</span><span class="nx">user</span><span class="p">)</span> <span class="c1">// 将userAttr强制转换为UserAttrs类型   Apply遍历并执行函数
+</span><span class="c1"></span>	<span class="k">return</span> <span class="nx">user</span>
 <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
@@ -248,9 +248,9 @@
 <td class="lntd">
 <pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">Object</span>
 
-<span class="kd">type</span> <span class="nx">UserAttr</span> <span class="kd">func</span><span class="p">(</span><span class="nx">user</span> <span class="o">*</span><span class="nx">User</span><span class="p">)</span> <span class="c1">// 用来定义User结构体的属性值函数
+<span class="kd">type</span> <span class="nx">UserAttr</span> <span class="kd">func</span><span class="p">(</span><span class="nx">user</span> <span class="o">*</span><span class="nx">User</span><span class="p">)</span> <span class="c1">// 用来定义User结构体的属性值的函数
 </span><span class="c1"></span>
-<span class="kd">type</span> <span class="nx">UserAttrs</span> <span class="p">[]</span><span class="nx">UserAttr</span>
+<span class="kd">type</span> <span class="nx">UserAttrs</span> <span class="p">[]</span><span class="nx">UserAttr</span> 
 
 <span class="c1">// 执行设置属性值的函数 
 </span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">this</span> <span class="nx">UserAttrs</span><span class="p">)</span> <span class="nf">Apply</span><span class="p">(</span><span class="nx">user</span> <span class="o">*</span><span class="nx">User</span><span class="p">)</span>  <span class="p">{</span>

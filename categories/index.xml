@@ -7,17 +7,35 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>dingo(Ding JianHui)</copyright>
-    <lastBuildDate>Fri, 24 Jul 2020 11:56:29 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 29 Jul 2020 09:54:54 +0800</lastBuildDate>
     
 	<atom:link href="http://dingjianhui.top/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>redis</title>
+      <link>http://dingjianhui.top/categories/redis/</link>
+      <pubDate>Wed, 29 Jul 2020 09:54:54 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/categories/redis/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>golang</title>
       <link>http://dingjianhui.top/categories/golang/</link>
-      <pubDate>Fri, 24 Jul 2020 11:56:29 +0800</pubDate>
+      <pubDate>Sun, 26 Jul 2020 07:55:30 +0800</pubDate>
       
       <guid>http://dingjianhui.top/categories/golang/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>rpc</title>
+      <link>http://dingjianhui.top/categories/rpc/</link>
+      <pubDate>Fri, 03 Jul 2020 15:07:02 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/categories/rpc/</guid>
       <description></description>
     </item>
     
@@ -27,6 +45,24 @@
       <pubDate>Tue, 30 Jun 2020 11:45:16 +0800</pubDate>
       
       <guid>http://dingjianhui.top/categories/openssl/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>etcd</title>
+      <link>http://dingjianhui.top/categories/etcd/</link>
+      <pubDate>Fri, 26 Jun 2020 15:50:48 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/categories/etcd/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>centos</title>
+      <link>http://dingjianhui.top/categories/centos/</link>
+      <pubDate>Wed, 17 Jun 2020 14:15:53 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/categories/centos/</guid>
       <description></description>
     </item>
     

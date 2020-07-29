@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>redis on Ding Jianhui 的个人博客 - 笔记</title>
+    <link>http://dingjianhui.top/categories/redis/</link>
+    <description>Recent content in redis on Ding Jianhui 的个人博客 - 笔记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>dingo(Ding JianHui)</copyright>
+    <lastBuildDate>Wed, 29 Jul 2020 09:54:54 +0800</lastBuildDate>
+    
+	<atom:link href="http://dingjianhui.top/categories/redis/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Docker中安装Redis并设置安全选项</title>
+      <link>http://dingjianhui.top/post/2020/07/29/redis-set-security-options/</link>
+      <pubDate>Wed, 29 Jul 2020 09:54:54 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/post/2020/07/29/redis-set-security-options/</guid>
+      <description>官方文档 https://redis.io/ https://hub.docker.com/_/redis https://github.com/redis/redis 环境 CentOS 7 + docker + docker-compose + redis 5.0 以安装redis5.0.7为例,目前最新版是6.0.6 下载安装 redis redis:&amp;lt;version&amp;gt; redis:&amp;lt;version&amp;gt;-alpine 1 2 3 4 [tintin@localhost ~]$ docker pull redis:5.0.7-alpine [tintin@localhost ~]$ docker images REPOSITORY TAG IMAGE ID CREATED</description>
+    </item>
+    
+  </channel>
+</rss>

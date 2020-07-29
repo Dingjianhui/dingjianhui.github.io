@@ -7,17 +7,62 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>dingo(Ding JianHui)</copyright>
-    <lastBuildDate>Fri, 24 Jul 2020 11:56:29 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 29 Jul 2020 09:54:54 +0800</lastBuildDate>
     
 	<atom:link href="http://dingjianhui.top/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>docker</title>
+      <link>http://dingjianhui.top/tags/docker/</link>
+      <pubDate>Wed, 29 Jul 2020 09:54:54 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/tags/docker/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>docker-compose</title>
+      <link>http://dingjianhui.top/tags/docker-compose/</link>
+      <pubDate>Wed, 29 Jul 2020 09:54:54 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/tags/docker-compose/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>redis</title>
+      <link>http://dingjianhui.top/tags/redis/</link>
+      <pubDate>Wed, 29 Jul 2020 09:54:54 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/tags/redis/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>安全</title>
+      <link>http://dingjianhui.top/tags/%E5%AE%89%E5%85%A8/</link>
+      <pubDate>Wed, 29 Jul 2020 09:54:54 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/tags/%E5%AE%89%E5%85%A8/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>go</title>
       <link>http://dingjianhui.top/tags/go/</link>
-      <pubDate>Fri, 24 Jul 2020 11:56:29 +0800</pubDate>
+      <pubDate>Sun, 26 Jul 2020 07:55:30 +0800</pubDate>
       
       <guid>http://dingjianhui.top/tags/go/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>go测试</title>
+      <link>http://dingjianhui.top/tags/go%E6%B5%8B%E8%AF%95/</link>
+      <pubDate>Sun, 26 Jul 2020 07:55:30 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/tags/go%E6%B5%8B%E8%AF%95/</guid>
       <description></description>
     </item>
     
@@ -40,11 +85,38 @@
     </item>
     
     <item>
+      <title>protobuf</title>
+      <link>http://dingjianhui.top/tags/protobuf/</link>
+      <pubDate>Wed, 01 Jul 2020 13:45:32 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/tags/protobuf/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>gateway</title>
+      <link>http://dingjianhui.top/tags/gateway/</link>
+      <pubDate>Tue, 30 Jun 2020 14:53:25 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/tags/gateway/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>https</title>
       <link>http://dingjianhui.top/tags/https/</link>
       <pubDate>Tue, 30 Jun 2020 11:45:16 +0800</pubDate>
       
       <guid>http://dingjianhui.top/tags/https/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>openssl</title>
+      <link>http://dingjianhui.top/tags/openssl/</link>
+      <pubDate>Tue, 30 Jun 2020 11:45:16 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/tags/openssl/</guid>
       <description></description>
     </item>
     
@@ -81,15 +153,6 @@
       <pubDate>Wed, 17 Jun 2020 14:15:53 +0800</pubDate>
       
       <guid>http://dingjianhui.top/tags/centos7/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>docker</title>
-      <link>http://dingjianhui.top/tags/docker/</link>
-      <pubDate>Wed, 17 Jun 2020 14:15:53 +0800</pubDate>
-      
-      <guid>http://dingjianhui.top/tags/docker/</guid>
       <description></description>
     </item>
     

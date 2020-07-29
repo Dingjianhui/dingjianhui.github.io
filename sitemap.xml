@@ -3,49 +3,98 @@
   
   <url>
     <loc>http://dingjianhui.top/categories/</loc>
-    <lastmod>2020-07-24T11:56:29+08:00</lastmod>
+    <lastmod>2020-07-29T09:54:54+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>http://dingjianhui.top/</loc>
-    <lastmod>2020-07-24T11:56:29+08:00</lastmod>
+    <lastmod>2020-07-29T09:54:54+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://dingjianhui.top/tags/go/</loc>
-    <lastmod>2020-07-24T11:56:29+08:00</lastmod>
+    <loc>http://dingjianhui.top/tags/docker/</loc>
+    <lastmod>2020-07-29T09:54:54+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://dingjianhui.top/categories/golang/</loc>
-    <lastmod>2020-07-24T11:56:29+08:00</lastmod>
+    <loc>http://dingjianhui.top/tags/docker-compose/</loc>
+    <lastmod>2020-07-29T09:54:54+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://dingjianhui.top/post/2020/07/24/go-reflect/</loc>
-    <lastmod>2020-07-24T11:56:29+08:00</lastmod>
+    <loc>http://dingjianhui.top/post/2020/07/29/redis-set-security-options/</loc>
+    <lastmod>2020-07-29T09:54:54+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>http://dingjianhui.top/post/</loc>
-    <lastmod>2020-07-24T11:56:29+08:00</lastmod>
+    <lastmod>2020-07-29T09:54:54+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://dingjianhui.top/tags/redis/</loc>
+    <lastmod>2020-07-29T09:54:54+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://dingjianhui.top/categories/redis/</loc>
+    <lastmod>2020-07-29T09:54:54+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>http://dingjianhui.top/tags/</loc>
-    <lastmod>2020-07-24T11:56:29+08:00</lastmod>
+    <lastmod>2020-07-29T09:54:54+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://dingjianhui.top/tags/%E5%AE%89%E5%85%A8/</loc>
+    <lastmod>2020-07-29T09:54:54+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://dingjianhui.top/tags/go/</loc>
+    <lastmod>2020-07-26T07:55:30+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://dingjianhui.top/categories/golang/</loc>
+    <lastmod>2020-07-26T07:55:30+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://dingjianhui.top/post/2020/07/26/go-test-mock/</loc>
+    <lastmod>2020-07-26T07:55:30+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://dingjianhui.top/tags/go%E6%B5%8B%E8%AF%95/</loc>
+    <lastmod>2020-07-26T07:55:30+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -93,6 +142,13 @@
   </url>
   
   <url>
+    <loc>http://dingjianhui.top/categories/rpc/</loc>
+    <lastmod>2020-07-03T15:07:02+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>http://dingjianhui.top/post/2020/07/03/go-grpc-stream/</loc>
     <lastmod>2020-07-03T15:07:02+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -100,8 +156,22 @@
   </url>
   
   <url>
+    <loc>http://dingjianhui.top/tags/protobuf/</loc>
+    <lastmod>2020-07-01T13:45:32+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>http://dingjianhui.top/post/2020/07/01/protobuf-grammar/</loc>
     <lastmod>2020-07-01T13:45:32+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://dingjianhui.top/tags/gateway/</loc>
+    <lastmod>2020-06-30T14:53:25+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -115,6 +185,13 @@
   
   <url>
     <loc>http://dingjianhui.top/tags/https/</loc>
+    <lastmod>2020-06-30T11:45:16+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://dingjianhui.top/tags/openssl/</loc>
     <lastmod>2020-06-30T11:45:16+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -143,6 +220,13 @@
   
   <url>
     <loc>http://dingjianhui.top/tags/etcd/</loc>
+    <lastmod>2020-06-26T15:50:48+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://dingjianhui.top/categories/etcd/</loc>
     <lastmod>2020-06-26T15:50:48+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -191,6 +275,13 @@
   </url>
   
   <url>
+    <loc>http://dingjianhui.top/categories/centos/</loc>
+    <lastmod>2020-06-17T14:15:53+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>http://dingjianhui.top/post/2020/06/17/centos-docker-install/</loc>
     <lastmod>2020-06-17T14:15:53+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -199,13 +290,6 @@
   
   <url>
     <loc>http://dingjianhui.top/tags/centos7/</loc>
-    <lastmod>2020-06-17T14:15:53+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://dingjianhui.top/tags/docker/</loc>
     <lastmod>2020-06-17T14:15:53+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

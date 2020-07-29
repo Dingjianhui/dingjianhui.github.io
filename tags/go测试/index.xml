@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>go测试 on Ding Jianhui 的个人博客 - 笔记</title>
+    <link>http://dingjianhui.top/tags/go%E6%B5%8B%E8%AF%95/</link>
+    <description>Recent content in go测试 on Ding Jianhui 的个人博客 - 笔记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>dingo(Ding JianHui)</copyright>
+    <lastBuildDate>Sun, 26 Jul 2020 07:55:30 +0800</lastBuildDate>
+    
+	<atom:link href="http://dingjianhui.top/tags/go%E6%B5%8B%E8%AF%95/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Golang 测试进阶之gomock框架(单元测试)</title>
+      <link>http://dingjianhui.top/post/2020/07/26/go-test-mock/</link>
+      <pubDate>Sun, 26 Jul 2020 07:55:30 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/post/2020/07/26/go-test-mock/</guid>
+      <description>官方文档 https://github.com/golang/mock https://godoc.org/github.com/golang/mock/gomock 介绍 GoMock is a mocking framework for the Go programming language. GoMock是由Golang官方开发维护的测试框架，实现了较为完整的基于interface的Mock功能</description>
+    </item>
+    
+    <item>
+      <title>Golang 测试用例的写法-单元测试、性能测试</title>
+      <link>http://dingjianhui.top/post/2020/07/22/go-test/</link>
+      <pubDate>Thu, 23 Jul 2020 15:05:10 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/post/2020/07/22/go-test/</guid>
+      <description>简介 go 自带单元测试和性能测试模块，仅需要很少的代码就可以快速测试一段需求代码 准则 需要创建一个名称以 _test.go 结尾的文件 该文件包含 测试用例 (如：Tes</description>
+    </item>
+    
+  </channel>
+</rss>

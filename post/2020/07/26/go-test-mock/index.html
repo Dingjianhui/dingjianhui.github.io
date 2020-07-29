@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Golang 测试进阶之gomock框架(单元测试) - Ding Jianhui 的个人博客 - 笔记</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="dingo" /><meta name="description" content="官方文档 https://github.com/golang/mock https://godoc.org/github.com/golang/mock/gomock 介绍 GoMock is a mocking framework for the Go programming language. GoMock是由Golang官方开发维护的测试框架，实现了较为完整的基于interface的Mock功能" /><meta name="keywords" content="dingo, golang, 笔记" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.73.0-DEV with theme even" />
+
+
+<link rel="canonical" href="http://dingjianhui.top/post/2020/07/26/go-test-mock/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Golang 测试进阶之gomock框架(单元测试)" />
+<meta property="og:description" content="官方文档 https://github.com/golang/mock https://godoc.org/github.com/golang/mock/gomock 介绍 GoMock is a mocking framework for the Go programming language. GoMock是由Golang官方开发维护的测试框架，实现了较为完整的基于interface的Mock功能" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://dingjianhui.top/post/2020/07/26/go-test-mock/" />
+<meta property="article:published_time" content="2020-07-26T07:55:30+08:00" />
+<meta property="article:modified_time" content="2020-07-26T07:55:30+08:00" />
+<meta itemprop="name" content="Golang 测试进阶之gomock框架(单元测试)">
+<meta itemprop="description" content="官方文档 https://github.com/golang/mock https://godoc.org/github.com/golang/mock/gomock 介绍 GoMock is a mocking framework for the Go programming language. GoMock是由Golang官方开发维护的测试框架，实现了较为完整的基于interface的Mock功能">
+<meta itemprop="datePublished" content="2020-07-26T07:55:30&#43;08:00" />
+<meta itemprop="dateModified" content="2020-07-26T07:55:30&#43;08:00" />
+<meta itemprop="wordCount" content="375">
+
+
+
+<meta itemprop="keywords" content="go,go测试," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Golang 测试进阶之gomock框架(单元测试)"/>
+<meta name="twitter:description" content="官方文档 https://github.com/golang/mock https://godoc.org/github.com/golang/mock/gomock 介绍 GoMock is a mocking framework for the Go programming language. GoMock是由Golang官方开发维护的测试框架，实现了较为完整的基于interface的Mock功能"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+<script data-ad-client="ca-pub-8764182409666792" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">dingo</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">dingo</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Golang 测试进阶之gomock框架(单元测试)</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-07-26 </span>
+        <div class="post-category">
+            <a href="/categories/golang/"> golang </a>
+            </div>
+          <span class="more-meta"> 约 375 字 </span>
+          <span class="more-meta"> 预计阅读 1 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#介绍">介绍</a></li>
+    <li><a href="#安装">安装</a></li>
+    <li><a href="#使用">使用</a>
+      <ul>
+        <li><a href="#mockgen工具的使用">mockgen工具的使用</a></li>
+      </ul>
+    </li>
+    <li><a href="#使用示例">使用示例</a></li>
+    <li><a href="#其他框架">其他框架</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <blockquote>
+<p>官方文档</p>
+<p><a href="https://github.com/golang/mock">https://github.com/golang/mock</a></p>
+<p><a href="https://godoc.org/github.com/golang/mock/gomock">https://godoc.org/github.com/golang/mock/gomock</a></p>
+</blockquote>
+<h2 id="介绍">介绍</h2>
+<blockquote>
+<p>GoMock is a mocking framework for the Go programming language.</p>
+</blockquote>
+<p><code>GoMock</code>是由<code>Golang</code>官方开发维护的测试框架，实现了较为完整的基于<code>interface</code>的<code>Mock</code>功能，
+能够与<code>Golang</code>内置的<code>testing</code>包良好集成，也能用于其它的测试环境中。</p>
+<h2 id="安装">安装</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">go get github.com/golang/mock/gomock
+go get github.com/golang/mock/mockgen
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="使用">使用</h2>
+<ol>
+<li>定义要模拟的接口</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go">      <span class="kd">type</span> <span class="nx">MyInterface</span> <span class="kd">interface</span> <span class="p">{</span>
+        <span class="nf">SomeMethod</span><span class="p">(</span><span class="nx">x</span> <span class="kt">int64</span><span class="p">,</span> <span class="nx">y</span> <span class="kt">string</span><span class="p">)</span>
+      <span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>使用mockgen工具从接口生成一个模拟</li>
+<li>在测试中使用模拟</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go">      <span class="kd">func</span> <span class="nf">TestMyThing</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">mockCtrl</span> <span class="o">:=</span> <span class="nx">gomock</span><span class="p">.</span><span class="nf">NewController</span><span class="p">(</span><span class="nx">t</span><span class="p">)</span>
+        <span class="k">defer</span> <span class="nx">mockCtrl</span><span class="p">.</span><span class="nf">Finish</span><span class="p">()</span>
+
+        <span class="nx">mockObj</span> <span class="o">:=</span> <span class="nx">something</span><span class="p">.</span><span class="nf">NewMockMyInterface</span><span class="p">(</span><span class="nx">mockCtrl</span><span class="p">)</span>
+        <span class="nx">mockObj</span><span class="p">.</span><span class="nf">EXPECT</span><span class="p">().</span><span class="nf">SomeMethod</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="s">&#34;blah&#34;</span><span class="p">)</span>
+        <span class="c1">// pass mockObj to a real object and play with it.
+</span><span class="c1"></span>      <span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="mockgen工具的使用">mockgen工具的使用</h3>
+<p>支持两种生成模式<code>mock</code> 接口</p>
+<ol>
+<li><code>source</code>：从源文件生成 <code>mock</code> 接口（通过 <code>-source</code> 启用）</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">mockgen -source<span class="o">=</span>foo.go <span class="o">[</span>other options<span class="o">]</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li><code>reflect</code>：通过使用反射程序来生成 <code>mock</code> 接口。
+它通过传递两个非标志参数来启用：导入路径和逗号分隔的接口列表</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">mockgen database/sql/driver Conn,Driver
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="使用示例">使用示例</h2>
+<p>定义一个接口</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">services</span>
+
+<span class="kd">type</span> <span class="nx">IService</span> <span class="kd">interface</span> <span class="p">{</span>
+	<span class="nf">Save</span><span class="p">(</span><span class="nx">data</span> <span class="kd">interface</span><span class="p">{})</span> <span class="nx">IService</span> <span class="c1">// 保存数据
+</span><span class="c1"></span>	<span class="nf">List</span><span class="p">()</span> <span class="nx">IService</span>  <span class="c1">// 获取列表数据
+</span><span class="c1"></span>	<span class="nf">Detail</span><span class="p">(</span><span class="nx">query</span> <span class="kd">interface</span><span class="p">{})</span> <span class="nx">IService</span> <span class="c1">// 获取详情数据
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="其他框架">其他框架</h2>
+<blockquote>
+<p>httpexcept (<a href="https://github.com/gavv/httpexpect">https://github.com/gavv/httpexpect</a>)</p>
+<p>testify (<a href="https://github.com/stretchr/testify">https://github.com/stretchr/testify</a>)</p>
+<p>go-sqlmock (<a href="https://github.com/DATA-DOG/go-sqlmock">https://github.com/DATA-DOG/go-sqlmock</a>)</p>
+</blockquote>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">dingo</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2020-07-26
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/go/">go</a>
+          <a href="/tags/go%E6%B5%8B%E8%AF%95/">go测试</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/2020/07/29/redis-set-security-options/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Docker中安装Redis并设置安全选项</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/2020/07/22/go-test/">
+            <span class="next-text nav-default">Golang 测试用例的写法-单元测试、性能测试</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/dingjianhui" class="iconfont icon-github" title="github"></a>
+  <a href="http://dingjianhui.top/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">dingo(Ding JianHui)</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

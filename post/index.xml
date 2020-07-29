@@ -7,18 +7,27 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>dingo(Ding JianHui)</copyright>
-    <lastBuildDate>Fri, 24 Jul 2020 11:56:29 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 29 Jul 2020 09:54:54 +0800</lastBuildDate>
     
 	<atom:link href="http://dingjianhui.top/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Golang的反射理解与示例使用</title>
-      <link>http://dingjianhui.top/post/2020/07/24/go-reflect/</link>
-      <pubDate>Fri, 24 Jul 2020 11:56:29 +0800</pubDate>
+      <title>Docker中安装Redis并设置安全选项</title>
+      <link>http://dingjianhui.top/post/2020/07/29/redis-set-security-options/</link>
+      <pubDate>Wed, 29 Jul 2020 09:54:54 +0800</pubDate>
       
-      <guid>http://dingjianhui.top/post/2020/07/24/go-reflect/</guid>
-      <description></description>
+      <guid>http://dingjianhui.top/post/2020/07/29/redis-set-security-options/</guid>
+      <description>官方文档 https://redis.io/ https://hub.docker.com/_/redis https://github.com/redis/redis 环境 CentOS 7 + docker + docker-compose + redis 5.0 以安装redis5.0.7为例,目前最新版是6.0.6 下载安装 redis redis:&amp;lt;version&amp;gt; redis:&amp;lt;version&amp;gt;-alpine 1 2 3 4 [tintin@localhost ~]$ docker pull redis:5.0.7-alpine [tintin@localhost ~]$ docker images REPOSITORY TAG IMAGE ID CREATED</description>
+    </item>
+    
+    <item>
+      <title>Golang 测试进阶之gomock框架(单元测试)</title>
+      <link>http://dingjianhui.top/post/2020/07/26/go-test-mock/</link>
+      <pubDate>Sun, 26 Jul 2020 07:55:30 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/post/2020/07/26/go-test-mock/</guid>
+      <description>官方文档 https://github.com/golang/mock https://godoc.org/github.com/golang/mock/gomock 介绍 GoMock is a mocking framework for the Go programming language. GoMock是由Golang官方开发维护的测试框架，实现了较为完整的基于interface的Mock功能</description>
     </item>
     
     <item>

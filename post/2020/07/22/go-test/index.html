@@ -49,11 +49,11 @@
 <meta itemprop="description" content="简介 go 自带单元测试和性能测试模块，仅需要很少的代码就可以快速测试一段需求代码 准则 需要创建一个名称以 _test.go 结尾的文件 该文件包含 测试用例 (如：Tes">
 <meta itemprop="datePublished" content="2020-07-23T15:05:10&#43;08:00" />
 <meta itemprop="dateModified" content="2020-07-23T15:05:10&#43;08:00" />
-<meta itemprop="wordCount" content="1623">
+<meta itemprop="wordCount" content="1664">
 
 
 
-<meta itemprop="keywords" content="go," /><meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="go,go测试," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Golang 测试用例的写法-单元测试、性能测试"/>
 <meta name="twitter:description" content="简介 go 自带单元测试和性能测试模块，仅需要很少的代码就可以快速测试一段需求代码 准则 需要创建一个名称以 _test.go 结尾的文件 该文件包含 测试用例 (如：Tes"/>
 
@@ -125,7 +125,7 @@
         <div class="post-category">
             <a href="/categories/golang/"> golang </a>
             </div>
-          <span class="more-meta"> 约 1623 字 </span>
+          <span class="more-meta"> 约 1664 字 </span>
           <span class="more-meta"> 预计阅读 4 分钟 </span>
         
       </div>
@@ -150,6 +150,7 @@
         <li><a href="#22-优化">2.2 优化</a></li>
       </ul>
     </li>
+    <li><a href="#框架">框架</a></li>
   </ul>
 </nav>
   </div>
@@ -619,11 +620,12 @@ ok      basicgo/mytest  4.028s
 </div>
 </div><p><code>BenchmarkJoin1-8</code> 循环执行的次数最多，每次循环花费的时间最短</p>
 <p>所以累加字符串使用<code>go内置包</code>，性能是最好的</p>
+<h2 id="框架">框架</h2>
+<p><a href="https://github.com/golang/mock">gomock</a> 是官方提供的 mock 框架，同时还提供了 mockgen 工具用来辅助生成测试代码。</p>
+<p><a href="https://github.com/google/pprof">pprof</a> 是用于可视化和分析数据的工具</p>
 <blockquote>
 <p>官方文档</p>
 <p><a href="https://godoc.org/testing">https://godoc.org/testing</a></p>
-<p>详细使用参考</p>
-<p><a href="https://books.studygolang.com/The-Golang-Standard-Library-by-Example/chapter09/09.1.html">https://books.studygolang.com/The-Golang-Standard-Library-by-Example/chapter09/09.1.html</a></p>
 </blockquote>
 
     </div>
@@ -646,11 +648,12 @@ ok      basicgo/mytest  4.028s
 <footer class="post-footer">
       <div class="post-tags">
           <a href="/tags/go/">go</a>
+          <a href="/tags/go%E6%B5%8B%E8%AF%95/">go测试</a>
           </div>
       <nav class="post-nav">
-        <a class="prev" href="/post/2020/07/24/go-reflect/">
+        <a class="prev" href="/post/2020/07/26/go-test-mock/">
             <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">Golang的反射理解与示例使用</span>
+            <span class="prev-text nav-default">Golang 测试进阶之gomock框架(单元测试)</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
         <a class="next" href="/post/2020/07/21/go-map/">

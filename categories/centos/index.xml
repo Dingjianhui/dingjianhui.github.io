@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>centos on Ding Jianhui 的个人博客 - 笔记</title>
+    <link>http://dingjianhui.top/categories/centos/</link>
+    <description>Recent content in centos on Ding Jianhui 的个人博客 - 笔记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>dingo(Ding JianHui)</copyright>
+    <lastBuildDate>Wed, 17 Jun 2020 14:15:53 +0800</lastBuildDate>
+    
+	<atom:link href="http://dingjianhui.top/categories/centos/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Centos 7系统中安装docker &amp; Docker Compose</title>
+      <link>http://dingjianhui.top/post/2020/06/17/centos-docker-install/</link>
+      <pubDate>Wed, 17 Jun 2020 14:15:53 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/post/2020/06/17/centos-docker-install/</guid>
+      <description>安装文档-以官方文档为准 官方文档 https://docs.docker.com/engine/install/centos/ Step 1 卸载旧版本 1 2 3 4 5 6 7 8 $ sudo yum remove docker \ docker-client \ docker-client-latest \ docker-common \ docker-latest \ docker-latest-logrotate \ docker-logrotate \ docker-engine Step 2 设置存储库 安装utils工具包 （依</description>
+    </item>
+    
+  </channel>
+</rss>

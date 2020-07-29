@@ -7,18 +7,18 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>dingo(Ding JianHui)</copyright>
-    <lastBuildDate>Fri, 24 Jul 2020 11:56:29 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 26 Jul 2020 07:55:30 +0800</lastBuildDate>
     
 	<atom:link href="http://dingjianhui.top/categories/golang/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Golang的反射理解与示例使用</title>
-      <link>http://dingjianhui.top/post/2020/07/24/go-reflect/</link>
-      <pubDate>Fri, 24 Jul 2020 11:56:29 +0800</pubDate>
+      <title>Golang 测试进阶之gomock框架(单元测试)</title>
+      <link>http://dingjianhui.top/post/2020/07/26/go-test-mock/</link>
+      <pubDate>Sun, 26 Jul 2020 07:55:30 +0800</pubDate>
       
-      <guid>http://dingjianhui.top/post/2020/07/24/go-reflect/</guid>
-      <description></description>
+      <guid>http://dingjianhui.top/post/2020/07/26/go-test-mock/</guid>
+      <description>官方文档 https://github.com/golang/mock https://godoc.org/github.com/golang/mock/gomock 介绍 GoMock is a mocking framework for the Go programming language. GoMock是由Golang官方开发维护的测试框架，实现了较为完整的基于interface的Mock功能</description>
     </item>
     
     <item>
@@ -64,15 +64,6 @@
       
       <guid>http://dingjianhui.top/post/2020/07/03/go-grpc-stream/</guid>
       <description>官方文档(基于golang语言) 流式RPC(服务端流式RPC、客户端流式RPC、双向流式RPC) https://www.grpc.io/docs/languages/go/basics 官方案例： https://github.com/grpc/grpc-go/tree/master/examples/route_guide 根据不同的业务场景, grpc 支持 4 种</description>
-    </item>
-    
-    <item>
-      <title>Protobuf语法-常用语法 (Protobu3)</title>
-      <link>http://dingjianhui.top/post/2020/07/01/protobuf-grammar/</link>
-      <pubDate>Wed, 01 Jul 2020 13:45:32 +0800</pubDate>
-      
-      <guid>http://dingjianhui.top/post/2020/07/01/protobuf-grammar/</guid>
-      <description>前言 Protobuf[1] 是一种语言中立、平台无关、可扩展的序列化数据的格式，可用于通信协议，数据存储等。 ProtoBuf 在序列化数据方面，它是灵活的、高效的。 相比于 XML 来说，</description>
     </item>
     
     <item>
