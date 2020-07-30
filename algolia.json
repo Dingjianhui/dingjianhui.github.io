@@ -1,0 +1,350 @@
+[
+    {
+        "title": "windows 开发环境下 go 交叉编译",
+        "uri": "post/2020/06/05/go-cross-compile",
+        "content": "linux set GOOS linux set GOARCH amd64 go build  o build hugo main go windows set GOOS windows set GOARCH amd64 go build  o build hugo exe main go   PS           GOARCH  amd64  386  arm  ppc64    GOOS  linux  darwin  windows  netbsd",
+        "objectID": "post/2020/06/05/go-cross-compile",
+        "date": "2020-06-05T00:00:00.000Z",
+        "tags": [
+            "go",
+            "go初级"
+        ],
+        "categories": [
+            "golang"
+        ],
+        "author": "dingo"
+    },
+    {
+        "title": "Golang中string、byte、rune的区别",
+        "uri": "post/2020/06/06/go-strings-byte-rune",
+        "content": "string string             utf8         slice      len                        for                   Randal      0  HelloWorld  func  this String  Ufirst   string           return               1     len this     1   return strings ToUpper string this     else   return strings ToUpper string this 0      string this 1                            example  helloWorld    Helloworld  func  this String  UfirstLlater   string           return               1     len this     1   return strings ToUpper string this     else   return strings ToUpper string this 0      strings ToLower string this 1                    example  helloWorld    hello_world    helloWorldA    helloworld_a func  this String  SnakeCase   string   strs    make   byte  0  len this                   isUnderLine    false           this EachByte func str byte                       str    65    str helloWorld    helloworldA    helloWorldA func  this String  CamelCase   string   strs    make   byte  0  len this                   isToUpper    false              this EachByte func str byte    str    97    str        https   blog golang org strings https   juejin im post 5c1a2db5f265da61682b52f5",
+        "objectID": "post/2020/06/06/go-strings-byte-rune",
+        "date": "2020-06-06T07:29:25.000Z",
+        "tags": [
+            "go",
+            "go初级"
+        ],
+        "categories": [
+            "golang"
+        ],
+        "author": "dingo"
+    },
+    {
+        "title": "使用docker模拟etcd集群的创建",
+        "uri": "post/2020/06/11/etcd-cluster-by-docker",
+        "content": "docker swarm   k8s     Step 1        docker     docker        bridge        docker network create etcdnet   subnet 172 25 0 0 16               tintin localhost ttphp   docker network create etcdnet   subnet 172 25 0 0 16 Step 2             etcd1      etcd2         conf   data  tintin localhost ttphp   cd etcds   tintin localhost etcds   mkdir etcd1 etcd2  tintin localhost etcds   mkdir etcd1 conf etcd1 data  tintin localhost etcds   mkdir etcd2 conf etcd2 data Step 3             etcd1 conf etcd yml  etcd1         vim etcd1 conf etcd yml name  etcd1 data dir   etcd data listen client urls  http   172 25 0 101 2379  http   127 0 0 1 2379 advertise client urls  http   172 25 0 101 2379 listen peer urls  http   172 25 0 101 2380 initial advertise peer urls  http   172 25 0 101 2380 initial cluster  etcd1 http   172 25 0 101 2380 etcd2 http   172 25 0 102 2380 initial cluster token  etcd cluster token initial cluster state  new etcd2 conf etcd yml  etcd2         vim etcd2 conf etcd yml name  etcd2 data dir   etcd data listen client urls  http   172 25 0 102 2379  http   127 0 0 1 2379 advertise client urls  http   172 25 0 102 2379 listen peer urls  http   172 25 0 102 2380 initial advertise peer urls  http   172 25 0 102 2380 initial cluster  etcd1 http   172 25 0 101 2380 etcd2 http   172 25 0 102 2380 initial cluster token  etcd cluster token initial cluster state  new ETCD     name       data dir         listen client urls                scheme   IP port                   http   0 0 0 0 2379      node     advertise client urls        ETCD                      advertise client urls listen client urls   listen peer urls                                      scheme   IP port                  http   0 0 0 0 2379     node     initial advertise peer urls                             URL    domain       listener peer urls    listener peer urls              initial advertise peer urls             URL       initial advertise peer urlsl  istener peer urls    initial cluster                    initial cluster token                           initial cluster state          new                    existing                         Step 4        commit  etcd        docker pull golang 1 14 4 alpine3 12   golang           docker run   name testgo  it golang 1 14 4 alpine3 12 sh    docker cp etcd testgo  usr bin    docker cp etcdctl testgo  usr bin        docker commit testgo etcd my  tintin localhost etcds   docker run   name testgo  it golang 1 14 4 alpine3 12 sh Ctrl D     tintin localhost etcds   docker start testgo  tintin localhost etcds   docker cp  home tintin ttphp etcd etcd testgo  usr bin      docker cp  home tintin ttphp etcd etcdctl testgo  usr bin  tintin localhost etcds   docker commit testgo etcd my  tintin localhost etcds   docker images  tintin localhost etcds   docker ps  tintin localhost etcds   docker stop testgo  tintin localhost etcds   docker rm testgo Step 5              tintin localhost etcds   docker run  d   name etcd1     network etcdnet   ip 172 25 0 101  p 23791 2379    v  home tintin ttphp etcds etcd1  etcd etcd my   etcd   config file  etcd conf etcd yml  tintin localhost etcds   docker run  d   name etcd2     network etcdnet   ip 172 25 0 102  p 23792 2379    v  home tintin ttphp etcds etcd2  etcd etcd my   etcd   config file  etcd conf etcd yml  tintin localhost etcds   docker ps Step 6     tintin localhost etcds   cd    etcd  tintin localhost etcd   ls  tintin localhost etcd     etcdctl   endpoints http   localhost 23791 member list 97f72e8299c69562  started  etcd1  http   172 25 0 101 2380  http   172 25 0 101 2379  false aea8ea6030d288e8  started  etcd2  http   172 25 0 102 2380  http   172 25 0 102 2379  false  tintin localhost etcd     etcdctl   endpoints http   localhost 23792 member list 97f72e8299c69562  started  etcd1  http   172 25 0 101 2380  http   172 25 0 101 2379  false aea8ea6030d288e8  started  etcd2  http   172 25 0 102 2380  http   172 25 0 102 2379  false                v2        ETCDCTLAPI 2 etcdctl member list   ETCDCTLAPI 3 etcdctl member list     know node leader        https   github com etcd io etcd issues 9417  tintin localhost etcds   docker exec  it etcd1 sh  go   etcdctl member list 97f72e8299c69562  started  etcd1  http   172 25 0 101 2380  http   172 25 0 101 2379  false aea8ea6030d288e8  started  etcd2  http   172 25 0 102 2380  http   172 25 0 102 2379  false  go   etcdctl version etcdctl version  3 4 9 API version  3 4  go   ETCDCTL_API 3 etcdctl member list 97f72e8299c69562  started  etcd1  http   172 25 0 101 2380  http   172 25 0 101 2379  false aea8ea6030d288e8  started  etcd2  http   172 25 0 102 2380  http   172 25 0 102 2379  false  go   ETCDCTL_API 2 etcdctl member list unexpected status code 404  go   ETCDCTL_API 3 etcdctl  w table   endpoints etcd1 2379 etcd2 2379 endpoint status                                                                                                                                         ENDPOINT   ID   VERSION   DB SIZE   LEADER   LEARNER   RAFT TERM   RAFT INDEX   RAFT APPLIED INDEX   ERRORS                                                   ",
+        "objectID": "post/2020/06/11/etcd-cluster-by-docker",
+        "date": "2020-06-11T09:14:58.000Z",
+        "tags": [
+            "docker",
+            "etcd"
+        ],
+        "categories": [
+            "docker",
+            "etcd"
+        ],
+        "author": "dingo"
+    },
+    {
+        "title": "etcd入门之环境搭建与命令使用(基于docker)",
+        "uri": "post/2020/06/11/etcd-install",
+        "content": "etcd     distributed  reliable key value store critical data distributed system etcd              etcd  CoreOS             ZooKeeper      Go     Github  https   github com etcd io etcd     https   etcd io            HTTP JSON   API     curl                SSL                                  Raft                                      Service Discovery          etcd         https   github com etcd io etcd releases        windows          linux        tintin localhost tools   tar  zxvf etcd v3 4 9 linux amd64 tar gz  tintin localhost tools   mv etcd v3 4 9 linux amd64    etcd  tintin localhost ttphp   cd    etcd   tintin localhost etcd   ls Documentation etcd etcdctl README etcdctl md README md READMEv2 etcdctl md        conf data  tintin localhost etcd   cd      tintin localhost ttphp   mkdir etcds  tintin localhost ttphp   cd etcds   tintin localhost etcds   mkdir etcd0  tintin localhost etcds   mkdir etcd0 conf etcd0 data   golang     golang                      etcd go                apline         tintin localhost etcds   docker pull golang 1 14 4 alpine3 12  tintin localhost etcds   docker images  tintin localhost etcds   docker run  it   name etcd  p 2379 2379    v  home tintin ttphp etcds etcd0  etcd golang 1 14 4 alpine3 12 sh Ctrl D          tintin localhost etcds   docker start etcd  tintin localhost etcds   docker cp  home tintin ttphp etcd etcd etcd  usr bin      docker cp  home tintin ttphp etcd etcdctl etcd  usr bin  tintin localhost etcds   cd  home tintin ttphp etcds etcd0 conf   tintin localhost conf   vim etcd yml       etcd yml name    hostname  s  data_dir   etcd data listen client urls  http   0 0 0 0 2379   etcd  tintin localhost conf   docker exec  it etcd sh  go   etcdctl version etcdctl version  3 4 9 API version  3 4  go   etcd   version etcd Version  3 4 9 Git SHA  54ba95891 Go Version  go1 12 17 Go OS Arch  linux amd64  go   etcd   config file  etcd conf etcd yml Etcdctl           etcd v3 4 9  API    v3             docker exec  it etcd sh    kv    tintin localhost conf   docker exec  it etcd sh  go   etcdctl put  user 101 name zhangsan OK  go   etcdctl put  user 101 age 18 OK  go   etcdctl  user 101 name  user 101 name zhangsan  go   etcdctl  user 101  go   etcdctl  user 101   prefix  user 101 age 18  user 101 name zhangsan  go   etcdctl del  user 101   prefix 2  go   etcdctl  user 101   prefix lease        redis                                 etcdctl lease grant 20           20            etcdctl lease list            etcdctl lease timetolive xxxxxxx      etcdctl lease revoke xxxxxxx          etcdctl lease keep alive xxxxx  key      etcdctl put  user shenyi   lease xxxxxooo             key    etcdctl lease timetolive xxxxxxx   keys            key  go   etcdctl lease grant 200 lease 694d72b5ce961a04 granted TTL 200s   go   etcdctl lease timetolive 694d72b5ce961a04 lease 694d72b5ce961a04 granted TTL 200s   remaining 178s   go   etcdctl lease list found 1 leases 694d72b5ce961a04  go   etcdctl lease revoke 694d72b5ce961a04 lease 694d72b5ce961a04 revoked  go   etcdctl lease list found 0 leases  go   etcdctl lease grant 200 lease 694d72b5ce961a07 granted TTL 200s   go   etcdctl lease timetolive 694d72b5ce961a07 lease 694d72b5ce961a07 granted TTL 200s   remaining 185s   go   etcdctl lease keep alive 694d72b5ce961a07 lease 694d72b5ce961a07 keepalived TTL 200   C  go   etcdctl lease revoke 694d72b5ce961a07 lease 694d72b5ce961a07 revoked  go   etcdctl lease grant 100 lease 694d72b5ce961a0a granted TTL 100s   go   etcdctl put  user lisi   lease 694d72b5ce961a0a OK  go   etcdctl  user   prefix  user lisi  go   etcdctl lease timetolive 694d72b5ce961a0a lease 694d72b5ce961a0a granted TTL 100s   remaining 7s   go   etcdctl lease timetolive 694d72b5ce961a0a   keys lease 694d72b5ce961a0a already expired  go   etcdctl lease grant 150 lease 694d72b5ce961a0f granted TTL 150s   go   etcdctl lease timetolive 694d72b5ce961a0f lease 694d72b5ce961a0f granted TTL 150s   remaining 134s   go   etcdctl put  user name zhangsan   lease 694d72b5ce961a0f OK  go   etcdctl lease timetolive 694d72b5ce961a0f   keys lease 694d72b5ce961a0f granted TTL 150s   remaining 61s   attached keys   user name    go   etcdctl put  user age 18   lease 694d72b5ce961a0f OK  go   etcdctl lease timetolive 694d72b5ce961a0f   keys lease 694d72b5ce961a0f granted TTL 150s   remaining 38s   attached keys   user name  user age    go   etcdctl lease timetolive 694d72b5ce961a0f lease 694d72b5ce961a0f granted TTL 150s   remaining 30s   go   etcdctl  user   prefix  user age 18  user name zhangsan  go   etcdctl lease timetolive 694d72b5ce961a0f lease 694d72b5ce961a0f already expired  go   etcdctl  user   prefix  go   etcdctl lease  h NAME  lease   Lease related commands USAGE  etcdctl lease  flags  API VERSION  3 4 COMMANDS  grant Creates leases keep alive Keeps leases alive  renew  list List active leases revoke Revokes leases timetolive lease information OPTIONS   h    help  false  help lease GLOBAL OPTIONS    cacert    verify certificates TLS enabled secure servers using CA bundle   cert    identify secure client using TLS certificate file   command timeout 5",
+        "objectID": "post/2020/06/11/etcd-install",
+        "date": "2020-06-11T05:14:58.000Z",
+        "tags": [
+            "docker",
+            "etcd",
+            "go初级"
+        ],
+        "categories": [
+            "docker",
+            "etcd"
+        ],
+        "author": "dingo"
+    },
+    {
+        "title": "Centos 7系统中安装docker & Docker Compose",
+        "uri": "post/2020/06/17/centos-docker-install",
+        "content": "https   docs docker com engine install centos  Step 1         sudo yum remove docker   docker client   docker client latest   docker common   docker latest   docker latest logrotate   docker logrotate   docker engine Step 2         utils               yum config manager   add repo https   download docker com linux centos docker ce repo        yum config manager   add repo http   mirrors aliyun com docker ce linux centos docker ce repo   sudo yum install  y yum utils   sudo yum config manager     add repo   https   download docker com linux centos docker ce repo Step 3    docker    1          sudo yum install docker ce docker ce cli containerd io 2                         yum list docker ce   showduplicates   sort  r updates  ftp iij ad jp Loading mirror speeds cached hostfile Loaded plugins  fastestmirror Installed Packages extras  ftp iij ad jp docker ce x86_64 3 19 03 9 3 el7 docker ce stable docker ce x86_64 3 18 09 9 3 el7 docker ce stable docker ce x86_64 17 12 1 ce 1 el7 centos docker ce stable    example   sudo yum install docker ce 3 19 03 9 3 el7 docker ce cli 3 19 03 9 3 el7 containerd io   sudo yum install docker ce  docker ce cli  containerd io Step 4    docker systemctl start docker   docker systemctl enable docker        sudo systemctl start docker   sudo systemctl enable docker Step 5               docker          usermod  aG docker                                      newgrp   docker               sudo usermod  aG docker tintin Step 6      docker                       docker run hello world latest  Pulling library hello world 0e03bdcc26d7  Pull complete Digest  sha256 d58e752213a51785838f9eed2b7a498ffa1cb3aa7f946dda11af39286c3db9a9 Status  Downloaded newer image hello world latest Hello Docker  message shows installation appears working correctly  generate message  Docker took following steps  Docker client contacted Docker daemon  Docker daemon pulled  hello world  image Docker Hub   amd64  Docker daemon created new container image runs executable produces output currently reading  Docker daemon streamed output Docker client  sent terminal  try something ambitious  run Ubuntu container with    docker run  it ubuntu bash Share images  automate workflows  free Docker ID  https   hub docker com  examples ideas  visit  https   docs docker com get started    docker compose       https   docs docker com compose install  curl       github      https   github com docker compose releases 1       sudo curl  L  https   github com docker compose releases download 1 26 0 docker compose   uname  s    uname  m    o  usr local bin docker compose           Compose    Compose    1 26 0 2            sudo chmod  x  usr local bin docker compose 3       docker compose version docker compose version 1 26 0  build d4451659 docker py version  4 2 1 CPython version  3 7 7 OpenSSL version  OpenSSL 1 1 0l 10 Sep 2019 4       sudo rm  usr local bin docker compose  nbsp   nbsp   nbsp  PS       Docker                                                       sudo mkdir  p  etc docker   sudo tee  etc docker daemon json         docker cli  docker         https   docs docker com engine reference run  docker compose cli  docker compose         https   docs docker com compose reference overview",
+        "objectID": "post/2020/06/17/centos-docker-install",
+        "date": "2020-06-17T06:15:53.000Z",
+        "tags": [
+            "docker",
+            "centos7"
+        ],
+        "categories": [
+            "docker",
+            "centos"
+        ],
+        "author": "dingo"
+    },
+    {
+        "title": "Go + Etcd V3 实现 服务注册与发现",
+        "uri": "post/2020/06/19/go-etcd-v3-Service-Discovery",
+        "content": "1            2         etcd 3                etcd  4      5                       package main import    context   etcd service service utils   fmt   github com google uuid   github com gorilla mux   log   net http   os   os signal   strconv   syscall                service      func main        1       serviceId    uuid New   String        ID serviceName     productDetailService         serviceAddress     192 168 123 178          servicePort    8081         router    mux NewRouter   server    http Server  Addr  serviceAddress         strconv Itoa servicePort   Handler  router              API router HandleFunc   product  id   d     func writer http ResponseWriter  request  http Request    vars    mux Vars request     todo        str     get product id     vars  id   writer Write   byte str      errChan    make chan error                    2    etcd service err    utils NewService   err    nil   errChan ps        https   godoc org go etcd io etcd clientv3 https   github com etcd io etcd",
+        "objectID": "post/2020/06/19/go-etcd-v3-Service-Discovery",
+        "date": "2020-06-19T08:45:07.000Z",
+        "tags": [
+            "go",
+            "etcd"
+        ],
+        "categories": [
+            "golang",
+            "etcd"
+        ],
+        "author": "dingo"
+    },
+    {
+        "title": "使用Golang实现二叉查找树案例",
+        "uri": "post/2020/06/24/go-binary-search-tree",
+        "content": "binary search tree                                                     1                                      2                                      3                        4           1         func AddNode tree BSTree  root BSTree   BSTree   root    nil   return tree                                                        tree Node   root Node   root RightNode   AddNode tree root RightNode    else tree Node tree Node   return SearchNode node  tree RightNode               else   return tree     3        func SearchNodeWithParent node int tree BSTree parentNode    interface     BSTree  BSTree string    tree    nil   return nil nil      node tree Node   return SearchNodeWithParent node tree RightNode tree  right                else   len parentNode     0   return tree nil      else   return tree parentNode 0    BSTree  parentNode 1   string        4        1           2           3                       func  this BSTree  PreOrder ret   int       nil   return   ret   append ret this Node  this LeftNode PreOrder ret  this RightNode PreOrder ret                func  this BSTree  MiddleOrder ret   int       nil   return   this LeftNode MiddleOrder ret  ret   append ret this Node  this RightNode MiddleOrder ret                func  this BSTree  PostOrder ret   int       nil   return   this LeftNode PostOrder ret  this RightNode PostOrder ret  ret   append ret this Node    5         func  this  BSTree  DepthTree   int      nil   return 0   lDepth    this LeftNode DepthTree   rDepth    this RightNode DepthTree   lDepth    rDepth   return lDepth   1   else   return rDepth   1     6                     func  this  BSTree  MaxNode   int   this RightNode    nil   return this RightNode MaxNode     else   return this Node              func  this  BSTree  MinNode   int   this LeftNode    nil   return this LeftNode MinNode     else   return this Node     7          1             2              3              3                                            func DelNode node int  tree  BSTree    nodeTree parentTree child    SearchNodeWithParent node  tree  nodeTree    nil   return              if parentTree    nil      return     nodeTree IsLeaf                                    parentTree    nil   tree    BSTree  nil       nil   BSTree   return                      child     left    parentTree LeftNode   nil   else   parentTree RightNode   nil     else single    nodeTree GetSingleNode    single    nil                                                            parentTree    nil   nodeTree LeftNode    nil   tree   nodeTree LeftNode   else   tree   nodeTree RightNode   return   child     left    parentTree LeftNode   single   else   parentTree RightNode   single     else             value    nodeTree RightNode MinNode                DelNode value tree               nodeTree Node   value                                func  this BSTree  GetSingleNode   BSTree   this LeftNode    nil    this RightNode    nil   return this LeftNode   this LeftNode    nil    this RightNode    nil   return this RightNode   return nil                       func  this  BSTree  IsLeaf   bool           this LeftNode    nil    this RightNode    nil   return true   else   return false     8                      2 n 1                      1                                                         N   2n 1            O logn     2    1000000                         500000       1000000            20                                         500000        1000000                20                            1000000                       500000         1000000                20",
+        "objectID": "post/2020/06/24/go-binary-search-tree",
+        "date": "2020-06-24T10:04:15.000Z",
+        "tags": [
+            "二叉树",
+            "go"
+        ],
+        "categories": [
+            "golang"
+        ],
+        "author": "dingo"
+    },
+    {
+        "title": "Golang中Defer的机制解读与defer的用法",
+        "uri": "post/2020/06/24/go-defer-used",
+        "content": "defer       defer                       return                                        return                                                    Socket                 defer                Java   C    finally                               defer   1 defer    defer               package main import  fmt  func main     DeferDef   DeferDef1   DeferDef2     func DeferDef     count    1 defer fmt Println  defer executed  count     count  count   fmt Println  before defer count     count    func DeferDef1     count    1 defer func count int    fmt Println  defer executed  count     count    count  count   fmt Println  before defer count     count    func DeferDef2     count    1 defer func     fmt Println  defer executed  count     count      count   fmt Println  before defer count     count        defer count    2 defer executed  count    1 defer count    2 defer executed  count    1 defer count    2 defer executed  count    2   defer    defer           DeferDef DeferDef2  defer      defer                 defer executed  count    1   DeferDef2  defer                   defer executed  count    2          GO  defer              package main import  fmt  func main     DeferDefTest     func DeferDefTest    ret int    ret   1 defer Show  ret  ret   return ret   func Show ret  int     ret   fmt Println  defer executed ret       ret       defer executed ret     3 2                         defer                                1         https   blog golang org defer panic and recover",
+        "objectID": "post/2020/06/24/go-defer-used",
+        "date": "2020-06-24T01:04:03.000Z",
+        "tags": [
+            "defer",
+            "go",
+            "go初级"
+        ],
+        "categories": [
+            "golang"
+        ],
+        "author": "dingo"
+    },
+    {
+        "title": "Golang + Etcd + Confd 实现简易的配置中心",
+        "uri": "post/2020/06/26/go-etcd-simple-config-center",
+        "content": "Confd                 go    Confd     Step 1    Confd     go     tintin localhost ttphp   ls etcd etcds tools  tintin localhost ttphp   mkdir build  tintin localhost ttphp   mkdir build confd  tintin localhost ttphp   cd build confd   tintin localhost confd   vi Dockerfile Dockerfile      https   github com kelseyhightower confd blob master docs installation md 1 14 4 alpine3 12 confd ARG CONFD_VERSION 0 16 0 ADD https   github com kelseyhightower confd archive v  CONFD_VERSION  tar gz  tmp  RUN apk add   no cache   bzip2        mkdir  p  go src github com kelseyhightower confd      cd  go src github com kelseyhightower confd      tar   strip components 1  zxf  tmp v  CONFD_VERSION  tar gz      go install github com kelseyhightower confd      rm  rf  tmp v  CONFD_VERSION  tar gz ENTRYPOINT    go bin confd        docker build  t confd my        docker images  tintin localhost confd   docker build  t confd my    tintin localhost confd   docker images Step 2        confdfiles          etc confd                      confdfiles    etc confd   confdfiles conf d       confdfiles dest       confdfiles templates        tintin localhost ttphp   ls build etcd etcds tools  tintin localhost ttphp   pwd  home tintin ttphp  tintin localhost ttphp   mkdir confdfiles  tintin localhost ttphp   mkdir  p confdfiles  conf d templates dest   tintin localhost ttphp   ls build confdfiles etcd etcds tools  tintin localhost ttphp   cd confdfiles   tintin localhost confdfiles   ls conf d dest templates Step 3    config confdfiles conf d myconfig toml  template  src    myconfig conf tmpl  dest     etc confd dest myconfig conf  keys       myconfig mysql user     myconfig mysql pass     confdfiles templates myconfig conf tmp  this myconfig  database_user    getv   myconfig mysql user    database_pass     getv   myconfig mysql pass    Step 4    etcd   docker  etcd            etcd   tintin localhost confdfiles   docker exec  it etcd1 sh  go   etcdctl put  myconfig mysql user root OK  go   etcdctl put  myconfig mysql pass 123456 OK  go Step 5         FATAL dial tcp 127 0 0 1 23791  connect  connection refused            etcd               sudo iptables  I INPUT  p tcp   dport 23791  j ACCEPT confd      https   github com kelseyhightower confd blob master docs command line flags md  onetime          docker run  it   rm   name confd  v  home tintin ttphp confdfiles  etc confd confd my  onetime  backend etcdv3  node http   192 168 137 131 23791   interval int       interval 5   5            docker run  it  d   rm   name confd  v  home tintin ttphp confdfiles  etc confd confd my  interval 5  backend etcdv3  node http   192 168 137 131 23791   tintin localhost confdfiles   docker run  it   rm   name confd    v  home tintin ttphp confdfiles  etc confd confd my  onetime    backend etcdv3  node http   192 168 137 131 23791  tintin localhost confdfiles   cat  home tintin ttphp confdfiles dest myconfig conf  this myconfig  database_user  root database_pass   123456 Step 6    etcd    watch   key      docker run  d   name confd  v  home tintin ttphp confdfiles  etc confd confd my  watch  backend etcdv3  node http   192 168 137 131 23791  confd  watch key                                                 confd  reload_cmd                    API curl API                            github                                  http server        https   github com jpillora overseer         https   github com kelseyhightower confd https   github com kelseyhightower confd blob master docs quick start guide md",
+        "objectID": "post/2020/06/26/go-etcd-simple-config-center",
+        "date": "2020-06-26T07:50:48.000Z",
+        "tags": [
+            "etcd",
+            "go"
+        ],
+        "categories": [
+            "golang",
+            "etcd"
+        ],
+        "author": "dingo"
+    },
+    {
+        "title": "grpc的优势与安装使用-Golang",
+        "uri": "post/2020/06/28/go-grpc-quick-start",
+        "content": "HTTP           RPC    RPC Remote Procedure Call                                    HTTP   RPC                     RPC     TCP     TCP         dubbo        HTTP2         gRPC       HTTP1 1                        RPC                                                RPC              HTTP               Nginx                                   HTTP                  grpc   gRPC  Google      RPC                  C Java Go        RPC     gRPC                                         HTTP 2                TCP                   gRPC                           IDL        proto                         Stub    Protocol Buffer    Protocol Buffer  Google                XML JSON Hession                                       go    Protocol buffer     protoc  V3   https   github com protocolbuffers protobuf releases    Protocol buffer      Go    protoc gen go  go github com golang protobuf protoc gen go Google Protocol Buffer     Protobuf   Google                                  Protobuf                            Portobuf           XML JSON    XML JSON                   Portobuf    Varint                Portobuf           XML JSON                    XML JSON      XML  JSON            https   developers google com protocol buffers docs gotutorial   grpc go  u google golang org grpc   proto      proto          Request      Response              Service  Service              proto   pbfiles Prod proto ProdRequest     ProdResponse     ProdService                      ID           syntax  proto3   package services  message ProdRequest   int32 prod_id  1         ID   message ProdResponse  int32 prod_stock 1          service ProdService   rpc GetProdStock  ProdRequest  returns  ProdResponse       Go   cd pbfiles protoc   go_out plugins grpc    services  Prod proto      go   services Prod pb go   grpc            services ProdService go package services import  context  type ProdService struct               func  this ProdService  GetProdStock ctx context Context  req ProdRequest    ProdResponse  error       todo                stock    req ProdId                 ID return  ProdResponse ProdStock stock  nil        server main go package main import    google golang org grpc   grpc services   log   net    func main     rpcServer    grpc NewServer                 grpc    services RegisterProdServiceServer rpcServer new services ProdService   lis err    net Listen  tcp    8081   err    nil   log Fatal err Error      rpcServer Serve lis         go run server main go             services Prod pb go                                 client main go package main import    context   fmt   google golang org grpc   grpc services   log    func main        grpc WithInsecure     https conn err    grpc Dial   8081  grpc WithInsecure    err    nil   log Fatal err Error      defer conn Close   prodClient    services NewProdServiceClient conn  prodRes err    prodClient GetProdStock context Background    services ProdRequest ProdId 20   err    nil   log Fatal err Error      fmt Println prodRes ProdStock       go run client main go            https   grpc io docs languages go quickstart  https   github com grpc grpc go tree master examples helloworld        https   www cnblogs com takumicx p 10059448 html",
+        "objectID": "post/2020/06/28/go-grpc-quick-start",
+        "date": "2020-06-28T05:47:36.000Z",
+        "tags": [
+            "go",
+            "grpc",
+            "go初级"
+        ],
+        "categories": [
+            "golang",
+            "rpc"
+        ],
+        "author": "dingo"
+    },
+    {
+        "title": "自签名https证书，本地浏览器测试",
+        "uri": "post/2020/06/30/generate-local-certificate",
+        "content": "OpenSSL             windows           bin      openssl exe    genrsa  des3  out server key 2048    server key              req  new  key server key  out server csr    server csr    common name            rsa  in server key  out servernopasswd key   x509  req  days 365  in server csr  signkey servernopasswd key  out server crt     server crt      CA server Client            root certificate            CA                               CA        openssl exe genrsa  out ca key 2048 req  new  x509  days 3650  key ca key  out ca pem   common name    localhost   ca          genrsa  out server key 2048 req  new  key server key  out server csr x509  req  sha256  CA ca pem  CAkey ca key  CAcreateserial  days 3650  in server csr  out server pem        openssl exe     common name    localhost   ca          ecparam  genkey  name secp384r1  out client key req  new  key client key  out client csr x509  req  sha256  CA ca pem  CAkey ca key  CAcreateserial  days 3650  in client csr  out client pem        openssl exe     common name    localhost",
+        "objectID": "post/2020/06/30/generate-local-certificate",
+        "date": "2020-06-30T03:45:16.000Z",
+        "tags": [
+            "https",
+            "openssl"
+        ],
+        "categories": [
+            "openssl"
+        ],
+        "author": "dingo"
+    },
+    {
+        "title": "使用grpc-gateway同时提供rpc和Restful接口-Golang",
+        "uri": "post/2020/06/30/go-grpc-gateway",
+        "content": "grpc            rpc                               RESTful JSON API            rpc          RESTful Api            Http   grpc gateway     grpc      JSON           Protocol buffer     protoc  V3   https   github com protocolbuffers protobuf releases    Protocol buffer      Go    protoc gen go  go github com golang protobuf protoc gen go    Protocol buffer        grpc gateway go github com grpc ecosystem grpc gateway protoc gen grpc gateway    Protocol buffer        swagger go github com grpc ecosystem grpc gateway protoc gen swagger    1    Protocol buffer  gRPC   server pbfiles Prod proto  syntax  proto3   package services  message ProdRequest   int32 prod_id  1         ID   message ProdResponse  int32 prod_stock 1          service ProdService   rpc GetProdStock  ProdRequest  returns  ProdResponse     2    google api http annotation     proto             server pbfiles               server pbfiles Prod proto  syntax  proto3   package services  import  google api annotations proto   message ProdRequest   int32 prod_id  1         ID   message ProdResponse  int32 prod_stock 1          service ProdService   rpc GetProdStock  ProdRequest  returns  ProdResponse    option  google api http      get    v1 prod  prod_id           3    Prod pb go   grpc stub          go      protoc   go_out plugins grpc    services Prod proto 4    Prod pb gw go protoc   grpc gateway_out logtostderr true    services Prod proto 5    HTTP         server httpserver go package main import    context   github com grpc ecosystem grpc gateway runtime   google golang org grpc   grpc server helper   grpc server services   log   net http    func main     mux    runtime NewServeMux   opt      grpc DialOption grpc WithTransportCredentials helper GetClientCreds     err    services RegisterProdServiceHandlerFromEndpoint context Background    mux   localhost 8081   opt    err    nil   log Fatal err Error      httpServer     http Server  Addr    8080   Handler  mux    err   httpServer ListenAndServe   err    nil   log Fatal err Error                      https   github com grpc ecosystem grpc gateway https   grpc ecosystem github io grpc gateway",
+        "objectID": "post/2020/06/30/go-grpc-gateway",
+        "date": "2020-06-30T06:53:25.000Z",
+        "tags": [
+            "go",
+            "grpc",
+            "gateway"
+        ],
+        "categories": [
+            "golang",
+            "rpc"
+        ],
+        "author": "dingo"
+    },
+    {
+        "title": "Protobuf语法-常用语法 (Protobu3)",
+        "uri": "post/2020/07/01/protobuf-grammar",
+        "content": "Protobuf 1                                           ProtoBuf                         XML    ProtoBuf                                          ProtoBuf                                               ProtoBuf                                               ProtoBuf           RPC                                                  Message      Protobuf                message                                                                     Protobuf           message                 ID                    ID    prodid         prodstock syntax  proto3   package services  message ProdRequest   int32 prod_id   1          ID   message ProdResponse   int32 prod_stock   1               service ProdService   rpc GetProdStock  ProdRequest  returns  ProdResponse          ID           syntax    proto3          proto      Protobuf3            Protobuf2                   ProdRequest    message    1              Field Types        Field Names       Field Numbers       service     RPC         1              https   developers google com protocol buffers docs proto3 scalar 2       Protobuf                                                         syntax  proto3   package services  message ProdRequest   int32 prod_id   1          ID   message ProdResponse   int32 prod_stock   1             FromPlat from_plat   2            enum FromPlat   FROM_TAOBAO   0        FROM_JD   1        FROM_SN   2            service ProdService   rpc GetProdStock  ProdRequest  returns  ProdResponse          ID                   Proto3                   0     0                                      0                      0      Proto2                            Proto3          Proto2  3       repeated Repeated                       0   syntax  proto3   package services  message ProdRequest   int32 prod_id   1          ID   message ProdResponse   int32 prod_name   1         float prod_price   2            message QuerySize  int32 limit   1              message ProdResponseList               repeated    repeated ProdResponse prod_list   1    service ProdService   rpc GetProdDetail  ProdRequest  returns  ProdResponse             rpc GetProdList  QuerySize  returns  ProdResponseList               4      Proto          pbfiles ProdModel proto            ProdModel proto   Prod proto  syntax    proto3   package services  message ProdModel          int32 prod_id   1  string prod_name   2  float prod_price   3         pbfiles Prod proto syntax  proto3   package services  import  ProdModels proto   message ProdRequest   int32 prod_id   1          ID   message QuerySize  int32 limit   1              message ProdResponseList               repeated    repeated ProdModel prod_list   1    service ProdService   rpc GetProdDetail  ProdRequest  returns  ProdModel             rpc GetProdList  QuerySize  returns  ProdResponseList               5  TimeStamp    import  google protobuf timestamp proto   message OrderMain          google protobuf Timestamp order_time 1    go       package main import    github com golang protobuf ptypes timestamp    func main              t    timestamp Timestamp Seconds time Now   Unix                6     Protobuf      C   C                                         https   www jitwxs cn 60aca815 html",
+        "objectID": "post/2020/07/01/protobuf-grammar",
+        "date": "2020-07-01T05:45:32.000Z",
+        "tags": [
+            "protobuf",
+            "grpc"
+        ],
+        "categories": [
+            "rpc"
+        ],
+        "author": "dingo"
+    },
+    {
+        "title": "流式RPC的使用例子(基于Golang)",
+        "uri": "post/2020/07/03/go-grpc-stream",
+        "content": "golang      RPC      RPC      RPC     RPC  https   www grpc io docs languages go basics       https   github com grpc grpc go tree master examples route_guide            grpc    4                                                                                                                   1             2                                      x                      setp 1    UserModel proto syntax    proto3   package pb  message UserInfo   int32 user_id   1       ID int32 user_score   2            setp 2    User proto syntax    proto3   package pb  import  UserModel proto   message UserScoreRequest   repeated UserInfo users   1    message UserScoreResponse   repeated UserInfo users   1           Restful API   Product proto service UserService                       rpc GetUserScore UserScoreRequest  returns  UserScoreResponse                           rpc GetUserScoreByServerStream UserScoreRequest  returns  stream UserScoreResponse                           rpc GetUserScoreByClientStream stream UserScoreRequest  returns  UserScoreResponse                               rpc GetUserScoreByDoubleStream stream UserScoreRequest  returns  stream UserScoreResponse     setp 3    proto protoc   go_out plugins grpc    pbfiles UserModel proto protoc   go_out plugins grpc    pbfiles User proto setp 4               UserService server services UserService go         package services import    context   fmt  pb  grpc pbfiles   io   log   time    type UserService struct                         func  this UserService  GetUserScore ctx context Context  req pb UserScoreRequest    pb UserScoreResponse  error       todo                              var score int32   101 users    make    pb UserInfo 0  _ user    range req Users   user UserScore   score score   users   append users user    return  pb UserScoreResponse Users users  nil                           func  this UserService  GetUserScoreByServerStream req pb UserScoreRequest  stream pb UserService_GetUserScoreByServerStreamServer  error      todo                              var score int32   101 users    make    pb UserInfo 0  index user    range req Users              ID       time Sleep time Second 2               user UserScore   score score   users   append users user         2     index   0     index   1    2    0   err    stream Send  pb UserScoreResponse Users users   err    nil   return err          users   users    users  0 0                  len users    0   err    stream Send  pb UserScoreResponse Users users   err    nil   return err     return nil                           func  this  UserService  GetUserScoreByClientStream stream pb UserService_GetUserScoreByClientStreamServer  error      todo                  fmt Println 123              var score int32   101 users    make    pb UserInfo 0    userScoerReq err    stream Recv   err    io EOF           return stream SendAndClose  pb UserScoreResponse Users users                   err    nil   return err               len userScoerReq Users    0   _ user    range userScoerReq Users   user UserScore   score score   users   append users user      fmt Println                                         func  this  UserService  GetUserScoreByDoubleStream stream pb UserService_GetUserScoreByDoubleStreamServer  error      todo                              var score int32   101 users    make    pb UserInfo 0                     req err    stream Recv   err    io EOF           return nil   err    nil   log Fatal err Error      _ user    range req Users   time Sleep time Second 1                       user UserScore   score score   users   append users user                  err   stream Send  pb UserScoreResponse Users users   err    nil   log Println err Error                   users    users  0 0    return nil   setp 5            client services Users go package services import    context   fmt   google golang org grpc  pb  grpc pbfiles   io   log    type Users struct   client pb UserServiceClient   func NewUsers conn grpc ClientConn  Users   cli    pb NewUserServiceClient conn  return  Users client cli                                                                      func  this  Users  GetUserScore ctx context Context             ID req     pb UserScoreRequest   var int32 req Users   make    pb UserInfo 0    1  0   _ user    range userRes Users   fmt Printf    ID  d        d  n   user UserId user UserScore                                           func  this  Users  GetUserScoreByClientStream ctx context Context    stream err    this client GetUserScoreByClientStream ctx  err    nil   log Fatal err             ID req     pb UserScoreRequest   var int32                    j    1  j",
+        "objectID": "post/2020/07/03/go-grpc-stream",
+        "date": "2020-07-03T07:07:02.000Z",
+        "tags": [
+            "go",
+            "grpc"
+        ],
+        "categories": [
+            "golang",
+            "rpc"
+        ],
+        "author": "dingo"
+    },
+    {
+        "title": "Golang 中协程调度的简单理解",
+        "uri": "post/2020/07/07/go-scheduler",
+        "content": "1  P M G    P  processor         P               G            cpu    P      P             G          cache     M  Work Thread               p    schedule    schedule               p        G    G        G      goexit        m       M    G     G   M       G  goroutine          goroutine   stack   goroutine    goroutine          G          2  P M         M       P P       G               G   M      G     3           G     1 61          G 60 61         G          G  P      G          P        G                            G                       n min len GQ  GOMAXPROCS   1  len GQ 2   4            M   G  syscall     P  M   M       G P      G     M        G     G            P     G M   G             P                           P          P M    G                     5                                           go                                    P M  G                G               M                 P M              GOMAXPROCS                           M              go        P G        M               https   tonybai com 2017 06 23 an intro about goroutine scheduler      https   medium com  ankur_anand illustrated tales of go runtime scheduler 74809ef6d19b     https   lessisbetter site 2019 03 10 golang scheduler 1 history",
+        "objectID": "post/2020/07/07/go-scheduler",
+        "date": "2020-07-07T03:24:21.000Z",
+        "tags": [
+            "go",
+            "协程",
+            "go初级"
+        ],
+        "categories": [
+            "golang"
+        ],
+        "author": "dingo"
+    },
+    {
+        "title": "Golang技巧之默认值设置的高阶玩法",
+        "uri": "post/2020/07/20/go-struct-default-value",
+        "content": "1         php  public function addLog  logtype  logcontent  adminid  adminname  type   2                 this  log  addLog 0                   this  adminid  this  adminname       type           type   Golang                                                                                               2       src Object User go package Object type User struct   UserId int UserName string UserAge int         User   userAttr                               func NewUser userAttr    UserAttr   User   user    new User  UserAttrs userAttr  Apply user      userAttr     UserAttrs   Apply        return user   src Object UserAttr go package Object type UserAttr func user  User         User           type UserAttrs   UserAttr               func  this UserAttrs  Apply user  User                  _ withAttr    range   withAttr user                   UserName     func WithUserName userName string  UserAttr   return func user  User    user UserName   userName          UserAge     func WithUserAge userAge int  UserAttr   return func user  User    user UserAge   userAge     src main go package main import    basicgo src Object   fmt    func main           User                    user    Object NewUser  Object WithUserName  zhangsan    Object WithUserAge 18     fmt Println user  fmt Println user UserName",
+        "objectID": "post/2020/07/20/go-struct-default-value",
+        "date": "2020-07-20T09:42:49.000Z",
+        "tags": [
+            "go",
+            "go初级"
+        ],
+        "categories": [
+            "golang"
+        ],
+        "author": "dingo"
+    },
+    {
+        "title": "Golang Map的使用案例--设置值、排序、多个map排序",
+        "uri": "post/2020/07/21/go-map",
+        "content": "Map     Map                         map type   UserMap map string interface           map func NewUser   UserMap   return make map string interface         make                 func  this UserMap  With key string val interface    UserMap   this key    val return            key   func  this UserMap  SortByKeys order string    string   keys      string   key _    range   keys   append keys key    order     asc    sort Sort sort StringSlice keys           StringSlice     else order     desc    sort Sort sort Reverse sort StringSlice keys            return keys           func  this UserMap  String order    string  UserMap   ord       len order    0   ord   order 0    idx key    range this SortByKeys ord    fmt Printf  index  d  key  v value  v  n  idx key this key     return      NewUser    With  name   zhangsan    With  age  18   With  sex        With  birthday   2020 07 12    String  asc     map      user1    NewUser    With  name   lisi    With  age  20   With  sex        With  birthday   2020 06 12   user2    NewUser    With  name   zhangsan    With  age  18   With  sex        With  birthday   2020 07 02   user3    NewUser    With  name   wangwu    With  age  19   With  sex        With  birthday   2020 03 01   users      UserMap   users   append users user1 user2 user3                         sort Slice users  func i  j int  bool   age1    usersi  int  age2    usersj  int  return age1   age2    fmt Println users",
+        "objectID": "post/2020/07/21/go-map",
+        "date": "2020-07-21T08:12:41.000Z",
+        "tags": [
+            "go",
+            "go初级"
+        ],
+        "categories": [
+            "golang"
+        ],
+        "author": "dingo"
+    },
+    {
+        "title": "Golang 测试用例的写法-单元测试、性能测试",
+        "uri": "post/2020/07/22/go-test",
+        "content": "go                                                  _test go                     TestXxx                TestXxxx t  testing T            BenchmarkXxxx b  testing B               Example_Xxx                 TestMain m  testing M        Main    1            unit testing                        1 1                 mytest Helper go                func Join strs    string  string   ret       _ s    range strs   ret    s   return ret        mytest Helper_test go             Join    testing T        func TestJoin t  testing T    var   expected    ab            actual    Join  a   b   actual    expected   t Errorf                  n        s         s  n   actual  expected    else   t Log                         D  www course basicgo mytest go test  v RUN TestJoin TestJoin  Helper_test go 16            PASS  TestJoin  0 00s  PASS ok basicgo mytest 0 165s 1 2 Table Driven Test                      if  else                                                         https   github com cweill gotests      goland          generate  tests file tests package          func TestJoin1 t  testing T    type args struct   strs   string   tests      struct   name string args args want string       TODO  Add test cases    _  tt    range tests   t Run tt name  func t  testing T       Join tt args strs         tt want   t Errorf  Join      v  want  v   got  tt want                func TestJoin1 t  testing T    type args struct   strs   string   tests      struct   name string           args args              want string                  TODO  Add test cases           case1  args   string  a   b     ab      case2  args   string  a   c     bb              case3  args   string  d   e     de      case3  args   string  f   g     fg      _  tt    range tests   t Run tt name  func t  testing T       Join tt args strs         tt want   t Errorf  Join      v  want  v   got  tt want    else   t Log                              case2    D  www course basicgo mytest go test  v RUN TestJoin TestJoin  Helper_test go 16            PASS  TestJoin  0 00s  RUN TestJoin1 RUN TestJoin1 case1 TestJoin1 case1  Helper_test go 40        RUN TestJoin1 case2 TestJoin1 case2  Helper_test go 38  Join     ac  want bb RUN TestJoin1 case3 TestJoin1 case3  Helper_test go 40        RUN TestJoin1 case3 01 TestJoin1 case3 01  Helper_test go 40            FAIL  TestJoin1  0 00s      PASS  TestJoin1 case1  0 00s      FAIL  TestJoin1 case2  0 00s      PASS  TestJoin1 case3  0 00s      PASS  TestJoin1 case3 01  0 00s  FAIL exit status 1 FAIL basicgo mytest 0 162s 2       2 1                                                             mytest Helper_test go                Join    testing B        func BenchmarkJoin t  testing B      0  go test  bench   goos  windows goarch  amd64 pkg  basicgo mytest BenchmarkJoin 8 33383965 37 1 ns op PASS ok basicgo mytest 1 446s 2 2         mytest Helper go                     func Join strs    string  string   ret       _ s    range strs   ret    s   return ret                     go    func Join1 strs    string  string   return strings Join strs                              buffer func Join2 strs    string  string   var bf bytes Buffer _ s    range strs   bf WriteString s    return bf String          mytest Helper_test go                Join    testing B        func BenchmarkJoin t  testing B      0  go test  bench   goos  windows goarch  amd64 pkg  basicgo mytest BenchmarkJoin 8 33386844 37 3 ns op BenchmarkJoin1 8 41437322 30 0 ns op BenchmarkJoin2 8 14756880 82 2 ns op PASS ok basicgo mytest 4 027s D  www course basicgo mytest go test  bench   goos  windows goarch  amd64 pkg  basicgo mytest BenchmarkJoin 8 33886052 37 0 ns op BenchmarkJoin1 8 42922138 30 0 ns op BenchmarkJoin2 8 14859778 82 1 ns op PASS ok basicgo mytest 4 081s D  www course basicgo mytest go test  bench   goos  windows goarch  amd64 pkg  basicgo mytest BenchmarkJoin 8 31632139 36 9 ns op BenchmarkJoin1 8 42917379 29 9 ns op BenchmarkJoin2 8 15230397 82 6 ns op PASS ok basicgo mytest 4 028s BenchmarkJoin1 8                                go              gomock        mock           mockgen               pprof                           https   godoc org testing",
+        "objectID": "post/2020/07/22/go-test",
+        "date": "2020-07-23T07:05:10.000Z",
+        "tags": [
+            "go",
+            "go测试",
+            "go初级"
+        ],
+        "categories": [
+            "golang"
+        ],
+        "author": "dingo"
+    },
+    {
+        "title": "Golang 测试进阶之gomock框架(单元测试)",
+        "uri": "post/2020/07/26/go-test-mock",
+        "content": "https   github com golang mock     https   godoc org github com golang mock gomock        GoMock mocking framework Go programming language  GoMock  Golang                      interface Mock       Golang   testing                       go github com golang mock gomock go github com golang mock mockgen             type MyInterface interface   SomeMethod x int64  y string      mockgen                     func TestMyThing t  testing T    mockCtrl    gomock NewController t  defer mockCtrl Finish   mockObj    something NewMockMyInterface mockCtrl  mockObj EXPECT   SomeMethod 4   blah      pass mockObj real object play it    mockgen              mock    source        mock        source     mockgen  source foo go  other options  reflect             mock                                    mockgen database sql driver Conn Driver             package services type IService interface   Save data interface    IService         List   IService           Detail query interface    IService                    httpexcept  https   github com gavv httpexpect      testify  https   github com stretchr testify      go sqlmock  https   github com DATA DOG go sqlmock",
+        "objectID": "post/2020/07/26/go-test-mock",
+        "date": "2020-07-25T23:55:30.000Z",
+        "tags": [
+            "go",
+            "go测试"
+        ],
+        "categories": [
+            "golang"
+        ],
+        "author": "dingo"
+    },
+    {
+        "title": "Docker中安装Redis并设置安全选项",
+        "uri": "post/2020/07/29/redis-set-security-options",
+        "content": "https   redis io      https   hub docker com _ redis     https   github com redis redis    CentOS 7   docker   docker compose   redis 5 0    redis5 0 7         6 0 6      redis redis  redis  alpine  tintin localhost     docker pull redis 5 0 7 alpine  tintin localhost     docker images REPOSITORY TAG IMAGE ID CREATED SIZE redis 5 0 7 alpine b68707e68547 6 months ago 29 8MB               Redis                     Redis                         Redis            Redis                       Redis                                redis    4      redis conf   github                         https   github com redis redis releases                            http   download redis io redis stable redis conf   redis conf Redis        bind       IP Redis         0 0 0 0 6379   WARNING   computer running Redis directly exposed internet  binding interfaces dangerous will expose instance everybody internet  So default uncomment following bind directive  will force Redis listen IPv4 loopback interface address  this means Redis will able accept connections clients running computer running   SURE WANT INSTANCE LISTEN INTERFACES JUST COMMENT FOLLOWING LINE  bind 127 0 0 1   redis       127 0 0 1   port         6379 Redis                                          Accept connections specified port  default 6379  IANA  815344   port 0 specified Redis will not listen TCP socket  port 63799 port      auth          Redis                                                                                                SECURITY Require clients issue AUTH processing commands  useful environments not trust others access host running redis server  stay commented backward compatibility people not need auth  e g  run own servers   Warning  Redis pretty fast outside user try 150k passwords per second against good box  means use strong password otherwise will easy break  requirepass 123123 requirepass           CONFIG                  Redis CONFIG                Command renaming  possible change name dangerous commands shared environment  instance CONFIG command may renamed something hard guess so will available internal use tools not available general clients  Example  rename command CONFIG b840fc02d524045429941cc15f59e41cb7be6c52 possible completely kill command renaming empty string  rename command CONFIG    FLUSHALL EVAL                  Protected mode         yes    Protected mode          redis cache   redis                                          redis   redis        redis      redis server             tintin localhost     pwd  home tintin  tintin localhost     mkdir redis  tintin localhost     mkdir redis data  tintin localhost     ls      redis conf         home tintin redis     tintin localhost     docker run  v  home tintin redis redis conf  usr local etc redis redis conf   name myredis redis 5 0 7 alpine redis server  usr local etc redis redis conf 1 C 29 Jul 2020 05 53 23 619   oO0OoO0OoO0Oo Redis starting oO0OoO0OoO0Oo 1 C 29 Jul 2020 05 53 23 619   Redis version 5 0 7  bits 64  commit 00000000  modified 0  pid 1  just started 1 C 29 Jul 2020 05 53 23 619   Configuration loaded  tintin localhost     docker ps CONTAINER ID IMAGE COMMAND CREATED STATUS PORTS NAMES  tintin localhost     docker ps  a CONTAINER ID IMAGE COMMAND CREATED STATUS PORTS NAMES d6c07b601b71 redis 5 0 7 alpine  docker entrypoint s   7 seconds ago Exited  0  6 seconds ago myredis  tintin localhost     docker logs myredis 1 C 29 Jul 2020 05 53 23 619   oO0OoO0OoO0Oo Redis starting oO0OoO0OoO0Oo 1 C 29 Jul 2020 05 53 23 619   Redis version 5 0 7  bits 64  commit 00000000  modified 0  pid 1  just started 1 C 29 Jul 2020 05 53 23 619   Configuration loaded  tintin localhost                         daemonize yes         daemonize no        redis              docker                          daemonize yes             redis conf daemonize              no    default Redis does not run daemon  Use  yes  need it  Note Redis will write pid file  var run redis pid when daemonized  daemonize no       tintin localhost     docker rm myredis myredis  tintin localhost     docker run  v  home tintin redis redis conf  usr local etc redis redis conf   name myredis redis 5 0 7 alpine redis server  usr local etc redis redis conf redis         redis          shell    tintin localhost     docker ps CONTAINER ID IMAGE COMMAND CREATED STATUS PORTS NAMES 629b83b2c315 redis 5 0 7 alpine  docker entrypoint s   9 minutes ago 9 minutes 6379 tcp myredis  tintin localhost     docker exec  it myredis sh  data   redis cli  h 127 0 0 1  p 63799 127 0 0 1 63799  keys    error  NOAUTH Authentication required  127 0 0 1 63799  auth 123123 OK 127 0 0 1 63799  keys    empty list set  127 0 0 1 63799  set name tintin OK 127 0 0 1 63799  keys   1   name  127 0 0 1 63799  name  tintin  127 0 0 1 63799     compose  tintin localhost     docker ps CONTAINER ID IMAGE COMMAND CREATED STATUS PORTS NAMES  tintin localhost     docker ps  a CONTAINER ID IMAGE COMMAND CREATED STATUS PORTS NAMES 629b83b2c315 redis 5 0 7 alpine  docker entrypoint s   12 minutes ago Exited  0  19 seconds ago myredis  tintin localhost     docker rm myredi",
+        "objectID": "post/2020/07/29/redis-set-security-options",
+        "date": "2020-07-29T01:54:54.000Z",
+        "tags": [
+            "docker",
+            "redis",
+            "安全",
+            "docker-compose",
+            "centos7"
+        ],
+        "categories": [
+            "redis",
+            "docker"
+        ],
+        "author": "dingo"
+    },
+    {
+        "title": "如何使用golang定义枚举",
+        "uri": "post/2020/07/30/go-define-enum",
+        "content": "Golang     enum               const    iota            iota Golang                      const  iota const           0 const          const            iota        const   Student   iota    0 Teacher    1 Leader    2      const   Student   iota    0 Teacher    1 Leader    2   func main     fmt Println Student Teacher Leader         0 1 2   const   Student   iota    0 Teacher    a     Leader      func main     fmt Println Student Teacher Leader         0   const   Student   iota    0 _ Teacher   iota    2 Leader    3   func main     fmt Println Student Teacher Leader         0 2 3          package main import  fmt  type UserType int func  this UserType  String   string   switch   case 0  return      case 1  return      case 2  return      default  return          const   Student UserType   iota Teacher Leader   func main     fmt Println UserType Student  UserType Teacher  UserType Leader                      Golang     enum               const    iota",
+        "objectID": "post/2020/07/30/go-define-enum",
+        "date": "2020-07-30T01:29:31.000Z",
+        "tags": [
+            "go",
+            "go初级"
+        ],
+        "categories": [
+            "golang"
+        ],
+        "author": "dingo"
+    },
+    {
+        "title": "限制协程执行数量的基本方法(防止机器跑崩)",
+        "uri": "post/2020/07/30/go-goroutine-num",
+        "content": "Goroutine                                            redis                                 package main import    fmt   sync   time            func job index int       todo job time Sleep time Second                fmt Printf     d       n  index    func main     maxGoroutine    10               var pool chan struct            pool   make chan struct    maxGoroutine            var wg sync WaitGroup          job    1",
+        "objectID": "post/2020/07/30/go-goroutine-num",
+        "date": "2020-07-30T02:42:26.000Z",
+        "tags": [
+            "go",
+            "go初级"
+        ],
+        "categories": [
+            "golang"
+        ],
+        "author": "dingo"
+    }
+]

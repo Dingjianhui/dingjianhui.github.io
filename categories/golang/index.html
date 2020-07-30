@@ -39,6 +39,7 @@
 
 <link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/search.css">
 
 
 <meta property="og:title" content="golang" />
@@ -60,6 +61,36 @@
   <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
 <![endif]-->
 <script data-ad-client="ca-pub-8764182409666792" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<style>
+  .algolia-autocomplete {
+    width: 100%;
+  }
+  .algolia-autocomplete .aa-input, .algolia-autocomplete .aa-hint {
+    width: 100%;
+  }
+  .algolia-autocomplete .aa-hint {
+    color: #999;
+  }
+  .algolia-autocomplete .aa-dropdown-menu {
+    width: 100%;
+    background-color: #fff;
+    border: 1px solid #999;
+    border-top: none;
+  }
+  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion {
+    cursor: pointer;
+    padding: 5px 4px;
+  }
+  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion.aa-cursor {
+    background-color: #B2D7FF;
+  }
+  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion em {
+    font-weight: bold;
+    font-style: normal;
+  }
+</style>
 </head>
 <body>
   <div id="mobile-navbar" class="mobile-navbar">
@@ -101,9 +132,14 @@
         <a class="menu-item-link" href="/tags/">标签</a>
       </li><li class="menu-item">
         <a class="menu-item-link" href="/categories/">分类</a>
-      </li>
-  </ul>
+      </li><li style="display:inline-block;margin-right:10px;">
+
+              <input class="form-control" id="search-input" name="contacts" type="text" placeholder='Search by name' />
+          </li></ul>
 </nav>
+
+
+
     </header>
 
     <main id="main" class="main">
@@ -320,5 +356,39 @@
 
 
 
+<script src="https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.min.js"></script>
+<script>
+  var client = algoliasearch('TKPNCDWVXO', '137b480446d5bc06c60764fc7af48ca1');
+  var index = client.initIndex('blog-dingjianhui.top');
+
+  function newHitsSource(index, params) {
+    return function doSearch(query, cb) {
+      index
+              .search(query, params)
+              .then(function(res) {
+                cb(res.hits, res);
+              })
+              .catch(function(err) {
+                console.error(err);
+                cb([]);
+              });
+    };
+  }
+
+  autocomplete('#search-input', { hint: false }, [
+    {
+      source: newHitsSource(index, { hitsPerPage: 5 }),
+      displayKey: 'my_attribute',
+      templates: {
+        suggestion: function(suggestion) {
+          return suggestion._highlightResult.my_attribute.value;
+        }
+      }
+    }
+  ]).on('autocomplete:selected', function(event, suggestion, dataset, context) {
+    console.log(event, suggestion, dataset, context);
+  });
+</script>
 </body>
 </html>
