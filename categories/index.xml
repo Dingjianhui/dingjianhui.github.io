@@ -7,10 +7,28 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>dingo(Ding JianHui)</copyright>
-    <lastBuildDate>Wed, 29 Jul 2020 09:54:54 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 30 Jul 2020 09:29:31 +0800</lastBuildDate>
     
 	<atom:link href="http://dingjianhui.top/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>golang</title>
+      <link>http://dingjianhui.top/categories/golang/</link>
+      <pubDate>Thu, 30 Jul 2020 09:29:31 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/categories/golang/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>docker</title>
+      <link>http://dingjianhui.top/categories/docker/</link>
+      <pubDate>Wed, 29 Jul 2020 09:54:54 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/categories/docker/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>redis</title>
@@ -18,15 +36,6 @@
       <pubDate>Wed, 29 Jul 2020 09:54:54 +0800</pubDate>
       
       <guid>http://dingjianhui.top/categories/redis/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>golang</title>
-      <link>http://dingjianhui.top/categories/golang/</link>
-      <pubDate>Sun, 26 Jul 2020 07:55:30 +0800</pubDate>
-      
-      <guid>http://dingjianhui.top/categories/golang/</guid>
       <description></description>
     </item>
     
@@ -63,15 +72,6 @@
       <pubDate>Wed, 17 Jun 2020 14:15:53 +0800</pubDate>
       
       <guid>http://dingjianhui.top/categories/centos/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>docker</title>
-      <link>http://dingjianhui.top/categories/docker/</link>
-      <pubDate>Wed, 17 Jun 2020 14:15:53 +0800</pubDate>
-      
-      <guid>http://dingjianhui.top/categories/docker/</guid>
       <description></description>
     </item>
     

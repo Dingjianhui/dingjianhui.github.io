@@ -49,11 +49,11 @@
 <meta itemprop="description" content="官方文档 https://redis.io/ https://hub.docker.com/_/redis https://github.com/redis/redis 环境 CentOS 7 &#43; docker &#43; docker-compose &#43; redis 5.0 以安装redis5.0.7为例,目前最新版是6.0.6 下载安装 redis redis:&lt;version&gt; redis:&lt;version&gt;-alpine 1 2 3 4 [tintin@localhost ~]$ docker pull redis:5.0.7-alpine [tintin@localhost ~]$ docker images REPOSITORY TAG IMAGE ID CREATED">
 <meta itemprop="datePublished" content="2020-07-29T09:54:54&#43;08:00" />
 <meta itemprop="dateModified" content="2020-07-29T09:54:54&#43;08:00" />
-<meta itemprop="wordCount" content="1872">
+<meta itemprop="wordCount" content="1873">
 
 
 
-<meta itemprop="keywords" content="docker,redis,安全,docker-compose," /><meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="docker,redis,安全,docker-compose,centos7," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Docker中安装Redis并设置安全选项"/>
 <meta name="twitter:description" content="官方文档 https://redis.io/ https://hub.docker.com/_/redis https://github.com/redis/redis 环境 CentOS 7 &#43; docker &#43; docker-compose &#43; redis 5.0 以安装redis5.0.7为例,目前最新版是6.0.6 下载安装 redis redis:&lt;version&gt; redis:&lt;version&gt;-alpine 1 2 3 4 [tintin@localhost ~]$ docker pull redis:5.0.7-alpine [tintin@localhost ~]$ docker images REPOSITORY TAG IMAGE ID CREATED"/>
 
@@ -124,8 +124,9 @@
         <span class="post-time"> 2020-07-29 </span>
         <div class="post-category">
             <a href="/categories/redis/"> redis </a>
+            <a href="/categories/docker/"> docker </a>
             </div>
-          <span class="more-meta"> 约 1872 字 </span>
+          <span class="more-meta"> 约 1873 字 </span>
           <span class="more-meta"> 预计阅读 4 分钟 </span>
         
       </div>
@@ -258,7 +259,7 @@ port 63799
 </li>
 <li>
 <p>设置<code>auth</code>选项，设置访问密码</p>
-<p><code>Redis</code>默认是没有访问密码的,为了防止暴力破解，密码可以设置长一点
+<p><code>Redis</code>默认是没有访问密码的,为了防止暴力破解，密码可以设置长一点,
 不用担心记不住，密码是明文方式存储在配置文件中，不需要记住</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -567,9 +568,14 @@ CONTAINER ID        IMAGE                 COMMAND                  CREATED      
           <a href="/tags/redis/">redis</a>
           <a href="/tags/%E5%AE%89%E5%85%A8/">安全</a>
           <a href="/tags/docker-compose/">docker-compose</a>
+          <a href="/tags/centos7/">centos7</a>
           </div>
       <nav class="post-nav">
-        
+        <a class="prev" href="/post/2020/07/30/go-define-enum/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">如何使用golang定义枚举</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
         <a class="next" href="/post/2020/07/26/go-test-mock/">
             <span class="next-text nav-default">Golang 测试进阶之gomock框架(单元测试)</span>
             <span class="next-text nav-mobile">下一篇</span>

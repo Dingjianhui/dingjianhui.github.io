@@ -7,10 +7,37 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>dingo(Ding JianHui)</copyright>
-    <lastBuildDate>Wed, 29 Jul 2020 09:54:54 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 30 Jul 2020 09:29:31 +0800</lastBuildDate>
     
 	<atom:link href="http://dingjianhui.top/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>go</title>
+      <link>http://dingjianhui.top/tags/go/</link>
+      <pubDate>Thu, 30 Jul 2020 09:29:31 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/tags/go/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>go初级</title>
+      <link>http://dingjianhui.top/tags/go%E5%88%9D%E7%BA%A7/</link>
+      <pubDate>Thu, 30 Jul 2020 09:29:31 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/tags/go%E5%88%9D%E7%BA%A7/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>centos7</title>
+      <link>http://dingjianhui.top/tags/centos7/</link>
+      <pubDate>Wed, 29 Jul 2020 09:54:54 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/tags/centos7/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>docker</title>
@@ -45,15 +72,6 @@
       <pubDate>Wed, 29 Jul 2020 09:54:54 +0800</pubDate>
       
       <guid>http://dingjianhui.top/tags/%E5%AE%89%E5%85%A8/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>go</title>
-      <link>http://dingjianhui.top/tags/go/</link>
-      <pubDate>Sun, 26 Jul 2020 07:55:30 +0800</pubDate>
-      
-      <guid>http://dingjianhui.top/tags/go/</guid>
       <description></description>
     </item>
     
@@ -144,15 +162,6 @@
       <pubDate>Wed, 24 Jun 2020 09:04:03 +0800</pubDate>
       
       <guid>http://dingjianhui.top/tags/defer/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>centos7</title>
-      <link>http://dingjianhui.top/tags/centos7/</link>
-      <pubDate>Wed, 17 Jun 2020 14:15:53 +0800</pubDate>
-      
-      <guid>http://dingjianhui.top/tags/centos7/</guid>
       <description></description>
     </item>
     

@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>dingo(Ding JianHui)</copyright>
-    <lastBuildDate>Sun, 26 Jul 2020 07:55:30 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 30 Jul 2020 09:29:31 +0800</lastBuildDate>
     
 	<atom:link href="http://dingjianhui.top/categories/golang/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>如何使用golang定义枚举</title>
+      <link>http://dingjianhui.top/post/2020/07/30/go-define-enum/</link>
+      <pubDate>Thu, 30 Jul 2020 09:29:31 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/post/2020/07/30/go-define-enum/</guid>
+      <description>前言 枚举就是一一列举，将所有的情况都列举出来，那么取值的时候只能是这几种情况的一种，不能是别的。 Golang 中没有 enum 关键字，要定义枚举可以使用 const 配合 iota</description>
+    </item>
     
     <item>
       <title>Golang 测试进阶之gomock框架(单元测试)</title>
