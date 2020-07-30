@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>dingo(Ding JianHui)</copyright>
-    <lastBuildDate>Thu, 30 Jul 2020 09:29:31 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 30 Jul 2020 10:42:26 +0800</lastBuildDate>
     
 	<atom:link href="http://dingjianhui.top/categories/golang/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>限制协程执行数量的基本方法(防止机器跑崩)</title>
+      <link>http://dingjianhui.top/post/2020/07/30/go-goroutine-num/</link>
+      <pubDate>Thu, 30 Jul 2020 10:42:26 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/post/2020/07/30/go-goroutine-num/</guid>
+      <description>介绍 我们在开发过程中，如果不对Goroutine加以控制而进行滥用的话， 可能会导致服务程序整体崩溃。 实现代码 使用类似数据库连接池，redis</description>
+    </item>
     
     <item>
       <title>如何使用golang定义枚举</title>
