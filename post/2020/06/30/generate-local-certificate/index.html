@@ -68,35 +68,7 @@
 <![endif]-->
 <script data-ad-client="ca-pub-8764182409666792" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-<style>
-  .algolia-autocomplete {
-    width: 100%;
-  }
-  .algolia-autocomplete .aa-input, .algolia-autocomplete .aa-hint {
-    width: 100%;
-  }
-  .algolia-autocomplete .aa-hint {
-    color: #999;
-  }
-  .algolia-autocomplete .aa-dropdown-menu {
-    width: 100%;
-    background-color: #fff;
-    border: 1px solid #999;
-    border-top: none;
-  }
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion {
-    cursor: pointer;
-    padding: 5px 4px;
-  }
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion.aa-cursor {
-    background-color: #B2D7FF;
-  }
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion em {
-    font-weight: bold;
-    font-style: normal;
-  }
-</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
 </head>
 <body>
   <div id="mobile-navbar" class="mobile-navbar">
@@ -128,9 +100,13 @@
   <a href="/" class="logo">dingo</a>
 </div>
 
+
+
 <nav class="site-navbar">
-  <ul id="menu" class="menu">
-    <li class="menu-item">
+  <ul id="menu" class="menu"><li class="search search-input">
+          <input type="search" class="docsearch-input" placeholder="请输入您要搜索的内容..." />
+          <i class="iconfont icon-right"></i>
+      </li><li class="menu-item">
         <a class="menu-item-link" href="/">首页</a>
       </li><li class="menu-item">
         <a class="menu-item-link" href="/post/">归档</a>
@@ -138,12 +114,9 @@
         <a class="menu-item-link" href="/tags/">标签</a>
       </li><li class="menu-item">
         <a class="menu-item-link" href="/categories/">分类</a>
-      </li><li style="display:inline-block;margin-right:10px;">
-
-              <input class="form-control" id="search-input" name="contacts" type="text" placeholder='Search by name' />
-          </li></ul>
+      </li>
+  </ul>
 </nav>
-
 
 
     </header>
@@ -249,7 +222,21 @@
   
   
 </div>
-<footer class="post-footer">
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/images/pay/weixin.jpg">
+        <span>微信打赏</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/images/pay/zhifubao.jpg">
+        <span>支付宝打赏</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
       <div class="post-tags">
           <a href="/tags/https/">https</a>
           <a href="/tags/openssl/">openssl</a>
@@ -280,6 +267,7 @@
 
     <footer id="footer" class="footer">
       <div class="social-links">
+      <a href="mailto:djhui1987@gmail.com" class="iconfont icon-email" title="email"></a>
       <a href="https://github.com/dingjianhui" class="iconfont icon-github" title="github"></a>
   <a href="http://dingjianhui.top/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
@@ -327,39 +315,16 @@
 
 
 
-<script src="https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch.umd.min.js"></script>
-<script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.min.js"></script>
-<script>
-  var client = algoliasearch('TKPNCDWVXO', '137b480446d5bc06c60764fc7af48ca1');
-  var index = client.initIndex('blog-dingjianhui.top');
 
-  function newHitsSource(index, params) {
-    return function doSearch(query, cb) {
-      index
-              .search(query, params)
-              .then(function(res) {
-                cb(res.hits, res);
-              })
-              .catch(function(err) {
-                console.error(err);
-                cb([]);
-              });
-    };
-  }
-
-  autocomplete('#search-input', { hint: false }, [
-    {
-      source: newHitsSource(index, { hitsPerPage: 5 }),
-      displayKey: 'my_attribute',
-      templates: {
-        suggestion: function(suggestion) {
-          return suggestion._highlightResult.my_attribute.value;
-        }
-      }
-    }
-  ]).on('autocomplete:selected', function(event, suggestion, dataset, context) {
-    console.log(event, suggestion, dataset, context);
-  });
-</script>
+<script src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+  <script>
+    docsearch({
+      apiKey: "63613c4b082a9ffcfdf94b1eb1df5ab5",
+      indexName: "blog_github",
+      appId: "B6SOJSDFFA",
+      inputSelector: '.docsearch-input',
+      debug: false,
+    });
+  </script>
 </body>
 </html>
