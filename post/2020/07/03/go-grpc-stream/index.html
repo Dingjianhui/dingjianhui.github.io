@@ -105,7 +105,6 @@
 <nav class="site-navbar">
   <ul id="menu" class="menu"><li class="search search-input">
           <input type="search" class="docsearch-input" placeholder="请输入您要搜索的内容..." />
-
       </li><li class="menu-item">
         <a class="menu-item-link" href="/">首页</a>
       </li><li class="menu-item">
@@ -1114,7 +1113,21 @@ protoc --go_out<span class="o">=</span><span class="nv">plugins</span><span clas
 
 
 
-
+<script id="baidu_push">
+  (function(){
+    if (window.location.hostname === 'localhost') return;
+    var bp = document.createElement('script'); bp.async = true;
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
 
 
 
