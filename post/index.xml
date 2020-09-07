@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>dingo(Ding JianHui)</copyright>
-    <lastBuildDate>Thu, 30 Jul 2020 10:42:26 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 07 Sep 2020 08:11:50 +0800</lastBuildDate>
     
 	<atom:link href="http://dingjianhui.top/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>谈一谈Golang的单例模式（Singleton）</title>
+      <link>http://dingjianhui.top/post/2020/09/07/go-singleton/</link>
+      <pubDate>Mon, 07 Sep 2020 08:11:50 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/post/2020/09/07/go-singleton/</guid>
+      <description>单例模式是一种常用的软件设计模式 Go语言实现单例模式的有四种方式，分别是懒汉模式、饿汉模式、双重检查和 sync.Once。 懒汉模式-就是创建</description>
+    </item>
     
     <item>
       <title>限制协程执行数量的基本方法(防止机器跑崩)</title>

@@ -3,48 +3,55 @@
   
   <url>
     <loc>http://dingjianhui.top/categories/</loc>
-    <lastmod>2020-07-30T10:42:26+08:00</lastmod>
+    <lastmod>2020-09-07T08:11:50+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>http://dingjianhui.top/</loc>
-    <lastmod>2020-07-30T10:42:26+08:00</lastmod>
+    <lastmod>2020-09-07T08:11:50+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>http://dingjianhui.top/tags/go/</loc>
-    <lastmod>2020-07-30T10:42:26+08:00</lastmod>
+    <lastmod>2020-09-07T08:11:50+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>http://dingjianhui.top/categories/golang/</loc>
-    <lastmod>2020-07-30T10:42:26+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://dingjianhui.top/tags/go%E5%88%9D%E7%BA%A7/</loc>
-    <lastmod>2020-07-30T10:42:26+08:00</lastmod>
+    <lastmod>2020-09-07T08:11:50+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>http://dingjianhui.top/post/</loc>
-    <lastmod>2020-07-30T10:42:26+08:00</lastmod>
+    <lastmod>2020-09-07T08:11:50+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>http://dingjianhui.top/tags/</loc>
+    <lastmod>2020-09-07T08:11:50+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://dingjianhui.top/post/2020/09/07/go-singleton/</loc>
+    <lastmod>2020-09-07T08:11:50+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://dingjianhui.top/tags/go%E5%88%9D%E7%BA%A7/</loc>
     <lastmod>2020-07-30T10:42:26+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
