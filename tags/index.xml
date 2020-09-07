@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>dingo(Ding JianHui)</copyright>
-    <lastBuildDate>Mon, 07 Sep 2020 08:11:50 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 07 Sep 2020 21:22:25 +0800</lastBuildDate>
     
 	<atom:link href="http://dingjianhui.top/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>nacos</title>
+      <link>http://dingjianhui.top/tags/nacos/</link>
+      <pubDate>Mon, 07 Sep 2020 21:22:25 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/tags/nacos/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>go</title>

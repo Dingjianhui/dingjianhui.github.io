@@ -3,14 +3,49 @@
   
   <url>
     <loc>http://dingjianhui.top/categories/</loc>
-    <lastmod>2020-09-07T08:11:50+08:00</lastmod>
+    <lastmod>2020-09-07T21:22:25+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>http://dingjianhui.top/</loc>
-    <lastmod>2020-09-07T08:11:50+08:00</lastmod>
+    <lastmod>2020-09-07T21:22:25+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://dingjianhui.top/tags/nacos/</loc>
+    <lastmod>2020-09-07T21:22:25+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://dingjianhui.top/categories/nacos/</loc>
+    <lastmod>2020-09-07T21:22:25+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://dingjianhui.top/post/2020/09/07/nacos-windows-error/</loc>
+    <lastmod>2020-09-07T21:22:25+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://dingjianhui.top/post/</loc>
+    <lastmod>2020-09-07T21:22:25+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://dingjianhui.top/tags/</loc>
+    <lastmod>2020-09-07T21:22:25+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -24,20 +59,6 @@
   
   <url>
     <loc>http://dingjianhui.top/categories/golang/</loc>
-    <lastmod>2020-09-07T08:11:50+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://dingjianhui.top/post/</loc>
-    <lastmod>2020-09-07T08:11:50+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://dingjianhui.top/tags/</loc>
     <lastmod>2020-09-07T08:11:50+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
