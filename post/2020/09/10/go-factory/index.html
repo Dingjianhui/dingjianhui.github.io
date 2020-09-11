@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>使用Golang实现工厂模式(Factory-Pattern) - Ding Jianhui 的个人博客 - 笔记</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="dingo" /><meta name="description" content="工厂模式是我们最常用的实例化对象模式了，是用工厂方法代替new操作的一种模式 简单工厂模式 （Simple Factory Pattern） 我们想要创建一个对象" /><meta name="keywords" content="dingo, golang, 笔记" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.73.0-DEV with theme even" />
+
+
+<link rel="canonical" href="http://dingjianhui.top/post/2020/09/10/go-factory/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/search.css">
+
+
+<meta property="og:title" content="使用Golang实现工厂模式(Factory-Pattern)" />
+<meta property="og:description" content="工厂模式是我们最常用的实例化对象模式了，是用工厂方法代替new操作的一种模式 简单工厂模式 （Simple Factory Pattern） 我们想要创建一个对象" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://dingjianhui.top/post/2020/09/10/go-factory/" />
+<meta property="article:published_time" content="2020-09-10T15:13:52+08:00" />
+<meta property="article:modified_time" content="2020-09-10T15:13:52+08:00" />
+<meta itemprop="name" content="使用Golang实现工厂模式(Factory-Pattern)">
+<meta itemprop="description" content="工厂模式是我们最常用的实例化对象模式了，是用工厂方法代替new操作的一种模式 简单工厂模式 （Simple Factory Pattern） 我们想要创建一个对象">
+<meta itemprop="datePublished" content="2020-09-10T15:13:52&#43;08:00" />
+<meta itemprop="dateModified" content="2020-09-10T15:13:52&#43;08:00" />
+<meta itemprop="wordCount" content="1835">
+
+
+
+<meta itemprop="keywords" content="go," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="使用Golang实现工厂模式(Factory-Pattern)"/>
+<meta name="twitter:description" content="工厂模式是我们最常用的实例化对象模式了，是用工厂方法代替new操作的一种模式 简单工厂模式 （Simple Factory Pattern） 我们想要创建一个对象"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+<script data-ad-client="ca-pub-8764182409666792" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">dingo</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">dingo</a>
+</div>
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu"><li class="search search-input">
+          <input type="search" class="docsearch-input" placeholder="请输入您要搜索的内容..." />
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li>
+  </ul>
+</nav>
+
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">使用Golang实现工厂模式(Factory-Pattern)</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-09-10 </span>
+        <div class="post-category">
+            <a href="/categories/golang/"> golang </a>
+            </div>
+          <span class="more-meta"> 约 1835 字 </span>
+          <span class="more-meta"> 预计阅读 4 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#简单工厂模式-simple-factory-pattern">简单工厂模式 （Simple Factory Pattern）</a></li>
+    <li><a href="#抽象工厂模式abstract-factory-pattern">抽象工厂模式（Abstract factory pattern）</a></li>
+    <li><a href="#总结">总结：</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <blockquote>
+<p>工厂模式是我们最常用的实例化对象模式了，是用工厂方法代替new操作的一种模式</p>
+</blockquote>
+<h2 id="简单工厂模式-simple-factory-pattern">简单工厂模式 （Simple Factory Pattern）</h2>
+<blockquote>
+<p>我们想要创建一个对象的时候，调用同一个方法，传入不同的参数就可以返回给我们不同的对象了</p>
+</blockquote>
+<p>完整代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+	<span class="s">&#34;log&#34;</span>
+<span class="p">)</span>
+
+<span class="c1">// 举例-用户名登录、手机号登录、E-mail登录
+</span><span class="c1">// 他们都有一个登录验证方法--login()
+</span><span class="c1"></span>
+<span class="c1">// 定义一个登录接口
+</span><span class="c1"></span><span class="kd">type</span> <span class="nx">ILogin</span> <span class="kd">interface</span> <span class="p">{</span>
+	<span class="nf">Login</span><span class="p">()</span> <span class="kt">error</span>
+<span class="p">}</span>
+
+<span class="c1">// 用户名密码模式登录
+</span><span class="c1"></span><span class="kd">type</span> <span class="nx">UserNameLogin</span> <span class="kd">struct</span> <span class="p">{}</span>
+<span class="c1">// 初始化
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">NewUserNameLogin</span><span class="p">()</span> <span class="o">*</span><span class="nx">UserNameLogin</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="o">&amp;</span><span class="nx">UserNameLogin</span><span class="p">{}</span>
+<span class="p">}</span>
+<span class="kd">func</span> <span class="p">(</span><span class="nx">this</span> <span class="o">*</span><span class="nx">UserNameLogin</span><span class="p">)</span> <span class="nf">Login</span><span class="p">()</span> <span class="kt">error</span> <span class="p">{</span>
+	<span class="c1">// 获取post提交的param
+</span><span class="c1"></span>	<span class="c1">// todo 验证用户名、密码是否正确
+</span><span class="c1"></span>	<span class="c1">// ......
+</span><span class="c1"></span>	<span class="nx">log</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;用户名和密码输入正确！登录成功&#34;</span><span class="p">)</span>
+	<span class="k">return</span> <span class="kc">nil</span>
+<span class="p">}</span>
+
+<span class="c1">// 手机号密码模式登录
+</span><span class="c1"></span><span class="kd">type</span> <span class="nx">PhoneLogin</span> <span class="kd">struct</span> <span class="p">{}</span>
+<span class="c1">// 初始化
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">NewPhoneLogin</span><span class="p">()</span> <span class="o">*</span><span class="nx">PhoneLogin</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="o">&amp;</span><span class="nx">PhoneLogin</span><span class="p">{}</span>
+<span class="p">}</span>
+<span class="kd">func</span> <span class="p">(</span><span class="nx">this</span> <span class="o">*</span><span class="nx">PhoneLogin</span><span class="p">)</span> <span class="nf">Login</span><span class="p">()</span> <span class="kt">error</span> <span class="p">{</span>
+	<span class="c1">// 获取post提交的param
+</span><span class="c1"></span>	<span class="c1">// todo 验证手机号、密码是否正确
+</span><span class="c1"></span>	<span class="c1">// ......
+</span><span class="c1"></span>	<span class="nx">log</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;手机号码和密码输入正确！登录成功&#34;</span><span class="p">)</span>
+	<span class="k">return</span> <span class="kc">nil</span>
+<span class="p">}</span>
+
+<span class="c1">// Email密码模式登录
+</span><span class="c1"></span><span class="kd">type</span> <span class="nx">EmailLogin</span> <span class="kd">struct</span> <span class="p">{}</span>
+<span class="c1">// 初始化
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">NewEmailLogin</span><span class="p">()</span> <span class="o">*</span><span class="nx">EmailLogin</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="o">&amp;</span><span class="nx">EmailLogin</span><span class="p">{}</span>
+<span class="p">}</span>
+<span class="kd">func</span> <span class="p">(</span><span class="nx">this</span> <span class="o">*</span><span class="nx">EmailLogin</span><span class="p">)</span> <span class="nf">Login</span><span class="p">()</span> <span class="kt">error</span>  <span class="p">{</span>
+	<span class="c1">// 获取post提交的param
+</span><span class="c1"></span>	<span class="c1">// todo 验证Email、密码是否正确
+</span><span class="c1"></span>	<span class="c1">// ......
+</span><span class="c1"></span>	<span class="nx">log</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;邮箱和密码输入正确！登录成功&#34;</span><span class="p">)</span>
+	<span class="k">return</span> <span class="kc">nil</span>
+<span class="p">}</span>
+
+
+
+<span class="c1">//---------------构建工厂-------------------//
+</span><span class="c1">// 作用：实例化对象，替代new方法
+</span><span class="c1"></span>
+<span class="c1">// 定义常量-登录类型
+</span><span class="c1"></span><span class="kd">const</span> <span class="p">(</span>
+	<span class="nx">UserName</span> <span class="p">=</span> <span class="kc">iota</span>
+	<span class="nx">Phone</span>
+	<span class="nx">Email</span>
+<span class="p">)</span>
+<span class="c1">// 创建工厂(CreateFactory)
+</span><span class="c1">// golang中使用函数就行了，就不用再创建一个 Factory  struct了
+</span><span class="c1">// 缺点：如果需要新增一个实例，需要在CreateFactory函数中做修改
+</span><span class="c1">// 打个比方，如果需要新增100个，上千个，那么都需要在工厂（CreateFactory）中修改
+</span><span class="c1">// 灵活性和可维护性不高
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">CreateFactory</span><span class="p">(</span><span class="nx">t</span> <span class="kt">int</span><span class="p">)</span> <span class="nx">ILogin</span> <span class="p">{</span>
+	<span class="k">switch</span> <span class="nx">t</span> <span class="p">{</span>
+	<span class="k">case</span> <span class="nx">UserName</span><span class="p">:</span>
+		<span class="k">return</span> <span class="nf">NewUserNameLogin</span><span class="p">()</span>
+	<span class="k">case</span> <span class="nx">Phone</span><span class="p">:</span>
+		<span class="k">return</span> <span class="nf">NewPhoneLogin</span><span class="p">()</span>
+	<span class="k">case</span> <span class="nx">Email</span><span class="p">:</span>
+		<span class="k">return</span> <span class="nf">NewEmailLogin</span><span class="p">()</span>
+	<span class="k">default</span><span class="p">:</span>
+		<span class="k">return</span> <span class="nf">NewUserNameLogin</span><span class="p">()</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span>  <span class="p">{</span>
+	<span class="c1">// 单例模式下，我们实例化对象
+</span><span class="c1"></span>	<span class="nx">_</span> <span class="p">=</span> <span class="nf">NewUserNameLogin</span><span class="p">().</span><span class="nf">Login</span><span class="p">()</span>
+	<span class="nx">_</span> <span class="p">=</span> <span class="nf">NewPhoneLogin</span><span class="p">().</span><span class="nf">Login</span><span class="p">()</span>
+	<span class="nx">_</span> <span class="p">=</span> <span class="nf">NewEmailLogin</span><span class="p">().</span><span class="nf">Login</span><span class="p">()</span>
+
+	<span class="c1">// 使用简单工厂模式
+</span><span class="c1"></span>	<span class="c1">// 调用的是同一个方法CreateFactory,我们只需要传入登录类型
+</span><span class="c1"></span>	<span class="c1">// 就可以得到我们所需要的实例化对象
+</span><span class="c1"></span>	<span class="nx">_</span> <span class="p">=</span> <span class="nf">CreateFactory</span><span class="p">(</span><span class="nx">UserName</span><span class="p">).</span><span class="nf">Login</span><span class="p">()</span>
+	<span class="nx">_</span> <span class="p">=</span> <span class="nf">CreateFactory</span><span class="p">(</span><span class="nx">Phone</span><span class="p">).</span><span class="nf">Login</span><span class="p">()</span>
+	<span class="nx">_</span> <span class="p">=</span> <span class="nf">CreateFactory</span><span class="p">(</span><span class="nx">Email</span><span class="p">).</span><span class="nf">Login</span><span class="p">()</span>
+<span class="p">}</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="抽象工厂模式abstract-factory-pattern">抽象工厂模式（Abstract factory pattern）</h2>
+<p>把工厂抽象成一个抽象接口，然后实例化由具体的工厂来实现</p>
+<p>调用的时候只需要将抽象接口指向具体的工厂即可</p>
+<p>你指向哪个工厂，抽象接口就会去那个工厂帮你把实例化对象返回给你</p>
+<p>完整代码：main.go</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+	<span class="s">&#34;log&#34;</span>
+<span class="p">)</span>
+
+<span class="c1">// 举例-用户名登录、手机号登录、E-mail登录
+</span><span class="c1">// 它们都有一个登录验证方法--login()
+</span><span class="c1"></span>
+<span class="c1">// 定义一个登录接口
+</span><span class="c1"></span><span class="kd">type</span> <span class="nx">ILogin</span> <span class="kd">interface</span> <span class="p">{</span>
+	<span class="nf">Login</span><span class="p">()</span> <span class="kt">error</span>
+<span class="p">}</span>
+
+<span class="c1">// 用户名密码模式登录
+</span><span class="c1"></span><span class="kd">type</span> <span class="nx">UserNameLogin</span> <span class="kd">struct</span> <span class="p">{}</span>
+<span class="c1">// 初始化
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">NewUserNameLogin</span><span class="p">()</span> <span class="o">*</span><span class="nx">UserNameLogin</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="o">&amp;</span><span class="nx">UserNameLogin</span><span class="p">{}</span>
+<span class="p">}</span>
+<span class="kd">func</span> <span class="p">(</span><span class="nx">this</span> <span class="o">*</span><span class="nx">UserNameLogin</span><span class="p">)</span> <span class="nf">Login</span><span class="p">()</span> <span class="kt">error</span> <span class="p">{</span>
+	<span class="c1">// 获取post提交的param
+</span><span class="c1"></span>	<span class="c1">// todo 验证用户名、密码是否正确
+</span><span class="c1"></span>	<span class="c1">// ......
+</span><span class="c1"></span>	<span class="nx">log</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;用户名和密码输入正确！登录成功&#34;</span><span class="p">)</span>
+	<span class="k">return</span> <span class="kc">nil</span>
+<span class="p">}</span>
+
+<span class="c1">// 手机号密码模式登录
+</span><span class="c1"></span><span class="kd">type</span> <span class="nx">PhoneLogin</span> <span class="kd">struct</span> <span class="p">{}</span>
+<span class="c1">// 初始化
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">NewPhoneLogin</span><span class="p">()</span> <span class="o">*</span><span class="nx">PhoneLogin</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="o">&amp;</span><span class="nx">PhoneLogin</span><span class="p">{}</span>
+<span class="p">}</span>
+<span class="kd">func</span> <span class="p">(</span><span class="nx">this</span> <span class="o">*</span><span class="nx">PhoneLogin</span><span class="p">)</span> <span class="nf">Login</span><span class="p">()</span> <span class="kt">error</span> <span class="p">{</span>
+	<span class="c1">// 获取post提交的param
+</span><span class="c1"></span>	<span class="c1">// todo 验证手机号、密码是否正确
+</span><span class="c1"></span>	<span class="c1">// ......
+</span><span class="c1"></span>	<span class="nx">log</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;手机号码和密码输入正确！登录成功&#34;</span><span class="p">)</span>
+	<span class="k">return</span> <span class="kc">nil</span>
+<span class="p">}</span>
+
+<span class="c1">// Email密码模式登录
+</span><span class="c1"></span><span class="kd">type</span> <span class="nx">EmailLogin</span> <span class="kd">struct</span> <span class="p">{}</span>
+<span class="c1">// 初始化
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">NewEmailLogin</span><span class="p">()</span> <span class="o">*</span><span class="nx">EmailLogin</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="o">&amp;</span><span class="nx">EmailLogin</span><span class="p">{}</span>
+<span class="p">}</span>
+<span class="kd">func</span> <span class="p">(</span><span class="nx">this</span> <span class="o">*</span><span class="nx">EmailLogin</span><span class="p">)</span> <span class="nf">Login</span><span class="p">()</span> <span class="kt">error</span>  <span class="p">{</span>
+	<span class="c1">// 获取post提交的param
+</span><span class="c1"></span>	<span class="c1">// todo 验证Email、密码是否正确
+</span><span class="c1"></span>	<span class="c1">// ......
+</span><span class="c1"></span>	<span class="nx">log</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;邮箱和密码输入正确！登录成功&#34;</span><span class="p">)</span>
+	<span class="k">return</span> <span class="kc">nil</span>
+<span class="p">}</span>
+
+
+
+<span class="c1">//---------------构建工厂-------------------//
+</span><span class="c1">// 作用：实例化对象，替代new方法
+</span><span class="c1"></span>
+<span class="c1">// 定义一个抽象化工厂接口
+</span><span class="c1"></span><span class="kd">type</span> <span class="nx">AbstractFactory</span> <span class="kd">interface</span> <span class="p">{</span>
+	<span class="nf">NewObject</span><span class="p">()</span> <span class="nx">ILogin</span>
+<span class="p">}</span>
+
+<span class="c1">// 创建具体的工厂 UserNameFactory
+</span><span class="c1"></span><span class="kd">type</span> <span class="nx">UserNameFactory</span> <span class="kd">struct</span> <span class="p">{}</span>
+<span class="c1">// 初始化
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">NewUserNameFactory</span><span class="p">()</span> <span class="o">*</span><span class="nx">UserNameFactory</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="o">&amp;</span><span class="nx">UserNameFactory</span><span class="p">{}</span>
+<span class="p">}</span>
+<span class="kd">func</span> <span class="p">(</span><span class="nx">this</span> <span class="o">*</span><span class="nx">UserNameFactory</span><span class="p">)</span> <span class="nf">NewObject</span><span class="p">()</span> <span class="nx">ILogin</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="nf">NewUserNameLogin</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="c1">// 创建具体的工厂 PhoneFactory
+</span><span class="c1"></span><span class="kd">type</span> <span class="nx">PhoneFactory</span> <span class="kd">struct</span> <span class="p">{}</span>
+<span class="kd">func</span> <span class="nf">NewPhoneFactory</span><span class="p">()</span> <span class="o">*</span><span class="nx">PhoneFactory</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="o">&amp;</span><span class="nx">PhoneFactory</span><span class="p">{}</span>
+<span class="p">}</span>
+<span class="kd">func</span> <span class="p">(</span><span class="nx">this</span> <span class="o">*</span><span class="nx">PhoneFactory</span><span class="p">)</span> <span class="nf">NewObject</span><span class="p">()</span> <span class="nx">ILogin</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="nf">NewPhoneLogin</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="c1">// 创建具体的工厂 EmailFactory
+</span><span class="c1"></span><span class="kd">type</span> <span class="nx">EmailFactory</span> <span class="kd">struct</span> <span class="p">{}</span>
+<span class="kd">func</span> <span class="nf">NewEmailFactory</span><span class="p">()</span> <span class="o">*</span><span class="nx">EmailFactory</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="o">&amp;</span><span class="nx">EmailFactory</span><span class="p">{}</span>
+<span class="p">}</span>
+<span class="kd">func</span> <span class="p">(</span><span class="nx">this</span> <span class="o">*</span><span class="nx">EmailFactory</span><span class="p">)</span> <span class="nf">NewObject</span><span class="p">()</span> <span class="nx">ILogin</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="nf">NewEmailLogin</span><span class="p">()</span>
+<span class="p">}</span>
+
+
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span>  <span class="p">{</span>
+
+	<span class="kd">var</span> <span class="nx">factory</span> <span class="nx">AbstractFactory</span>
+
+	<span class="nx">factory</span> <span class="p">=</span> <span class="nf">NewUserNameFactory</span><span class="p">()</span>
+	<span class="c1">//factory = NewPhoneFactory()
+</span><span class="c1"></span>	<span class="c1">//factory = NewEmailFactory()
+</span><span class="c1"></span>	<span class="nx">factory</span><span class="p">.</span><span class="nf">NewObject</span><span class="p">().</span><span class="nf">Login</span><span class="p">()</span>
+
+<span class="p">}</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="总结">总结：</h2>
+<p>简单工厂:</p>
+<pre><code>灵活性不高
+可维护性不高
+与工厂类的耦合度高
+</code></pre>
+<p>抽象工厂:</p>
+<pre><code>增加了代码量
+代码的维护性提高了
+与工厂的藕合度降低了
+</code></pre>
+<p>个人理解：抽象工厂在代码的规范性上好一些，团队协作方面好管理，队员写好各自的具体工厂类就好了，代码逼格了些</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">dingo</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2020-09-10
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/go/">go</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/2020/09/07/go-singleton/">
+            <span class="next-text nav-default">Golang实现单例模式（Singleton）- sync.Once</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:djhui1987@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/dingjianhui" class="iconfont icon-github" title="github"></a>
+  <a href="http://dingjianhui.top/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">dingo(Ding JianHui)</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+
+
+
+<script id="baidu_push">
+  (function(){
+    if (window.location.hostname === 'localhost') return;
+    var bp = document.createElement('script'); bp.async = true;
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+  <script>
+    docsearch({
+      apiKey: "63613c4b082a9ffcfdf94b1eb1df5ab5",
+      indexName: "blog_github",
+      appId: "B6SOJSDFFA",
+      inputSelector: '.docsearch-input',
+      debug: false,
+    });
+  </script>
+</body>
+</html>

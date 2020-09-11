@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>谈一谈Golang的单例模式（Singleton） - Ding Jianhui 的个人博客 - 笔记</title>
+  <title>Golang实现单例模式（Singleton）- sync.Once - Ding Jianhui 的个人博客 - 笔记</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -40,13 +40,13 @@
 <link rel="stylesheet" href="/css/search.css">
 
 
-<meta property="og:title" content="谈一谈Golang的单例模式（Singleton）" />
+<meta property="og:title" content="Golang实现单例模式（Singleton）- sync.Once" />
 <meta property="og:description" content="单例模式是一种常用的软件设计模式 Go语言实现单例模式的有四种方式，分别是懒汉模式、饿汉模式、双重检查和 sync.Once。 懒汉模式-就是创建" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://dingjianhui.top/post/2020/09/07/go-singleton/" />
 <meta property="article:published_time" content="2020-09-07T08:11:50+08:00" />
 <meta property="article:modified_time" content="2020-09-07T08:11:50+08:00" />
-<meta itemprop="name" content="谈一谈Golang的单例模式（Singleton）">
+<meta itemprop="name" content="Golang实现单例模式（Singleton）- sync.Once">
 <meta itemprop="description" content="单例模式是一种常用的软件设计模式 Go语言实现单例模式的有四种方式，分别是懒汉模式、饿汉模式、双重检查和 sync.Once。 懒汉模式-就是创建">
 <meta itemprop="datePublished" content="2020-09-07T08:11:50&#43;08:00" />
 <meta itemprop="dateModified" content="2020-09-07T08:11:50&#43;08:00" />
@@ -55,7 +55,7 @@
 
 
 <meta itemprop="keywords" content="go," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="谈一谈Golang的单例模式（Singleton）"/>
+<meta name="twitter:title" content="Golang实现单例模式（Singleton）- sync.Once"/>
 <meta name="twitter:description" content="单例模式是一种常用的软件设计模式 Go语言实现单例模式的有四种方式，分别是懒汉模式、饿汉模式、双重检查和 sync.Once。 懒汉模式-就是创建"/>
 
 <!--[if lte IE 9]>
@@ -126,7 +126,7 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">谈一谈Golang的单例模式（Singleton）</h1>
+      <h1 class="post-title">Golang实现单例模式（Singleton）- sync.Once</h1>
 
       <div class="post-meta">
         <span class="post-time"> 2020-09-07 </span>
@@ -510,7 +510,11 @@
           <a href="/tags/go/">go</a>
           </div>
       <nav class="post-nav">
-        
+        <a class="prev" href="/post/2020/09/10/go-factory/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">使用Golang实现工厂模式(Factory-Pattern)</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
         <a class="next" href="/post/2020/07/30/go-goroutine-num/">
             <span class="next-text nav-default">限制协程执行数量的基本方法(防止机器跑崩)</span>
             <span class="next-text nav-mobile">下一篇</span>
