@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>dingo(Ding JianHui)</copyright>
-    <lastBuildDate>Thu, 10 Sep 2020 15:13:52 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 11 Sep 2020 16:02:41 +0800</lastBuildDate>
     
 	<atom:link href="http://dingjianhui.top/categories/golang/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Golang实现装饰器模式(Decorator)</title>
+      <link>http://dingjianhui.top/post/2020/09/11/go-decorator/</link>
+      <pubDate>Fri, 11 Sep 2020 16:02:41 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/post/2020/09/11/go-decorator/</guid>
+      <description>修饰模式是常见的一种设计模式,例如：中间件就可以使用到这种设计模式 逼格点： 允许向一个现有的对象添加新的功能，同时又不改变其结构 示例1： 1 2 3</description>
+    </item>
     
     <item>
       <title>使用Golang实现工厂模式(Factory-Pattern)</title>
