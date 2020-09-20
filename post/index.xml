@@ -7,10 +7,28 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>dingo(Ding JianHui)</copyright>
-    <lastBuildDate>Fri, 11 Sep 2020 16:02:41 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 20 Sep 2020 23:10:03 +0800</lastBuildDate>
     
 	<atom:link href="http://dingjianhui.top/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>使用Docker安装Mongo</title>
+      <link>http://dingjianhui.top/post/2020/09/20/docker-mongo-install/</link>
+      <pubDate>Sun, 20 Sep 2020 23:10:03 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/post/2020/09/20/docker-mongo-install/</guid>
+      <description>文档 https://hub.docker.com/_/mongo 自定义配置文件 https://docs.mongodb.com/manual/reference/configuration-options/ 安装 1 [dingo@localhost mongo]$ docker pull mongo:4 启动 1 2 3 4 5 6 7 8 9 10 docker run --name mongodb -v /home/dingo/mongo/data:/data/db -p 27017:27017 -d mongo:4 --auth # --config /etc/mongo/mongod.conf 自定义配置文件 # /home/dingo/mongo/conf:/etc/mongo 配置文件夹映射 # 环境变量配置 # -e</description>
+    </item>
+    
+    <item>
+      <title>Golang中日期格式化问题</title>
+      <link>http://dingjianhui.top/post/2020/09/19/go-timeformart/</link>
+      <pubDate>Sat, 19 Sep 2020 13:55:31 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/post/2020/09/19/go-timeformart/</guid>
+      <description>Go 自身的 time.Time 类型默认解析的日期格式是 RFC3339 标准， 也就是 2006-01-02T15:04:05Z07:00 的格式 转换成时间戳 1 2 3 4 5 6 // 转换成时间戳 func (t *Time) UnmarshalJSON(data []byte) (err error) { now,err := time.ParseInLocation(`&amp;#34;` + timeFormart + `&amp;#34;`, string(data), time.Local) *t = Time(now) return } 转</description>
+    </item>
     
     <item>
       <title>Golang实现装饰器模式(Decorator)</title>

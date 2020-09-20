@@ -46,7 +46,7 @@
 <meta property="og:description" content="Ding Jianhui 的个人博客|笔记|golang|etcd|grpc" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="http://dingjianhui.top/" />
-<meta property="og:updated_time" content="2020-09-11T16:02:41+08:00" />
+<meta property="og:updated_time" content="2020-09-20T23:10:03+08:00" />
 <meta itemprop="name" content="Ding Jianhui 的个人博客 - 笔记">
 <meta itemprop="description" content="Ding Jianhui 的个人博客|笔记|golang|etcd|grpc"><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Ding Jianhui 的个人博客 - 笔记"/>
@@ -118,6 +118,52 @@
       <div class="content-wrapper">
         <div id="content" class="content">
           <section id="posts" class="posts">
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/2020/07/21/go-map/">Golang Map的使用案例--设置值、排序、多个map排序</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-07-21 </span>
+      <div class="post-category">
+          <a href="/categories/golang/"> golang </a>
+          </div>
+        <span class="more-meta"> 约 470 字 </span>
+        <span class="more-meta"> 预计阅读 1 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      Map(集合) Map 是一种无序的键值对的集合 定义初始化 1 2 3 4 5 6 7 8 9 // 定义map type ( UserMap map[string]interface{} ) // 初始化map func NewUser() UserMap { return make(map[string]interface{}) // 使用make初始化 } 设
+    </div>
+    <div class="read-more">
+      <a href="/post/2020/07/21/go-map/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/2020/07/20/go-struct-default-value/">Golang技巧之默认值设置的高阶玩法</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-07-20 </span>
+      <div class="post-category">
+          <a href="/categories/golang/"> golang </a>
+          </div>
+        <span class="more-meta"> 约 602 字 </span>
+        <span class="more-meta"> 预计阅读 2 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      传参时，不改变属性默认值时就不传该参数 1. 普通玩法 比如php中 1 2 3 4 public function addLog($log_type,$log_content,$admin_id,$admin_name,$type = 2) { ...... } 调用 $this-&gt;log-&gt;addLog(0
+    </div>
+    <div class="read-more">
+      <a href="/post/2020/07/20/go-struct-default-value/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
     <article class="post">
   <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/2020/07/07/go-scheduler/">Golang 中协程调度的简单理解</a></h1>
@@ -302,53 +348,6 @@
     </div>
     <div class="read-more">
       <a href="/post/2020/06/24/go-binary-search-tree/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/2020/06/24/go-defer-used/">Golang中Defer的机制解读与defer的用法</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2020-06-24 </span>
-      <div class="post-category">
-          <a href="/categories/golang/"> golang </a>
-          </div>
-        <span class="more-meta"> 约 1562 字 </span>
-        <span class="more-meta"> 预计阅读 4 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      defer介绍 关键字 defer 允许我们推迟到函数返回之前（或任意位置执行 return 语句之后）一刻才执行某个语句或函数 （为什么要在返回之后才执行这些语句？因为
-    </div>
-    <div class="read-more">
-      <a href="/post/2020/06/24/go-defer-used/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/2020/06/19/go-etcd-v3-service-discovery/">Go &#43; Etcd V3 实现 服务注册与发现</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2020-06-19 </span>
-      <div class="post-category">
-          <a href="/categories/golang/"> golang </a>
-          <a href="/categories/etcd/"> etcd </a>
-          </div>
-        <span class="more-meta"> 约 1042 字 </span>
-        <span class="more-meta"> 预计阅读 3 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      示意图 服务注册 1.服务提供者 创建服务 2.服务提供者 配置etcd 3.服务提供者 把服务注册到配置的etcd中 4.服务启动 5.服务关闭时反注册服务
-    </div>
-    <div class="read-more">
-      <a href="/post/2020/06/19/go-etcd-v3-service-discovery/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>

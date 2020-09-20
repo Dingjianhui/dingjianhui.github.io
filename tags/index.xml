@@ -7,15 +7,42 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>dingo(Ding JianHui)</copyright>
-    <lastBuildDate>Fri, 11 Sep 2020 16:02:41 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 20 Sep 2020 23:10:03 +0800</lastBuildDate>
     
 	<atom:link href="http://dingjianhui.top/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>docker</title>
+      <link>http://dingjianhui.top/tags/docker/</link>
+      <pubDate>Sun, 20 Sep 2020 23:10:03 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/tags/docker/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>mongo</title>
+      <link>http://dingjianhui.top/tags/mongo/</link>
+      <pubDate>Sun, 20 Sep 2020 23:10:03 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/tags/mongo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>gin</title>
+      <link>http://dingjianhui.top/tags/gin/</link>
+      <pubDate>Sat, 19 Sep 2020 13:55:31 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/tags/gin/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>go</title>
       <link>http://dingjianhui.top/tags/go/</link>
-      <pubDate>Fri, 11 Sep 2020 16:02:41 +0800</pubDate>
+      <pubDate>Sat, 19 Sep 2020 13:55:31 +0800</pubDate>
       
       <guid>http://dingjianhui.top/tags/go/</guid>
       <description></description>
@@ -36,15 +63,6 @@
       <pubDate>Wed, 29 Jul 2020 09:54:54 +0800</pubDate>
       
       <guid>http://dingjianhui.top/tags/centos7/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>docker</title>
-      <link>http://dingjianhui.top/tags/docker/</link>
-      <pubDate>Wed, 29 Jul 2020 09:54:54 +0800</pubDate>
-      
-      <guid>http://dingjianhui.top/tags/docker/</guid>
       <description></description>
     </item>
     

@@ -7,26 +7,35 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>dingo(Ding JianHui)</copyright>
-    <lastBuildDate>Fri, 11 Sep 2020 16:02:41 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 20 Sep 2020 23:10:03 +0800</lastBuildDate>
     
 	<atom:link href="http://dingjianhui.top/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>golang</title>
-      <link>http://dingjianhui.top/categories/golang/</link>
-      <pubDate>Fri, 11 Sep 2020 16:02:41 +0800</pubDate>
+      <title>docker</title>
+      <link>http://dingjianhui.top/categories/docker/</link>
+      <pubDate>Sun, 20 Sep 2020 23:10:03 +0800</pubDate>
       
-      <guid>http://dingjianhui.top/categories/golang/</guid>
+      <guid>http://dingjianhui.top/categories/docker/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>docker</title>
-      <link>http://dingjianhui.top/categories/docker/</link>
-      <pubDate>Wed, 29 Jul 2020 09:54:54 +0800</pubDate>
+      <title>mongo</title>
+      <link>http://dingjianhui.top/categories/mongo/</link>
+      <pubDate>Sun, 20 Sep 2020 23:10:03 +0800</pubDate>
       
-      <guid>http://dingjianhui.top/categories/docker/</guid>
+      <guid>http://dingjianhui.top/categories/mongo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>golang</title>
+      <link>http://dingjianhui.top/categories/golang/</link>
+      <pubDate>Sat, 19 Sep 2020 13:55:31 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/categories/golang/</guid>
       <description></description>
     </item>
     

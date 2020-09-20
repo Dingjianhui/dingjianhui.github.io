@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>mongo on Ding Jianhui 的个人博客 - 笔记</title>
+    <link>http://dingjianhui.top/categories/mongo/</link>
+    <description>Recent content in mongo on Ding Jianhui 的个人博客 - 笔记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>dingo(Ding JianHui)</copyright>
+    <lastBuildDate>Sun, 20 Sep 2020 23:10:03 +0800</lastBuildDate>
+    
+	<atom:link href="http://dingjianhui.top/categories/mongo/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>使用Docker安装Mongo</title>
+      <link>http://dingjianhui.top/post/2020/09/20/docker-mongo-install/</link>
+      <pubDate>Sun, 20 Sep 2020 23:10:03 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/post/2020/09/20/docker-mongo-install/</guid>
+      <description>文档 https://hub.docker.com/_/mongo 自定义配置文件 https://docs.mongodb.com/manual/reference/configuration-options/ 安装 1 [dingo@localhost mongo]$ docker pull mongo:4 启动 1 2 3 4 5 6 7 8 9 10 docker run --name mongodb -v /home/dingo/mongo/data:/data/db -p 27017:27017 -d mongo:4 --auth # --config /etc/mongo/mongod.conf 自定义配置文件 # /home/dingo/mongo/conf:/etc/mongo 配置文件夹映射 # 环境变量配置 # -e</description>
+    </item>
+    
+  </channel>
+</rss>
