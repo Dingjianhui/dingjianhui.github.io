@@ -127,14 +127,14 @@
           <a href="/categories/docker/"> docker </a>
           <a href="/categories/mongo/"> mongo </a>
           </div>
-        <span class="more-meta"> 约 1168 字 </span>
+        <span class="more-meta"> 约 1285 字 </span>
         <span class="more-meta"> 预计阅读 3 分钟 </span>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      文档 https://hub.docker.com/_/mongo 自定义配置文件 https://docs.mongodb.com/manual/reference/configuration-options/ 安装 1 [dingo@localhost mongo]$ docker pull mongo:4 启动 1 2 3 4 5 6 7 8 9 10 docker run --name mongodb -v /home/dingo/mongo/data:/data/db -p 27017:27017 -d mongo:4 --auth # --config /etc/mongo/mongod.conf 自定义配置文件 # /home/dingo/mongo/conf:/etc/mongo 配置文件夹映射 # 环境变量配置 # -e
+      文档 https://hub.docker.com/_/mongo 自定义配置文件 https://docs.mongodb.com/manual/reference/configuration-options/ 安装 1 [dingo@localhost mongo]$ docker pull mongo:4 启动 1 2 3 4 5 6 7 8 9 10 docker run --name mongodb -v /home/dingo/dingo-web/mongo/data:/data/db -p 27017:27017 -d mongo:4 --auth # --config /etc/mongo/mongod.conf 自定义配置文件 # /home/dingo/dingo-web/mongo/conf:/etc/mongo 配置文件夹映射 # 环境变量配置 # -e
     </div>
     <div class="read-more">
       <a href="/post/2020/09/20/docker-mongo-install/" class="read-more-link">阅读更多</a>

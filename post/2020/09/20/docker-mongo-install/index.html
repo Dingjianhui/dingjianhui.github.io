@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="dingo" /><meta name="description" content="文档 https://hub.docker.com/_/mongo 自定义配置文件 https://docs.mongodb.com/manual/reference/configuration-options/ 安装 1 [dingo@localhost mongo]$ docker pull mongo:4 启动 1 2 3 4 5 6 7 8 9 10 docker run --name mongodb -v /home/dingo/mongo/data:/data/db -p 27017:27017 -d mongo:4 --auth # --config /etc/mongo/mongod.conf 自定义配置文件 # /home/dingo/mongo/conf:/etc/mongo 配置文件夹映射 # 环境变量配置 # -e" /><meta name="keywords" content="dingo, golang, 笔记" />
+<meta name="author" content="dingo" /><meta name="description" content="文档 https://hub.docker.com/_/mongo 自定义配置文件 https://docs.mongodb.com/manual/reference/configuration-options/ 安装 1 [dingo@localhost mongo]$ docker pull mongo:4 启动 1 2 3 4 5 6 7 8 9 10 docker run --name mongodb -v /home/dingo/dingo-web/mongo/data:/data/db -p 27017:27017 -d mongo:4 --auth # --config /etc/mongo/mongod.conf 自定义配置文件 # /home/dingo/dingo-web/mongo/conf:/etc/mongo 配置文件夹映射 # 环境变量配置 # -e" /><meta name="keywords" content="dingo, golang, 笔记" />
 
 
 
@@ -41,22 +41,22 @@
 
 
 <meta property="og:title" content="使用Docker安装Mongo" />
-<meta property="og:description" content="文档 https://hub.docker.com/_/mongo 自定义配置文件 https://docs.mongodb.com/manual/reference/configuration-options/ 安装 1 [dingo@localhost mongo]$ docker pull mongo:4 启动 1 2 3 4 5 6 7 8 9 10 docker run --name mongodb -v /home/dingo/mongo/data:/data/db -p 27017:27017 -d mongo:4 --auth # --config /etc/mongo/mongod.conf 自定义配置文件 # /home/dingo/mongo/conf:/etc/mongo 配置文件夹映射 # 环境变量配置 # -e" />
+<meta property="og:description" content="文档 https://hub.docker.com/_/mongo 自定义配置文件 https://docs.mongodb.com/manual/reference/configuration-options/ 安装 1 [dingo@localhost mongo]$ docker pull mongo:4 启动 1 2 3 4 5 6 7 8 9 10 docker run --name mongodb -v /home/dingo/dingo-web/mongo/data:/data/db -p 27017:27017 -d mongo:4 --auth # --config /etc/mongo/mongod.conf 自定义配置文件 # /home/dingo/dingo-web/mongo/conf:/etc/mongo 配置文件夹映射 # 环境变量配置 # -e" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://dingjianhui.top/post/2020/09/20/docker-mongo-install/" />
 <meta property="article:published_time" content="2020-09-20T23:10:03+08:00" />
 <meta property="article:modified_time" content="2020-09-20T23:10:03+08:00" />
 <meta itemprop="name" content="使用Docker安装Mongo">
-<meta itemprop="description" content="文档 https://hub.docker.com/_/mongo 自定义配置文件 https://docs.mongodb.com/manual/reference/configuration-options/ 安装 1 [dingo@localhost mongo]$ docker pull mongo:4 启动 1 2 3 4 5 6 7 8 9 10 docker run --name mongodb -v /home/dingo/mongo/data:/data/db -p 27017:27017 -d mongo:4 --auth # --config /etc/mongo/mongod.conf 自定义配置文件 # /home/dingo/mongo/conf:/etc/mongo 配置文件夹映射 # 环境变量配置 # -e">
+<meta itemprop="description" content="文档 https://hub.docker.com/_/mongo 自定义配置文件 https://docs.mongodb.com/manual/reference/configuration-options/ 安装 1 [dingo@localhost mongo]$ docker pull mongo:4 启动 1 2 3 4 5 6 7 8 9 10 docker run --name mongodb -v /home/dingo/dingo-web/mongo/data:/data/db -p 27017:27017 -d mongo:4 --auth # --config /etc/mongo/mongod.conf 自定义配置文件 # /home/dingo/dingo-web/mongo/conf:/etc/mongo 配置文件夹映射 # 环境变量配置 # -e">
 <meta itemprop="datePublished" content="2020-09-20T23:10:03&#43;08:00" />
 <meta itemprop="dateModified" content="2020-09-20T23:10:03&#43;08:00" />
-<meta itemprop="wordCount" content="1168">
+<meta itemprop="wordCount" content="1285">
 
 
 
 <meta itemprop="keywords" content="mongo,docker," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="使用Docker安装Mongo"/>
-<meta name="twitter:description" content="文档 https://hub.docker.com/_/mongo 自定义配置文件 https://docs.mongodb.com/manual/reference/configuration-options/ 安装 1 [dingo@localhost mongo]$ docker pull mongo:4 启动 1 2 3 4 5 6 7 8 9 10 docker run --name mongodb -v /home/dingo/mongo/data:/data/db -p 27017:27017 -d mongo:4 --auth # --config /etc/mongo/mongod.conf 自定义配置文件 # /home/dingo/mongo/conf:/etc/mongo 配置文件夹映射 # 环境变量配置 # -e"/>
+<meta name="twitter:description" content="文档 https://hub.docker.com/_/mongo 自定义配置文件 https://docs.mongodb.com/manual/reference/configuration-options/ 安装 1 [dingo@localhost mongo]$ docker pull mongo:4 启动 1 2 3 4 5 6 7 8 9 10 docker run --name mongodb -v /home/dingo/dingo-web/mongo/data:/data/db -p 27017:27017 -d mongo:4 --auth # --config /etc/mongo/mongod.conf 自定义配置文件 # /home/dingo/dingo-web/mongo/conf:/etc/mongo 配置文件夹映射 # 环境变量配置 # -e"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -134,7 +134,7 @@
             <a href="/categories/docker/"> docker </a>
             <a href="/categories/mongo/"> mongo </a>
             </div>
-          <span class="more-meta"> 约 1168 字 </span>
+          <span class="more-meta"> 约 1285 字 </span>
           <span class="more-meta"> 预计阅读 3 分钟 </span>
         
       </div>
@@ -155,7 +155,7 @@
         <li><a href="#查看版本">查看版本</a></li>
         <li><a href="#创建admin管理用户">创建admin管理用户</a></li>
         <li><a href="#创建具有读写权限的用户">创建具有读写权限的用户</a></li>
-        <li><a href="#认证用户并操作">认证用户并操作</a></li>
+        <li><a href="#使用创建的用户root登录进行数据库操作">使用创建的用户root登录进行数据库操作：</a></li>
       </ul>
     </li>
     <li><a href="#连接mongo">连接Mongo</a></li>
@@ -194,10 +194,10 @@
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">docker run --name mongodb -v /home/dingo/mongo/data:/data/db -p 27017:27017 -d mongo:4 --auth
+<pre class="chroma"><code class="language-shell" data-lang="shell">docker run --name mongodb -v /home/dingo/dingo-web/mongo/data:/data/db -p 27017:27017 -d mongo:4 --auth
 
 <span class="c1"># --config /etc/mongo/mongod.conf 自定义配置文件</span>
-<span class="c1"># /home/dingo/mongo/conf:/etc/mongo 配置文件夹映射</span>
+<span class="c1"># /home/dingo/dingo-web/mongo/conf:/etc/mongo 配置文件夹映射</span>
 <span class="c1"># 环境变量配置</span>
 <span class="c1">#    -e MONGO_INITDB_ROOT_USERNAME=mongoadmin</span> 
 <span class="c1">#    -e MONGO_INITDB_ROOT_PASSWORD=secret</span> 
@@ -268,6 +268,8 @@ MongoDB server version: 4.4.1
 </span><span class="lnt">10
 </span><span class="lnt">11
 </span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-shell" data-lang="shell">&gt; use admin
@@ -282,9 +284,13 @@ Successfully added user: <span class="o">{</span>
 		<span class="o">}</span>
 	<span class="o">]</span>
 <span class="o">}</span>
+&gt; db.auth<span class="o">(</span><span class="s1">&#39;admin&#39;</span>,<span class="s1">&#39;123456&#39;</span><span class="o">)</span><span class="p">;</span>
+<span class="m">1</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="创建具有读写权限的用户">创建具有读写权限的用户</h3>
+</div><p><code>db.auth</code> 返回1，表示认证成功</p>
+<p>验证之后还是做不了操作，因为admin只有用户管理权限，下面创建用户，用户都跟着库走，</p>
+<h3 id="创建具有读写权限的用户">创建具有读写权限的用户</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -299,20 +305,22 @@ Successfully added user: <span class="o">{</span>
 </span><span class="lnt">10
 </span><span class="lnt">11
 </span><span class="lnt">12
+</span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">&gt; db.auth<span class="o">(</span><span class="s1">&#39;admin&#39;</span>,<span class="s1">&#39;123456&#39;</span><span class="o">)</span><span class="p">;</span>
-<span class="m">1</span>
-&gt; db.createUser<span class="o">({</span> user:<span class="s1">&#39;dingo&#39;</span>,pwd:<span class="s1">&#39;123456&#39;</span>,roles:<span class="o">[</span> <span class="o">{</span> role:<span class="s1">&#39;readWrite&#39;</span>, db: <span class="s1">&#39;yapi&#39;</span><span class="o">}]})</span><span class="p">;</span>
+<pre class="chroma"><code class="language-shell" data-lang="shell">&gt; use mydb
+switched to db mydb
+&gt; db.createUser<span class="o">({</span>user: <span class="s2">&#34;root&#34;</span>,pwd: <span class="s2">&#34;123456&#34;</span>,roles: <span class="o">[{</span> role: <span class="s2">&#34;readWrite&#34;</span>, db: <span class="s2">&#34;mydb&#34;</span> <span class="o">}]})</span>
 Successfully added user: <span class="o">{</span>
-	<span class="s2">&#34;user&#34;</span> : <span class="s2">&#34;dingo&#34;</span>,
+	<span class="s2">&#34;user&#34;</span> : <span class="s2">&#34;root&#34;</span>,
 	<span class="s2">&#34;roles&#34;</span> : <span class="o">[</span>
 		<span class="o">{</span>
 			<span class="s2">&#34;role&#34;</span> : <span class="s2">&#34;readWrite&#34;</span>,
-			<span class="s2">&#34;db&#34;</span> : <span class="s2">&#34;yapi&#34;</span>
+			<span class="s2">&#34;db&#34;</span> : <span class="s2">&#34;mydb&#34;</span>
 		<span class="o">}</span>
 	<span class="o">]</span>
 <span class="o">}</span>
+&gt; <span class="nb">exit</span>
 </code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
@@ -359,7 +367,34 @@ dbAdminAnyDatabase：只在admin数据库中可用，赋予用户所有数据库
 root：只在admin数据库中可用。超级账号，超级权限
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="认证用户并操作">认证用户并操作</h3>
+</div><h3 id="使用创建的用户root登录进行数据库操作">使用创建的用户root登录进行数据库操作：</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">root@fad10ef91cad:/# mongo 127.0.0.1/mydb -uroot -p
+MongoDB shell version v4.4.1
+Enter password: 
+connecting to: mongodb://127.0.0.1:27017/mydb?compressors<span class="o">=</span>disabled<span class="p">&amp;</span><span class="nv">gssapiServiceName</span><span class="o">=</span>mongodb
+Implicit session: session <span class="o">{</span> <span class="s2">&#34;id&#34;</span> : UUID<span class="o">(</span><span class="s2">&#34;ef953a6d-a98c-445b-bf2b-411e02b9b722&#34;</span><span class="o">)</span> <span class="o">}</span>
+MongoDB server version: 4.4.1
+&gt; db
+mydb
+&gt; use mydb
+switched to db mydb
+</code></pre></td></tr></table>
+</div>
+</div><p>&mdash;&mdash;&mdash;&mdash;CURD&mdash;&ndash;</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -367,21 +402,13 @@ root：只在admin数据库中可用。超级账号，超级权限
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">&gt; db.auth<span class="o">(</span><span class="s1">&#39;dingo&#39;</span>,<span class="s1">&#39;123456&#39;</span><span class="o">)</span>
-<span class="m">1</span>
-&gt; use yapi
-switched to db yapi
-&gt; db.user.insert<span class="o">({</span>name:<span class="s2">&#34;lishi&#34;</span>,age:20<span class="o">})</span>
+<pre class="chroma"><code class="language-shell" data-lang="shell">&gt; db.users.insert<span class="o">({</span>name:<span class="s2">&#34;lishi&#34;</span>,age:20<span class="o">})</span>
 WriteResult<span class="o">({</span> <span class="s2">&#34;nInserted&#34;</span> : <span class="m">1</span> <span class="o">})</span>
-&gt; db.user.find<span class="o">({})</span>
-<span class="o">{</span> <span class="s2">&#34;_id&#34;</span> : ObjectId<span class="o">(</span><span class="s2">&#34;5f6776ecb98a8d757ed42a15&#34;</span><span class="o">)</span>, <span class="s2">&#34;name&#34;</span> : <span class="s2">&#34;lishi&#34;</span>, <span class="s2">&#34;age&#34;</span> : <span class="m">20</span> <span class="o">}</span>
-
+&gt; db.users.find<span class="o">({})</span>
+<span class="o">{</span> <span class="s2">&#34;_id&#34;</span> : ObjectId<span class="o">(</span><span class="s2">&#34;5f68258dbf6b555be2023ccd&#34;</span><span class="o">)</span>, <span class="s2">&#34;name&#34;</span> : <span class="s2">&#34;lishi&#34;</span>, <span class="s2">&#34;age&#34;</span> : <span class="m">20</span> <span class="o">}</span>
+&gt;
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="连接mongo">连接Mongo</h2>
