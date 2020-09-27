@@ -51,7 +51,7 @@
           #content {
           margin: 0 auto;
           padding: 2% 5%;
-          max-width: 800px;
+          max-width: 900px;
           }
 
           .desc {

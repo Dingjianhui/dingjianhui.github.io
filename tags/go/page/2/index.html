@@ -39,13 +39,16 @@
 
 <link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/dingo.css">
+<link rel="stylesheet" href="/css/chroma.css">
 
 
 <meta property="og:title" content="go" />
 <meta property="og:description" content="Ding Jianhui 的个人博客|笔记|golang|etcd|grpc" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="http://dingjianhui.top/tags/go/" />
-<meta property="og:updated_time" content="2020-07-21T16:12:41+08:00" />
+<meta property="og:updated_time" content="2020-09-26T15:26:18+08:00" />
 <meta itemprop="name" content="go">
 <meta itemprop="description" content="Ding Jianhui 的个人博客|笔记|golang|etcd|grpc"><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="go"/>
@@ -60,6 +63,8 @@
   <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
 <![endif]-->
 <script data-ad-client="ca-pub-8764182409666792" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
 </head>
 <body>
   <div id="mobile-navbar" class="mobile-navbar">
@@ -91,9 +96,12 @@
   <a href="/" class="logo">dingo</a>
 </div>
 
+
+
 <nav class="site-navbar">
-  <ul id="menu" class="menu">
-    <li class="menu-item">
+  <ul id="menu" class="menu"><li class="search search-input">
+          <input type="search" class="docsearch-input" placeholder="请输入您要搜索的内容..." />
+      </li><li class="menu-item">
         <a class="menu-item-link" href="/">首页</a>
       </li><li class="menu-item">
         <a class="menu-item-link" href="/post/">归档</a>
@@ -104,6 +112,8 @@
       </li>
   </ul>
 </nav>
+
+
     </header>
 
     <main id="main" class="main">
@@ -114,56 +124,11 @@
 
   <div class="archive-post">
       <span class="archive-post-time">
-        2020-06-19
-      </span>
-      <span class="archive-post-title">
-        <a href="/post/2020/06/19/go-etcd-v3-service-discovery/" class="archive-post-link">
-          Go 实现 Etcd V3 服务注册与发现
-        </a>
-      </span>
-    </div><div class="archive-post">
-      <span class="archive-post-time">
-        2020-06-19
-      </span>
-      <span class="archive-post-title">
-        <a href="/blog/2020/06/19/go-etcd-v3-service-discovery/" class="archive-post-link">
-          Go Etcd V3 Service Discovery
-        </a>
-      </span>
-    </div><div class="archive-post">
-      <span class="archive-post-time">
-        2020-06-06
-      </span>
-      <span class="archive-post-title">
-        <a href="/blog/2020/06/06/go-strings-byte-rune/" class="archive-post-link">
-          Go String Byte Rune
-        </a>
-      </span>
-    </div><div class="archive-post">
-      <span class="archive-post-time">
-        2020-06-06
-      </span>
-      <span class="archive-post-title">
-        <a href="/post/2020/06/06/go-strings-byte-rune/" class="archive-post-link">
-          Go - string、byte、rune的区别
-        </a>
-      </span>
-    </div><div class="archive-post">
-      <span class="archive-post-time">
         2020-06-05
       </span>
       <span class="archive-post-title">
         <a href="/post/2020/06/05/go-cross-compile/" class="archive-post-link">
           windows 开发环境下 go 交叉编译
-        </a>
-      </span>
-    </div><div class="archive-post">
-      <span class="archive-post-time">
-        2020-06-05
-      </span>
-      <span class="archive-post-title">
-        <a href="/blog/2020/06/05/go-cross-compile/" class="archive-post-link">
-          Go Cross Compile
         </a>
       </span>
     </div>
@@ -184,6 +149,7 @@
 
     <footer id="footer" class="footer">
       <div class="social-links">
+      <a href="mailto:djhui1987@gmail.com" class="iconfont icon-email" title="email"></a>
       <a href="https://github.com/dingjianhui" class="iconfont icon-github" title="github"></a>
   <a href="http://dingjianhui.top/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
@@ -206,7 +172,7 @@
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
-    <span class="author">Ding JianHui</span>
+    <span class="author">dingo(Ding JianHui)</span>
   </span>
 </div>
     </footer>
@@ -226,10 +192,35 @@
 
 
 
+<script id="baidu_push">
+  (function(){
+    if (window.location.hostname === 'localhost') return;
+    var bp = document.createElement('script'); bp.async = true;
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
 
 
 
 
 
+<script src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+  <script>
+    docsearch({
+      apiKey: "63613c4b082a9ffcfdf94b1eb1df5ab5",
+      indexName: "blog_github",
+      appId: "B6SOJSDFFA",
+      inputSelector: '.docsearch-input',
+      debug: false,
+    });
+  </script>
 </body>
 </html>

@@ -1,0 +1,49 @@
+
+.post .post-content code, .post .post-content pre {
+    /*color: #34495e;*/
+    background: #ffffff;
+}
+
+.post .post-content code.language-shell {
+    color: #34495e;
+}
+
+
+.post .post-content h2 {
+    color: #4c51bf;
+}
+
+.posts .post {
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, .1), 0 10px 10px -5px rgba(0, 0, 0, .04);
+    padding: 1rem 1.25rem;
+    border-radius: 0 0 0.5rem 0.5rem;
+    border: 0;
+}
+.posts {
+    border: 0;
+}
+.content-wrapper {
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, .1), 0 10px 10px -5px rgba(0, 0, 0, .04);
+}
+
+.highlight {
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, .1), 0 10px 10px -5px rgba(0, 0, 0, .04);
+}
+
+.post .post-toc {
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, .1), 0 10px 10px -5px rgba(0, 0, 0, .04);
+}
+
+.post .post-toc {
+    margin-left: 885px;
+}
+
+.content {
+    padding-bottom: 30px;
+}
+
+.post .post-footer .post-nav .prev, .post .post-footer .post-nav .next {
+    font-size: 14px;
+}
+
+

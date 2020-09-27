@@ -1,0 +1,238 @@
+.post .post-content .highlight > .chroma {
+    background-color:#fff;
+    overflow:auto;
+    border-radius:.25rem;
+    margin:1rem 0;
+    /*padding:1rem 1.25rem;*/
+    box-shadow:0 1px 3px 0 rgba(0,0,0,.2),0 1px 2px 0 rgba(0,0,0,.1);
+    font-size:.895rem
+}
+.post .post-content .highlight > .chroma .err {
+    color:#a61717;
+    background-color:#e3d2d2
+}
+.post .post-content .highlight > .chroma .lntd {
+    vertical-align:top;
+    padding:0;
+    margin:0;
+    border:0
+}
+.post .post-content .highlight > .chroma .lntable {
+    border-spacing:0;
+    padding:0;
+    margin:0;
+    border:0;
+    width:auto;
+    overflow:auto;
+    display:block
+}
+.post .post-content .highlight > .chroma .hl {
+    display:block;
+    width:100%;
+    background-color:#ffc
+}
+.post .post-content .highlight > .chroma .lnt {
+    margin-right:.4em;
+    padding:0 .4em 0 .4em;
+    color:#7f7f7f
+}
+.post .post-content .highlight > .chroma .ln {
+    margin-right:.4em;
+    padding:0 .4em 0 .4em;
+    color:#7f7f7f
+}
+.post .post-content .highlight > .chroma .k {
+    font-weight:700
+}
+.post .post-content .highlight > .chroma .kc {
+    font-weight:700
+}
+.post .post-content .highlight > .chroma .kd {
+    font-weight:700
+}
+.post .post-content .highlight > .chroma .kn {
+    color: #34495e;
+    font-weight:700
+}
+.post .post-content .highlight > .chroma .kp {
+    font-weight:700
+}
+.post .post-content .highlight > .chroma .kr {
+    font-weight:700
+}
+.post .post-content .highlight > .chroma .kt {
+    color:#458;
+    font-weight:700
+}
+.post .post-content .highlight > .chroma .na {
+    color:teal
+}
+.post .post-content .highlight > .chroma .nb {
+    color:#999
+}
+.post .post-content .highlight > .chroma .nc {
+    color:#458;
+    font-weight:700
+}
+.post .post-content .highlight > .chroma .no {
+    color:teal
+}
+.post .post-content .highlight > .chroma .ni {
+    color:purple
+}
+.post .post-content .highlight > .chroma .ne {
+    color:#4c5bd3;
+    font-weight:700
+}
+.post .post-content .highlight > .chroma .nf {
+    color:#4c5bd3;
+    font-weight:700
+}
+.post .post-content .highlight > .chroma .nn {
+    color:#555
+}
+.post .post-content .highlight > .chroma .nt {
+    color:navy
+}
+.post .post-content .highlight > .chroma .nv {
+    color:teal
+}
+.post .post-content .highlight > .chroma .s {
+    color:#af5f2a;
+}
+.post .post-content .highlight > .chroma .sa {
+    color:#af5f2a
+}
+.post .post-content .highlight > .chroma .sb {
+    color:#af5f2a
+}
+.post .post-content .highlight > .chroma .sc {
+    color:#af5f2a
+}
+.post .post-content .highlight > .chroma .dl {
+    color:#af5f2a
+}
+.post .post-content .highlight > .chroma .sd {
+    color:#af5f2a
+}
+.post .post-content .highlight > .chroma .s2 {
+    color:#af5f2a
+}
+.post .post-content .highlight > .chroma .se {
+    color:#af5f2a
+}
+.post .post-content .highlight > .chroma .sh {
+    color:#af5f2a
+}
+.post .post-content .highlight > .chroma .si {
+    color:#af5f2a
+}
+.post .post-content .highlight > .chroma .sx {
+    color:#af5f2a
+}
+.post .post-content .highlight > .chroma .sr {
+    color:olive
+}
+.post .post-content .highlight > .chroma .s1 {
+    color:#af5f2a
+}
+.post .post-content .highlight > .chroma .ss {
+    color:#af5f2a
+}
+.post .post-content .highlight > .chroma .m {
+    color:#099
+}
+.post .post-content .highlight > .chroma .mb {
+    color:#099
+}
+.post .post-content .highlight > .chroma .mf {
+    color:#099
+}
+.post .post-content .highlight > .chroma .mh {
+    color:#099
+}
+.post .post-content .highlight > .chroma .mi {
+    color:#099
+}
+.post .post-content .highlight > .chroma .il {
+    color:#099
+}
+.post .post-content .highlight > .chroma .mo {
+    color:#099
+}
+.post .post-content .highlight > .chroma .o {
+    font-weight:700
+}
+.post .post-content .highlight > .chroma .ow {
+    font-weight:700
+}
+.post .post-content .highlight > .chroma .c {
+    color:#998;
+    font-style:italic
+}
+.post .post-content .highlight > .chroma .ch {
+    color:#998;
+    font-style:italic
+}
+.post .post-content .highlight > .chroma .cm {
+    color:#998;
+    font-style:italic
+}
+.post .post-content .highlight > .chroma .c1 {
+    color:#998;
+    font-style:italic
+}
+.post .post-content .highlight > .chroma .cs {
+    color:#999;
+    font-weight:700;
+    font-style:italic
+}
+.post .post-content .highlight > .chroma .cp {
+    color:#999;
+    font-weight:700
+}
+.post .post-content .highlight > .chroma .cpf {
+    color:#999;
+    font-weight:700
+}
+.post .post-content .highlight > .chroma .gd {
+    color:#000;
+    background-color:#fdd
+}
+.post .post-content .highlight > .chroma .ge {
+    font-style:italic
+}
+.post .post-content .highlight > .chroma .gr {
+    color:#a00
+}
+.post .post-content .highlight > .chroma .gh {
+    color:#999
+}
+.post .post-content .highlight > .chroma .gi {
+    color:#000;
+    background-color:#dfd
+}
+.post .post-content .highlight > .chroma .go {
+    color:#888
+}
+.post .post-content .highlight > .chroma .gp {
+    color:#555
+}
+.post .post-content .highlight > .chroma .gs {
+    font-weight:700
+}
+.post .post-content .highlight > .chroma .gu {
+    color:#aaa
+}
+.post .post-content .highlight > .chroma .gt {
+    color:#a00
+}
+.post .post-content .highlight > .chroma .gl {
+    text-decoration:underline
+}
+.post .post-content .highlight > .chroma .w {
+    color:#bbb
+}
+.demo {
+    overflow: auto;
+}
