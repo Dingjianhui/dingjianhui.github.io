@@ -7,10 +7,37 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>dingo(Ding JianHui)</copyright>
-    <lastBuildDate>Sat, 26 Sep 2020 15:26:18 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 30 Sep 2020 00:16:11 +0800</lastBuildDate>
     
 	<atom:link href="http://dingjianhui.top/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>docker</title>
+      <link>http://dingjianhui.top/tags/docker/</link>
+      <pubDate>Wed, 30 Sep 2020 00:16:11 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/tags/docker/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>k8s</title>
+      <link>http://dingjianhui.top/tags/k8s/</link>
+      <pubDate>Wed, 30 Sep 2020 00:16:11 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/tags/k8s/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>rancher</title>
+      <link>http://dingjianhui.top/tags/rancher/</link>
+      <pubDate>Wed, 30 Sep 2020 00:16:11 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/tags/rancher/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>go</title>
@@ -18,15 +45,6 @@
       <pubDate>Sat, 26 Sep 2020 15:26:18 +0800</pubDate>
       
       <guid>http://dingjianhui.top/tags/go/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>docker</title>
-      <link>http://dingjianhui.top/tags/docker/</link>
-      <pubDate>Sun, 20 Sep 2020 23:10:03 +0800</pubDate>
-      
-      <guid>http://dingjianhui.top/tags/docker/</guid>
       <description></description>
     </item>
     

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>k8s on Ding Jianhui 的个人博客 - 笔记</title>
+    <link>http://dingjianhui.top/tags/k8s/</link>
+    <description>Recent content in k8s on Ding Jianhui 的个人博客 - 笔记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>dingo(Ding JianHui)</copyright>
+    <lastBuildDate>Wed, 30 Sep 2020 00:16:11 +0800</lastBuildDate>
+    
+	<atom:link href="http://dingjianhui.top/tags/k8s/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>使用Rancher 2.0快速部署k8s集群</title>
+      <link>http://dingjianhui.top/post/2020/09/30/rancher-create-cluster/</link>
+      <pubDate>Wed, 30 Sep 2020 00:16:11 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/post/2020/09/30/rancher-create-cluster/</guid>
+      <description>建议准备2-3台机器模拟操作 ，2-3台机器建议是8G的内存 我使用了2台8G的虚拟机测试,把Rancher安装在了master主节点中，建议另</description>
+    </item>
+    
+  </channel>
+</rss>

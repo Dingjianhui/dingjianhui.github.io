@@ -7,10 +7,28 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>dingo(Ding JianHui)</copyright>
-    <lastBuildDate>Sat, 26 Sep 2020 15:26:18 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 30 Sep 2020 00:16:11 +0800</lastBuildDate>
     
 	<atom:link href="http://dingjianhui.top/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>k8s</title>
+      <link>http://dingjianhui.top/categories/k8s/</link>
+      <pubDate>Wed, 30 Sep 2020 00:16:11 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/categories/k8s/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>rancher</title>
+      <link>http://dingjianhui.top/categories/rancher/</link>
+      <pubDate>Wed, 30 Sep 2020 00:16:11 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/categories/rancher/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>golang</title>

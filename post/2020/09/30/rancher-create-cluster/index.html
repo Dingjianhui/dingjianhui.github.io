@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>使用Rancher 2.0快速部署k8s集群 - Ding Jianhui 的个人博客 - 笔记</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="dingo" /><meta name="description" content="建议准备2-3台机器模拟操作 ，2-3台机器建议是8G的内存 我使用了2台8G的虚拟机测试,把Rancher安装在了master主节点中，建议另" /><meta name="keywords" content="dingo, golang, 笔记" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.73.0-DEV with theme even" />
+
+
+<link rel="canonical" href="http://dingjianhui.top/post/2020/09/30/rancher-create-cluster/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/dingo.css">
+<link rel="stylesheet" href="/css/chroma.css">
+
+
+<meta property="og:title" content="使用Rancher 2.0快速部署k8s集群" />
+<meta property="og:description" content="建议准备2-3台机器模拟操作 ，2-3台机器建议是8G的内存 我使用了2台8G的虚拟机测试,把Rancher安装在了master主节点中，建议另" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://dingjianhui.top/post/2020/09/30/rancher-create-cluster/" />
+<meta property="article:published_time" content="2020-09-30T00:16:11+08:00" />
+<meta property="article:modified_time" content="2020-09-30T00:16:11+08:00" />
+<meta itemprop="name" content="使用Rancher 2.0快速部署k8s集群">
+<meta itemprop="description" content="建议准备2-3台机器模拟操作 ，2-3台机器建议是8G的内存 我使用了2台8G的虚拟机测试,把Rancher安装在了master主节点中，建议另">
+<meta itemprop="datePublished" content="2020-09-30T00:16:11&#43;08:00" />
+<meta itemprop="dateModified" content="2020-09-30T00:16:11&#43;08:00" />
+<meta itemprop="wordCount" content="1137">
+
+
+
+<meta itemprop="keywords" content="rancher,k8s,docker," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="使用Rancher 2.0快速部署k8s集群"/>
+<meta name="twitter:description" content="建议准备2-3台机器模拟操作 ，2-3台机器建议是8G的内存 我使用了2台8G的虚拟机测试,把Rancher安装在了master主节点中，建议另"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+<script data-ad-client="ca-pub-8764182409666792" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">dingo</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">dingo</a>
+</div>
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu"><li class="search search-input">
+          <input type="search" class="docsearch-input" placeholder="请输入您要搜索的内容..." />
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li>
+  </ul>
+</nav>
+
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">使用Rancher 2.0快速部署k8s集群</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-09-30 </span>
+        <div class="post-category">
+            <a href="/categories/rancher/"> rancher </a>
+            <a href="/categories/k8s/"> k8s </a>
+            </div>
+          <span class="more-meta"> 约 1137 字 </span>
+          <span class="more-meta"> 预计阅读 3 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#k8s-简介">k8s 简介</a></li>
+    <li><a href="#准备工作">准备工作</a>
+      <ul>
+        <li><a href="#安装-docker">安装 docker</a></li>
+        <li><a href="#关闭防火墙">关闭防火墙</a></li>
+        <li><a href="#关闭-selinux">关闭 SELinux</a></li>
+        <li><a href="#关闭swap">关闭swap</a></li>
+        <li><a href="#重启docker">重启docker</a></li>
+      </ul>
+    </li>
+    <li><a href="#启动-rancher">启动 Rancher</a></li>
+    <li><a href="#使用rancher创建集群">使用Rancher创建集群</a></li>
+    <li><a href="#k8s集群部署完成">k8s集群部署完成</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>建议准备2-3台机器模拟操作 ，2-3台机器建议是8G的内存</p>
+<p>我使用了2台8G的虚拟机测试,把<code>Rancher</code>安装在了<code>master</code>主节点中，建议另开一台机器单独部署<code>Rancher</code>节点</p>
+<p>如果是购买阿里云ecs的话，需要在同一局域网下（比如华东地区那就都要买华东地区）</p>
+<pre><code>dingo_k8s_master 机器1
+dingo_k8s_worker 机器2
+</code></pre>
+<h2 id="k8s-简介">k8s 简介</h2>
+<p><a href="https://www.kubernetes.org.cn/k8s">官方地址</a></p>
+<blockquote>
+<p>Kubernetes (通常称为 K8s) 是开源容器集群管理系统，用于自动部署、扩展和管理容器化 应用程序。</p>
+</blockquote>
+<h2 id="准备工作">准备工作</h2>
+<p>准备工作，3台机器 都要操作</p>
+<h3 id="安装-docker">安装 docker</h3>
+<p><a href="http://dingo.wiki/post/2020/06/17/centos-docker-install/">Centos 7系统中安装docker</a>
+如果已安装，建议</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">$ docker stop <span class="k">$(</span>docker ps -a -q<span class="k">)</span> //  stop停止所有容器
+$ docker  rm <span class="k">$(</span>docker ps -a -q<span class="k">)</span> //   remove删除所有容器
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="关闭防火墙">关闭防火墙</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">$ systemctl stop firewalld <span class="o">&amp;&amp;</span> systemctl disable firewalld
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="关闭-selinux">关闭 SELinux</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">$ sudo setenforce <span class="m">0</span>
+$ sudo sed -i <span class="s1">&#39;s/SELINUX=enforcing/SELINUX=disabled/g&#39;</span> /etc/selinux/config
+
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="关闭swap">关闭swap</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">$ sudo swapoff -a
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="重启docker">重启docker</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">$ sudo systemctl daemon-reload
+$ sudo systemctl restart docker
+
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="启动-rancher">启动 Rancher</h2>
+<p>将<code>rancher</code>安装在 <code>dingo_k8s_master</code> 主节点上，可单独开一台机器单独部署<code>Rancher</code>节点</p>
+<p><code>Rancher 安装到master主节点</code>，不要安装到worker节点上哦</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">$ sudo docker run -d --restart<span class="o">=</span>unless-stopped -p 8080:80 -p 8443:443 -v /home/dingo/k8s/rancher:/var/lib/rancher/ rancher/rancher:stable
+</code></pre></td></tr></table>
+</div>
+</div><p>启动Rancher时，由于镜像不存在，会自动下载镜像 <code>rancher/rancher:stable</code> 稳定版本 (<code>下载需要一些时间</code>)</p>
+<p><code>--restart=unless-stopped</code>在容器退出时总是重启容器，但是不考虑在Docker守护进程启动时就已经停止了的容器</p>
+<p>如果是阿里云的话，需要在 <code>安全组规则</code> 里开放8080端口和8443端口</p>
+<p>虚拟机的话使用 <code>iptables</code> 开放</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">$ docker images // 查看是否下载成功
+$ docker ps // 查看rancher是否启动
+$ iptables -I INPUT -p tcp --dport <span class="m">8080</span> -j ACCEPT  // 放行端口8080
+$ iptables -I INPUT -p tcp --dport <span class="m">8443</span> -j ACCEPT  // 放行端口8443
+</code></pre></td></tr></table>
+</div>
+</div><p>我的<code>master</code>主节点机器的内网IP是<code>192.168.137.147</code></p>
+<p>所以访问<code>192.168.137.147:8080</code>即可打开<code>rancher</code>,由于没有安装证书，浏览打开时，需要点高级里面，继续访问</p>
+<p>会跳转到修改密码页面，说明<code>rancher</code>安装成功</p>
+<p><img src="/images/k8s/rancher_server_url.png" alt="rancherServerUrl">
+这个地址是rancher的服务器网址，我rancher是安装在master主节点机器上，所以我用的是master主节点的IP地址</p>
+<p>如果是阿里云的话，是使用内网地址</p>
+<h2 id="使用rancher创建集群">使用Rancher创建集群</h2>
+<p>右下角可以选择语言</p>
+<p>集群-&gt;添加集群-&gt;自定义</p>
+<p>输入集群名称（如：firstCluster）,其他都使用默认，然后下一步
+<img src="/images/k8s/add_host_cmd.png" alt="添加主机命令"></p>
+<p>这个需要配置,分别把命令放到master主机和worker主机上执行</p>
+<ol>
+<li>master节点：角色选择<code>etcd</code>、<code>Control</code> 、 <code>Worker</code></li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">$ sudo docker run -d --privileged --restart<span class="o">=</span>unless-stopped --net<span class="o">=</span>host -v /etc/kubernetes:/etc/kubernetes -v /var/run:/var/run rancher/rancher-agent:v2.4.8 --server https://192.168.137.147:8443 --token 829h98vq5rxbhcmm7r7fvh2zll72kg6rhtqckp2mg96xzqgns8vmlq --ca-checksum 616fa847199c2bb38ffa314306534d61345d08e3f263be93ce4122047ad661b1 --etcd --controlplane --worker
+</code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>worker节点： 角色选择 <code>Worker</code></li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">$ sudo docker run -d --privileged --restart<span class="o">=</span>unless-stopped --net<span class="o">=</span>host -v /etc/kubernetes:/etc/kubernetes -v /var/run:/var/run rancher/rancher-agent:v2.4.8 --server https://192.168.137.147:8443 --token 829h98vq5rxbhcmm7r7fvh2zll72kg6rhtqckp2mg96xzqgns8vmlq --ca-checksum 616fa847199c2bb38ffa314306534d61345d08e3f263be93ce4122047ad661b1 --worker
+</code></pre></td></tr></table>
+</div>
+</div><p>机器 都执行完命令成功后，点击完成</p>
+<p>在集群列表中查看集群状态,会初始化集群，第一次安装的话，时间会比较久一点，master主节点机器会下载很多的容器</p>
+<p>状态为<code>Active</code>则表示正常</p>
+<p><img src="/images/k8s/cluster_list.png" alt="集群列表">
+如果失败了，删除集群，重新创建试试</p>
+<p><img src="/images/k8s/cluster_success.png" alt="集群添加成功"></p>
+<h2 id="k8s集群部署完成">k8s集群部署完成</h2>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">dingo</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2020-09-30
+        
+    </span>
+  </p>
+  
+  
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/images/pay/weixin.jpg">
+        <span>微信打赏</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/images/pay/zhifubao.jpg">
+        <span>支付宝打赏</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/rancher/">rancher</a>
+          <a href="/tags/k8s/">k8s</a>
+          <a href="/tags/docker/">docker</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/2020/09/26/go-web-example/">
+            <span class="next-text nav-default">通过示例学习Web编程-golang基础练习</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:djhui1987@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/dingjianhui" class="iconfont icon-github" title="github"></a>
+  <a href="http://dingjianhui.top/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">dingo(Ding JianHui)</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+
+
+
+<script id="baidu_push">
+  (function(){
+    if (window.location.hostname === 'localhost') return;
+    var bp = document.createElement('script'); bp.async = true;
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+  <script>
+    docsearch({
+      apiKey: "63613c4b082a9ffcfdf94b1eb1df5ab5",
+      indexName: "blog_github",
+      appId: "B6SOJSDFFA",
+      inputSelector: '.docsearch-input',
+      debug: false,
+    });
+  </script>
+</body>
+</html>
