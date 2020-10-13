@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>dingo(Ding JianHui)</copyright>
-    <lastBuildDate>Wed, 30 Sep 2020 00:16:11 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 13 Oct 2020 11:27:26 +0800</lastBuildDate>
     
 	<atom:link href="http://dingjianhui.top/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>go</title>
+      <link>http://dingjianhui.top/tags/go/</link>
+      <pubDate>Tue, 13 Oct 2020 11:27:26 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/tags/go/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>docker</title>
@@ -36,15 +45,6 @@
       <pubDate>Wed, 30 Sep 2020 00:16:11 +0800</pubDate>
       
       <guid>http://dingjianhui.top/tags/rancher/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>go</title>
-      <link>http://dingjianhui.top/tags/go/</link>
-      <pubDate>Sat, 26 Sep 2020 15:26:18 +0800</pubDate>
-      
-      <guid>http://dingjianhui.top/tags/go/</guid>
       <description></description>
     </item>
     
