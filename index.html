@@ -122,20 +122,20 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/2020/10/13/go-sync-pool/">Sync.Pool--Golang的临时对象池</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/2020/10/13/go-sync-pool/">Golang之Sync.Pool理解--临时对象池</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2020-10-13 </span>
       <div class="post-category">
           <a href="/categories/golang/"> golang </a>
           </div>
-        <span class="more-meta"> 约 592 字 </span>
+        <span class="more-meta"> 约 916 字 </span>
         <span class="more-meta"> 预计阅读 2 分钟 </span>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      1. sync.Pool是什么 sync.Pool是临时对象池 sync.Pool不适合放做“数据库连接池”等带持久性质的数据，因为它会定期回收～ 时
+      1. sync.Pool是什么 概念：协程安全、可伸缩的，用于存放可重用对象的容器 &ndash; 临时对象池 原始目的是：存放已分配但是暂时不用的对象，需要时直接
     </div>
     <div class="read-more">
       <a href="/post/2020/10/13/go-sync-pool/" class="read-more-link">阅读更多</a>

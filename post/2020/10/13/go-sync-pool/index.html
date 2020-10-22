@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Sync.Pool--Golang的临时对象池 - Ding Jianhui 的个人博客 - 笔记</title>
+  <title>Golang之Sync.Pool理解--临时对象池 - Ding Jianhui 的个人博客 - 笔记</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="dingo" /><meta name="description" content="1. sync.Pool是什么 sync.Pool是临时对象池 sync.Pool不适合放做“数据库连接池”等带持久性质的数据，因为它会定期回收～ 时" /><meta name="keywords" content="dingo, golang, 笔记" />
+<meta name="author" content="dingo" /><meta name="description" content="1. sync.Pool是什么 概念：协程安全、可伸缩的，用于存放可重用对象的容器 &amp;ndash; 临时对象池 原始目的是：存放已分配但是暂时不用的对象，需要时直接" /><meta name="keywords" content="dingo, golang, 笔记" />
 
 
 
@@ -42,23 +42,23 @@
 <link rel="stylesheet" href="/css/chroma.css">
 
 
-<meta property="og:title" content="Sync.Pool--Golang的临时对象池" />
-<meta property="og:description" content="1. sync.Pool是什么 sync.Pool是临时对象池 sync.Pool不适合放做“数据库连接池”等带持久性质的数据，因为它会定期回收～ 时" />
+<meta property="og:title" content="Golang之Sync.Pool理解--临时对象池" />
+<meta property="og:description" content="1. sync.Pool是什么 概念：协程安全、可伸缩的，用于存放可重用对象的容器 &ndash; 临时对象池 原始目的是：存放已分配但是暂时不用的对象，需要时直接" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://dingjianhui.top/post/2020/10/13/go-sync-pool/" />
 <meta property="article:published_time" content="2020-10-13T11:27:26+08:00" />
 <meta property="article:modified_time" content="2020-10-13T11:27:26+08:00" />
-<meta itemprop="name" content="Sync.Pool--Golang的临时对象池">
-<meta itemprop="description" content="1. sync.Pool是什么 sync.Pool是临时对象池 sync.Pool不适合放做“数据库连接池”等带持久性质的数据，因为它会定期回收～ 时">
+<meta itemprop="name" content="Golang之Sync.Pool理解--临时对象池">
+<meta itemprop="description" content="1. sync.Pool是什么 概念：协程安全、可伸缩的，用于存放可重用对象的容器 &ndash; 临时对象池 原始目的是：存放已分配但是暂时不用的对象，需要时直接">
 <meta itemprop="datePublished" content="2020-10-13T11:27:26&#43;08:00" />
 <meta itemprop="dateModified" content="2020-10-13T11:27:26&#43;08:00" />
-<meta itemprop="wordCount" content="592">
+<meta itemprop="wordCount" content="916">
 
 
 
 <meta itemprop="keywords" content="go," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Sync.Pool--Golang的临时对象池"/>
-<meta name="twitter:description" content="1. sync.Pool是什么 sync.Pool是临时对象池 sync.Pool不适合放做“数据库连接池”等带持久性质的数据，因为它会定期回收～ 时"/>
+<meta name="twitter:title" content="Golang之Sync.Pool理解--临时对象池"/>
+<meta name="twitter:description" content="1. sync.Pool是什么 概念：协程安全、可伸缩的，用于存放可重用对象的容器 &ndash; 临时对象池 原始目的是：存放已分配但是暂时不用的对象，需要时直接"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -128,14 +128,14 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">Sync.Pool--Golang的临时对象池</h1>
+      <h1 class="post-title">Golang之Sync.Pool理解--临时对象池</h1>
 
       <div class="post-meta">
         <span class="post-time"> 2020-10-13 </span>
         <div class="post-category">
             <a href="/categories/golang/"> golang </a>
             </div>
-          <span class="more-meta"> 约 592 字 </span>
+          <span class="more-meta"> 约 916 字 </span>
           <span class="more-meta"> 预计阅读 2 分钟 </span>
         
       </div>
@@ -149,19 +149,24 @@
     <li><a href="#1-syncpool是什么">1. sync.Pool是什么</a></li>
     <li><a href="#2-为什么需要syncpool">2. 为什么需要sync.Pool</a></li>
     <li><a href="#3-如何使用syncpool">3. 如何使用sync.Pool</a></li>
+    <li><a href="#4-场景">4. 场景</a></li>
     <li><a href="#常用属性和方法">常用属性和方法</a>
       <ul>
         <li><a href="#属性">属性：</a></li>
         <li><a href="#方法">方法：</a></li>
       </ul>
     </li>
+    <li><a href="#案例">案例：</a></li>
   </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
       <h2 id="1-syncpool是什么">1. sync.Pool是什么</h2>
-<p>sync.Pool是<code>临时对象池</code></p>
+<p>概念：协程安全、可伸缩的，用于存放可重用对象的容器 &ndash; 临时对象池</p>
+<p>原始目的是：存放已分配但是暂时不用的对象，需要时直接从pool中取，然后放回，以减少GC回收的压力</p>
+<p>GC压力是啥？</p>
+<p>很简单，对象多了，GC要回收自然压力大（需要了解：go垃圾回收如何标记内存的）</p>
 <p><code>sync.Pool</code>不适合放做“数据库连接池”等带持久性质的数据，因为它会定期回收～</p>
 <p>时间就是两次GC间隔的时间。</p>
 <h2 id="2-为什么需要syncpool">2. 为什么需要sync.Pool</h2>
@@ -175,7 +180,10 @@
 </ol>
 <h2 id="3-如何使用syncpool">3. 如何使用sync.Pool</h2>
 <p>思路：搞一个池子，预先放入临时产生的对象，然后取出使用</p>
-<p>官方fmt包就是使用了sync.pool，由于fmt总是需要很多[]byte对象，索性就直接建了一个[]byte对象的池子。</p>
+<h2 id="4-场景">4. 场景</h2>
+<ol>
+<li>go中 fmt 的 print　 对象 <code>src/fmt/print.go</code></li>
+</ol>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -209,54 +217,86 @@
 </span><span class="lnt">29
 </span><span class="lnt">30
 </span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">pp</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">buf</span> <span class="nx">buffer</span>
 
-<span class="kn">import</span> <span class="p">(</span>
-	<span class="s">&#34;fmt&#34;</span>
-	<span class="s">&#34;sync&#34;</span>
-<span class="p">)</span>
+	<span class="c1">// arg holds the current item, as an interface{}.
+</span><span class="c1"></span>	<span class="nx">arg</span> <span class="kd">interface</span><span class="p">{}</span>
 
-<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-	<span class="c1">// 初始化一个pool
-</span><span class="c1"></span>	<span class="nx">pool</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">sync</span><span class="p">.</span><span class="nx">Pool</span><span class="p">{</span>
-		<span class="c1">// 默认的返回值设置，不写这个参数，默认是nil
-</span><span class="c1"></span>		<span class="nx">New</span><span class="p">:</span> <span class="kd">func</span><span class="p">()</span> <span class="kd">interface</span><span class="p">{}</span> <span class="p">{</span>
-			<span class="k">return</span> <span class="mi">0</span>
-		<span class="p">},</span>
-	<span class="p">}</span>
+	<span class="c1">// value is used instead of arg for reflect values.
+</span><span class="c1"></span>	<span class="nx">value</span> <span class="nx">reflect</span><span class="p">.</span><span class="nx">Value</span>
 
-	<span class="c1">// 看一下初始的值，这里是返回0，如果不设置New函数，默认返回nil
-</span><span class="c1"></span>	<span class="nx">init</span> <span class="o">:=</span> <span class="nx">pool</span><span class="p">.</span><span class="nf">Get</span><span class="p">()</span>
-	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">init</span><span class="p">)</span>
+	<span class="c1">// fmt is used to format basic items such as integers or strings.
+</span><span class="c1"></span>	<span class="nx">fmt</span> <span class="nx">fmt</span>
 
-	<span class="c1">// 设置一个参数1
-</span><span class="c1"></span>	<span class="nx">pool</span><span class="p">.</span><span class="nf">Put</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+	<span class="c1">// reordered records whether the format string used argument reordering.
+</span><span class="c1"></span>	<span class="nx">reordered</span> <span class="kt">bool</span>
+	<span class="c1">// goodArgNum records whether the most recent reordering directive was valid.
+</span><span class="c1"></span>	<span class="nx">goodArgNum</span> <span class="kt">bool</span>
+	<span class="c1">// panicking is set by catchPanic to avoid infinite panic, recover, panic, ... recursion.
+</span><span class="c1"></span>	<span class="nx">panicking</span> <span class="kt">bool</span>
+	<span class="c1">// erroring is set when printing an error string to guard against calling handleMethods.
+</span><span class="c1"></span>	<span class="nx">erroring</span> <span class="kt">bool</span>
+	<span class="c1">// wrapErrs is set when the format string may contain a %w verb.
+</span><span class="c1"></span>	<span class="nx">wrapErrs</span> <span class="kt">bool</span>
+	<span class="c1">// wrappedErr records the target of the %w verb.
+</span><span class="c1"></span>	<span class="nx">wrappedErr</span> <span class="kt">error</span>
+<span class="p">}</span>
 
-	<span class="c1">// 获取查看结果
-</span><span class="c1"></span>	<span class="nx">num</span> <span class="o">:=</span> <span class="nx">pool</span><span class="p">.</span><span class="nf">Get</span><span class="p">()</span>
-	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">num</span><span class="p">)</span>
+<span class="kd">var</span> <span class="nx">ppFree</span> <span class="p">=</span> <span class="nx">sync</span><span class="p">.</span><span class="nx">Pool</span><span class="p">{</span>
+	<span class="nx">New</span><span class="p">:</span> <span class="kd">func</span><span class="p">()</span> <span class="kd">interface</span><span class="p">{}</span> <span class="p">{</span> <span class="k">return</span> <span class="nb">new</span><span class="p">(</span><span class="nx">pp</span><span class="p">)</span> <span class="p">},</span>
+<span class="p">}</span>
 
-	<span class="c1">// 再次获取，会发现，已经是空的了，只能返回默认的值。
-</span><span class="c1"></span>	<span class="nx">num</span> <span class="p">=</span> <span class="nx">pool</span><span class="p">.</span><span class="nf">Get</span><span class="p">()</span>
-	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">num</span><span class="p">)</span>
+<span class="c1">// newPrinter allocates a new pp struct or grabs a cached one.
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">newPrinter</span><span class="p">()</span> <span class="o">*</span><span class="nx">pp</span> <span class="p">{</span>
+	<span class="nx">p</span> <span class="o">:=</span> <span class="nx">ppFree</span><span class="p">.</span><span class="nf">Get</span><span class="p">().(</span><span class="o">*</span><span class="nx">pp</span><span class="p">)</span>
+	<span class="nx">p</span><span class="p">.</span><span class="nx">panicking</span> <span class="p">=</span> <span class="kc">false</span>
+	<span class="nx">p</span><span class="p">.</span><span class="nx">erroring</span> <span class="p">=</span> <span class="kc">false</span>
+	<span class="nx">p</span><span class="p">.</span><span class="nx">wrapErrs</span> <span class="p">=</span> <span class="kc">false</span>
+	<span class="nx">p</span><span class="p">.</span><span class="nx">fmt</span><span class="p">.</span><span class="nf">init</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">p</span><span class="p">.</span><span class="nx">buf</span><span class="p">)</span>
+	<span class="k">return</span> <span class="nx">p</span>
 <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>运行结果：</p>
+</div><ol start="2">
+<li>gin框架中 ServerHttp每次调用的Context对象也是存放在临时对角池Sync.pool中</li>
+</ol>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">$ go run main.go
-<span class="m">0</span>
-<span class="m">1</span>
-<span class="m">0</span>
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="c1">// ServeHTTP conforms to the http.Handler interface.
+</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">engine</span> <span class="o">*</span><span class="nx">Engine</span><span class="p">)</span> <span class="nf">ServeHTTP</span><span class="p">(</span><span class="nx">w</span> <span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span> <span class="nx">req</span> <span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">c</span> <span class="o">:=</span> <span class="nx">engine</span><span class="p">.</span><span class="nx">pool</span><span class="p">.</span><span class="nf">Get</span><span class="p">().(</span><span class="o">*</span><span class="nx">Context</span><span class="p">)</span>
+	<span class="nx">c</span><span class="p">.</span><span class="nx">writermem</span><span class="p">.</span><span class="nf">reset</span><span class="p">(</span><span class="nx">w</span><span class="p">)</span>
+	<span class="nx">c</span><span class="p">.</span><span class="nx">Request</span> <span class="p">=</span> <span class="nx">req</span>
+	<span class="nx">c</span><span class="p">.</span><span class="nf">reset</span><span class="p">()</span>
+
+	<span class="nx">engine</span><span class="p">.</span><span class="nf">handleHTTPRequest</span><span class="p">(</span><span class="nx">c</span><span class="p">)</span>
+
+	<span class="nx">engine</span><span class="p">.</span><span class="nx">pool</span><span class="p">.</span><span class="nf">Put</span><span class="p">(</span><span class="nx">c</span><span class="p">)</span>
+<span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="常用属性和方法">常用属性和方法</h2>
@@ -268,14 +308,116 @@
 <h3 id="方法">方法：</h3>
 <p>Get() Get解决了如何从具体sync.Pool中获取对象的问题。</p>
 <p>Put() Put完成将对象放回对象池。</p>
-<blockquote>
-<p>参考：</p>
-<pre><code>   https://juejin.im/post/6844903903046320136
+<h2 id="案例">案例：</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
 
-   https://zhuanlan.zhihu.com/p/69047958
-</code></pre>
-</blockquote>
+<span class="kn">import</span> <span class="p">(</span>
+	<span class="s">&#34;github.com/gin-gonic/gin&#34;</span>
+	<span class="s">&#34;log&#34;</span>
+	<span class="s">&#34;sync&#34;</span>
+<span class="p">)</span>
 
+<span class="kd">var</span> <span class="nx">resultPool</span> <span class="o">*</span><span class="nx">sync</span><span class="p">.</span><span class="nx">Pool</span>
+
+<span class="kd">type</span> <span class="nx">JsonResult</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">Msg</span> <span class="kt">string</span> <span class="s">`json:&#34;msg&#34;`</span>
+	<span class="nx">Code</span> <span class="kt">string</span> <span class="s">`json:&#34;code&#34;`</span>
+	<span class="nx">Result</span> <span class="kd">interface</span><span class="p">{}</span> <span class="s">`json:&#34;result&#34;`</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">NewJsonResult</span><span class="p">(</span><span class="nx">msg</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">code</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">result</span> <span class="kd">interface</span><span class="p">{})</span> <span class="o">*</span><span class="nx">JsonResult</span> <span class="p">{</span>
+	<span class="nx">log</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;create JsonResult&#34;</span><span class="p">)</span>
+	<span class="k">return</span> <span class="o">&amp;</span><span class="nx">JsonResult</span><span class="p">{</span><span class="nx">Msg</span><span class="p">:</span> <span class="nx">msg</span><span class="p">,</span> <span class="nx">Code</span><span class="p">:</span> <span class="nx">code</span><span class="p">,</span> <span class="nx">Result</span><span class="p">:</span> <span class="nx">result</span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">json</span> <span class="o">*</span><span class="nx">JsonResult</span><span class="p">)</span> <span class="nf">Success</span><span class="p">(</span><span class="nx">ctx</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span> <span class="nx">msg</span> <span class="kt">string</span><span class="p">)</span>  <span class="p">{</span>
+	<span class="nx">json</span><span class="p">.</span><span class="nx">Code</span> <span class="p">=</span> <span class="s">&#34;200&#34;</span>
+	<span class="nx">json</span><span class="p">.</span><span class="nx">Msg</span> <span class="p">=</span> <span class="nx">msg</span>
+	<span class="nx">ctx</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="nx">json</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span>  <span class="p">{</span>
+	<span class="nx">resultPool</span> <span class="p">=</span> <span class="o">&amp;</span><span class="nx">sync</span><span class="p">.</span><span class="nx">Pool</span><span class="p">{</span>
+		<span class="nx">New</span><span class="p">:</span> <span class="kd">func</span><span class="p">()</span> <span class="kd">interface</span><span class="p">{}</span> <span class="p">{</span>
+			<span class="k">return</span> <span class="nf">NewJsonResult</span><span class="p">(</span><span class="s">&#34;&#34;</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="kc">nil</span><span class="p">)</span>
+		<span class="p">},</span>
+	<span class="p">}</span>
+
+	<span class="nx">r</span> <span class="o">:=</span> <span class="nx">gin</span><span class="p">.</span><span class="nf">Default</span><span class="p">()</span>
+
+	<span class="nx">r</span><span class="p">.</span><span class="nf">Handle</span><span class="p">(</span><span class="s">&#34;GET&#34;</span><span class="p">,</span><span class="s">&#34;/&#34;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">ctx</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">result</span> <span class="o">:=</span> <span class="nx">resultPool</span><span class="p">.</span><span class="nf">Get</span><span class="p">().(</span><span class="o">*</span><span class="nx">JsonResult</span><span class="p">)</span>
+		<span class="k">defer</span> <span class="nx">resultPool</span><span class="p">.</span><span class="nf">Put</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span>
+		<span class="nx">result</span><span class="p">.</span><span class="nf">Success</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;index&#34;</span><span class="p">)</span>
+	<span class="p">})</span>
+
+	<span class="nx">r</span><span class="p">.</span><span class="nf">Handle</span><span class="p">(</span><span class="s">&#34;GET&#34;</span><span class="p">,</span><span class="s">&#34;/test&#34;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">ctx</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">result</span> <span class="o">:=</span> <span class="nx">resultPool</span><span class="p">.</span><span class="nf">Get</span><span class="p">().(</span><span class="o">*</span><span class="nx">JsonResult</span><span class="p">)</span>
+		<span class="k">defer</span> <span class="nx">resultPool</span><span class="p">.</span><span class="nf">Put</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span>
+		<span class="nx">result</span><span class="p">.</span><span class="nf">Success</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;test&#34;</span><span class="p">)</span>
+	<span class="p">})</span>
+
+	<span class="nx">r</span><span class="p">.</span><span class="nf">Run</span><span class="p">(</span><span class="s">&#34;:8080&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+
+</code></pre></td></tr></table>
+</div>
+</div>
     </div>
 
     <div class="post-copyright">
