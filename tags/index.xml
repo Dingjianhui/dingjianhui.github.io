@@ -7,17 +7,44 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>dingo(Ding JianHui)</copyright>
-    <lastBuildDate>Tue, 13 Oct 2020 11:27:26 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 24 Oct 2020 15:50:37 +0800</lastBuildDate>
     
 	<atom:link href="http://dingjianhui.top/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>config</title>
+      <link>http://dingjianhui.top/tags/config/</link>
+      <pubDate>Sat, 24 Oct 2020 15:50:37 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/tags/config/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>go</title>
       <link>http://dingjianhui.top/tags/go/</link>
-      <pubDate>Tue, 13 Oct 2020 11:27:26 +0800</pubDate>
+      <pubDate>Sat, 24 Oct 2020 15:50:37 +0800</pubDate>
       
       <guid>http://dingjianhui.top/tags/go/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>viper</title>
+      <link>http://dingjianhui.top/tags/viper/</link>
+      <pubDate>Sat, 24 Oct 2020 15:50:37 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/tags/viper/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>配置</title>
+      <link>http://dingjianhui.top/tags/%E9%85%8D%E7%BD%AE/</link>
+      <pubDate>Sat, 24 Oct 2020 15:50:37 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/tags/%E9%85%8D%E7%BD%AE/</guid>
       <description></description>
     </item>
     

@@ -7,10 +7,28 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>dingo(Ding JianHui)</copyright>
-    <lastBuildDate>Tue, 13 Oct 2020 11:27:26 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 24 Oct 2020 15:50:37 +0800</lastBuildDate>
     
 	<atom:link href="http://dingjianhui.top/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Golang的配置管理神器——Viper</title>
+      <link>http://dingjianhui.top/post/2020/10/24/golang-viper/</link>
+      <pubDate>Sat, 24 Oct 2020 15:50:37 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/post/2020/10/24/golang-viper/</guid>
+      <description>Viper Github地址 : https://github.com/spf13/viper 官网好像在准备 V2版本 安装： 1 go get github.com/spf13/viper Viper 是什么 ? Viper是用于Go应用程序的完整配置解决方案。它被设计用于在应用程序中</description>
+    </item>
+    
+    <item>
+      <title>Struct与Map互转的方法</title>
+      <link>http://dingjianhui.top/post/2020/10/23/go-struct-2-map/</link>
+      <pubDate>Fri, 23 Oct 2020 08:56:38 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/post/2020/10/23/go-struct-2-map/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Golang之Sync.Pool理解--临时对象池</title>
@@ -18,7 +36,7 @@
       <pubDate>Tue, 13 Oct 2020 11:27:26 +0800</pubDate>
       
       <guid>http://dingjianhui.top/post/2020/10/13/go-sync-pool/</guid>
-      <description>1. sync.Pool是什么 概念：协程安全、可伸缩的，用于存放可重用对象的容器 &amp;ndash; 临时对象池 原始目的是：存放已分配但是暂时不用的对象，需要时直接</description>
+      <description>sync.Pool是什么 概念：协程安全、可伸缩的，用于存放可重用对象的容器 &amp;ndash; 临时对象池 原始目的是：存放已分配但是暂时不用的对象，需要时直接从</description>
     </item>
     
     <item>

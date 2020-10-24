@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Golang的配置管理神器——Viper - Ding Jianhui 的个人博客 - 笔记</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="dingo" /><meta name="description" content="Viper Github地址 : https://github.com/spf13/viper 官网好像在准备 V2版本 安装： 1 go get github.com/spf13/viper Viper 是什么 ? Viper是用于Go应用程序的完整配置解决方案。它被设计用于在应用程序中" /><meta name="keywords" content="dingo, golang, 笔记" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.73.0-DEV with theme even" />
+
+
+<link rel="canonical" href="http://dingjianhui.top/post/2020/10/24/golang-viper/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/dingo.css">
+<link rel="stylesheet" href="/css/chroma.css">
+
+
+<meta property="og:title" content="Golang的配置管理神器——Viper" />
+<meta property="og:description" content="Viper Github地址 : https://github.com/spf13/viper 官网好像在准备 V2版本 安装： 1 go get github.com/spf13/viper Viper 是什么 ? Viper是用于Go应用程序的完整配置解决方案。它被设计用于在应用程序中" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://dingjianhui.top/post/2020/10/24/golang-viper/" />
+<meta property="article:published_time" content="2020-10-24T15:50:37+08:00" />
+<meta property="article:modified_time" content="2020-10-24T15:50:37+08:00" />
+<meta itemprop="name" content="Golang的配置管理神器——Viper">
+<meta itemprop="description" content="Viper Github地址 : https://github.com/spf13/viper 官网好像在准备 V2版本 安装： 1 go get github.com/spf13/viper Viper 是什么 ? Viper是用于Go应用程序的完整配置解决方案。它被设计用于在应用程序中">
+<meta itemprop="datePublished" content="2020-10-24T15:50:37&#43;08:00" />
+<meta itemprop="dateModified" content="2020-10-24T15:50:37&#43;08:00" />
+<meta itemprop="wordCount" content="1304">
+
+
+
+<meta itemprop="keywords" content="go,config,viper,配置," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Golang的配置管理神器——Viper"/>
+<meta name="twitter:description" content="Viper Github地址 : https://github.com/spf13/viper 官网好像在准备 V2版本 安装： 1 go get github.com/spf13/viper Viper 是什么 ? Viper是用于Go应用程序的完整配置解决方案。它被设计用于在应用程序中"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+<script data-ad-client="ca-pub-8764182409666792" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">dingo</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">dingo</a>
+</div>
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu"><li class="search search-input">
+          <input type="search" class="docsearch-input" placeholder="请输入您要搜索的内容..." />
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li>
+  </ul>
+</nav>
+
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Golang的配置管理神器——Viper</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-10-24 </span>
+        <div class="post-category">
+            <a href="/categories/golang/"> golang </a>
+            </div>
+          <span class="more-meta"> 约 1304 字 </span>
+          <span class="more-meta"> 预计阅读 3 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#viper-是什么-">Viper 是什么 ?</a></li>
+    <li><a href="#为什么选择viper">为什么选择Viper</a></li>
+    <li><a href="#怎么存储值到viper中">怎么存储值到Viper中</a>
+      <ul>
+        <li><a href="#设置默认值">设置默认值</a></li>
+        <li><a href="#读取配置文件">读取配置文件</a></li>
+        <li><a href="#写入配置文件">写入配置文件</a></li>
+        <li><a href="#监控并重新读取配置文件">监控并重新读取配置文件</a></li>
+        <li><a href="#从ioreader读取配置">从io.Reader读取配置</a></li>
+        <li><a href="#覆盖设置">覆盖设置</a></li>
+        <li><a href="#注册和使用别名">注册和使用别名</a></li>
+        <li><a href="#使用环境变量">使用环境变量</a></li>
+        <li><a href="#使用flags">使用Flags</a></li>
+        <li><a href="#远程keyvalue存储支持">远程Key/Value存储支持</a></li>
+        <li><a href="#远程keyvalue存储示例-未加密">远程Key/Value存储示例-未加密</a></li>
+        <li><a href="#远程keyvalue存储示例-加密">远程Key/Value存储示例-加密</a></li>
+        <li><a href="#监控etcd中的更改-未加密">监控etcd中的更改-未加密</a></li>
+      </ul>
+    </li>
+    <li><a href="#从viper获取值">从Viper获取值</a>
+      <ul>
+        <li><a href="#访问嵌套的键">访问嵌套的键</a></li>
+        <li><a href="#提取子树">提取子树</a></li>
+        <li><a href="#反序列化">反序列化</a></li>
+        <li><a href="#序列化成字符串">序列化成字符串</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p><a href="https://github.com/spf13/viper">Viper Github地址</a> : <a href="https://github.com/spf13/viper">https://github.com/spf13/viper</a></p>
+<p>官网好像在准备 V2版本</p>
+<p>安装：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">go get github.com/spf13/viper
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="viper-是什么-">Viper 是什么 ?</h2>
+<p><a href="https://github.com/spf13/viper">Viper</a>是用于Go应用程序的完整配置解决方案。它被设计用于在应用程序中工作，
+并且可以处理<code>所有类型的配置需求</code>和<code>格式</code></p>
+<p>supports（支持）：</p>
+<ol>
+<li>设置默认值</li>
+<li>从JSON、TOML、YAML、HCL、envfile和Java properties格式的配置文件读取配置信息</li>
+<li>实时监控和重新读取配置文件（可选）</li>
+<li>从环境变量中读取</li>
+<li>从远程配置系统（etcd或Consul）读取并监控配置变化</li>
+<li>从命令行参数读取配置</li>
+<li>从buffer读取配置</li>
+<li>显式配置值</li>
+</ol>
+<h2 id="为什么选择viper">为什么选择Viper</h2>
+<p>在构建现代应用程序时，你无需担心配置文件格式；你想要专注于构建出色的软件。
+<code>Viper</code>的出现就是为了在这方面帮助你的。</p>
+<p><code>Viper</code>能够为你执行下列操作：</p>
+<ul>
+<li>查找、加载和反序列化<code>JSON、TOML、YAML、HCL、INI、envfile</code>和<code>Java properties</code>格式的配置文件。</li>
+<li>提供一种机制为你的不同配置选项设置默认值。</li>
+<li>提供一种机制来通过命令行参数覆盖指定选项的值。</li>
+<li>提供别名系统，以便在不破坏现有代码的情况下轻松重命名参数。</li>
+<li>当用户提供了与默认值相同的命令行或配置文件时，可以很容易地分辨出它们之间的区别。</li>
+</ul>
+<p><code>Viper</code>会按照下面的优先级。从上(高)往下(低)</p>
+<ul>
+<li>显示调用Set设置值</li>
+<li>命令行参数（flag）</li>
+<li>环境变量</li>
+<li>配置文件</li>
+<li>key/value存储</li>
+<li>默认值</li>
+</ul>
+<h2 id="怎么存储值到viper中">怎么存储值到Viper中</h2>
+<h3 id="设置默认值">设置默认值</h3>
+<p><code>viper.SetDefault(&quot;ContentDir&quot;, &quot;content&quot;)</code> 设置key(ContentDir)的默认值</p>
+<p>默认值仅在未通过配置文件、环境变量、远程配置或命令行标志（flag）设置key时使用</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span>  <span class="p">{</span>
+	<span class="nx">viper</span><span class="p">.</span><span class="nf">SetDefault</span><span class="p">(</span><span class="s">&#34;ContentDir&#34;</span><span class="p">,</span> <span class="s">&#34;content&#34;</span><span class="p">)</span>
+	<span class="nx">viper</span><span class="p">.</span><span class="nf">SetDefault</span><span class="p">(</span><span class="s">&#34;LayoutDir&#34;</span><span class="p">,</span> <span class="s">&#34;layouts&#34;</span><span class="p">)</span>
+	<span class="nx">viper</span><span class="p">.</span><span class="nf">SetDefault</span><span class="p">(</span><span class="s">&#34;Taxonomies&#34;</span><span class="p">,</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="p">{</span><span class="s">&#34;tag&#34;</span><span class="p">:</span> <span class="s">&#34;tags&#34;</span><span class="p">,</span> <span class="s">&#34;category&#34;</span><span class="p">:</span> <span class="s">&#34;categories&#34;</span><span class="p">})</span>
+
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">viper</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="s">&#34;ContentDir&#34;</span><span class="p">))</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">viper</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="s">&#34;LayoutDir&#34;</span><span class="p">))</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">viper</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="s">&#34;Taxonomies&#34;</span><span class="p">))</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">$ go run main.go
+content
+layouts
+map<span class="o">[</span>category:categories tag:tags<span class="o">]</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="读取配置文件">读取配置文件</h3>
+<ul>
+<li><code>Viper</code>支持<code>JSON</code>、<code>TOML</code>、<code>YAML</code>、<code>HCL</code>、<code>envfile</code>和<code>Java properties</code>格式的配置文件</li>
+<li><code>Viper</code>可以搜索多个路径，但目前单个<code>Viper</code>实例只支持单个配置文件</li>
+<li><code>Viper</code>不会默认使用任何配置搜索路径，默认决策权 - 留给应用程序</li>
+</ul>
+<p><code>conf/config.json</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+  <span class="nt">&#34;mysql&#34;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&#34;port&#34;</span> <span class="p">:</span> <span class="mi">13306</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><code>conf/config.yaml</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="k">mysql</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="k">port</span><span class="p">:</span><span class="w"> </span><span class="m">23306</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><p><code>main.go</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+	<span class="s">&#34;fmt&#34;</span>
+	<span class="s">&#34;github.com/spf13/viper&#34;</span>
+<span class="p">)</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span>  <span class="p">{</span>
+	<span class="nx">viper</span><span class="p">.</span><span class="nf">SetConfigName</span><span class="p">(</span><span class="s">&#34;config&#34;</span><span class="p">)</span>
+	<span class="nx">viper</span><span class="p">.</span><span class="nf">AddConfigPath</span><span class="p">(</span><span class="s">&#34;./conf&#34;</span><span class="p">)</span>
+	<span class="nx">err</span> <span class="o">:=</span> <span class="nx">viper</span><span class="p">.</span><span class="nf">ReadInConfig</span><span class="p">()</span> <span class="c1">// 查找并读取配置文件
+</span><span class="c1"></span>	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span> <span class="c1">// 处理读取配置文件的错误
+</span><span class="c1"></span>		<span class="nb">panic</span><span class="p">(</span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Errorf</span><span class="p">(</span><span class="s">&#34;Fatal error config file: %s \n&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">))</span>
+	<span class="p">}</span>
+
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">viper</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="s">&#34;mysql.port&#34;</span><span class="p">))</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>运行：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">$ go run main.go
+<span class="m">13306</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>优先读取了config.json</p>
+<h3 id="写入配置文件">写入配置文件</h3>
+<ul>
+<li>WriteConfig - 将当前的viper配置写入预定义的路径并覆盖（如果存在的话）。如果没有预定义的路径，则报错。</li>
+<li>SafeWriteConfig - 将当前的viper配置写入预定义的路径。如果没有预定义的路径，则报错。如果存在，将不会覆盖当前的配置文件。</li>
+<li>WriteConfigAs - 将当前的viper配置写入给定的文件路径。将覆盖给定的文件(如果它存在的话)。</li>
+<li>SafeWriteConfigAs - 将当前的viper配置写入给定的文件路径。不会覆盖给定的文件(如果它存在的话)。</li>
+</ul>
+<h3 id="监控并重新读取配置文件">监控并重新读取配置文件</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="nx">viper</span><span class="p">.</span><span class="nf">WatchConfig</span><span class="p">()</span>
+<span class="nx">viper</span><span class="p">.</span><span class="nf">OnConfigChange</span><span class="p">(</span><span class="kd">func</span><span class="p">(</span><span class="nx">e</span> <span class="nx">fsnotify</span><span class="p">.</span><span class="nx">Event</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// 配置文件发生变更之后会调用的回调函数
+</span><span class="c1"></span>	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Config file changed:&#34;</span><span class="p">,</span> <span class="nx">e</span><span class="p">.</span><span class="nx">Name</span><span class="p">)</span>
+<span class="p">})</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="从ioreader读取配置">从io.Reader读取配置</h3>
+<h3 id="覆盖设置">覆盖设置</h3>
+<h3 id="注册和使用别名">注册和使用别名</h3>
+<h3 id="使用环境变量">使用环境变量</h3>
+<h3 id="使用flags">使用Flags</h3>
+<h3 id="远程keyvalue存储支持">远程Key/Value存储支持</h3>
+<h3 id="远程keyvalue存储示例-未加密">远程Key/Value存储示例-未加密</h3>
+<h3 id="远程keyvalue存储示例-加密">远程Key/Value存储示例-加密</h3>
+<h3 id="监控etcd中的更改-未加密">监控etcd中的更改-未加密</h3>
+<h2 id="从viper获取值">从Viper获取值</h2>
+<h3 id="访问嵌套的键">访问嵌套的键</h3>
+<h3 id="提取子树">提取子树</h3>
+<h3 id="反序列化">反序列化</h3>
+<h3 id="序列化成字符串">序列化成字符串</h3>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">dingo</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2020-10-24
+        
+    </span>
+  </p>
+  
+  
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/images/pay/weixin.jpg">
+        <span>微信打赏</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/images/pay/zhifubao.jpg">
+        <span>支付宝打赏</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/go/">go</a>
+          <a href="/tags/config/">config</a>
+          <a href="/tags/viper/">viper</a>
+          <a href="/tags/%E9%85%8D%E7%BD%AE/">配置</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/2020/10/23/go-struct-2-map/">
+            <span class="next-text nav-default">Struct与Map互转的方法</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:djhui1987@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/dingjianhui" class="iconfont icon-github" title="github"></a>
+  <a href="http://dingjianhui.top/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">dingo(Ding JianHui)</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+
+
+
+<script id="baidu_push">
+  (function(){
+    if (window.location.hostname === 'localhost') return;
+    var bp = document.createElement('script'); bp.async = true;
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+  <script>
+    docsearch({
+      apiKey: "63613c4b082a9ffcfdf94b1eb1df5ab5",
+      indexName: "blog_github",
+      appId: "B6SOJSDFFA",
+      inputSelector: '.docsearch-input',
+      debug: false,
+    });
+  </script>
+</body>
+</html>

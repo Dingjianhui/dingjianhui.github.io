@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>配置 on Ding Jianhui 的个人博客 - 笔记</title>
+    <link>http://dingjianhui.top/tags/%E9%85%8D%E7%BD%AE/</link>
+    <description>Recent content in 配置 on Ding Jianhui 的个人博客 - 笔记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>dingo(Ding JianHui)</copyright>
+    <lastBuildDate>Sat, 24 Oct 2020 15:50:37 +0800</lastBuildDate>
+    
+	<atom:link href="http://dingjianhui.top/tags/%E9%85%8D%E7%BD%AE/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Golang的配置管理神器——Viper</title>
+      <link>http://dingjianhui.top/post/2020/10/24/golang-viper/</link>
+      <pubDate>Sat, 24 Oct 2020 15:50:37 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/post/2020/10/24/golang-viper/</guid>
+      <description>Viper Github地址 : https://github.com/spf13/viper 官网好像在准备 V2版本 安装： 1 go get github.com/spf13/viper Viper 是什么 ? Viper是用于Go应用程序的完整配置解决方案。它被设计用于在应用程序中</description>
+    </item>
+    
+  </channel>
+</rss>

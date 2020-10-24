@@ -425,18 +425,20 @@ go <span class="nb">test</span> -cover ./user                    // 测试覆盖
 </div>
 </div><p>一、常用 mock 方法
 调用方法</p>
-<pre><code>Call.Do()：声明在匹配时要运行的操作
-Call.DoAndReturn()：声明在匹配调用时要运行的操作，并且模拟返回该函数的返回值
-Call.MaxTimes()：设置最大的调用次数为 n 次
-Call.MinTimes()：设置最小的调用次数为 n 次
-Call.AnyTimes()：允许调用次数为 0 次或更多次
-Call.Times()：设置调用次数为 n 次
-</code></pre>
+<ul>
+<li>Call.Do()：声明在匹配时要运行的操作</li>
+<li>Call.DoAndReturn()：声明在匹配调用时要运行的操作，并且模拟返回该函数的返回值</li>
+<li>Call.MaxTimes()：设置最大的调用次数为 n 次</li>
+<li>Call.MinTimes()：设置最小的调用次数为 n 次</li>
+<li>Call.AnyTimes()：允许调用次数为 0 次或更多次</li>
+<li>Call.Times()：设置调用次数为 n 次</li>
+</ul>
 <p>参数匹配</p>
-<pre><code>gomock.Any()：匹配任意值
-gomock.Eq()：通过反射匹配到指定的类型值，而不需要手动设置
-gomock.Nil()：返回 nil
-</code></pre>
+<ul>
+<li>gomock.Any()：匹配任意值</li>
+<li>gomock.Eq()：通过反射匹配到指定的类型值，而不需要手动设置</li>
+<li>gomock.Nil()：返回 nil</li>
+</ul>
 <p>建议更多的方法可参见 <img src="https://godoc.org/github.com/golang/mock/gomock#pkg-index" alt="官方文档"></p>
 <p>二、生成多个 mock 文件</p>
 <p>你可能会想一条条命令生成 mock 文件，岂不得崩溃？</p>
@@ -472,13 +474,14 @@ gomock.Nil()：返回 nil
 </code></pre></td></tr></table>
 </div>
 </div><p>我们关注到 go:generate 这条语句，可分为以下部分：</p>
-<pre><code>声明 //go:generate （注意不要留空格）
-使用 mockgen 命令
-定义 -destination
-定义 -package
-定义 source，此处为 person 的包路径
-定义 interfaces，此处为 Male
-</code></pre>
+<ul>
+<li>声明 //go:generate （注意不要留空格）</li>
+<li>使用 mockgen 命令</li>
+<li>定义 -destination</li>
+<li>定义 -package</li>
+<li>定义 source，此处为 person 的包路径</li>
+<li>定义 interfaces，此处为 Male</li>
+</ul>
 <p>重新生成 mock 文件</p>
 <p>回到根目录下，执行以下命令</p>
 <div class="highlight"><div class="chroma">

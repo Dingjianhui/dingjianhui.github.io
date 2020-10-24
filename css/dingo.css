@@ -1,7 +1,20 @@
 
-.post .post-content code, .post .post-content pre {
-    /*color: #34495e;*/
-    background: #ffffff;
+.post .post-content code {
+    display: inline;
+    margin: 0 5px;
+    padding: 3px 5px;
+    border: 1px solid #ddd;
+}
+
+.post .post-content pre {
+    border: none;
+    background: #fff;
+}
+
+.post .post-content pre code {
+    border: none;
+    background: #fff;
+    margin-left: 0;
 }
 
 .post .post-content code.language-shell {
@@ -10,7 +23,15 @@
 
 
 .post .post-content h2 {
-    color: #4c51bf;
+    color: #cf4029;
+    background: linear-gradient(#fff 60%, #8a8a8a 40%);
+    text-align: center;
+}
+
+.post .post-content h3 {
+    color: #c05b4d;;
+    border-left: 4px solid #c05b4d;;
+    padding-left: 10px;
 }
 
 .posts .post {
@@ -27,7 +48,7 @@
 }
 
 .highlight {
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, .1), 0 10px 10px -5px rgba(0, 0, 0, .04);
+    /*box-shadow: 0 20px 25px -5px rgba(0, 0, 0, .1), 0 10px 10px -5px rgba(0, 0, 0, .04);*/
 }
 
 .post .post-toc {
@@ -45,5 +66,7 @@
 .post .post-footer .post-nav .prev, .post .post-footer .post-nav .next {
     font-size: 14px;
 }
+
+
 
 

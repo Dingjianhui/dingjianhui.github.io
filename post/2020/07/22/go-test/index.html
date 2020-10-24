@@ -174,11 +174,12 @@
 <li>该文件包含 测试用例 (如：<code>TestXxx</code> 函数)</li>
 </ol>
 <p>测试用例有四种形式：</p>
-<pre><code>TestXxxx(t *testing.T)    // 基本测试用例
-BenchmarkXxxx(b *testing.B) // 压力测试的测试用例
-Example_Xxx()  // 测试控制台输出的例子
-TestMain(m *testing.M) // 测试 Main 函数
-</code></pre>
+<ul>
+<li>TestXxxx(t *testing.T)    // 基本测试用例</li>
+<li>BenchmarkXxxx(b *testing.B) // 压力测试的测试用例</li>
+<li>Example_Xxx()  // 测试控制台输出的例子</li>
+<li>TestMain(m *testing.M) // 测试 Main 函数</li>
+</ul>
 <h2 id="1-单元测试">1. 单元测试</h2>
 <p>单元测试（<code>unit testing</code>），是指对软件中的最小可测试单元进行检查和验证</p>
 <h3 id="11-单元测试示例">1.1 单元测试示例</h3>

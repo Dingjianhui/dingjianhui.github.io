@@ -48,7 +48,7 @@
 <meta property="og:description" content="Ding Jianhui 的个人博客|笔记|golang|etcd|grpc" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="http://dingjianhui.top/" />
-<meta property="og:updated_time" content="2020-10-13T11:27:26+08:00" />
+<meta property="og:updated_time" content="2020-10-24T15:50:37+08:00" />
 <meta itemprop="name" content="Ding Jianhui 的个人博客 - 笔记">
 <meta itemprop="description" content="Ding Jianhui 的个人博客|笔记|golang|etcd|grpc"><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Ding Jianhui 的个人博客 - 笔记"/>
@@ -120,6 +120,53 @@
       <div class="content-wrapper">
         <div id="content" class="content">
           <section id="posts" class="posts">
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/2020/06/30/go-grpc-gateway/">使用grpc-gateway同时提供rpc和Restful接口-Golang</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-06-30 </span>
+      <div class="post-category">
+          <a href="/categories/golang/"> golang </a>
+          <a href="/categories/rpc/"> rpc </a>
+          </div>
+        <span class="more-meta"> 约 632 字 </span>
+        <span class="more-meta"> 预计阅读 2 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      前言 grpc很棒-支持多种语言来构建rpc服务,快速、易于使用、带宽高效， 但是我们仍然希望提供供传统的RESTful JSON API，兼容老系统 通常
+    </div>
+    <div class="read-more">
+      <a href="/post/2020/06/30/go-grpc-gateway/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/2020/06/30/generate-local-certificate/">自签名https证书，本地浏览器测试</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-06-30 </span>
+      <div class="post-category">
+          <a href="/categories/openssl/"> openssl </a>
+          </div>
+        <span class="more-meta"> 约 455 字 </span>
+        <span class="more-meta"> 预计阅读 1 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      OpenSSL工具下载： 下载地址链接 windows环境 自签证书 进入 bin目录 执行 openssl.exe 执行 genrsa -des3 -out server.key 2048（会生成server.key,私钥文件
+    </div>
+    <div class="read-more">
+      <a href="/post/2020/06/30/generate-local-certificate/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
     <article class="post">
   <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/2020/06/28/go-grpc-quick-start/">grpc的优势与安装使用-Golang</a></h1>
@@ -310,52 +357,6 @@
   </div>
 </article>
 
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/2020/06/06/go-strings-byte-rune/">Golang中string、byte、rune的区别</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2020-06-06 </span>
-      <div class="post-category">
-          <a href="/categories/golang/"> golang </a>
-          </div>
-        <span class="more-meta"> 约 1825 字 </span>
-        <span class="more-meta"> 预计阅读 4 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      什么是string string 是不可变的字节序列,采用utf8编码的 字节切片(slice), 因此用len函数获取到的长度并不是字符个数，而是字节个数。
-    </div>
-    <div class="read-more">
-      <a href="/post/2020/06/06/go-strings-byte-rune/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/2020/06/05/go-cross-compile/">windows 开发环境下 go 交叉编译</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2020-06-05 </span>
-      <div class="post-category">
-          <a href="/categories/golang/"> golang </a>
-          </div>
-        <span class="more-meta"> 约 96 字 </span>
-        <span class="more-meta"> 预计阅读 1 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      linux set GOOS=linux set GOARCH=amd64 go build -o build/hugo main.go windows set GOOS=windows set GOARCH=amd64 go build -o build/hugo.exe main.go PS：环境变量参数参考： 1 2 GOARCH:amd64,386,arm,ppc64,…GOOS:lin
-    </div>
-    <div class="read-more">
-      <a href="/post/2020/06/05/go-cross-compile/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
     </section>
   
   <nav class="pagination">
@@ -363,7 +364,10 @@
         <i class="iconfont icon-left"></i>
         <span class="prev-text">上一页</span>
       </a>
-    
+    <a class="next" href="/page/4/">
+        <span class="next-text">下一页</span>
+        <i class="iconfont icon-right"></i>
+      </a>
   </nav>
         </div>
         

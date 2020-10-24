@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="dingo" /><meta name="description" content="1. sync.Pool是什么 概念：协程安全、可伸缩的，用于存放可重用对象的容器 &amp;ndash; 临时对象池 原始目的是：存放已分配但是暂时不用的对象，需要时直接" /><meta name="keywords" content="dingo, golang, 笔记" />
+<meta name="author" content="dingo" /><meta name="description" content="sync.Pool是什么 概念：协程安全、可伸缩的，用于存放可重用对象的容器 &amp;ndash; 临时对象池 原始目的是：存放已分配但是暂时不用的对象，需要时直接从" /><meta name="keywords" content="dingo, golang, 笔记" />
 
 
 
@@ -43,13 +43,13 @@
 
 
 <meta property="og:title" content="Golang之Sync.Pool理解--临时对象池" />
-<meta property="og:description" content="1. sync.Pool是什么 概念：协程安全、可伸缩的，用于存放可重用对象的容器 &ndash; 临时对象池 原始目的是：存放已分配但是暂时不用的对象，需要时直接" />
+<meta property="og:description" content="sync.Pool是什么 概念：协程安全、可伸缩的，用于存放可重用对象的容器 &ndash; 临时对象池 原始目的是：存放已分配但是暂时不用的对象，需要时直接从" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://dingjianhui.top/post/2020/10/13/go-sync-pool/" />
 <meta property="article:published_time" content="2020-10-13T11:27:26+08:00" />
 <meta property="article:modified_time" content="2020-10-13T11:27:26+08:00" />
 <meta itemprop="name" content="Golang之Sync.Pool理解--临时对象池">
-<meta itemprop="description" content="1. sync.Pool是什么 概念：协程安全、可伸缩的，用于存放可重用对象的容器 &ndash; 临时对象池 原始目的是：存放已分配但是暂时不用的对象，需要时直接">
+<meta itemprop="description" content="sync.Pool是什么 概念：协程安全、可伸缩的，用于存放可重用对象的容器 &ndash; 临时对象池 原始目的是：存放已分配但是暂时不用的对象，需要时直接从">
 <meta itemprop="datePublished" content="2020-10-13T11:27:26&#43;08:00" />
 <meta itemprop="dateModified" content="2020-10-13T11:27:26&#43;08:00" />
 <meta itemprop="wordCount" content="916">
@@ -58,7 +58,7 @@
 
 <meta itemprop="keywords" content="go," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Golang之Sync.Pool理解--临时对象池"/>
-<meta name="twitter:description" content="1. sync.Pool是什么 概念：协程安全、可伸缩的，用于存放可重用对象的容器 &ndash; 临时对象池 原始目的是：存放已分配但是暂时不用的对象，需要时直接"/>
+<meta name="twitter:description" content="sync.Pool是什么 概念：协程安全、可伸缩的，用于存放可重用对象的容器 &ndash; 临时对象池 原始目的是：存放已分配但是暂时不用的对象，需要时直接从"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -146,10 +146,10 @@
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#1-syncpool是什么">1. sync.Pool是什么</a></li>
-    <li><a href="#2-为什么需要syncpool">2. 为什么需要sync.Pool</a></li>
-    <li><a href="#3-如何使用syncpool">3. 如何使用sync.Pool</a></li>
-    <li><a href="#4-场景">4. 场景</a></li>
+    <li><a href="#syncpool是什么">sync.Pool是什么</a></li>
+    <li><a href="#为什么需要syncpool">为什么需要sync.Pool</a></li>
+    <li><a href="#如何使用syncpool">如何使用sync.Pool</a></li>
+    <li><a href="#场景">场景</a></li>
     <li><a href="#常用属性和方法">常用属性和方法</a>
       <ul>
         <li><a href="#属性">属性：</a></li>
@@ -162,14 +162,14 @@
   </div>
 </div>
     <div class="post-content">
-      <h2 id="1-syncpool是什么">1. sync.Pool是什么</h2>
-<p>概念：协程安全、可伸缩的，用于存放可重用对象的容器 &ndash; 临时对象池</p>
+      <h2 id="syncpool是什么">sync.Pool是什么</h2>
+<p>概念：协程安全、可伸缩的，用于存放可重用对象的容器 &ndash; <code>临时对象池</code></p>
 <p>原始目的是：存放已分配但是暂时不用的对象，需要时直接从pool中取，然后放回，以减少GC回收的压力</p>
 <p>GC压力是啥？</p>
 <p>很简单，对象多了，GC要回收自然压力大（需要了解：go垃圾回收如何标记内存的）</p>
 <p><code>sync.Pool</code>不适合放做“数据库连接池”等带持久性质的数据，因为它会定期回收～</p>
 <p>时间就是两次GC间隔的时间。</p>
-<h2 id="2-为什么需要syncpool">2. 为什么需要sync.Pool</h2>
+<h2 id="为什么需要syncpool">为什么需要sync.Pool</h2>
 <ol>
 <li>
 <p>增加临时对象的用复用率，减少GC负担</p>
@@ -178,11 +178,11 @@
 <p>通过对象的复用，减少内存申请开销，有利于提高一部分性能</p>
 </li>
 </ol>
-<h2 id="3-如何使用syncpool">3. 如何使用sync.Pool</h2>
+<h2 id="如何使用syncpool">如何使用sync.Pool</h2>
 <p>思路：搞一个池子，预先放入临时产生的对象，然后取出使用</p>
-<h2 id="4-场景">4. 场景</h2>
+<h2 id="场景">场景</h2>
 <ol>
-<li>go中 fmt 的 print　 对象 <code>src/fmt/print.go</code></li>
+<li>go中 fmt 的 <code>print</code>对象     <code>src/fmt/print.go</code></li>
 </ol>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -269,7 +269,7 @@
 </code></pre></td></tr></table>
 </div>
 </div><ol start="2">
-<li>gin框架中 ServerHttp每次调用的Context对象也是存放在临时对角池Sync.pool中</li>
+<li><code>gin</code>框架中 <code>ServerHttp</code>每次调用的<code>Context</code>对象也是存放在临时对角池<code>Sync.pool</code>中</li>
 </ol>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -301,13 +301,29 @@
 </div>
 </div><h2 id="常用属性和方法">常用属性和方法</h2>
 <h3 id="属性">属性：</h3>
-<p>noCopy： 防止sync.Pool被复制</p>
-<p>local： poolLocal数组的指针</p>
-<p>localSize： poolLocal数组大小</p>
+<ul>
+<li>
+<p>noCopy： 防止<code>sync.Pool</code>被复制</p>
+</li>
+<li>
+<p>local： <code>poolLocal</code>数组的指针</p>
+</li>
+<li>
+<p>localSize： <code>poolLocal</code>数组大小</p>
+</li>
+<li>
 <p>New： 函数指针申请具体的对象，便于用户定制各种类型的对象</p>
+</li>
+</ul>
 <h3 id="方法">方法：</h3>
-<p>Get() Get解决了如何从具体sync.Pool中获取对象的问题。</p>
-<p>Put() Put完成将对象放回对象池。</p>
+<ul>
+<li>
+<p>Get() <code>Get</code>解决了如何从具体<code>sync.Pool</code>中获取对象的问题。</p>
+</li>
+<li>
+<p>Put() <code>Put</code>完成将对象放回对象池。</p>
+</li>
+</ul>
 <h2 id="案例">案例：</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -454,7 +470,11 @@
           <a href="/tags/go/">go</a>
           </div>
       <nav class="post-nav">
-        
+        <a class="prev" href="/post/2020/10/23/go-struct-2-map/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Struct与Map互转的方法</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
         <a class="next" href="/post/2020/09/30/rancher-create-cluster/">
             <span class="next-text nav-default">使用Rancher 2.0快速部署k8s集群</span>
             <span class="next-text nav-mobile">下一篇</span>
