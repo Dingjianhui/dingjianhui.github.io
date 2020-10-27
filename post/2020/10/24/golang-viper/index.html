@@ -52,7 +52,7 @@
 <meta itemprop="description" content="Viper Github地址 : https://github.com/spf13/viper 官网好像在准备 V2版本 安装： 1 go get github.com/spf13/viper Viper 是什么 ? Viper是用于Go应用程序的完整配置解决方案。它被设计用于在应用程序中">
 <meta itemprop="datePublished" content="2020-10-24T15:50:37&#43;08:00" />
 <meta itemprop="dateModified" content="2020-10-24T15:50:37&#43;08:00" />
-<meta itemprop="wordCount" content="1304">
+<meta itemprop="wordCount" content="1190">
 
 
 
@@ -135,7 +135,7 @@
         <div class="post-category">
             <a href="/categories/golang/"> golang </a>
             </div>
-          <span class="more-meta"> 约 1304 字 </span>
+          <span class="more-meta"> 约 1190 字 </span>
           <span class="more-meta"> 预计阅读 3 分钟 </span>
         
       </div>
@@ -273,87 +273,6 @@ map<span class="o">[</span>category:categories tag:tags<span class="o">]</span>
 <li><code>Viper</code>可以搜索多个路径，但目前单个<code>Viper</code>实例只支持单个配置文件</li>
 <li><code>Viper</code>不会默认使用任何配置搜索路径，默认决策权 - 留给应用程序</li>
 </ul>
-<p><code>conf/config.json</code></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
-  <span class="nt">&#34;mysql&#34;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="nt">&#34;port&#34;</span> <span class="p">:</span> <span class="mi">13306</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
-</div>
-</div><p><code>conf/config.yaml</code></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="k">mysql</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="k">port</span><span class="p">:</span><span class="w"> </span><span class="m">23306</span><span class="w">
-</span></code></pre></td></tr></table>
-</div>
-</div><p><code>main.go</code></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
-
-<span class="kn">import</span> <span class="p">(</span>
-	<span class="s">&#34;fmt&#34;</span>
-	<span class="s">&#34;github.com/spf13/viper&#34;</span>
-<span class="p">)</span>
-
-<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span>  <span class="p">{</span>
-	<span class="nx">viper</span><span class="p">.</span><span class="nf">SetConfigName</span><span class="p">(</span><span class="s">&#34;config&#34;</span><span class="p">)</span>
-	<span class="nx">viper</span><span class="p">.</span><span class="nf">AddConfigPath</span><span class="p">(</span><span class="s">&#34;./conf&#34;</span><span class="p">)</span>
-	<span class="nx">err</span> <span class="o">:=</span> <span class="nx">viper</span><span class="p">.</span><span class="nf">ReadInConfig</span><span class="p">()</span> <span class="c1">// 查找并读取配置文件
-</span><span class="c1"></span>	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span> <span class="c1">// 处理读取配置文件的错误
-</span><span class="c1"></span>		<span class="nb">panic</span><span class="p">(</span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Errorf</span><span class="p">(</span><span class="s">&#34;Fatal error config file: %s \n&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">))</span>
-	<span class="p">}</span>
-
-	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">viper</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="s">&#34;mysql.port&#34;</span><span class="p">))</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>运行：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">$ go run main.go
-<span class="m">13306</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>优先读取了config.json</p>
 <h3 id="写入配置文件">写入配置文件</h3>
 <ul>
 <li>WriteConfig - 将当前的viper配置写入预定义的路径并覆盖（如果存在的话）。如果没有预定义的路径，则报错。</li>

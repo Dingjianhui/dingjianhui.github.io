@@ -27,7 +27,7 @@
       <pubDate>Fri, 23 Oct 2020 08:56:38 +0800</pubDate>
       
       <guid>http://dingjianhui.top/post/2020/10/23/go-struct-2-map/</guid>
-      <description></description>
+      <description>struct结构体 转 Map[string]interface 通过json转有一个“坑”的。那就是Go语言中的json包在序列化空接口存放的数字类型（整型、浮点型等）都会序列化成f</description>
     </item>
     
     <item>
