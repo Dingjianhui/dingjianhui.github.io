@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>nginx on Ding Jianhui 的个人博客 - 笔记</title>
+    <link>http://dingjianhui.top/tags/nginx/</link>
+    <description>Recent content in nginx on Ding Jianhui 的个人博客 - 笔记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>dingo(Ding JianHui)</copyright>
+    <lastBuildDate>Mon, 09 Nov 2020 08:31:33 +0800</lastBuildDate>
+    
+	<atom:link href="http://dingjianhui.top/tags/nginx/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>使用Supervisor &#43; nginx部署Golang项目</title>
+      <link>http://dingjianhui.top/post/2020/11/09/go-product-installed/</link>
+      <pubDate>Mon, 09 Nov 2020 08:31:33 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/post/2020/11/09/go-product-installed/</guid>
+      <description>部署有很多种方法，看公司需要和个人喜欢 本文简单部署 : 编译Go项目 使用supervisor来管理进程 使用nginx来反向代理 编译 windows 开发环境下 go</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -48,7 +48,7 @@
 <meta property="og:description" content="Ding Jianhui 的个人博客|笔记|golang|etcd|grpc" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="http://dingjianhui.top/" />
-<meta property="og:updated_time" content="2020-10-24T15:50:37+08:00" />
+<meta property="og:updated_time" content="2020-11-09T08:31:33+08:00" />
 <meta itemprop="name" content="Ding Jianhui 的个人博客 - 笔记">
 <meta itemprop="description" content="Ding Jianhui 的个人博客|笔记|golang|etcd|grpc"><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Ding Jianhui 的个人博客 - 笔记"/>
@@ -122,13 +122,59 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/2020/11/09/go-product-installed/">使用Supervisor &#43; nginx部署Golang项目</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-11-09 </span>
+      <div class="post-category">
+          <a href="/categories/golang/"> golang </a>
+          </div>
+        <span class="more-meta"> 约 764 字 </span>
+        <span class="more-meta"> 预计阅读 2 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      部署有很多种方法，看公司需要和个人喜欢 本文简单部署 : 编译Go项目 使用supervisor来管理进程 使用nginx来反向代理 编译 windows 开发环境下 go
+    </div>
+    <div class="read-more">
+      <a href="/post/2020/11/09/go-product-installed/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/2020/10/28/gin-logger-zap/">使用Zap日志替换Gin中默认的日志</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-10-28 </span>
+      <div class="post-category">
+          <a href="/categories/golang/"> golang </a>
+          </div>
+        <span class="more-meta"> 约 96 字 </span>
+        <span class="more-meta"> 预计阅读 1 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      Uber-go Zap Zap是非常快的、结构化的，分日志级别的Go日志库。 为什么选择使用Zap 它同时提供了结构化日志记录和printf风格的日志记录 它非常的快
+    </div>
+    <div class="read-more">
+      <a href="/post/2020/10/28/gin-logger-zap/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/2020/10/24/golang-viper/">Golang的配置管理神器——Viper</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2020-10-24 </span>
       <div class="post-category">
           <a href="/categories/golang/"> golang </a>
           </div>
-        <span class="more-meta"> 约 1190 字 </span>
+        <span class="more-meta"> 约 1235 字 </span>
         <span class="more-meta"> 预计阅读 3 分钟 </span>
     </div>
   </header>
@@ -302,52 +348,6 @@
     </div>
     <div class="read-more">
       <a href="/post/2020/09/11/go-decorator/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/2020/09/10/go-factory/">使用Golang实现工厂模式(Factory-Pattern)</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2020-09-10 </span>
-      <div class="post-category">
-          <a href="/categories/golang/"> golang </a>
-          </div>
-        <span class="more-meta"> 约 1835 字 </span>
-        <span class="more-meta"> 预计阅读 4 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      工厂模式是我们最常用的实例化对象模式了，是用工厂方法代替new操作的一种模式 简单工厂模式 （Simple Factory Pattern） 我们想要创建一个对象
-    </div>
-    <div class="read-more">
-      <a href="/post/2020/09/10/go-factory/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/2020/09/07/go-singleton/">Golang实现单例模式（Singleton）- sync.Once</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2020-09-07 </span>
-      <div class="post-category">
-          <a href="/categories/golang/"> golang </a>
-          </div>
-        <span class="more-meta"> 约 1507 字 </span>
-        <span class="more-meta"> 预计阅读 4 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      单例模式是一种常用的软件设计模式 Go语言实现单例模式的有四种方式，分别是懒汉模式、饿汉模式、双重检查和 sync.Once。 懒汉模式-就是创建
-    </div>
-    <div class="read-more">
-      <a href="/post/2020/09/07/go-singleton/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>

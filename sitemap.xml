@@ -3,7 +3,84 @@
   
   <url>
     <loc>http://dingjianhui.top/categories/</loc>
-    <lastmod>2020-10-24T15:50:37+08:00</lastmod>
+    <lastmod>2020-11-09T08:31:33+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://dingjianhui.top/</loc>
+    <lastmod>2020-11-09T08:31:33+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://dingjianhui.top/tags/go/</loc>
+    <lastmod>2020-11-09T08:31:33+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://dingjianhui.top/categories/golang/</loc>
+    <lastmod>2020-11-09T08:31:33+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://dingjianhui.top/tags/nginx/</loc>
+    <lastmod>2020-11-09T08:31:33+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://dingjianhui.top/post/</loc>
+    <lastmod>2020-11-09T08:31:33+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://dingjianhui.top/tags/supervisor/</loc>
+    <lastmod>2020-11-09T08:31:33+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://dingjianhui.top/tags/</loc>
+    <lastmod>2020-11-09T08:31:33+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://dingjianhui.top/post/2020/11/09/go-product-installed/</loc>
+    <lastmod>2020-11-09T08:31:33+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://dingjianhui.top/tags/logs/</loc>
+    <lastmod>2020-10-28T16:55:20+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://dingjianhui.top/tags/zap/</loc>
+    <lastmod>2020-10-28T16:55:20+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://dingjianhui.top/post/2020/10/28/gin-logger-zap/</loc>
+    <lastmod>2020-10-28T16:55:20+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -16,42 +93,7 @@
   </url>
   
   <url>
-    <loc>http://dingjianhui.top/</loc>
-    <lastmod>2020-10-24T15:50:37+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://dingjianhui.top/tags/go/</loc>
-    <lastmod>2020-10-24T15:50:37+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://dingjianhui.top/categories/golang/</loc>
-    <lastmod>2020-10-24T15:50:37+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>http://dingjianhui.top/post/2020/10/24/golang-viper/</loc>
-    <lastmod>2020-10-24T15:50:37+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://dingjianhui.top/post/</loc>
-    <lastmod>2020-10-24T15:50:37+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>http://dingjianhui.top/tags/</loc>
     <lastmod>2020-10-24T15:50:37+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

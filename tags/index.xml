@@ -7,10 +7,55 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>dingo(Ding JianHui)</copyright>
-    <lastBuildDate>Sat, 24 Oct 2020 15:50:37 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 09 Nov 2020 08:31:33 +0800</lastBuildDate>
     
 	<atom:link href="http://dingjianhui.top/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>go</title>
+      <link>http://dingjianhui.top/tags/go/</link>
+      <pubDate>Mon, 09 Nov 2020 08:31:33 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/tags/go/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>nginx</title>
+      <link>http://dingjianhui.top/tags/nginx/</link>
+      <pubDate>Mon, 09 Nov 2020 08:31:33 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/tags/nginx/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>supervisor</title>
+      <link>http://dingjianhui.top/tags/supervisor/</link>
+      <pubDate>Mon, 09 Nov 2020 08:31:33 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/tags/supervisor/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>logs</title>
+      <link>http://dingjianhui.top/tags/logs/</link>
+      <pubDate>Wed, 28 Oct 2020 16:55:20 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/tags/logs/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>zap</title>
+      <link>http://dingjianhui.top/tags/zap/</link>
+      <pubDate>Wed, 28 Oct 2020 16:55:20 +0800</pubDate>
+      
+      <guid>http://dingjianhui.top/tags/zap/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>config</title>
@@ -18,15 +63,6 @@
       <pubDate>Sat, 24 Oct 2020 15:50:37 +0800</pubDate>
       
       <guid>http://dingjianhui.top/tags/config/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>go</title>
-      <link>http://dingjianhui.top/tags/go/</link>
-      <pubDate>Sat, 24 Oct 2020 15:50:37 +0800</pubDate>
-      
-      <guid>http://dingjianhui.top/tags/go/</guid>
       <description></description>
     </item>
     

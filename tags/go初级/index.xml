@@ -108,7 +108,7 @@
       <pubDate>Fri, 05 Jun 2020 00:00:00 +0000</pubDate>
       
       <guid>http://dingjianhui.top/post/2020/06/05/go-cross-compile/</guid>
-      <description>linux set GOOS=linux set GOARCH=amd64 go build -o build/hugo main.go windows set GOOS=windows set GOARCH=amd64 go build -o build/hugo.exe main.go PS：环境变量参数参考： 1 2 GOARCH:amd64,386,arm,ppc64,…GOOS:lin</description>
+      <description>linux 1 2 3 set GOOS=linux set GOARCH=amd64 go build -o build/hugo main.go windows 1 2 3 set GOOS=windows set GOARCH=amd64 go build -o build/hugo.exe main.go PS：环境变量参数参考： 1 2 GOARCH:amd64,386,arm,ppc64,…GO</description>
     </item>
     
   </channel>

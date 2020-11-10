@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="dingo" /><meta name="description" content="linux set GOOS=linux set GOARCH=amd64 go build -o build/hugo main.go windows set GOOS=windows set GOARCH=amd64 go build -o build/hugo.exe main.go PS：环境变量参数参考： 1 2 GOARCH:amd64,386,arm,ppc64,…GOOS:lin" /><meta name="keywords" content="dingo, golang, 笔记" />
+<meta name="author" content="dingo" /><meta name="description" content="linux 1 2 3 set GOOS=linux set GOARCH=amd64 go build -o build/hugo main.go windows 1 2 3 set GOOS=windows set GOARCH=amd64 go build -o build/hugo.exe main.go PS：环境变量参数参考： 1 2 GOARCH:amd64,386,arm,ppc64,…GO" /><meta name="keywords" content="dingo, golang, 笔记" />
 
 
 
@@ -43,22 +43,22 @@
 
 
 <meta property="og:title" content="windows 开发环境下 go 交叉编译" />
-<meta property="og:description" content="linux set GOOS=linux set GOARCH=amd64 go build -o build/hugo main.go windows set GOOS=windows set GOARCH=amd64 go build -o build/hugo.exe main.go PS：环境变量参数参考： 1 2 GOARCH:amd64,386,arm,ppc64,…GOOS:lin" />
+<meta property="og:description" content="linux 1 2 3 set GOOS=linux set GOARCH=amd64 go build -o build/hugo main.go windows 1 2 3 set GOOS=windows set GOARCH=amd64 go build -o build/hugo.exe main.go PS：环境变量参数参考： 1 2 GOARCH:amd64,386,arm,ppc64,…GO" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://dingjianhui.top/post/2020/06/05/go-cross-compile/" />
 <meta property="article:published_time" content="2020-06-05T00:00:00+00:00" />
 <meta property="article:modified_time" content="2020-06-05T00:00:00+00:00" />
 <meta itemprop="name" content="windows 开发环境下 go 交叉编译">
-<meta itemprop="description" content="linux set GOOS=linux set GOARCH=amd64 go build -o build/hugo main.go windows set GOOS=windows set GOARCH=amd64 go build -o build/hugo.exe main.go PS：环境变量参数参考： 1 2 GOARCH:amd64,386,arm,ppc64,…GOOS:lin">
+<meta itemprop="description" content="linux 1 2 3 set GOOS=linux set GOARCH=amd64 go build -o build/hugo main.go windows 1 2 3 set GOOS=windows set GOARCH=amd64 go build -o build/hugo.exe main.go PS：环境变量参数参考： 1 2 GOARCH:amd64,386,arm,ppc64,…GO">
 <meta itemprop="datePublished" content="2020-06-05T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2020-06-05T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="96">
+<meta itemprop="wordCount" content="102">
 
 
 
 <meta itemprop="keywords" content="go,go初级," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="windows 开发环境下 go 交叉编译"/>
-<meta name="twitter:description" content="linux set GOOS=linux set GOARCH=amd64 go build -o build/hugo main.go windows set GOOS=windows set GOARCH=amd64 go build -o build/hugo.exe main.go PS：环境变量参数参考： 1 2 GOARCH:amd64,386,arm,ppc64,…GOOS:lin"/>
+<meta name="twitter:description" content="linux 1 2 3 set GOOS=linux set GOARCH=amd64 go build -o build/hugo main.go windows 1 2 3 set GOOS=windows set GOARCH=amd64 go build -o build/hugo.exe main.go PS：环境变量参数参考： 1 2 GOARCH:amd64,386,arm,ppc64,…GO"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -135,7 +135,7 @@
         <div class="post-category">
             <a href="/categories/golang/"> golang </a>
             </div>
-          <span class="more-meta"> 约 96 字 </span>
+          <span class="more-meta"> 约 102 字 </span>
           <span class="more-meta"> 预计阅读 1 分钟 </span>
         
       </div>
@@ -154,16 +154,32 @@
 </div>
     <div class="post-content">
       <h2 id="linux">linux</h2>
-<pre><code>set GOOS=linux
-set GOARCH=amd64
-go build -o build/hugo main.go
-</code></pre>
-<h2 id="windows">windows</h2>
-<pre><code>set GOOS=windows
-set GOARCH=amd64
-go build -o build/hugo.exe main.go
-</code></pre>
-<blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">    <span class="nb">set</span> <span class="nv">GOOS</span><span class="o">=</span>linux
+    <span class="nb">set</span> <span class="nv">GOARCH</span><span class="o">=</span>amd64
+    go build -o build/hugo main.go
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="windows">windows</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">    <span class="nb">set</span> <span class="nv">GOOS</span><span class="o">=</span>windows
+    <span class="nb">set</span> <span class="nv">GOARCH</span><span class="o">=</span>amd64
+    go build -o build/hugo.exe main.go
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
 <p>PS：环境变量参数参考：</p>
 </blockquote>
 <div class="highlight"><div class="chroma">

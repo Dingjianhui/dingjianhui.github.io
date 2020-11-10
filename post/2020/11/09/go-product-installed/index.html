@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>使用Supervisor &#43; nginx部署Golang项目 - Ding Jianhui 的个人博客 - 笔记</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="dingo" /><meta name="description" content="部署有很多种方法，看公司需要和个人喜欢 本文简单部署 : 编译Go项目 使用supervisor来管理进程 使用nginx来反向代理 编译 windows 开发环境下 go" /><meta name="keywords" content="dingo, golang, 笔记" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.73.0-DEV with theme even" />
+
+
+<link rel="canonical" href="http://dingjianhui.top/post/2020/11/09/go-product-installed/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/dingo.css">
+<link rel="stylesheet" href="/css/chroma.css">
+
+
+<meta property="og:title" content="使用Supervisor &#43; nginx部署Golang项目" />
+<meta property="og:description" content="部署有很多种方法，看公司需要和个人喜欢 本文简单部署 : 编译Go项目 使用supervisor来管理进程 使用nginx来反向代理 编译 windows 开发环境下 go" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://dingjianhui.top/post/2020/11/09/go-product-installed/" />
+<meta property="article:published_time" content="2020-11-09T08:31:33+08:00" />
+<meta property="article:modified_time" content="2020-11-09T08:31:33+08:00" />
+<meta itemprop="name" content="使用Supervisor &#43; nginx部署Golang项目">
+<meta itemprop="description" content="部署有很多种方法，看公司需要和个人喜欢 本文简单部署 : 编译Go项目 使用supervisor来管理进程 使用nginx来反向代理 编译 windows 开发环境下 go">
+<meta itemprop="datePublished" content="2020-11-09T08:31:33&#43;08:00" />
+<meta itemprop="dateModified" content="2020-11-09T08:31:33&#43;08:00" />
+<meta itemprop="wordCount" content="764">
+
+
+
+<meta itemprop="keywords" content="go,nginx,supervisor," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="使用Supervisor &#43; nginx部署Golang项目"/>
+<meta name="twitter:description" content="部署有很多种方法，看公司需要和个人喜欢 本文简单部署 : 编译Go项目 使用supervisor来管理进程 使用nginx来反向代理 编译 windows 开发环境下 go"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+<script data-ad-client="ca-pub-8764182409666792" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">dingo</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">dingo</a>
+</div>
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu"><li class="search search-input">
+          <input type="search" class="docsearch-input" placeholder="请输入您要搜索的内容..." />
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li>
+  </ul>
+</nav>
+
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">使用Supervisor &#43; nginx部署Golang项目</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-11-09 </span>
+        <div class="post-category">
+            <a href="/categories/golang/"> golang </a>
+            </div>
+          <span class="more-meta"> 约 764 字 </span>
+          <span class="more-meta"> 预计阅读 2 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#编译">编译</a></li>
+    <li><a href="#supervisor-管理进程">supervisor 管理进程</a>
+      <ul>
+        <li><a href="#介绍">介绍</a></li>
+        <li><a href="#安装">安装</a></li>
+        <li><a href="#启动">启动</a></li>
+        <li><a href="#配置">配置</a></li>
+        <li><a href="#重启">重启</a></li>
+        <li><a href="#查看状态">查看状态</a></li>
+        <li><a href="#管理命令">管理命令</a></li>
+      </ul>
+    </li>
+    <li><a href="#nginx-反向代理">nginx 反向代理</a>
+      <ul>
+        <li><a href="#容器部署">容器部署</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>部署有很多种方法，看公司需要和个人喜欢</p>
+<p>本文简单部署 :</p>
+<ol>
+<li>编译Go项目</li>
+<li>使用supervisor来管理进程</li>
+<li>使用nginx来反向代理</li>
+</ol>
+<h2 id="编译">编译</h2>
+<p><a href="http://dingo.wiki/post/2020/06/05/go-cross-compile/">windows 开发环境下 go 交叉编译</a></p>
+<p>上传到服务器, 并配置好 <code>Mysql</code> 、 <code>Redis</code></p>
+<p><a href="http://dingo.wiki/post/2020/07/29/redis-set-security-options/">Docker中安装Redis并设置安全选项</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">├── bin
+│   └── test
+├── configs
+│   ├── application.yaml
+│   └── resource
+│       └── model.conf
+└── runtime
+    └── log
+        └── errors.log
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="supervisor-管理进程">supervisor 管理进程</h2>
+<h3 id="介绍">介绍</h3>
+<p><a href="http://supervisord.org/">Supervisor</a>是用Python开发的一套通用的进程管理程序,
+能将一个普通的命令行进程变为后台daemon,并监控进程状态,异常退出时能自动重启 <a href="https://github.com/Supervisor/supervisor">github</a></p>
+<h3 id="安装">安装</h3>
+<p>使用<code>yum</code>安装, 先安装扩展 <code>EPEL</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">$ sudo yum install epel-release
+</code></pre></td></tr></table>
+</div>
+</div><p>安装 <code>supervisor</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">$ sudo yum install supervisor
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="启动">启动</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">$ sudo supervisord -c /etc/supervisord.conf
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="配置">配置</h3>
+<p>Supervisor 的配置文件为： <code>/etc/supervisord.conf</code>
+Supervisor 所管理的应用的配置文件放在 <code>/etc/supervisord.d/</code> 目录中</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">$ sudo vim /etc/supervisord.d/dingodian.conf
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">[program:dingodian]  ;程序名称
+user=dingodian  ;执行程序的用户
+command=/home/dingodian/app/bin/dingodian  ;执行的命令
+directory=/home/dingodian/app/ ;命令执行的目录
+stopsignal=TERM  ;重启时发送的信号
+autostart=true  
+autorestart=true  ;是否自动重启
+stdout_logfile=/home/dingodian/logs/dingodian-stdout.log  ;标准输出日志位置
+stderr_logfile=/home/dingodian/logs/dingodian-stderr.log  ;标准错误日志位置
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="重启">重启</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">$ sudo supervisorctl update
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="查看状态">查看状态</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">$ sudo supervisorctl status bluebell
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="管理命令">管理命令</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">supervisorctl status       <span class="c1"># 查看所有任务状态</span>
+supervisorctl shutdown     <span class="c1"># 关闭所有任务</span>
+supervisorctl start 程序名  <span class="c1"># 启动任务</span>
+supervisorctl stop 程序名   <span class="c1"># 关闭任务</span>
+supervisorctl reload       <span class="c1"># 重启supervisor</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="nginx-反向代理">nginx 反向代理</h2>
+<h3 id="容器部署">容器部署</h3>
+<p><code>docker pull nginx:版本</code>   <code>docker pull nginx:latest</code> (最新版本)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">$ docker pull nginx:1.19.3-alpine
+</code></pre></td></tr></table>
+</div>
+</div><p>docker-compose.ymal</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml">---<span class="w">
+</span><span class="w"></span><span class="k">networks</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="k">nginx_net</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="k">driver</span><span class="p">:</span><span class="w"> </span>bridge<span class="w">
+</span><span class="w">    </span><span class="k">ipam</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="k">config</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span>- <span class="k">subnet</span><span class="p">:</span><span class="w"> </span><span class="m">192.168</span>.xxx<span class="m">.0</span>/<span class="m">24</span><span class="w">
+</span><span class="w"></span><span class="k">services</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="k">nginx</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="k">container_name</span><span class="p">:</span><span class="w"> </span>nginx-srv<span class="w">
+</span><span class="w">    </span><span class="k">image</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;nginx:1.19.3-alpine&#34;</span><span class="w">
+</span><span class="w">    </span><span class="k">networks</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="k">nginx_net</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="k">ipv4_address</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;192.168.xxx.2&#34;</span><span class="w">
+</span><span class="w">    </span><span class="k">ports</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="s2">&#34;80:80&#34;</span><span class="w">
+</span><span class="w">      </span>- <span class="s2">&#34;443:443&#34;</span><span class="w">
+</span><span class="w">    </span><span class="k">volumes</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="s2">&#34;/home/dingodian/conf/nginx.conf:/etc/nginx/nginx.conf&#34;</span><span class="w">
+</span><span class="w">      </span>- <span class="s2">&#34;/home/dingodian/conf/cert/:/etc/nginx/cert/&#34;</span><span class="w">
+</span><span class="w">      </span>- <span class="s2">&#34;/home/dingodian/logs/nginx/:/var/log/nginx/&#34;</span><span class="w">
+</span><span class="w">      </span>- <span class="s2">&#34;/home/dingodian/web:/usr/share/nginx/html&#34;</span><span class="w">
+</span><span class="w">    </span><span class="k">restart</span><span class="p">:</span><span class="w"> </span>always<span class="w">
+</span><span class="w">  </span><span class="k">mysql</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="k">container_name</span><span class="p">:</span><span class="w"> </span>mysqld-srv<span class="w">
+</span><span class="w">    </span><span class="k">image</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;mysql:5.7.22&#34;</span><span class="w">
+</span><span class="w">    </span><span class="k">networks</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="k">nginx_net</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="k">ipv4_address</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;192.168.xxx.188&#34;</span><span class="w">
+</span><span class="w">    </span><span class="k">volumes</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="s2">&#34;/home/dingodian/mysql/data:/var/lib/mysql&#34;</span><span class="w">
+</span><span class="w">      </span>- <span class="s2">&#34;/home/dingodian/mysql/conf:/etc/mysql/conf.d&#34;</span><span class="w">
+</span><span class="w">      </span>- <span class="s2">&#34;/home/dingodian/mysql/bakup:/bakup&#34;</span><span class="w">
+</span><span class="w">    </span><span class="k">environment</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="s2">&#34;MYSQL_USER=dingodian&#34;</span><span class="w">
+</span><span class="w">      </span>- <span class="s2">&#34;MYSQL_PASSWORD=dingodian.xxx.com&#34;</span><span class="w">
+</span><span class="w">      </span>- <span class="s2">&#34;MYSQL_ROOT_PASSWORD=dingodian.xxx.com&#34;</span><span class="w">
+</span><span class="w">    </span><span class="k">restart</span><span class="p">:</span><span class="w"> </span>always<span class="w">
+</span><span class="w">  </span><span class="k">redis</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="k">container_name</span><span class="p">:</span><span class="w"> </span>redis-srv<span class="w">
+</span><span class="w">    </span><span class="k">image</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;redis:5.0.7&#34;</span><span class="w">
+</span><span class="w">    </span><span class="k">networks</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="k">nginx_net</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="k">ipv4_address</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;192.168.xxx.189&#34;</span><span class="w">
+</span><span class="w">    </span><span class="k">volumes</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="s2">&#34;/home/dingodian/redis/redis.conf:/usr/local/etc/redis.conf&#34;</span><span class="w">
+</span><span class="w">      </span>- <span class="s2">&#34;/home/dingodian/redis/data:/data&#34;</span><span class="w">
+</span><span class="w">    </span><span class="k">restart</span><span class="p">:</span><span class="w"> </span>always<span class="w">
+</span><span class="w">    </span><span class="k">command</span><span class="p">:</span><span class="w"> </span>redis-server<span class="w"> </span>/usr/local/etc/redis.conf<span class="w">
+</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="k">version</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;3&#34;</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>nginx.conf</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">worker_processes  1;
+
+events {
+  worker_connections  1024;
+}
+
+http {
+  include       mime.types;
+  default_type  application/octet-stream;
+
+  sendfile        on;
+  keepalive_timeout  65;
+
+  server {
+    listen 443 ssl;
+    server_name xxx.dingodian.xxx;
+    ssl_certificate /etc/nginx/cert/4680015_xxx.dingodian.xxx.perm;
+    ssl_certificate_key /etc/nginx/cert/4680015_xxx.dingodian.xxx.key;
+    ssl_session_timeout 5m;
+    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+    ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE:ECDH:AES:HIGH:!NULL:!aNULL:!MD5:!ADH:!RC4;
+    ssl_prefer_server_ciphers on;
+
+    access_log   /var/log/dingodian-access.log;
+    error_log    /var/log/dingodian-error.log;
+
+    location / {
+      proxy_pass                 http://127.0.0.1:8080;
+      proxy_redirect             off;
+      proxy_set_header           Host             $host;
+      proxy_set_header           X-Real-IP        $remote_addr;
+      proxy_set_header           X-Forwarded-For  $proxy_add_x_forwarded_for;
+    }
+  }
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>使用docker-compose创建容器并运行</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">$ docker-compose up -d
+$ docker ps
+</code></pre></td></tr></table>
+</div>
+</div><p>有问题查看日志</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">$ docker logs 容器名
+</code></pre></td></tr></table>
+</div>
+</div><p>docker-compose其他命令</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">docker-compose start
+docker-compose stop
+docker-compose rm 
+
+docker-compose start 服务名
+docker-compose stop 服务名
+docker-compose rm  服务名
+</code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">dingo</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2020-11-09
+        
+    </span>
+  </p>
+  
+  
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/images/pay/weixin.jpg">
+        <span>微信打赏</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/images/pay/zhifubao.jpg">
+        <span>支付宝打赏</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/go/">go</a>
+          <a href="/tags/nginx/">nginx</a>
+          <a href="/tags/supervisor/">supervisor</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/2020/10/28/gin-logger-zap/">
+            <span class="next-text nav-default">使用Zap日志替换Gin中默认的日志</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:djhui1987@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/dingjianhui" class="iconfont icon-github" title="github"></a>
+  <a href="http://dingjianhui.top/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">dingo(Ding JianHui)</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+
+
+
+<script id="baidu_push">
+  (function(){
+    if (window.location.hostname === 'localhost') return;
+    var bp = document.createElement('script'); bp.async = true;
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+  <script>
+    docsearch({
+      apiKey: "63613c4b082a9ffcfdf94b1eb1df5ab5",
+      indexName: "blog_github",
+      appId: "B6SOJSDFFA",
+      inputSelector: '.docsearch-input',
+      debug: false,
+    });
+  </script>
+</body>
+</html>

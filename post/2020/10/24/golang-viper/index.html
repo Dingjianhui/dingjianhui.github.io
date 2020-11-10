@@ -52,7 +52,7 @@
 <meta itemprop="description" content="Viper Github地址 : https://github.com/spf13/viper 官网好像在准备 V2版本 安装： 1 go get github.com/spf13/viper Viper 是什么 ? Viper是用于Go应用程序的完整配置解决方案。它被设计用于在应用程序中">
 <meta itemprop="datePublished" content="2020-10-24T15:50:37&#43;08:00" />
 <meta itemprop="dateModified" content="2020-10-24T15:50:37&#43;08:00" />
-<meta itemprop="wordCount" content="1190">
+<meta itemprop="wordCount" content="1235">
 
 
 
@@ -135,7 +135,7 @@
         <div class="post-category">
             <a href="/categories/golang/"> golang </a>
             </div>
-          <span class="more-meta"> 约 1190 字 </span>
+          <span class="more-meta"> 约 1235 字 </span>
           <span class="more-meta"> 预计阅读 3 分钟 </span>
         
       </div>
@@ -297,20 +297,83 @@ map<span class="o">[</span>category:categories tag:tags<span class="o">]</span>
 <span class="p">})</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="从ioreader读取配置">从io.Reader读取配置</h3>
-<h3 id="覆盖设置">覆盖设置</h3>
-<h3 id="注册和使用别名">注册和使用别名</h3>
-<h3 id="使用环境变量">使用环境变量</h3>
-<h3 id="使用flags">使用Flags</h3>
-<h3 id="远程keyvalue存储支持">远程Key/Value存储支持</h3>
-<h3 id="远程keyvalue存储示例-未加密">远程Key/Value存储示例-未加密</h3>
-<h3 id="远程keyvalue存储示例-加密">远程Key/Value存储示例-加密</h3>
-<h3 id="监控etcd中的更改-未加密">监控etcd中的更改-未加密</h3>
-<h2 id="从viper获取值">从Viper获取值</h2>
-<h3 id="访问嵌套的键">访问嵌套的键</h3>
-<h3 id="提取子树">提取子树</h3>
-<h3 id="反序列化">反序列化</h3>
-<h3 id="序列化成字符串">序列化成字符串</h3>
+</div><p>自己在项目中简单的使用，使用反序列化方式</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">var</span> <span class="nx">Cfg</span> <span class="p">=</span> <span class="nb">new</span><span class="p">(</span><span class="nx">SysConfig</span><span class="p">)</span> 
+
+<span class="c1">// InitViper 初始化配置 - 使用Viper组件
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">InitViper</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">viper</span><span class="p">.</span><span class="nf">SetConfigFile</span><span class="p">(</span><span class="s">&#34;./configs/application.yaml&#34;</span><span class="p">)</span>
+
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">viper</span><span class="p">.</span><span class="nf">ReadInConfig</span><span class="p">();</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">log</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="s">&#34;viper.ReadInConfig failed : &#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">())</span>
+	<span class="p">}</span>
+
+	<span class="c1">// 反序列化到struct
+</span><span class="c1"></span>	<span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">viper</span><span class="p">.</span><span class="nf">Unmarshal</span><span class="p">(</span><span class="nx">Cfg</span><span class="p">);</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">log</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="s">&#34;viper.Unmarshal failed : &#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">())</span>
+	<span class="p">}</span>
+
+	<span class="c1">// 监听配置文件
+</span><span class="c1"></span>	<span class="nx">viper</span><span class="p">.</span><span class="nf">WatchConfig</span><span class="p">()</span>
+	<span class="nx">viper</span><span class="p">.</span><span class="nf">OnConfigChange</span><span class="p">(</span><span class="kd">func</span><span class="p">(</span><span class="nx">in</span> <span class="nx">fsnotify</span><span class="p">.</span><span class="nx">Event</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">log</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;config file is changed&#34;</span><span class="p">)</span>
+		<span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">viper</span><span class="p">.</span><span class="nf">Unmarshal</span><span class="p">(</span><span class="nx">Cfg</span><span class="p">);</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+			<span class="nx">log</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="s">&#34;viper.Unmarshal failed : &#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">())</span>
+		<span class="p">}</span>
+	<span class="p">})</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">SysConfig</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">Server</span> <span class="o">*</span><span class="nx">ServerConfig</span> <span class="s">`mapstructure:&#34;server&#34;`</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">ServerConfig</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">Name</span> <span class="kt">string</span>        <span class="s">`mapstructure:&#34;name&#34;`</span>
+	<span class="nx">Mode</span> <span class="kt">string</span>        <span class="s">`mapstructure:&#34;mode&#34;`</span>
+	<span class="nx">Port</span> <span class="kt">int</span>           <span class="s">`mapstructure:&#34;port&#34;`</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>初始化 <code>InitViper()</code></p>
+<p>使用 <code>Cfg.Server.Mode</code></p>
 
     </div>
 
@@ -351,7 +414,11 @@ map<span class="o">[</span>category:categories tag:tags<span class="o">]</span>
           <a href="/tags/%E9%85%8D%E7%BD%AE/">配置</a>
           </div>
       <nav class="post-nav">
-        
+        <a class="prev" href="/post/2020/10/28/gin-logger-zap/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">使用Zap日志替换Gin中默认的日志</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
         <a class="next" href="/post/2020/10/23/go-struct-2-map/">
             <span class="next-text nav-default">Struct与Map互转的方法</span>
             <span class="next-text nav-mobile">下一篇</span>
